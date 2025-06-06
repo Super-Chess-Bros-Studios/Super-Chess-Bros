@@ -1,43 +1,82 @@
-# Super-Chess-Bros
-The super cool awesome 2D platform fighter chess adaption made in Godot
 
-1. Prerequisites
+# Super-Chess-Bros
+
+  
+
+The super cool awesome 2D platform fighter chess adaption made in Godot.
+
+  
+
+**Prerequisites**
+
 Make sure you have the following installed on your machine:
 
-Python 3.7 or newer (https://www.python.org/downloads/)
+Python 3.7 or newer ([https://www.python.org/downloads/](https://www.python.org/downloads/))
 
+  
 
-2. Clone the Repository
+**Clone the Repository**
+
 Open your terminal (Git Bash on Windows or Terminal on macOS/Linux) and run:
 
-git clone https://github.com/MasonHall9987/Super-Chess-Bros
-cd your-repo
+```bash
 
+git  clone  https://github.com/MasonHall9987/Super-Chess-Bros
 
-3. Install Python Dependencies and Set Up Git Hooks
-python3 -m pip install --user --upgrade pre-commit
-python3 -m pip install --user --upgrade "gdtoolkit==4.*
-python3 -m pre_commit install
+cd  your-repo
 
+```
 
-4. Verify Installation
-python3 -m pre_commit run --all-files
+**Install Python Dependencies and Set Up Git Hooks**
 
+```bash
 
-5. Usage
-Now, every time you make a Git commit, the pre-commit hook will automatically:
+python3  -m pip install --user  --upgrade pre-commit
 
-Lint your GDScript files using gdlint
+python3  -m pip install --user  --upgrade "gdtoolkit==4.*"
 
-Format your GDScript files using gdformat
+python3  -m pre_commit install
 
-If linting errors are found, the commit will be blocked until you fix them.
+  ```
 
+**Verify Installation**
 
-6. Additional Notes
-To update the tooling later, run:
+```bash
 
-python3 -m pip install --user --upgrade pre-commit gdtoolkit
+python3  -m  pre_commit  run  --all-files
+
+  ```
+
+**Usage**
+
+Now,  every  time  you  make  a  Git  commit,  the  pre-commit  hook  will  automatically:
+
+  
+
+Lint  your  GDScript  files  using  gdlint
+
+  
+
+Format  your  GDScript  files  using  gdformat
+
+  
+
+If  linting  errors  are  found,  the  commit  will  be  blocked  until  you  fix  them.
+
+  
+
+**Additional Notes**
+
+To  update  the  tooling  later,  run:
+
+```bash
+
+python3  -m pip install --user  --upgrade pre-commit gdtoolkit
+```
+
 To uninstall:
 
-python3 -m pip uninstall pre-commit gdtoolkit
+```bash
+
+python3  -m  pip  uninstall  pre-commit  gdtoolkit
+```
