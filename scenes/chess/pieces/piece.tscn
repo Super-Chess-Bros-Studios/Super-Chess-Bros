@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://bidd6hxynugwx"]
 
-[ext_resource type="Script" uid="uid://c1ncgg4tiedqu" path="res://scenes/chess/piece.gd" id="1_g2fmo"]
+[ext_resource type="Script" uid="uid://c1ncgg4tiedqu" path="res://scripts/chess/pieces/piece.gd" id="1_xuvmr"]
 
 [node name="Piece" type="Node2D"]
-script = ExtResource("1_g2fmo")
+script = ExtResource("1_xuvmr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

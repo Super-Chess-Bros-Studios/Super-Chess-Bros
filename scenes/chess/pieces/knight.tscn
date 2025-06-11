@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://o6ffeyc0if4k"]
+
+[ext_resource type="Script" uid="uid://crhy0hkeocmjn" path="res://scripts/chess/pieces/knight.gd" id="1_7wier"]
+
+[node name="Knight" type="Node2D"]
+script = ExtResource("1_7wier")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

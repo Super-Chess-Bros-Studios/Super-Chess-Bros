@@ -3,6 +3,15 @@ extends Node2D
 const BOARD_SIZE := 8
 const TILE_SIZE := 24
 
+const PIECE_SCENES := {
+	"pawn": preload("res://scenes/chess/pieces/pawn.tscn"),
+	"rook": preload("res://scenes/chess/pieces/rook.tscn"),
+	"knight": preload("res://scenes/chess/pieces/knight.tscn"),
+	"bishop": preload("res://scenes/chess/pieces/bishop.tscn"),
+	"queen": preload("res://scenes/chess/pieces/queen.tscn"),
+	"king": preload("res://scenes/chess/pieces/king.tscn")
+}
+
 #So TilesContainer just contains a bunch of scenes of tile which we import as a packed scene
 @onready var tiles_container := $TilesContainer
 @export var tile_scene: PackedScene
@@ -35,13 +44,10 @@ func spawn_board():
 
 # Our function that spawns the respective piece
 func spawn_piece(piece_type: String, is_white: bool, position: Vector2i, point_value: int):
-	var piece = piece_scene.instantiate()
-	piece.piece_type = piece_type
-	piece.is_white = is_white
-	piece.set_board_position(position, TILE_SIZE) # This is important as this is the grid position of the piece in reference to the array of the positions so we change this value to change the position of a piece
-	piece.sprite_sheet = piece_sprite_sheet
-	piece.point_value = point_value
+	var scene = PIECE_SCENES[piece_type]
+	var piece = scene.instantiate()
 	add_child(piece)
+	piece.setup(is_white, position, piece_sprite_sheet, point_value, TILE_SIZE)
 
 func spawn_pieces():
 	# Pawns
