@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dej34oly4vdle"
-path="res://.godot/imported/black_king.png-d739301147e002bdb55f32d2015b10e5.ctex"
+uid="uid://c4hiqwc00q3rb"
+path="res://.godot/imported/tile-sprite.png-267413851688c6e59dd8531ee09e5412.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/chess_pieces/black_king.png"
-dest_files=["res://.godot/imported/black_king.png-d739301147e002bdb55f32d2015b10e5.ctex"]
+source_file="res://assets/sprites/tile-sprite.png"
+dest_files=["res://.godot/imported/tile-sprite.png-267413851688c6e59dd8531ee09e5412.ctex"]
 
 [params]
 

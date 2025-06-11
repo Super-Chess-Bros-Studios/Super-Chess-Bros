@@ -1,15 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://lq0wuin82d5k"]
+[gd_scene load_steps=3 format=3 uid="uid://lq0wuin82d5k"]
 
-[ext_resource type="PackedScene" uid="uid://c4u47p1oik0xl" path="res://scenes/board.tscn" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://cki3j0mwd04b5" path="res://scripts/main.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://xv82r6mhk4x5" path="res://scenes/chess/board.tscn" id="2_0wfyh"]
 
 [node name="Main" type="Node2D"]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(73, -70)
-zoom = Vector2(4, 4)
-
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
-position = Vector2(144, 4)
-
-[node name="Board" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(72, -71)
+script = ExtResource("1_0wfyh")
+board_scene = ExtResource("2_0wfyh")
