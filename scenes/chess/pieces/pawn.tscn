@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://duuob55origof"]
+
+[ext_resource type="Script" uid="uid://d0y8wp8spk7nx" path="res://scripts/chess/pieces/pawn.gd" id="1_2txua"]
+
+[node name="Pawn" type="Node2D"]
+script = ExtResource("1_2txua")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
