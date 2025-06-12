@@ -39,7 +39,7 @@ func _physics_process(delta):
 		current_state.Physics_Update(delta)
 
 func on_child_transitioned(state, new_state_name, direction):
-	# If the state being signaled by the SM is not the current state, return.
+	# This means something went wrong.
 	if state != current_state:
 		return
 	
