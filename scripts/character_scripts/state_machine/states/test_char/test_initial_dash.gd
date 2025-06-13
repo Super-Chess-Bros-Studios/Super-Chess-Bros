@@ -1,9 +1,10 @@
 extends CharacterState
-class_name TestRun
+class_name TestInitialDash
 
 @export var anim : AnimatedSprite2D
 @export var speed : int = 300
 @export var character : CharacterBody2D
+@export var timer : Timer
 
 enum DIRECTION {left = -1, right = 1}
 
@@ -15,17 +16,27 @@ func playanim():
 		anim.set_flip_h(false)
 
 func Enter():
-	print("Run state")
+	#this is the simplest way i can think of to avoid race conditions with state 
+	#switching while doing signals based on time
+	print("Initial Dash State")
+	timer.set_paused(false)
+	timer.start()
 	playanim()
+
+func _on_dash_time_timeout() -> void:
+	Transitioned.emit(self, "run", cur_dir)
 
 func Physics_Update(delta):
 	#if you let go of the key direction you're going, you transition to idle.
 	if !Input.is_action_pressed("left") and cur_dir == DIRECTION.left:
+		timer.set_paused(true)
 		Transitioned.emit(self, "idle", DIRECTION.left)
 	elif !Input.is_action_pressed("right") and cur_dir == DIRECTION.right:
+		timer.set_paused(true)
 		Transitioned.emit(self, "idle", DIRECTION.right)
 	elif Input.is_action_pressed("ui_accept"):
-		Transitioned.emit(self, "JumpSquat", cur_dir)
+		timer.set_paused(true)
+		Transitioned.emit(self, "jumpsquat", cur_dir)
 	else:
 		#you don't have to multiply by delta if you call move and slide for velocity
 		#move and slide already handles delta.

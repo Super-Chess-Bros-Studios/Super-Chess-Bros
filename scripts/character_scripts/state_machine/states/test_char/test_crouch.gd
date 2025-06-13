@@ -1,0 +1,26 @@
+extends CharacterState
+class_name TestCrouch
+
+@export var anim : AnimatedSprite2D
+@export var character : CharacterBody2D
+@export var friction = 0.8
+
+enum DIRECTION {left = -1, right = 1}
+
+func playanim():
+	anim.play("crouch")
+	if cur_dir < 0:
+		anim.set_flip_h(true)
+	else:
+		anim.set_flip_h(false)
+
+func Enter():
+	print("Crouch state")
+	playanim()
+
+func Physics_Update(delta):
+	if !Input.is_action_pressed("down"):
+		Transitioned.emit(self,"idle",cur_dir)
+	else:
+		character.velocity.x -= lerp(character.velocity.x, 0.0, friction)
+		character.move_and_slide()
