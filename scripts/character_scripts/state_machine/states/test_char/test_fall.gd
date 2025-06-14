@@ -16,7 +16,7 @@ enum DIRECTION {left = -1, right = 1}
 
 func playanim():
 	anim.play("jump")
-	if cur_dir == DIRECTION.left:
+	if char_attributes.cur_dir == DIRECTION.left:
 		anim.set_flip_h(true)
 	else:
 		anim.set_flip_h(false)
@@ -28,7 +28,7 @@ func Enter():
 func Physics_Update(delta):
 	#handles vertical events
 	if character.is_on_floor():
-		Transitioned.emit(self, "idle", cur_dir)
+		Transitioned.emit(self, "idle", char_attributes)
 	else:
 		character.velocity.y += gravity
 	

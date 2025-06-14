@@ -9,7 +9,7 @@ enum DIRECTION {left = -1, right = 1}
 
 func playanim():
 	anim.play("idle")
-	if cur_dir < 0:
+	if char_attributes.cur_dir < 0:
 		anim.set_flip_h(true)
 	else:
 		anim.set_flip_h(false)
@@ -20,17 +20,17 @@ func Enter():
 
 func Physics_Update(delta):
 	if !character.is_on_floor():
-		Transitioned.emit(self,"fall", cur_dir)
+		Transitioned.emit(self,"fall", char_attributes)
 	if Input.is_action_pressed("left"):
-		cur_dir = DIRECTION.left
-		Transitioned.emit(self,"initialdash",DIRECTION.left)
+		char_attributes.cur_dir = DIRECTION.left
+		Transitioned.emit(self,"initialdash",char_attributes)
 	elif Input.is_action_pressed("right"):
-		cur_dir = DIRECTION.right
-		Transitioned.emit(self,"initialdash", DIRECTION.right)
+		char_attributes.cur_dir = DIRECTION.right
+		Transitioned.emit(self,"initialdash", char_attributes)
 	elif Input.is_action_pressed("down"):
-		Transitioned.emit(self,"crouch", cur_dir)
+		Transitioned.emit(self,"crouch", char_attributes)
 	elif Input.is_action_pressed("ui_accept"):
-		Transitioned.emit(self, "JumpSquat", cur_dir)
+		Transitioned.emit(self, "JumpSquat", char_attributes)
 	else:
 		character.velocity.x -= lerp(character.velocity.x, 0.0, friction)
 		character.move_and_slide()

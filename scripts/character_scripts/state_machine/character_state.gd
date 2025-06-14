@@ -5,7 +5,7 @@ class_name CharacterState
 #This allows the State to communicate with the state machine.
 signal Transitioned
 
-var cur_dir : int
+var char_attributes : CharacterAttributes
 
 
 #Function for entering the state

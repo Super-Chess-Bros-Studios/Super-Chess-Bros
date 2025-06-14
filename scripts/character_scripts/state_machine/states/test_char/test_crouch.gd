@@ -9,7 +9,7 @@ enum DIRECTION {left = -1, right = 1}
 
 func playanim():
 	anim.play("crouch")
-	if cur_dir < 0:
+	if char_attributes.cur_dir < 0:
 		anim.set_flip_h(true)
 	else:
 		anim.set_flip_h(false)
@@ -20,7 +20,7 @@ func Enter():
 
 func Physics_Update(delta):
 	if !Input.is_action_pressed("down"):
-		Transitioned.emit(self,"idle",cur_dir)
+		Transitioned.emit(self,"idle",char_attributes)
 	else:
 		character.velocity.x -= lerp(character.velocity.x, 0.0, friction)
 		character.move_and_slide()
