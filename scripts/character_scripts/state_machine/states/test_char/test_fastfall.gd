@@ -1,11 +1,10 @@
 extends CharacterState
-class_name TestShortHop
-
+class_name TestFastFall
 @export var anim : AnimatedSprite2D
 @export var character : CharacterBody2D
 
 @export var speed : float = 300
-@export var jump_power : float = -350
+@export var jump_power : float = -500
 
 #these control how quick they change velocity in the air
 @export var friction = 0.8
@@ -19,20 +18,16 @@ func playanim():
 		anim.set_flip_h(false)
 
 func Enter():
-	print("Short hop state")
-	character.velocity.y = jump_power/2
+	print("FastFall state")
+	character.velocity.y += 200
 	playanim()
 
 func Physics_Update(delta):
 	#handles vertical events
-	
-	#i commented is on floor out here because it would transition to idle for a frame on every jump
-	#if character.is_on_floor():
-		#Transitioned.emit(self, "idle", cur_dir)
-	if character.velocity.y > 0:
-		Transitioned.emit(self, "fall")
+	if character.is_on_floor():
+		Transitioned.emit(self, "idle")
 	else:
-		character.velocity.y += char_attributes.GRAVITY
+		character.velocity.y += char_attributes.GRAVITY * char_attributes.FASTFALLMULTIPLIER
 	
 	#handles horizontal events
 	if Input.is_action_pressed("left"):

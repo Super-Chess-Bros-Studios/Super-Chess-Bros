@@ -6,13 +6,10 @@ class_name TestFullHop
 
 @export var speed : float = 300
 @export var jump_power : float = -350
-@export var gravity : float = 10
 
 #these control how quick they change velocity in the air
 @export var friction = 0.8
 @export var air_interpolation = 0.4
-
-enum DIRECTION {left = -1, right = 1}
 
 func playanim():
 	anim.play("jump")
@@ -33,9 +30,9 @@ func Physics_Update(delta):
 	#if character.is_on_floor():
 		#Transitioned.emit(self, "idle", char_attributes.cur_dir)
 	if character.velocity.y > 0:
-		Transitioned.emit(self, "fall", char_attributes)
+		Transitioned.emit(self, "fall")
 	else:
-		character.velocity.y += gravity
+		character.velocity.y += char_attributes.GRAVITY
 	
 	#handles horizontal events
 	if Input.is_action_pressed("left"):

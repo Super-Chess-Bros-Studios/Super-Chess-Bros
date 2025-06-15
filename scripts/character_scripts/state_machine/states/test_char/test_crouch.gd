@@ -5,8 +5,6 @@ class_name TestCrouch
 @export var character : CharacterBody2D
 @export var friction = 0.8
 
-enum DIRECTION {left = -1, right = 1}
-
 func playanim():
 	anim.play("crouch")
 	if char_attributes.cur_dir < 0:
@@ -20,7 +18,7 @@ func Enter():
 
 func Physics_Update(delta):
 	if !Input.is_action_pressed("down"):
-		Transitioned.emit(self,"idle",char_attributes)
+		Transitioned.emit(self,"idle")
 	else:
 		character.velocity.x -= lerp(character.velocity.x, 0.0, friction)
 		character.move_and_slide()

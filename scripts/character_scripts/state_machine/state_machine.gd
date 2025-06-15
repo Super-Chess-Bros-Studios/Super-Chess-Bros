@@ -30,18 +30,21 @@ func _ready():
 		initial_state.Enter()
 		current_state = initial_state
 		char_attributes.cur_dir = DIRECTION.right
+	else:
+		push_error("There's no initial state set!")
+		return
 
 #Updates the current state chosen by the state machine.
-func _process(delta):
-	if current_state:
-		current_state.Update(delta)
+#func _process(delta):
+	#if current_state:
 
 #Since Physics is run on a separate server or something, it also has to be updated (?)
 func _physics_process(delta):
 	if current_state:
 		current_state.Physics_Update(delta)
+		current_state.Update(delta)
 
-func on_child_transitioned(state, new_state_name, char_attributes):
+func on_child_transitioned(state, new_state_name):
 	# This means something went wrong.
 	if state != current_state:
 		return

@@ -6,8 +6,6 @@ class_name TestJumpSquat
 @export var timer : Timer
 var short_hop = false
 
-enum DIRECTION {left = -1, right = 1}
-
 func playanim():
 	anim.play("crouch")
 	if char_attributes.cur_dir < 0:
@@ -23,9 +21,9 @@ func Enter():
 
 func _on_squat_time_timeout() -> void:
 	if short_hop:
-		Transitioned.emit(self, "shorthop", char_attributes)
+		Transitioned.emit(self, "shorthop")
 	else:
-		Transitioned.emit(self, "fullhop", char_attributes)
+		Transitioned.emit(self, "fullhop")
 
 func Update(delta):
 	if Input.is_action_just_released("ui_accept"):

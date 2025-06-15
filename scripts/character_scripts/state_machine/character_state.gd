@@ -7,6 +7,7 @@ signal Transitioned
 
 var char_attributes : CharacterAttributes
 
+enum DIRECTION {left = -1, right = 1}
 
 #Function for entering the state
 func Enter():
