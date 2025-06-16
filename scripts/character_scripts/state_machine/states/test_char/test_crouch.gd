@@ -3,7 +3,6 @@ class_name TestCrouch
 
 @export var anim : AnimatedSprite2D
 @export var character : CharacterBody2D
-@export var friction = 0.8
 
 func playanim():
 	anim.play("crouch")
@@ -20,5 +19,5 @@ func Physics_Update(delta):
 	if !Input.is_action_pressed("down"):
 		Transitioned.emit(self,"idle")
 	else:
-		character.velocity.x -= lerp(character.velocity.x, 0.0, friction)
+		character.velocity.x -= lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
 		character.move_and_slide()

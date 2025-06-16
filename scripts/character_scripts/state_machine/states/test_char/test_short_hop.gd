@@ -5,11 +5,6 @@ class_name TestShortHop
 @export var character : CharacterBody2D
 
 @export var speed : float = 300
-@export var jump_power : float = -350
-
-#these control how quick they change velocity in the air
-@export var friction = 0.8
-@export var air_interpolation = 0.4
 
 func playanim():
 	anim.play("jump")
@@ -20,7 +15,7 @@ func playanim():
 
 func Enter():
 	print("Short hop state")
-	character.velocity.y = jump_power/2
+	character.velocity.y = char_attributes.JUMP_POWER/2
 	playanim()
 
 func Physics_Update(delta):
@@ -29,20 +24,23 @@ func Physics_Update(delta):
 	#i commented is on floor out here because it would transition to idle for a frame on every jump
 	#if character.is_on_floor():
 		#Transitioned.emit(self, "idle", cur_dir)
-	if character.velocity.y > 0:
+	if Input.is_action_just_pressed("ui_accept") and char_attributes.can_double_jump:
+		char_attributes.can_double_jump = false
+		character.velocity.y = char_attributes.JUMP_POWER
+	elif character.velocity.y > 0:
 		Transitioned.emit(self, "fall")
 	else:
 		character.velocity.y += char_attributes.GRAVITY
 	
 	#handles horizontal events
 	if Input.is_action_pressed("left"):
-		character.velocity.x = lerp(character.velocity.x,-speed,air_interpolation)
+		character.velocity.x = lerp(character.velocity.x,-speed,char_attributes.AIRSPEEDLERP)
 		character.move_and_slide()
 	elif Input.is_action_pressed("right"):
-		character.velocity.x = lerp(character.velocity.x,speed,air_interpolation)
+		character.velocity.x = lerp(character.velocity.x,speed,char_attributes.AIRSPEEDLERP)
 		character.move_and_slide()
 	else:
 		#you don't have to multiply by delta if you call move and slide for velocity
 		#move and slide already handles delta.
-		character.velocity.x = lerp(character.velocity.x, 0.0, friction)
+		character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.AIRFRICTIONLERP)
 		character.move_and_slide()

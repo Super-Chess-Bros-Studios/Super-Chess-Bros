@@ -2,7 +2,6 @@ extends CharacterState
 class_name TestJumpSquat
 @export var anim : AnimatedSprite2D
 @export var character : CharacterBody2D
-@export var friction = 0.8
 @export var timer : Timer
 var short_hop = false
 
@@ -30,5 +29,5 @@ func Update(delta):
 		short_hop = true
 
 func Physics_Update(delta):
-	character.velocity.x -= lerp(character.velocity.x, 0.0, friction)
+	character.velocity.x -= lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
 	character.move_and_slide()

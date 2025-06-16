@@ -5,14 +5,11 @@ class_name TestFall
 @export var character : CharacterBody2D
 
 @export var speed : float = 300
-@export var jump_power : float = -500
 
 #these control how quick they change velocity in the air
-@export var friction = 0.8
-@export var air_interpolation = 0.4
 
 func playanim():
-	anim.play("jump")
+	anim.play("fall")
 	if char_attributes.cur_dir == DIRECTION.left:
 		anim.set_flip_h(true)
 	else:
@@ -28,17 +25,25 @@ func Physics_Update(delta):
 		Transitioned.emit(self, "idle")
 	else:
 		character.velocity.y += char_attributes.GRAVITY
-		if Input.is_action_pressed("down"):
+		
+		#if you can double jump do it if it's input
+		if Input.is_action_pressed("ui_accept") and char_attributes.can_double_jump:
+			char_attributes.can_double_jump = false
+			Transitioned.emit(self, "fullhop")
+			
+		#input for fastfall.
+		elif Input.is_action_pressed("down"):
 			Transitioned.emit(self, "fastfall")
+			
 		#handles horizontal events
 		elif Input.is_action_pressed("left"):
-			character.velocity.x = lerp(character.velocity.x,-speed,air_interpolation)
+			character.velocity.x = lerp(character.velocity.x,-speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
 		elif Input.is_action_pressed("right"):
-			character.velocity.x = lerp(character.velocity.x,speed,air_interpolation)
+			character.velocity.x = lerp(character.velocity.x,speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
 		else:
 			#you don't have to multiply by delta if you call move and slide for velocity
 			#move and slide already handles delta.
-			character.velocity.x = lerp(character.velocity.x, 0.0, friction)
+			character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.AIRFRICTIONLERP)
 			character.move_and_slide()
