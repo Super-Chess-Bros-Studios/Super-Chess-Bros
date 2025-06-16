@@ -15,7 +15,9 @@ func playanim(animation):
 
 func Enter():
 	print("Idle state")
+	#refreshes the character's ability to air dodge and double jump
 	char_attributes.can_double_jump = true
+	char_attributes.can_air_dodge = true
 	#.length returns the velocity as an absolute value
 	#if you're moving fast enough, start skidding
 	if character.velocity.length() > 50:
@@ -38,7 +40,7 @@ func Physics_Update(delta):
 		Transitioned.emit(self,"initialdash")
 	elif Input.is_action_pressed("down"):
 		Transitioned.emit(self,"crouch")
-	elif Input.is_action_pressed("ui_accept"):
+	elif Input.is_action_pressed("jump"):
 		Transitioned.emit(self, "JumpSquat")
 	else:
 		#if you're not moving quick enough, stop skidding

@@ -7,17 +7,14 @@ var states : Dictionary = {}
 enum DIRECTION {left = -1, right = 1}
 
 
-#Sets the initial state
+#Sets the initial state and character attributes
 @export var initial_state : CharacterState
-
-
+@export var char_attributes : CharacterAttributes
 
 #_ready is called when the node is first created automatically by Godot.
 #Essentially, it fills up the dictionary with each Character_State node under the
 #State Machine in the scene tree.
 func _ready():
-	var char_attributes_class = load("res://scripts/character_scripts/state_machine/states/character_attributes.gd")
-	var char_attributes = char_attributes_class.new()
 	for child in get_children():
 		if child is CharacterState:
 			#to_lower is a precaution, of course.
@@ -37,8 +34,9 @@ func _ready():
 #Updates the current state chosen by the state machine.
 #func _process(delta):
 	#if current_state:
+		#current_state.Update(delta)
 
-#Since Physics is run on a separate server or something, it also has to be updated (?)
+#We moved update and physics update into physics process to avoid race conditions
 func _physics_process(delta):
 	if current_state:
 		current_state.Physics_Update(delta)
@@ -61,3 +59,8 @@ func on_child_transitioned(state, new_state_name):
 	new_state.Enter()
 	
 	current_state = new_state
+
+
+func _on_roll_cooldown_timeout() -> void:
+	print("roll refreshed")
+	char_attributes.can_roll = true

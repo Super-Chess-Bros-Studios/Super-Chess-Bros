@@ -16,8 +16,12 @@ func Enter():
 	playanim()
 
 func Physics_Update(delta):
-	if !Input.is_action_pressed("down"):
+	if !character.is_on_floor():
+		Transitioned.emit(self,"fall")
+	elif !Input.is_action_pressed("down"):
 		Transitioned.emit(self,"idle")
+	elif Input.is_action_pressed("jump"):
+		Transitioned.emit(self, "jumpsquat")
 	else:
 		character.velocity.x -= lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
 		character.move_and_slide()

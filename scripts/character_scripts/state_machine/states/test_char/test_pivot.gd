@@ -48,7 +48,7 @@ func Physics_Update(delta):
 		else:
 			Transitioned.emit(self,"idle")
 	#You can jump cancel pivot because doesn't that sound badass?
-	elif Input.is_action_pressed("ui_accept"):
+	elif Input.is_action_pressed("jump"):
 			Transitioned.emit(self, "JumpSquat")
 	#Run logic as normal until pivot ends.
 	else:

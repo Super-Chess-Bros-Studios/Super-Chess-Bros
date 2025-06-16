@@ -1,24 +1,53 @@
-[gd_scene load_steps=64 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=82 format=3 uid="uid://5b3fmt2t3sc6"]
 
 [ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
+[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
 [ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
 [ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
 [ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
 [ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
 [ext_resource type="Script" uid="uid://rg3jnrlnyt6m" path="res://scripts/character_scripts/state_machine/states/test_char/test_idle.gd" id="5_dgi44"]
+[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
 [ext_resource type="Script" uid="uid://ctsqulv68cgxy" path="res://scripts/character_scripts/state_machine/states/test_char/test_run.gd" id="6_kpwuy"]
 [ext_resource type="Script" uid="uid://dbyyiifx7mbga" path="res://scripts/character_scripts/state_machine/states/test_char/test_crouch.gd" id="7_2137q"]
 [ext_resource type="Script" uid="uid://b5d57x8h3avr5" path="res://scripts/character_scripts/state_machine/states/test_char/test_jumpsquat.gd" id="8_cqar7"]
+[ext_resource type="Script" uid="uid://db3y4jnn8ci5y" path="res://scripts/character_scripts/state_machine/states/character_attributes.gd" id="8_h8dpt"]
 [ext_resource type="Script" uid="uid://xq4wnlhqxdlm" path="res://scripts/character_scripts/state_machine/states/test_char/test_jump.gd" id="9_qga04"]
 [ext_resource type="Script" uid="uid://dsq2k53fkg20h" path="res://scripts/character_scripts/state_machine/states/test_char/test_short_hop.gd" id="11_0l6pb"]
 [ext_resource type="Script" uid="uid://dxn1tegm7uca6" path="res://scripts/character_scripts/state_machine/states/test_char/test_fall.gd" id="11_hmptn"]
 [ext_resource type="Script" uid="uid://d26weydsrf1ra" path="res://scripts/character_scripts/state_machine/states/test_char/test_initial_dash.gd" id="13_va0ok"]
 [ext_resource type="Script" uid="uid://cfpxokfyo3ldp" path="res://scripts/character_scripts/state_machine/states/test_char/test_fastfall.gd" id="14_w2ni4"]
 [ext_resource type="Script" uid="uid://cqcicn3e5fkak" path="res://scripts/character_scripts/state_machine/states/test_char/test_pivot.gd" id="15_1ekob"]
+[ext_resource type="Script" uid="uid://dbhq6jkm6podc" path="res://scripts/character_scripts/state_machine/states/test_char/test_air_dodge.gd" id="17_eam3d"]
+[ext_resource type="Script" uid="uid://d0tk7qxtqo4sl" path="res://scripts/character_scripts/state_machine/states/test_char/test_roll.gd" id="20_he0e7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uoks1"]
 size = Vector2(21, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqteo"]
+atlas = ExtResource("1_w1xps")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42ld6"]
+atlas = ExtResource("1_w1xps")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31y7r"]
+atlas = ExtResource("1_w1xps")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yqwl"]
+atlas = ExtResource("1_w1xps")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m852p"]
+atlas = ExtResource("1_w1xps")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p57wh"]
+atlas = ExtResource("1_w1xps")
+region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ct5a"]
 atlas = ExtResource("3_4jtsn")
@@ -152,6 +181,34 @@ region = Rect2(240, 0, 48, 48)
 atlas = ExtResource("4_ld6di")
 region = Rect2(288, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gi5x"]
+atlas = ExtResource("6_du7ul")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh1gg"]
+atlas = ExtResource("6_du7ul")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1e3k"]
+atlas = ExtResource("6_du7ul")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlf1o"]
+atlas = ExtResource("6_du7ul")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q47m3"]
+atlas = ExtResource("6_du7ul")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfuln"]
+atlas = ExtResource("6_du7ul")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8vyv"]
+atlas = ExtResource("6_du7ul")
+region = Rect2(288, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_luash"]
 atlas = ExtResource("2_422c8")
 region = Rect2(0, 0, 48, 48)
@@ -202,6 +259,29 @@ region = Rect2(384, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_luash"]
 animations = [{
+"frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_tqteo")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_42ld6")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_31y7r")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_2yqwl")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_m852p")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_p57wh")
+}],
+"loop": true,
+"name": &"airdodge",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_4ct5a")
@@ -335,6 +415,32 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_1gi5x")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_gh1gg")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_c1e3k")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_mlf1o")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_q47m3")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_lfuln")
+}, {
+"duration": 0.25,
+"texture": SubResource("AtlasTexture_y8vyv")
+}],
+"loop": false,
+"name": &"roll",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 0.5,
 "texture": SubResource("AtlasTexture_luash")
 }, {
@@ -391,11 +497,16 @@ shape = SubResource("RectangleShape2D_uoks1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_luash")
-animation = &"skid"
+animation = &"roll"
 
-[node name="State Machine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
+[node name="CharacterAttributes" type="Node" parent="CharacterBody2D"]
+script = ExtResource("8_h8dpt")
+metadata/_custom_type_script = "uid://db3y4jnn8ci5y"
+
+[node name="State Machine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state", "char_attributes")]
 script = ExtResource("5_422c8")
 initial_state = NodePath("Idle")
+char_attributes = NodePath("../CharacterAttributes")
 
 [node name="Idle" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("5_dgi44")
@@ -477,7 +588,36 @@ metadata/_custom_type_script = "uid://cqcicn3e5fkak"
 wait_time = 0.1
 one_shot = true
 
+[node name="AirDodge" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "timer")]
+script = ExtResource("17_eam3d")
+anim = NodePath("../../AnimatedSprite2D")
+character = NodePath("../..")
+timer = NodePath("DodgeLength")
+speed = 400.0
+metadata/_custom_type_script = "uid://dbhq6jkm6podc"
+
+[node name="DodgeLength" type="Timer" parent="CharacterBody2D/State Machine/AirDodge"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Roll" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "timer", "roll_cooldown_timer")]
+script = ExtResource("20_he0e7")
+anim = NodePath("../../AnimatedSprite2D")
+character = NodePath("../..")
+timer = NodePath("RollLength")
+roll_cooldown_timer = NodePath("RollCooldown")
+metadata/_custom_type_script = "uid://d0tk7qxtqo4sl"
+
+[node name="RollLength" type="Timer" parent="CharacterBody2D/State Machine/Roll"]
+wait_time = 0.3
+one_shot = true
+
+[node name="RollCooldown" type="Timer" parent="CharacterBody2D/State Machine/Roll"]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="CharacterBody2D/State Machine/Run/PreTransition" to="CharacterBody2D/State Machine/Run" method="_on_pre_transition_timeout"]
 [connection signal="timeout" from="CharacterBody2D/State Machine/JumpSquat/SquatTime" to="CharacterBody2D/State Machine/JumpSquat" method="_on_squat_time_timeout"]
 [connection signal="timeout" from="CharacterBody2D/State Machine/InitialDash/DashTime" to="CharacterBody2D/State Machine/InitialDash" method="_on_dash_time_timeout"]
 [connection signal="timeout" from="CharacterBody2D/State Machine/Pivot/PivotTime" to="CharacterBody2D/State Machine/Pivot" method="_on_pivot_time_timeout"]
+[connection signal="timeout" from="CharacterBody2D/State Machine/Roll/RollCooldown" to="CharacterBody2D/State Machine" method="_on_roll_cooldown_timeout"]

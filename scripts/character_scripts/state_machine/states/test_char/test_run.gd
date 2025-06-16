@@ -2,7 +2,7 @@ extends CharacterState
 class_name TestRun
 
 @export var anim : AnimatedSprite2D
-@export var speed : int = 300
+@export var speed : int = 400
 @export var character : CharacterBody2D
 @export var timer : Timer
 #I use this timed_out variable so I don't cause a race condition
@@ -32,12 +32,20 @@ func apply_friction():
 	character.move_and_slide()
 
 func Physics_Update(delta):
-	#This handles transition to pivot
-	if !timer.is_stopped() and Input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.left:
-		Transitioned.emit(self, "Pivot")
-	if !timer.is_stopped() and Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.right:
-		Transitioned.emit(self, "Pivot")
 
+	#ensures the player doesn't just run on air
+	if !character.is_on_floor():
+		Transitioned.emit(self,"fall")
+	#This handles transition to pivot
+	elif !timer.is_stopped() and Input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.left:
+		Transitioned.emit(self, "Pivot")
+	elif !timer.is_stopped() and Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.right:
+		Transitioned.emit(self, "Pivot")
+	
+	#handles transition to roll
+	elif Input.is_action_just_pressed("shield") and char_attributes.can_roll:
+		Transitioned.emit(self,"roll")
+	
 	#if you let go of the key direction you're going, you transition to idle.
 	elif !Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
 		
@@ -63,7 +71,7 @@ func Physics_Update(delta):
 		Transitioned.emit(self,"crouch")
 	
 	#This handles transition to jumpsquat
-	elif Input.is_action_pressed("ui_accept"):
+	elif Input.is_action_pressed("jump"):
 		Transitioned.emit(self, "JumpSquat")
 
 

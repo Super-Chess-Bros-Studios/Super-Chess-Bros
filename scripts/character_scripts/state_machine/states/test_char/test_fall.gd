@@ -23,11 +23,14 @@ func Physics_Update(delta):
 	#handles vertical events
 	if character.is_on_floor():
 		Transitioned.emit(self, "idle")
+	elif Input.is_action_pressed("shield") and char_attributes.can_air_dodge:
+		#don't calculate move and slide until airdodge is running it's part
+		Transitioned.emit(self,"airdodge")
 	else:
 		character.velocity.y += char_attributes.GRAVITY
 		
 		#if you can double jump do it if it's input
-		if Input.is_action_pressed("ui_accept") and char_attributes.can_double_jump:
+		if Input.is_action_pressed("jump") and char_attributes.can_double_jump:
 			char_attributes.can_double_jump = false
 			Transitioned.emit(self, "fullhop")
 			

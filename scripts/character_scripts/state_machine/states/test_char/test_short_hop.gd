@@ -24,7 +24,7 @@ func Physics_Update(delta):
 	#i commented is on floor out here because it would transition to idle for a frame on every jump
 	#if character.is_on_floor():
 		#Transitioned.emit(self, "idle", cur_dir)
-	if Input.is_action_just_pressed("ui_accept") and char_attributes.can_double_jump:
+	if Input.is_action_just_pressed("jump") and char_attributes.can_double_jump:
 		char_attributes.can_double_jump = false
 		character.velocity.y = char_attributes.JUMP_POWER
 	elif character.velocity.y > 0:

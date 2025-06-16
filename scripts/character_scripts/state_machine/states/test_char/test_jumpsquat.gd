@@ -19,13 +19,15 @@ func Enter():
 	playanim()
 
 func _on_squat_time_timeout() -> void:
-	if short_hop:
+	if Input.is_action_pressed("shield"):
+		Transitioned.emit(self, "airdodge")
+	elif short_hop:
 		Transitioned.emit(self, "shorthop")
 	else:
 		Transitioned.emit(self, "fullhop")
 
 func Update(delta):
-	if Input.is_action_just_released("ui_accept"):
+	if Input.is_action_just_released("jump"):
 		short_hop = true
 
 func Physics_Update(delta):
