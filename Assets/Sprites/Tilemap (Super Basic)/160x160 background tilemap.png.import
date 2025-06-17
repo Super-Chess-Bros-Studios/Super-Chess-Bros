@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://s1oq4lioocty"
-path="res://.godot/imported/160x160 background tilemap.png-24054232c2ba8596918de4686394af40.ctex"
+path="res://.godot/imported/160x160 background tilemap.png-bc71fffbc8d577359df0cb052a4a1eab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Tilemap (Super Basic)/160x160 background tilemap.png"
-dest_files=["res://.godot/imported/160x160 background tilemap.png-24054232c2ba8596918de4686394af40.ctex"]
+source_file="res://assets/sprites/Tilemap (Super Basic)/160x160 background tilemap.png"
+dest_files=["res://.godot/imported/160x160 background tilemap.png-bc71fffbc8d577359df0cb052a4a1eab.ctex"]
 
 [params]
 

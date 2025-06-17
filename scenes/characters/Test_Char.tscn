@@ -1,14 +1,14 @@
 [gd_scene load_steps=82 format=3 uid="uid://5b3fmt2t3sc6"]
 
-[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
-[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
-[ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
-[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
-[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
-[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
+[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
+[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
+[ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
+[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
+[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
+[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
 [ext_resource type="Script" uid="uid://rg3jnrlnyt6m" path="res://scripts/character_scripts/state_machine/states/test_char/test_idle.gd" id="5_dgi44"]
-[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
+[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
 [ext_resource type="Script" uid="uid://ctsqulv68cgxy" path="res://scripts/character_scripts/state_machine/states/test_char/test_run.gd" id="6_kpwuy"]
 [ext_resource type="Script" uid="uid://dbyyiifx7mbga" path="res://scripts/character_scripts/state_machine/states/test_char/test_crouch.gd" id="7_2137q"]
 [ext_resource type="Script" uid="uid://b5d57x8h3avr5" path="res://scripts/character_scripts/state_machine/states/test_char/test_jumpsquat.gd" id="8_cqar7"]
@@ -487,7 +487,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="TestChar" type="Node2D"]
+[node name="TestChar" type="Node2D" node_paths=PackedStringArray("initial_state", "char_attributes", "state_machine")]
+script = ExtResource("5_422c8")
+initial_state = NodePath("CharacterBody2D/State Machine/Idle")
+char_attributes = NodePath("CharacterBody2D/CharacterAttributes")
+state_machine = NodePath("CharacterBody2D/State Machine")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
@@ -503,10 +507,7 @@ animation = &"roll"
 script = ExtResource("8_h8dpt")
 metadata/_custom_type_script = "uid://db3y4jnn8ci5y"
 
-[node name="State Machine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state", "char_attributes")]
-script = ExtResource("5_422c8")
-initial_state = NodePath("Idle")
-char_attributes = NodePath("../CharacterAttributes")
+[node name="State Machine" type="Node" parent="CharacterBody2D"]
 
 [node name="Idle" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("5_dgi44")

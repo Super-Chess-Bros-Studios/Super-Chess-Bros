@@ -10,12 +10,13 @@ enum DIRECTION {left = -1, right = 1}
 #Sets the initial state and character attributes
 @export var initial_state : CharacterState
 @export var char_attributes : CharacterAttributes
+@export var state_machine : Node
 
 #_ready is called when the node is first created automatically by Godot.
 #Essentially, it fills up the dictionary with each Character_State node under the
 #State Machine in the scene tree.
 func _ready():
-	for child in get_children():
+	for child in state_machine.get_children():
 		if child is CharacterState:
 			#to_lower is a precaution, of course.
 			states[child.name.to_lower()] = child
