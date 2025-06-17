@@ -19,15 +19,15 @@ func Enter():
 func Physics_Update(delta):
 	if !character.is_on_floor():
 		Transitioned.emit(self,"fall")
-	if Input.is_action_pressed("left"):
+	if input.is_action_pressed("left"):
 		char_attributes.cur_dir = DIRECTION.left
 		Transitioned.emit(self,"initialdash")
-	elif Input.is_action_pressed("right"):
+	elif input.is_action_pressed("right"):
 		char_attributes.cur_dir = DIRECTION.right
 		Transitioned.emit(self,"initialdash")
-	elif Input.is_action_pressed("down"):
+	elif input.is_action_pressed("down"):
 		Transitioned.emit(self,"crouch")
-	elif Input.is_action_pressed("ui_accept"):
+	elif input.is_action_pressed("ui_accept"):
 		Transitioned.emit(self, "JumpSquat")
 	else:
 		character.velocity.x -= lerp(character.velocity.x, 0.0, friction)

@@ -17,7 +17,7 @@ func Enter():
 	playanim()
 
 func Physics_Update(delta):
-	if !Input.is_action_pressed("down"):
+	if !input.is_action_pressed("down"):
 		Transitioned.emit(self,"idle")
 	else:
 		character.velocity.x -= lerp(character.velocity.x, 0.0, friction)

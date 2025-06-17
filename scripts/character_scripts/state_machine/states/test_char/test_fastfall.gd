@@ -30,10 +30,10 @@ func Physics_Update(delta):
 		character.velocity.y += char_attributes.GRAVITY * char_attributes.FASTFALLMULTIPLIER
 	
 	#handles horizontal events
-	if Input.is_action_pressed("left"):
+	if input.is_action_pressed("left"):
 		character.velocity.x = lerp(character.velocity.x,-speed,air_interpolation)
 		character.move_and_slide()
-	elif Input.is_action_pressed("right"):
+	elif input.is_action_pressed("right"):
 		character.velocity.x = lerp(character.velocity.x,speed,air_interpolation)
 		character.move_and_slide()
 	else:

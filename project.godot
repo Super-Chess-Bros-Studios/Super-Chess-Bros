@@ -15,6 +15,14 @@ run/main_scene="uid://dtf4p6j0qehoa"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+MultiplayerInput="*res://addons/multiplayer_input/multiplayer_input.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/multiplayer_input/plugin.cfg")
+
 [input]
 
 ui_accept={

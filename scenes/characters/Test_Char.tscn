@@ -1,9 +1,9 @@
-[gd_scene load_steps=51 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=52 format=3 uid="uid://5b3fmt2t3sc6"]
 
-[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
-[ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
-[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
-[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
+[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
+[ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
+[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
+[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
 [ext_resource type="Script" uid="uid://rg3jnrlnyt6m" path="res://scripts/character_scripts/state_machine/states/test_char/test_idle.gd" id="5_dgi44"]
 [ext_resource type="Script" uid="uid://ctsqulv68cgxy" path="res://scripts/character_scripts/state_machine/states/test_char/test_run.gd" id="6_kpwuy"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://dxn1tegm7uca6" path="res://scripts/character_scripts/state_machine/states/test_char/test_fall.gd" id="11_hmptn"]
 [ext_resource type="Script" uid="uid://d26weydsrf1ra" path="res://scripts/character_scripts/state_machine/states/test_char/test_initial_dash.gd" id="13_va0ok"]
 [ext_resource type="Script" uid="uid://cfpxokfyo3ldp" path="res://scripts/character_scripts/state_machine/states/test_char/test_fastfall.gd" id="14_w2ni4"]
+
+[sub_resource type="GDScript" id="GDScript_vwwhj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uoks1"]
 size = Vector2(21, 30)
@@ -280,6 +282,7 @@ animations = [{
 }]
 
 [node name="TestChar" type="Node2D"]
+script = SubResource("GDScript_vwwhj")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
@@ -293,29 +296,30 @@ animation = &"jump"
 frame = 5
 frame_progress = 1.0
 
-[node name="State Machine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_422c8")
+device_id = -1
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
+[node name="Idle" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("5_dgi44")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://rg3jnrlnyt6m"
 
-[node name="Run" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
+[node name="Run" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("6_kpwuy")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://ctsqulv68cgxy"
 
-[node name="Crouch" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
+[node name="Crouch" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("7_2137q")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dbyyiifx7mbga"
 
-[node name="JumpSquat" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "timer")]
+[node name="JumpSquat" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character", "timer")]
 script = ExtResource("8_cqar7")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
@@ -323,44 +327,44 @@ friction = 0.0
 timer = NodePath("SquatTime")
 metadata/_custom_type_script = "uid://b5d57x8h3avr5"
 
-[node name="SquatTime" type="Timer" parent="CharacterBody2D/State Machine/JumpSquat"]
+[node name="SquatTime" type="Timer" parent="CharacterBody2D/StateMachine/JumpSquat"]
 wait_time = 0.2
 one_shot = true
 
-[node name="FullHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
+[node name="FullHop" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("9_qga04")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://xq4wnlhqxdlm"
 
-[node name="ShortHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
+[node name="ShortHop" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("11_0l6pb")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dsq2k53fkg20h"
 
-[node name="Fall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
+[node name="Fall" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("11_hmptn")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dxn1tegm7uca6"
 
-[node name="InitialDash" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "timer")]
+[node name="InitialDash" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character", "timer")]
 script = ExtResource("13_va0ok")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 timer = NodePath("DashTime")
 metadata/_custom_type_script = "uid://d26weydsrf1ra"
 
-[node name="DashTime" type="Timer" parent="CharacterBody2D/State Machine/InitialDash"]
+[node name="DashTime" type="Timer" parent="CharacterBody2D/StateMachine/InitialDash"]
 wait_time = 0.2
 one_shot = true
 
-[node name="Fastfall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
+[node name="Fastfall" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("14_w2ni4")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
 
-[connection signal="timeout" from="CharacterBody2D/State Machine/JumpSquat/SquatTime" to="CharacterBody2D/State Machine/JumpSquat" method="_on_squat_time_timeout"]
-[connection signal="timeout" from="CharacterBody2D/State Machine/InitialDash/DashTime" to="CharacterBody2D/State Machine/InitialDash" method="_on_dash_time_timeout"]
+[connection signal="timeout" from="CharacterBody2D/StateMachine/JumpSquat/SquatTime" to="CharacterBody2D/StateMachine/JumpSquat" method="_on_squat_time_timeout"]
+[connection signal="timeout" from="CharacterBody2D/StateMachine/InitialDash/DashTime" to="CharacterBody2D/StateMachine/InitialDash" method="_on_dash_time_timeout"]

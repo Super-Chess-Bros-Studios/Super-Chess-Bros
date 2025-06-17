@@ -26,15 +26,15 @@ func _on_dash_time_timeout() -> void:
 
 func Physics_Update(delta):
 	#if you let go of the key direction you're going, you transition to idle.
-	if !Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
+	if !input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
 		timer.set_paused(true)
 		char_attributes.cur_dir = DIRECTION.left
 		Transitioned.emit(self, "idle")
-	elif !Input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.right:
+	elif !input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.right:
 		timer.set_paused(true)
 		char_attributes.cur_dir = DIRECTION.right
 		Transitioned.emit(self, "idle")
-	elif Input.is_action_pressed("ui_accept"):
+	elif input.is_action_pressed("ui_accept"):
 		timer.set_paused(true)
 		Transitioned.emit(self, "jumpsquat")
 	else:

@@ -1,6 +1,9 @@
 extends Node
 
+@export var device_id: int
+var input : DeviceInput
 var current_state : CharacterState
+
 # Dictionary of State objects 
 var states : Dictionary = {}
 
@@ -11,11 +14,16 @@ enum DIRECTION {left = -1, right = 1}
 @export var initial_state : CharacterState
 
 
-
 #_ready is called when the node is first created automatically by Godot.
 #Essentially, it fills up the dictionary with each Character_State node under the
 #State Machine in the scene tree.
 func _ready():
+	var devices = Input.get_connected_joypads()
+	print(devices)
+	
+	
+	print(device_id)
+	input = DeviceInput.new(device_id)
 	var char_attributes_class = load("res://scripts/character_scripts/state_machine/states/character_attributes.gd")
 	var char_attributes = char_attributes_class.new()
 	for child in get_children():
@@ -23,6 +31,7 @@ func _ready():
 			#to_lower is a precaution, of course.
 			states[child.name.to_lower()] = child
 			child.char_attributes = char_attributes # points to this single instance of char_attributes.
+			child.input = input
 			child.Transitioned.connect(on_child_transitioned)
 	#Checks if there's an initial state set in the State Machine node.
 	if initial_state:

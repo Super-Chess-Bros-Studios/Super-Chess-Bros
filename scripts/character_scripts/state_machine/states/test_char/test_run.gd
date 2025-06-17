@@ -18,12 +18,12 @@ func Enter():
 
 func Physics_Update(delta):
 	#if you let go of the key direction you're going, you transition to idle.
-	if !Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
+	if !input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
 		char_attributes.cur_dir = DIRECTION.left
 		Transitioned.emit(self, "idle")
-	elif !Input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.right:
+	elif !input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.right:
 		Transitioned.emit(self, "idle")
-	elif Input.is_action_pressed("ui_accept"):
+	elif input.is_action_pressed("ui_accept"):
 		Transitioned.emit(self, "JumpSquat")
 	else:
 		#you don't have to multiply by delta if you call move and slide for velocity
