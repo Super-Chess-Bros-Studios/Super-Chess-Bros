@@ -20,4 +20,4 @@ var can_air_dodge = true
 #needed for a cooldown
 var can_roll = true
 #hitboxes should ignore a character if they are invulnerable
-var invulnerable = true
+var invulnerable = false

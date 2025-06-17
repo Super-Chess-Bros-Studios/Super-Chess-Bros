@@ -5,6 +5,7 @@ class_name TestShortHop
 @export var character : CharacterBody2D
 
 @export var speed : float = 300
+@export var jump_power_coefficient = 0.5
 
 func playanim():
 	anim.play("jump")
@@ -15,7 +16,7 @@ func playanim():
 
 func Enter():
 	print("Short hop state")
-	character.velocity.y = char_attributes.JUMP_POWER/2
+	character.velocity.y = char_attributes.JUMP_POWER * jump_power_coefficient
 	playanim()
 
 func Physics_Update(delta):
