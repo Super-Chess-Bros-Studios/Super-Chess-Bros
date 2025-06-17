@@ -4,10 +4,7 @@ class_name CharacterState
 
 #This allows the State to communicate with the state machine.
 signal Transitioned
-
-var input : DeviceInput 
 var char_attributes : CharacterAttributes
-
 enum DIRECTION {left = -1, right = 1}
 
 #Function for entering the state

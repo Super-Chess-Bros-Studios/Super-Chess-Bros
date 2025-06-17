@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PlayerControls" load_steps=2 format=3 uid="uid://4rfa5fud71o"]
+
+[ext_resource type="Script" uid="uid://cxkrkeqtr6scf" path="res://scripts/character_scripts/state_machine/PlayerControls.gd" id="1_ibjcd"]
+
+[resource]
+script = ExtResource("1_ibjcd")
+player_index = 0
+left = "p1_left"
+right = "p1_right"
+jump = "p1_jump"
+down = "p1_down"
+metadata/_custom_type_script = "uid://cxkrkeqtr6scf"

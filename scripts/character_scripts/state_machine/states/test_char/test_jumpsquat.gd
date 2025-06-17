@@ -26,7 +26,7 @@ func _on_squat_time_timeout() -> void:
 		Transitioned.emit(self, "fullhop")
 
 func Update(delta):
-	if input.is_action_just_released("ui_accept"):
+	if Input.is_action_just_released("ui_accept"):
 		short_hop = true
 
 func Physics_Update(delta):

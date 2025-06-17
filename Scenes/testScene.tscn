@@ -11,10 +11,7 @@
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_4mqg7")
 
-[node name="TestChar1" parent="." instance=ExtResource("1_8xinf")]
+[node name="Player1" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(-48, -29)
-
-[node name="TestChar2" parent="." instance=ExtResource("1_8xinf")]
-position = Vector2(39, -28)
 
 [node name="Camera2D" type="Camera2D" parent="."]

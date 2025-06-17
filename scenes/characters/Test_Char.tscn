@@ -1,7 +1,8 @@
-[gd_scene load_steps=52 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=53 format=3 uid="uid://5b3fmt2t3sc6"]
 
 [ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
 [ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
+[ext_resource type="Resource" uid="uid://4rfa5fud71o" path="res://scripts/character_scripts/state_machine/player_1_controls.tres" id="2_b4nd2"]
 [ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
 [ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
@@ -284,6 +285,77 @@ animations = [{
 [node name="TestChar" type="Node2D"]
 script = SubResource("GDScript_vwwhj")
 
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_422c8")
+initial_state = NodePath("Idle")
+controls = ExtResource("2_b4nd2")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character")]
+script = ExtResource("5_dgi44")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+metadata/_custom_type_script = "uid://rg3jnrlnyt6m"
+
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character")]
+script = ExtResource("6_kpwuy")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+metadata/_custom_type_script = "uid://ctsqulv68cgxy"
+
+[node name="Crouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character")]
+script = ExtResource("7_2137q")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+friction = null
+metadata/_custom_type_script = "uid://dbyyiifx7mbga"
+
+[node name="JumpSquat" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character", "timer")]
+script = ExtResource("8_cqar7")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+friction = 0.0
+timer = NodePath("SquatTime")
+metadata/_custom_type_script = "uid://b5d57x8h3avr5"
+
+[node name="SquatTime" type="Timer" parent="StateMachine/JumpSquat"]
+wait_time = 0.2
+one_shot = true
+
+[node name="FullHop" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character")]
+script = ExtResource("9_qga04")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+metadata/_custom_type_script = "uid://xq4wnlhqxdlm"
+
+[node name="ShortHop" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character")]
+script = ExtResource("11_0l6pb")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+metadata/_custom_type_script = "uid://dsq2k53fkg20h"
+
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character")]
+script = ExtResource("11_hmptn")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+metadata/_custom_type_script = "uid://dxn1tegm7uca6"
+
+[node name="InitialDash" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character", "timer")]
+script = ExtResource("13_va0ok")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+timer = NodePath("DashTime")
+metadata/_custom_type_script = "uid://d26weydsrf1ra"
+
+[node name="DashTime" type="Timer" parent="StateMachine/InitialDash"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Fastfall" type="Node" parent="StateMachine" node_paths=PackedStringArray("anim", "character")]
+script = ExtResource("14_w2ni4")
+anim = NodePath("../../CharacterBody2D/AnimatedSprite2D")
+character = NodePath("../../CharacterBody2D")
+metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -296,75 +368,5 @@ animation = &"jump"
 frame = 5
 frame_progress = 1.0
 
-[node name="StateMachine" type="Node" parent="CharacterBody2D" node_paths=PackedStringArray("initial_state")]
-script = ExtResource("5_422c8")
-device_id = -1
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
-script = ExtResource("5_dgi44")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://rg3jnrlnyt6m"
-
-[node name="Run" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
-script = ExtResource("6_kpwuy")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://ctsqulv68cgxy"
-
-[node name="Crouch" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
-script = ExtResource("7_2137q")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://dbyyiifx7mbga"
-
-[node name="JumpSquat" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character", "timer")]
-script = ExtResource("8_cqar7")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-friction = 0.0
-timer = NodePath("SquatTime")
-metadata/_custom_type_script = "uid://b5d57x8h3avr5"
-
-[node name="SquatTime" type="Timer" parent="CharacterBody2D/StateMachine/JumpSquat"]
-wait_time = 0.2
-one_shot = true
-
-[node name="FullHop" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
-script = ExtResource("9_qga04")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://xq4wnlhqxdlm"
-
-[node name="ShortHop" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
-script = ExtResource("11_0l6pb")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://dsq2k53fkg20h"
-
-[node name="Fall" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
-script = ExtResource("11_hmptn")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://dxn1tegm7uca6"
-
-[node name="InitialDash" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character", "timer")]
-script = ExtResource("13_va0ok")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-timer = NodePath("DashTime")
-metadata/_custom_type_script = "uid://d26weydsrf1ra"
-
-[node name="DashTime" type="Timer" parent="CharacterBody2D/StateMachine/InitialDash"]
-wait_time = 0.2
-one_shot = true
-
-[node name="Fastfall" type="Node" parent="CharacterBody2D/StateMachine" node_paths=PackedStringArray("anim", "character")]
-script = ExtResource("14_w2ni4")
-anim = NodePath("../../AnimatedSprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
-
-[connection signal="timeout" from="CharacterBody2D/StateMachine/JumpSquat/SquatTime" to="CharacterBody2D/StateMachine/JumpSquat" method="_on_squat_time_timeout"]
-[connection signal="timeout" from="CharacterBody2D/StateMachine/InitialDash/DashTime" to="CharacterBody2D/StateMachine/InitialDash" method="_on_dash_time_timeout"]
+[connection signal="timeout" from="StateMachine/JumpSquat/SquatTime" to="StateMachine/JumpSquat" method="_on_squat_time_timeout"]
+[connection signal="timeout" from="StateMachine/InitialDash/DashTime" to="StateMachine/InitialDash" method="_on_dash_time_timeout"]
