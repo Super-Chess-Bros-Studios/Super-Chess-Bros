@@ -8,7 +8,6 @@ class_name TestFall
 @export var slide_colliderL : Area2D
 @export var slide_colliderR : Area2D
 var begin_wall_slide = false
-#these control how quick they change velocity in the air
 
 func playanim():
 	anim.play("fall")
@@ -19,6 +18,7 @@ func playanim():
 
 func Enter():
 	print("Fall state")
+	begin_wall_slide = false
 	wall_detection_enabled(true)
 	playanim()
 

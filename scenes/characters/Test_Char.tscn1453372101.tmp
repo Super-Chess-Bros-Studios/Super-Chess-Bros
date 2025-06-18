@@ -594,20 +594,17 @@ metadata/_custom_type_script = "uid://b5d57x8h3avr5"
 wait_time = 0.05
 one_shot = true
 
-[node name="FullHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "slide_colliderL", "slide_colliderR")]
+[node name="FullHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("9_qga04")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
-slide_colliderL = NodePath("../../LeftCollide")
-slide_colliderR = NodePath("../../RightCollide")
 metadata/_custom_type_script = "uid://xq4wnlhqxdlm"
 
-[node name="ShortHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "slide_colliderL", "slide_colliderR")]
+[node name="ShortHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("11_0l6pb")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
-slide_colliderL = NodePath("../../LeftCollide")
-slide_colliderR = NodePath("../../RightCollide")
+jump_power_coefficient = 0.65
 metadata/_custom_type_script = "uid://dsq2k53fkg20h"
 
 [node name="Fall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "slide_colliderL", "slide_colliderR")]
@@ -629,12 +626,10 @@ metadata/_custom_type_script = "uid://d26weydsrf1ra"
 wait_time = 0.2
 one_shot = true
 
-[node name="Fastfall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "slide_colliderL", "slide_colliderR")]
+[node name="Fastfall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("14_w2ni4")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
-slide_colliderL = NodePath("../../LeftCollide")
-slide_colliderR = NodePath("../../RightCollide")
 metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
 
 [node name="Pivot" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "timer")]
@@ -681,11 +676,9 @@ anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dk3025g8v6boo"
 
-[connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/FullHop" method="_on_left_collide"]
 [connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/Fall" method="_on_left_collide"]
 [connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/Fastfall" method="_on_left_collide"]
 [connection signal="body_exited" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/WallSlide" method="_on_wall_detect_body_exited"]
-[connection signal="body_entered" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/FullHop" method="_on_right_collide"]
 [connection signal="body_entered" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/Fall" method="_on_right_collide"]
 [connection signal="body_entered" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/Fastfall" method="_on_right_collide"]
 [connection signal="body_exited" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/WallSlide" method="_on_wall_detect_body_exited"]

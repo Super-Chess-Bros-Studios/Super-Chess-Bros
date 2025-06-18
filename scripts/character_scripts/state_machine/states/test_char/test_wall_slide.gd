@@ -7,8 +7,9 @@ class_name TestWallSlide
 
 #vertical variables
 
-#how fast you slide down a wall
-@export var wall_slide_speed : float = 10
+#how fast you slide down a wall without holding down
+@export var wall_slide_speed : float = 60
+
 #how fast you fall while holding down during a wall slide
 @export var fast_wall_slide_coefficient : float = 2
 @export var max_wall_slide_speed = char_attributes.MAX_FALL_SPEED
@@ -16,7 +17,7 @@ class_name TestWallSlide
 #horizontal variables
 
 #how fast horizontally you boost off a wall if you jump
-@export var wall_jump_horizontal_strength : float = 500
+@export var wall_jump_horizontal_strength : float = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH
 #how quick you move off of a wall when inputting opposite of a wall
 #this might not be too important to have
 @export var wall_slide_boost = 50
@@ -41,7 +42,6 @@ func _on_wall_detect_body_exited(body: Node2D) -> void:
 
 
 func Physics_Update(delta):
-	print(char_attributes.cur_dir)
 	#handles vertical events
 	if character.is_on_floor():
 		Transitioned.emit(self, "idle")
@@ -52,8 +52,7 @@ func Physics_Update(delta):
 		Transitioned.emit(self,"airdodge")
 		
 	else:
-		character.velocity.y = lerp(character.velocity.y, wall_slide_speed, 0.5)
-		
+		character.velocity.y = clamp(character.velocity.y + char_attributes.GRAVITY,0,wall_slide_speed)
 		#if you can wall jump do it if it's input
 		if Input.is_action_pressed("jump") and char_attributes.can_wall_jump:
 			char_attributes.can_wall_jump = false
@@ -62,7 +61,8 @@ func Physics_Update(delta):
 			
 		#input for fast slide.
 		elif Input.is_action_pressed("down"):
-			character.velocity.y = clamp(character.velocity.y * (wall_slide_speed * fast_wall_slide_coefficient), 0, char_attributes.MAX_FALL_SPEED)
+			character.velocity.y = clamp(character.velocity.y + (wall_slide_speed * fast_wall_slide_coefficient), 0, max_wall_slide_speed)
+			print(character.velocity.y)
 			character.move_and_slide()
 			
 		#handles horizontal events

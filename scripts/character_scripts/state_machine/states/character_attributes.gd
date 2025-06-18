@@ -12,6 +12,7 @@ const MAX_FALL_SPEED : float = 600
 
 #controls jump power
 const JUMP_POWER : float = -350
+const WALL_JUMP_HORIZONTAL_STRENGTH : float = 500
 
 #These are basically "global variables" for the character that can be read and written to by other states
 var cur_dir = 1
