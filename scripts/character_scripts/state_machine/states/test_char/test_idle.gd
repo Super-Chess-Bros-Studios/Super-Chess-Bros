@@ -18,6 +18,7 @@ func Enter():
 	#refreshes the character's ability to air dodge and double jump
 	char_attributes.can_double_jump = true
 	char_attributes.can_air_dodge = true
+	char_attributes.can_wall_jump = true
 	#.length returns the velocity as an absolute value
 	#if you're moving fast enough, start skidding
 	if character.velocity.length() > 50:

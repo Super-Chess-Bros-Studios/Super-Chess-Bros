@@ -22,7 +22,7 @@ func Physics_Update(delta):
 	if character.is_on_floor():
 		Transitioned.emit(self, "idle")
 	else:
-		character.velocity.y += char_attributes.GRAVITY * char_attributes.FASTFALLMULTIPLIER
+		character.velocity.y = clamp(character.velocity.y + char_attributes.GRAVITY * char_attributes.FASTFALLMULTIPLIER, 0, char_attributes.MAX_FALL_SPEED)
 	if Input.is_action_pressed("shield") and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part
 		Transitioned.emit(self,"airdodge")

@@ -8,6 +8,7 @@ const FASTFALLMULTIPLIER : float = 2
 const AIRSPEEDLERP : float = 0.15
 const AIRFRICTIONLERP : float = 0.1
 const FRICTIONLERP : float = 0.1
+const MAX_FALL_SPEED : float = 600
 
 #controls jump power
 const JUMP_POWER : float = -350
@@ -17,6 +18,7 @@ var cur_dir = 1
 #this character can only double jump and air dodge once before needing to hit the ground
 var can_double_jump = true
 var can_air_dodge = true
+var can_wall_jump = true
 #needed for a cooldown
 var can_roll = true
 #hitboxes should ignore a character if they are invulnerable
