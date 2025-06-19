@@ -55,6 +55,8 @@ func double_jump():
 	Transitioned.emit(self, "fullhop")
 
 func Exit():
+	rightCollide = false
+	leftCollide = false
 	wall_detection_enabled(false)
 
 func Physics_Update(delta):
@@ -65,8 +67,10 @@ func Physics_Update(delta):
 	
 	#handles jump input
 	else:
+		print("rightcollide", rightCollide)
+		print("leftcollide", leftCollide)
 		if Input.is_action_just_pressed("jump") and (char_attributes.can_double_jump or char_attributes.can_wall_jump):
-			if char_attributes.can_wall_jump:
+			if char_attributes.can_wall_jump and (rightCollide or leftCollide):
 				if rightCollide:
 					wall_kick(DIRECTION.left)
 				elif leftCollide:
