@@ -31,5 +31,5 @@ func Update(delta):
 		short_hop = true
 
 func Physics_Update(delta):
-	character.velocity.x -= lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
+	character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
 	character.move_and_slide()

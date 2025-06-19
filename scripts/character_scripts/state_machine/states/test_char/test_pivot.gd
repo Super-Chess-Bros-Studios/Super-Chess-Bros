@@ -52,5 +52,5 @@ func Physics_Update(delta):
 			Transitioned.emit(self, "JumpSquat")
 	#Run logic as normal until pivot ends.
 	else:
-		character.velocity.x -= lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
+		character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
 		character.move_and_slide()
