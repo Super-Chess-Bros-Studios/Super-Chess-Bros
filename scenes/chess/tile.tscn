@@ -1,11 +1,30 @@
+<<<<<<< HEAD
 [gd_scene load_steps=3 format=3 uid="uid://dldgguqclgyl8"]
+=======
+[gd_scene load_steps=4 format=3 uid="uid://dldgguqclgyl8"]
+>>>>>>> c9c565a (initialize)
 
 [ext_resource type="Script" uid="uid://eu8uy5e38nr1" path="res://scripts/chess/tile.gd" id="1_3dk36"]
 [ext_resource type="Texture2D" uid="uid://c4hiqwc00q3rb" path="res://assets/sprites/chess/tile-sprite.png" id="2_16y4v"]
 
+<<<<<<< HEAD
+=======
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_16y4v"]
+size = Vector2(24, 24)
+
+>>>>>>> c9c565a (initialize)
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_3dk36")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("2_16y4v")
 centered = false
+<<<<<<< HEAD
+=======
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(12, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_16y4v")
+>>>>>>> c9c565a (initialize)

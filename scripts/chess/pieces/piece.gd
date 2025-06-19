@@ -2,7 +2,11 @@
 extends Node2D
 class_name Piece
 
+<<<<<<< HEAD
 var is_white: bool
+=======
+var team # Enum from board.gd, white = 0, black = 1
+>>>>>>> c9c565a (initialize)
 var board_position: Vector2i
 var point_value: int
 var sprite_sheet: Texture
@@ -14,8 +18,13 @@ func set_board_position(pos: Vector2i, tile_size: int = 24):
 	board_position = pos
 	position = Vector2(pos.x * tile_size + tile_size/2, pos.y * tile_size + tile_size/2)
 
+<<<<<<< HEAD
 func setup(_is_white: bool, _pos: Vector2i, _sheet: Texture, _points: int, tile_size: int):
 	is_white = _is_white
+=======
+func setup(_team, _pos: Vector2i, _sheet: Texture, _points: int, tile_size: int):
+	team = _team
+>>>>>>> c9c565a (initialize)
 	point_value = _points
 	sprite_sheet = _sheet
 	set_board_position(_pos, tile_size)
@@ -28,7 +37,11 @@ func update_sprite_region():
 		return
 
 	var col = get_sprite_column()
+<<<<<<< HEAD
 	var row = 0 if not is_white else 1
+=======
+	var row = 0 if team == 1 else 1 
+>>>>>>> c9c565a (initialize)
 
 	var padding = 1
 	var frame_width = (sprite_sheet.get_width() - padding * 5) / 6
