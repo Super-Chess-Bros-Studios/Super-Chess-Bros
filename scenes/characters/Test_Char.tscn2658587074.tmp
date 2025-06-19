@@ -600,14 +600,15 @@ anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
+speed = null
+double_jump_coefficient = null
 metadata/_custom_type_script = "uid://xq4wnlhqxdlm"
 
-[node name="ShortHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "slide_colliderL", "slide_colliderR")]
+[node name="ShortHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("11_0l6pb")
 anim = NodePath("../../AnimatedSprite2D")
 character = NodePath("../..")
-slide_colliderL = NodePath("../../LeftCollide")
-slide_colliderR = NodePath("../../RightCollide")
+jump_power_coefficient = 0.65
 metadata/_custom_type_script = "uid://dsq2k53fkg20h"
 
 [node name="Fall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "slide_colliderL", "slide_colliderR")]

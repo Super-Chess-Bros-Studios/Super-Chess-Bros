@@ -25,8 +25,14 @@ func _on_dash_time_timeout() -> void:
 	Transitioned.emit(self, "run")
 
 func Physics_Update(delta):
+	
+	#ensures the player doesn't just run on air
+	if !character.is_on_floor():
+		Transitioned.emit(self,"fall")
+	elif Input.is_action_just_pressed("shield") and char_attributes.can_roll:
+		Transitioned.emit(self,"roll")
 	#if you let go of the key direction you're going, you transition to idle.
-	if !Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
+	elif !Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
 		timer.set_paused(true)
 		char_attributes.cur_dir = DIRECTION.left
 		Transitioned.emit(self, "idle")
@@ -34,7 +40,8 @@ func Physics_Update(delta):
 		timer.set_paused(true)
 		char_attributes.cur_dir = DIRECTION.right
 		Transitioned.emit(self, "idle")
-	elif Input.is_action_pressed("ui_accept"):
+	#lets you jump from initial dash
+	elif Input.is_action_pressed("jump"):
 		timer.set_paused(true)
 		Transitioned.emit(self, "jumpsquat")
 	else:
