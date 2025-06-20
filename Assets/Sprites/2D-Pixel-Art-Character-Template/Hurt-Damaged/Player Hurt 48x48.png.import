@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cng3raykcvqid"
-path="res://.godot/imported/Player Hurt 48x48.png-e0c18b702ac68f49758604a7eefaaeeb.ctex"
+path="res://.godot/imported/Player Hurt 48x48.png-8ed58a2a8e8c6db9a68ad2acabc2f2d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png"
-dest_files=["res://.godot/imported/Player Hurt 48x48.png-e0c18b702ac68f49758604a7eefaaeeb.ctex"]
+source_file="res://assets/Sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png"
+dest_files=["res://.godot/imported/Player Hurt 48x48.png-8ed58a2a8e8c6db9a68ad2acabc2f2d0.ctex"]
 
 [params]
 

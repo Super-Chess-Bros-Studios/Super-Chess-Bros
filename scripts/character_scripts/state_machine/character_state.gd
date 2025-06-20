@@ -26,3 +26,6 @@ func Update(_delta: float):
 #Same thing as above but for the physics server.
 func Physics_Update(_delta: float):
 	pass
+
+func get_action(action_base: String) -> String:
+	return "%s_%d" % [action_base, char_attributes.player_id]

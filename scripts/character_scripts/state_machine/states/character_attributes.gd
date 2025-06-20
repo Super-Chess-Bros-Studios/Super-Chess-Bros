@@ -1,6 +1,9 @@
 extends Node
 class_name CharacterAttributes
 
+
+@export var player_id: int = 1  # Set this in the editor or at spawn time
+
 const GRAVITY  : float = 10
 const FASTFALLMULTIPLIER : float = 2
 

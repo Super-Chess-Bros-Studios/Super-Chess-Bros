@@ -29,19 +29,19 @@ func Physics_Update(delta):
 	#ensures the player doesn't just run on air
 	if !character.is_on_floor():
 		Transitioned.emit(self,"fall")
-	elif Input.is_action_just_pressed("shield") and char_attributes.can_roll:
+	elif Input.is_action_just_pressed(get_action("shield")) and char_attributes.can_roll:
 		Transitioned.emit(self,"roll")
 	#if you let go of the key direction you're going, you transition to idle.
-	elif !Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
+	elif !Input.is_action_pressed(get_action("left")) and char_attributes.cur_dir == DIRECTION.left:
 		timer.set_paused(true)
 		char_attributes.cur_dir = DIRECTION.left
 		Transitioned.emit(self, "idle")
-	elif !Input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.right:
+	elif !Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.right:
 		timer.set_paused(true)
 		char_attributes.cur_dir = DIRECTION.right
 		Transitioned.emit(self, "idle")
 	#lets you jump from initial dash
-	elif Input.is_action_pressed("jump"):
+	elif Input.is_action_pressed(get_action("jump")):
 		timer.set_paused(true)
 		Transitioned.emit(self, "jumpsquat")
 	else:

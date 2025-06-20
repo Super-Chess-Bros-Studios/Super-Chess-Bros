@@ -33,15 +33,15 @@ func Physics_Update(delta):
 	#bunch of inputs
 	if !character.is_on_floor():
 		Transitioned.emit(self,"fall")
-	if Input.is_action_pressed("left"):
+	if Input.is_action_pressed(get_action("left")):
 		char_attributes.cur_dir = DIRECTION.left
 		Transitioned.emit(self,"initialdash")
-	elif Input.is_action_pressed("right"):
+	elif Input.is_action_pressed(get_action("right")):
 		char_attributes.cur_dir = DIRECTION.right
 		Transitioned.emit(self,"initialdash")
-	elif Input.is_action_pressed("down"):
+	elif Input.is_action_pressed(get_action("down")):
 		Transitioned.emit(self,"crouch")
-	elif Input.is_action_pressed("jump"):
+	elif Input.is_action_pressed(get_action("jump")):
 		Transitioned.emit(self, "JumpSquat")
 	else:
 		#if you're not moving quick enough, stop skidding

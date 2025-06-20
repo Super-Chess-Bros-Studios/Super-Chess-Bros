@@ -18,9 +18,9 @@ func Enter():
 func Physics_Update(delta):
 	if !character.is_on_floor():
 		Transitioned.emit(self,"fall")
-	elif !Input.is_action_pressed("down"):
+	elif !Input.is_action_pressed(get_action("down")):
 		Transitioned.emit(self,"idle")
-	elif Input.is_action_pressed("jump"):
+	elif Input.is_action_pressed(get_action("jump")):
 		Transitioned.emit(self, "jumpsquat")
 	else:
 		character.velocity.x -= lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
