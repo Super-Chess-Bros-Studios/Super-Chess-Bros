@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Super Chess Bros"
-run/main_scene="uid://b08n1logddr8i"
+run/main_scene="uid://dtf4p6j0qehoa"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
