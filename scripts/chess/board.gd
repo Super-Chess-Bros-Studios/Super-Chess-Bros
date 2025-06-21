@@ -12,6 +12,9 @@ const PIECE_SCENES := {
 	"king": preload("res://scenes/chess/pieces/king.tscn")
 }
 
+# Cursor scene
+@onready var cursor: Node2D = preload("res://scenes/chess/cursor.tscn").instantiate()
+
 #So TilesContainer just contains a bunch of scenes of tile which we import as a packed scene
 @onready var tiles_container := $TilesContainer
 @export var tile_scene: PackedScene
@@ -26,11 +29,16 @@ const PIECE_SCENES := {
 # We get board center so we can position camera correctly
 var board_center = Vector2(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE) / 2
 
+# cursor settings 
+var cursor_pos := Vector2i(4, 4)
+var cursor_speed := 300.0
+var tile_pos: Vector2i = Vector2i(-1, -1)
+
+#chess logic
 var board_state := [] # Game state of the board
 var selected_piece: Piece = null
 enum team {white, black}
 var current_turn : team = team.white # Logic for chess turns
-var hovered_tile_pos: Vector2i = Vector2i(-1, -1) # Init tile selector
 
 # Hovering colors for both sides
 var turn_colors := {
@@ -43,6 +51,11 @@ func _ready():
 	initialize_board_state()
 	spawn_pieces()
 	$Camera2D.position = board_center
+	add_child(cursor)
+	cursor.position = board_center
+
+func _process(delta):
+	handle_controller_input(delta)
 
 # Populates our board with respective tiles
 func spawn_board():
@@ -106,49 +119,96 @@ func spawn_pieces():
 	spawn_piece("king", team.white, Vector2i(4, 7), 0)
 	spawn_piece("king", team.black, Vector2i(4, 0), 0)
 
-# Logic for moving your selector square
-func mouse_hovered(tile_pos: Vector2i):
-	# Clear previous hover
-	if hovered_tile_pos != Vector2i(-1, -1):
-		var prev_tile = get_tile_at_position(hovered_tile_pos)
-		if prev_tile:
-			if selected_piece == null or hovered_tile_pos != selected_piece.board_position:
-				prev_tile.reset_color()
+func handle_controller_input(delta):
+	# controller input vectors
+	var input_vector := Vector2(
+		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	)
 	
-	# Set hover with players color
-	hovered_tile_pos = tile_pos
-	var tile = get_tile_at_position(tile_pos)
-	if tile:
-		var piece_at_tile = board_state[tile_pos.y][tile_pos.x]
-		if selected_piece == null or (piece_at_tile != selected_piece):
-			tile.highlight(turn_colors[current_turn])
-		else:
-			# selected piece tile stays highlighted
-			tile.highlight(Color.GREEN)
+	# hide highlight until cursor is moved
+	if input_vector.length() > 0.1:
+		update_hovered_tile()
+	
+	# diagonal movement
+	if input_vector.length() > 1.0:
+		input_vector = input_vector.normalized()
+	
+	# Move cursor
+	cursor.position += input_vector * cursor_speed * delta
+	
+	# Keep cursor on the board
+	cursor.position.x = clamp(cursor.position.x, 0, BOARD_SIZE * TILE_SIZE)
+	cursor.position.y = clamp(cursor.position.y, 0, BOARD_SIZE * TILE_SIZE)
+	
+	# buttons
+	if Input.is_action_just_pressed("ui_accept"):
+		tile_clicked()
+	if Input.is_action_just_pressed("ui_cancel") and selected_piece != null:
+		deselect_piece()
 
+func update_hovered_tile():
+	# Convert cursor position to tile coordinates
+	var new_hover := Vector2i(
+		floor(cursor.position.x / TILE_SIZE),
+		floor(cursor.position.y / TILE_SIZE)
+	)
+	
+	# Clamp to board size
+	new_hover.x = clamp(new_hover.x, 0, BOARD_SIZE - 1)
+	new_hover.y = clamp(new_hover.y, 0, BOARD_SIZE - 1)
+	
+	# update highlight if when we change tiles
+	if new_hover != tile_pos:
+		# Clear previous highlight
+		if tile_pos != Vector2i(-1, -1):
+			var prev_tile = get_tile_at_position(tile_pos)
+			if prev_tile:
+				# only remove if not selected tile
+				if selected_piece == null or tile_pos != selected_piece.board_position:
+					prev_tile.reset_color()
+			
+		# Set next highlight
+		tile_pos = new_hover
+		var tile = get_tile_at_position(tile_pos)
+		if tile:
+			var piece_at_tile = board_state[tile_pos.y][tile_pos.x]
+			if selected_piece == null or (piece_at_tile != selected_piece):
+				tile.highlight(turn_colors[current_turn])
+			else:
+				# selected piece tile stays green
+				tile.highlight(Color.GREEN)
+
+# Get tile using its name format "Tile_{row}_{col}"
 func get_tile_at_position(pos: Vector2i) :
-	# Get the tile using its expected name format "Tile_{row}_{col}"
 	var tile_name = "Tile_%d_%d" % [pos.y, pos.x] 
 	return tiles_container.get_node_or_null(tile_name)
 
-func tile_clicked(pos: Vector2i):
-	print(current_turn, " player clicked tile: ", pos) # debug
+func tile_clicked():
+	var tile_pos := Vector2i(
+		floor(cursor.position.x / TILE_SIZE),
+		floor(cursor.position.y / TILE_SIZE)
+	)
+	tile_pos.x = clamp(tile_pos.x, 0, BOARD_SIZE - 1)
+	tile_pos.y = clamp(tile_pos.y, 0, BOARD_SIZE - 1)
 	
-	var piece = board_state[pos.y][pos.x]
+	print("Clicked Tile: [",tile_pos.x,",",tile_pos.y,"]") #debug
+	var piece = board_state[tile_pos.y][tile_pos.x]
 	
-	# If no piece is selected and click on a piece of our color
+	# If no piece is selected and we're on a piece of our color
 	if selected_piece == null and piece != null and piece.team == current_turn:
 		selected_piece = piece
-		get_tile_at_position(pos).highlight(Color.GREEN)
-		print("Selected Piece: ", selected_piece.name) #debug
+		print("Selected Piece: ", selected_piece.name) # debug
+		get_tile_at_position(tile_pos).highlight(Color.GREEN)
 		return
 	
-	# Clicking on any tile after piece selection
 	if selected_piece != null:
 		# Movement logic will go here
-		
 		switch_turn()
-		# Deselect after move attempt
+		deselect_piece()
+
+func deselect_piece():
+	if selected_piece != null:
 		get_tile_at_position(selected_piece.board_position).reset_color()
 		selected_piece = null
 
@@ -156,7 +216,7 @@ func switch_turn():
 	# switch team
 	current_turn = team.black if current_turn == team.white else team.white
 	
-	# clear previous mouse selector tile on turn switch
-	if hovered_tile_pos != Vector2i(-1, -1):
-		get_tile_at_position(hovered_tile_pos).reset_color()
-	hovered_tile_pos = Vector2i(-1, -1)
+	# clear tile highlight on turn switch
+	if tile_pos != Vector2i(-1, -1):
+		get_tile_at_position(tile_pos).highlight(
+			turn_colors[team.white] if current_turn == team.white else turn_colors[team.black])
