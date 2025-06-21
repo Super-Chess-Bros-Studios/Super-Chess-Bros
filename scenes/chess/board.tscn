@@ -15,6 +15,7 @@ piece_sprite_sheet = ExtResource("4_l1xyo")
 [node name="WhiteCursor" parent="." instance=ExtResource("5_l1xyo")]
 
 [node name="BlackCursor" parent="." instance=ExtResource("5_l1xyo")]
+player_id = 2
 
 [node name="PiecesContainer" type="Node2D" parent="."]
 

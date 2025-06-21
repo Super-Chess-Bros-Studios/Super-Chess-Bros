@@ -10,10 +10,23 @@ var board_size_pixels := Vector2.ZERO
 var cursor_size := Vector2.ZERO
 var last_hovered_tile := Vector2i(-1, -1)  # Track last hovered tile
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 func _ready():
+	
 	board_size_pixels = Vector2(BOARD_SIZE * tile_size, BOARD_SIZE * tile_size)
 	cursor_pos = Vector2(BOARD_SIZE / 2 * tile_size, BOARD_SIZE / 2 * tile_size)
 	cursor_size = Vector2(tile_size, tile_size)
+	
+	# Make sure sprite is visible
+	if sprite:
+		sprite.visible = true
+	
+	# Set color of Cursors
+	if player_id == 1:
+		sprite.modulate = Color(1.0, 0.0, 0.0)  # Bright red
+	else:
+		sprite.modulate = Color(1.0, 1.0, 0.0)  # Bright yellow
 
 func _process(delta):
 	handle_input(delta)

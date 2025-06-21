@@ -12,9 +12,9 @@ const PIECE_SCENES := {
 	"king": preload("res://scenes/chess/pieces/king.tscn")
 }
 
-# Cursor scenes - now we have two cursors
-@onready var white_cursor: Node2D = preload("res://scenes/chess/cursor.tscn").instantiate()
-@onready var black_cursor: Node2D = preload("res://scenes/chess/cursor.tscn").instantiate()
+# Get cursor references from scene children
+@onready var white_cursor: Node2D = $WhiteCursor
+@onready var black_cursor: Node2D = $BlackCursor
 
 #So TilesContainer just contains a bunch of scenes of tile which we import as a packed scene
 @onready var tiles_container := $TilesContainer
@@ -52,21 +52,9 @@ func _ready():
 	spawn_pieces()
 	$Camera2D.position = board_center
 	
-	# Setup cursors
-	add_child(white_cursor)
-	add_child(black_cursor)
-	
-	# Set player IDs for cursors
-	white_cursor.player_id = 1
-	black_cursor.player_id = 2
-	
 	# Set initial positions
 	white_cursor.cursor_pos = board_center
 	black_cursor.cursor_pos = board_center
-	
-	# Pass tile_size to cursors
-	white_cursor.tile_size = TILE_SIZE
-	black_cursor.tile_size = TILE_SIZE
 
 func _process(delta):
 	# Handle accept/cancel inputs for both players
