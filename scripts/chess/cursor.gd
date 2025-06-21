@@ -40,8 +40,8 @@ func _process(delta):
 
 func update_hover():
 	# Convert the cursor's pixel position to tile coordinates
-	var tile_x = int(round(cursor_pos.x / tile_size))
-	var tile_y = int(round(cursor_pos.y / tile_size))
+	var tile_x = int(floor(cursor_pos.x / tile_size))
+	var tile_y = int(floor(cursor_pos.y / tile_size))
 	var tile_pos = Vector2i(tile_x, tile_y)
 	
 	# Only update hover if the tile changed
