@@ -21,7 +21,7 @@ func playanim():
 
 func Enter():
 	print("Roll state")
-	directional_input = Input.get_vector("left","right","up","down")
+	directional_input = Input.get_vector(get_action("left"),get_action("right"),get_action("up"),get_action("down"))
 	#maintains the input as a vector, allows you to separate cur_dir from the actual input
 	directional_input.y = 0
 	directional_input = directional_input.normalized()
