@@ -37,17 +37,17 @@ func Physics_Update(delta):
 	if !character.is_on_floor():
 		Transitioned.emit(self,"fall")
 	#This handles transition to pivot
-	elif !timer.is_stopped() and Input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.left:
+	elif !timer.is_stopped() and Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.left:
 		Transitioned.emit(self, "Pivot")
-	elif !timer.is_stopped() and Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.right:
+	elif !timer.is_stopped() and Input.is_action_pressed(get_action("left")) and char_attributes.cur_dir == DIRECTION.right:
 		Transitioned.emit(self, "Pivot")
 	
 	#handles transition to roll
-	elif Input.is_action_just_pressed("shield") and char_attributes.can_roll:
+	elif Input.is_action_just_pressed(get_action("shield")) and char_attributes.can_roll:
 		Transitioned.emit(self,"roll")
 	
 	#if you let go of the key direction you're going, you transition to idle.
-	elif !Input.is_action_pressed("left") and char_attributes.cur_dir == DIRECTION.left:
+	elif !Input.is_action_pressed(get_action("left")) and char_attributes.cur_dir == DIRECTION.left:
 		
 		#I have to add !timed_out because it'll trigger twice otherwise.
 		if timer.is_stopped() and !timed_out:
@@ -58,7 +58,7 @@ func Physics_Update(delta):
 		elif timed_out:
 			#apply_friction()
 			Transitioned.emit(self, "idle")
-	elif !Input.is_action_pressed("right") and char_attributes.cur_dir == DIRECTION.right:
+	elif !Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.right:
 		if timer.is_stopped() and !timed_out:
 			timer.start()
 			playanim("skid")
@@ -67,11 +67,11 @@ func Physics_Update(delta):
 			#apply_friction()
 			Transitioned.emit(self, "idle")
 	
-	elif Input.is_action_pressed("down"):
+	elif Input.is_action_pressed(get_action("down")):
 		Transitioned.emit(self,"crouch")
 	
 	#This handles transition to jumpsquat
-	elif Input.is_action_pressed("jump"):
+	elif Input.is_action_pressed(get_action("jump")):
 		Transitioned.emit(self, "JumpSquat")
 
 

@@ -18,7 +18,7 @@ func playanim():
 
 func Enter():
 	print("Air dodge state")
-	directional_input = Input.get_vector("left","right","up","down").normalized()
+	directional_input = Input.get_vector(get_action("left"),get_action("right"),get_action("up"),get_action("down")).normalized()
 	char_attributes.invulnerable = true
 	char_attributes.can_air_dodge = false
 	timer.start()

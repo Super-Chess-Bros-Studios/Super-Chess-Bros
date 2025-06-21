@@ -61,7 +61,7 @@ func Exit():
 
 func Physics_Update(delta):
 	#shield is prioritized here so it doesn't get overwritten by left and right inputs
-	if Input.is_action_pressed("shield") and char_attributes.can_air_dodge:
+	if Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part
 		Transitioned.emit(self,"airdodge")
 	
@@ -69,7 +69,7 @@ func Physics_Update(delta):
 	else:
 		print("rightcollide", rightCollide)
 		print("leftcollide", leftCollide)
-		if Input.is_action_just_pressed("jump") and (char_attributes.can_double_jump or char_attributes.can_wall_jump):
+		if Input.is_action_just_pressed(get_action("jump")) and (char_attributes.can_double_jump or char_attributes.can_wall_jump):
 			if char_attributes.can_wall_jump and (rightCollide or leftCollide):
 				if rightCollide:
 					wall_kick(DIRECTION.left)
@@ -85,10 +85,10 @@ func Physics_Update(delta):
 			character.velocity.y += char_attributes.GRAVITY
 
 		#handles horizontal events
-		if Input.is_action_pressed("left"):
+		if Input.is_action_pressed(get_action("left")):
 			character.velocity.x = lerp(character.velocity.x,-speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
-		elif Input.is_action_pressed("right"):
+		elif Input.is_action_pressed(get_action("right")):
 			character.velocity.x = lerp(character.velocity.x,speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
 

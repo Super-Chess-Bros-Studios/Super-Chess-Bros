@@ -50,7 +50,7 @@ func Physics_Update(delta):
 	#handles vertical events
 	if character.is_on_floor():
 		Transitioned.emit(self, "idle")
-	elif Input.is_action_pressed("shield") and char_attributes.can_air_dodge:
+	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part
 		Transitioned.emit(self,"airdodge")
 	elif begin_wall_slide:
@@ -59,19 +59,19 @@ func Physics_Update(delta):
 	else:
 		character.velocity.y = clamp(character.velocity.y + char_attributes.GRAVITY, -char_attributes.MAX_FALL_SPEED, char_attributes.MAX_FALL_SPEED)
 		#if you can double jump do it if it's input
-		if Input.is_action_pressed("jump") and char_attributes.can_double_jump:
+		if Input.is_action_pressed(get_action("jump")) and char_attributes.can_double_jump:
 			char_attributes.can_double_jump = false
 			Transitioned.emit(self, "fullhop")
 			
 		#input for fastfall.
-		elif Input.is_action_pressed("down"):
+		elif Input.is_action_pressed(get_action("down")):
 			Transitioned.emit(self, "fastfall")
 			
 		#handles horizontal events
-		elif Input.is_action_pressed("left"):
+		elif Input.is_action_pressed(get_action("left")):
 			character.velocity.x = lerp(character.velocity.x,-speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
-		elif Input.is_action_pressed("right"):
+		elif Input.is_action_pressed(get_action("right")):
 			character.velocity.x = lerp(character.velocity.x,speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
 		else:

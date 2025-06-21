@@ -47,33 +47,33 @@ func Physics_Update(delta):
 		Transitioned.emit(self, "idle")
 	elif exit_wall_slide:
 		Transitioned.emit(self,"fall")
-	elif Input.is_action_pressed("shield") and char_attributes.can_air_dodge:
+	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part
 		Transitioned.emit(self,"airdodge")
 		
 	else:
 		character.velocity.y = clamp(character.velocity.y + char_attributes.GRAVITY,0,wall_slide_speed)
 		#if you can wall jump do it if it's input
-		if Input.is_action_pressed("jump") and char_attributes.can_wall_jump:
+		if Input.is_action_pressed(get_action("jump")) and char_attributes.can_wall_jump:
 			char_attributes.can_wall_jump = false
 			character.velocity.x = wall_jump_horizontal_strength * char_attributes.cur_dir
 			Transitioned.emit(self, "fullhop")
 			
 		#input for fast slide.
-		elif Input.is_action_pressed("down"):
+		elif Input.is_action_pressed(get_action("down")):
 			character.velocity.y = clamp(character.velocity.y + (wall_slide_speed * fast_wall_slide_coefficient), 0, max_wall_slide_speed)
 			print(character.velocity.y)
 			character.move_and_slide()
 			
 		#handles horizontal events
-		elif Input.is_action_pressed("left"):
+		elif Input.is_action_pressed(get_action("left")):
 			if char_attributes.cur_dir == DIRECTION.left:
 				character.velocity.x = wall_slide_boost * char_attributes.cur_dir
 				character.move_and_slide()
 				Transitioned.emit(self,"fall")
 			else:
 				character.move_and_slide()
-		elif Input.is_action_pressed("right"):
+		elif Input.is_action_pressed(get_action("right")):
 			if char_attributes.cur_dir == DIRECTION.right:
 				character.velocity.x = wall_slide_boost * char_attributes.cur_dir
 				character.move_and_slide()

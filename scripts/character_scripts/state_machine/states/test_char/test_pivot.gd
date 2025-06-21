@@ -34,21 +34,21 @@ func Physics_Update(delta):
 	#Only allow these movements once pivot ends.
 	elif timed_out:
 		#If you're holding left at the end of pivot, run left.
-		if Input.is_action_pressed("left"):
+		if Input.is_action_pressed(get_action("left")):
 			char_attributes.cur_dir = DIRECTION.left
 			Transitioned.emit(self,"initialdash")
 		#If you're holding right at the end of pivot, run right.
-		elif Input.is_action_pressed("right"):
+		elif Input.is_action_pressed(get_action("right")):
 			char_attributes.cur_dir = DIRECTION.right
 			Transitioned.emit(self,"initialdash")
 		#If you're holding down at the end of pivot, crouch.
-		elif Input.is_action_pressed("down"):
+		elif Input.is_action_pressed(get_action("down")):
 			Transitioned.emit(self,"crouch")
 		#If you're not doing anything at the end of pivot, idle.
 		else:
 			Transitioned.emit(self,"idle")
 	#You can jump cancel pivot because doesn't that sound badass?
-	elif Input.is_action_pressed("jump"):
+	elif Input.is_action_pressed(get_action("jump")):
 			Transitioned.emit(self, "JumpSquat")
 	#Run logic as normal until pivot ends.
 	else:

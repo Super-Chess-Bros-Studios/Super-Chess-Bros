@@ -15,8 +15,14 @@ size = Vector2(128, 128)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_4mqg7")
 
-[node name="TestChar" parent="." instance=ExtResource("1_8xinf")]
+[node name="Player1" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(36, -26)
+
+[node name="Player2" parent="." instance=ExtResource("1_8xinf")]
+position = Vector2(66, -26)
+
+[node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="4"]
+player_id = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -90)
@@ -30,3 +36,6 @@ texture = ExtResource("2_i052m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
 shape = SubResource("RectangleShape2D_3sglg")
+
+[editable path="Player1"]
+[editable path="Player2"]
