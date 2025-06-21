@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://xv82r6mhk4x5"]
+[gd_scene load_steps=6 format=3 uid="uid://xv82r6mhk4x5"]
 
 [ext_resource type="Script" uid="uid://b5ep5if383vj3" path="res://scripts/chess/board.gd" id="1_m5kr7"]
 [ext_resource type="PackedScene" uid="uid://dldgguqclgyl8" path="res://scenes/chess/tile.tscn" id="2_w6gev"]
 [ext_resource type="PackedScene" uid="uid://bidd6hxynugwx" path="res://scenes/chess/pieces/piece.tscn" id="3_6y3m1"]
 [ext_resource type="Texture2D" uid="uid://clw4wtm4s1qki" path="res://assets/sprites/chess/chess-pieces.png" id="4_l1xyo"]
+[ext_resource type="PackedScene" uid="uid://b5qaf8x74fqir" path="res://scenes/chess/cursor.tscn" id="5_l1xyo"]
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_m5kr7")
@@ -11,10 +12,14 @@ tile_scene = ExtResource("2_w6gev")
 piece_scene = ExtResource("3_6y3m1")
 piece_sprite_sheet = ExtResource("4_l1xyo")
 
+[node name="WhiteCursor" parent="." instance=ExtResource("5_l1xyo")]
+
+[node name="BlackCursor" parent="." instance=ExtResource("5_l1xyo")]
+
 [node name="PiecesContainer" type="Node2D" parent="."]
 
 [node name="TilesContainer" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(290, 164)
-zoom = Vector2(5, 5)
+zoom = Vector2(3, 3)
