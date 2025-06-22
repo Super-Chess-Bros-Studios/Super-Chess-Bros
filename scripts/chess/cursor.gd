@@ -50,9 +50,10 @@ func update_hover():
 	var tile_y = int(floor(cursor_pos.y / ChessConstants.TILE_SIZE))
 	var tile_pos = Vector2i(tile_x, tile_y)
 	
-	# Only update hover if the tile changed
-	if tile_pos != last_hovered_tile:
+	# Only update hover if the tile changed and it's this player's turn
+	if tile_pos != last_hovered_tile and game_manager.can_player_act(player_id): ##TODO && game_manager.selected_piece == null for now we leave this out for testing purposes
 		handle_hover_change(last_hovered_tile, tile_pos)
+		last_hovered_tile = tile_pos
 		last_hovered_tile = tile_pos
 
 func handle_hover_change(old_tile_pos: Vector2i, new_tile_pos: Vector2i):
@@ -103,9 +104,13 @@ func handle_accept_input():
 		return
 	
 	if game_manager.selected_piece != null:
+		var selected_pos = game_manager.selected_piece.board_position
 		# Movement logic will go here
+		print("Piece Moved to ", tile_pos)
 		game_manager.switch_turn()
 		game_manager.deselect_piece()
+		board_renderer.reset_tile_color(selected_pos)
+		board_renderer.reset_tile_color(last_hovered_tile)
 
 func handle_cancel_input():
 	if not game_manager.can_player_act(player_id):

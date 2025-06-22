@@ -37,8 +37,8 @@ const PIECE_VALUES := {
 
 # UI Colors
 const HOVER_COLORS := {
-	TeamColor.WHITE: Color(0.9, 0.9, 1.0),
-	TeamColor.BLACK: Color(0.2, 0.2, 0.4)
+	TeamColor.WHITE: Color(1.0, 1.0, 0.0),
+	TeamColor.BLACK: Color(1.0, 1.0, 0.0)
 }
 
 const SELECTION_COLOR := Color.GREEN
