@@ -1,32 +1,37 @@
 extends Node2D
 
-@export var player_id: int = 1  # Exposed variable for player ID
+@export var player_id: ChessConstants.PlayerId = ChessConstants.PlayerId.WHITE_PLAYER
 @export var move_speed := 80.0
 
-var tile_size := 24
-const BOARD_SIZE := 8
 var cursor_pos := Vector2.ZERO
 var board_size_pixels := Vector2.ZERO
 var cursor_size := Vector2.ZERO
-var last_hovered_tile := Vector2i(-1, -1)  # Track last hovered tile
+var last_hovered_tile := Vector2i(-1, -1)
 
 @onready var sprite: Sprite2D = $Sprite2D
 
+# References
+var game_manager: GameManager
+var board_renderer: BoardRenderer
+
 func _ready():
-	
-	board_size_pixels = Vector2(BOARD_SIZE * tile_size, BOARD_SIZE * tile_size)
-	cursor_pos = Vector2(BOARD_SIZE / 2 * tile_size, BOARD_SIZE / 2 * tile_size)
-	cursor_size = Vector2(tile_size, tile_size)
+	board_size_pixels = Vector2(ChessConstants.BOARD_SIZE * ChessConstants.TILE_SIZE, ChessConstants.BOARD_SIZE * ChessConstants.TILE_SIZE)
+	cursor_pos = Vector2(ChessConstants.BOARD_SIZE / 2 * ChessConstants.TILE_SIZE, ChessConstants.BOARD_SIZE / 2 * ChessConstants.TILE_SIZE)
+	cursor_size = Vector2(ChessConstants.TILE_SIZE, ChessConstants.TILE_SIZE)
 	
 	# Make sure sprite is visible
 	if sprite:
 		sprite.visible = true
 	
 	# Set color of Cursors
-	if player_id == 1:
+	if player_id == ChessConstants.PlayerId.WHITE_PLAYER:
 		sprite.modulate = Color(1.0, 0.0, 0.0)  # Bright red
 	else:
 		sprite.modulate = Color(1.0, 1.0, 0.0)  # Bright yellow
+
+func setup(_game_manager: GameManager, _board_renderer: BoardRenderer):
+	game_manager = _game_manager
+	board_renderer = _board_renderer
 
 func _process(delta):
 	handle_input(delta)
@@ -41,8 +46,8 @@ func _process(delta):
 
 func update_hover():
 	# Convert the cursor's pixel position to tile coordinates
-	var tile_x = int(floor(cursor_pos.x / tile_size))
-	var tile_y = int(floor(cursor_pos.y / tile_size))
+	var tile_x = int(floor(cursor_pos.x / ChessConstants.TILE_SIZE))
+	var tile_y = int(floor(cursor_pos.y / ChessConstants.TILE_SIZE))
 	var tile_pos = Vector2i(tile_x, tile_y)
 	
 	# Only update hover if the tile changed
@@ -51,42 +56,65 @@ func update_hover():
 		last_hovered_tile = tile_pos
 
 func handle_hover_change(old_tile_pos: Vector2i, new_tile_pos: Vector2i):
-	var board = get_parent()
+	if not game_manager or not board_renderer:
+		return
 	
 	# Clear previous highlight if it exists
 	if old_tile_pos != Vector2i(-1, -1):
-		var prev_tile = board.get_tile_at_position(old_tile_pos)
-		if prev_tile:
-			# Only remove if not selected tile
-			var selected_piece = board.selected_piece
-			if selected_piece == null or old_tile_pos != selected_piece.board_position:
-				prev_tile.reset_color()
+		# Only remove if not selected tile
+		if game_manager.selected_piece == null or old_tile_pos != game_manager.selected_piece.board_position:
+			board_renderer.reset_tile_color(old_tile_pos)
 	
 	# Set new highlight
-	var tile = board.get_tile_at_position(new_tile_pos)
-	if tile:
-		var board_state = board.board_state
-		var piece_at_tile = board_state[new_tile_pos.y][new_tile_pos.x]
-		var selected_piece = board.selected_piece
-		var current_turn = board.current_turn
-		var turn_colors = board.turn_colors
-		
-		if selected_piece == null or (piece_at_tile != selected_piece):
-			# Use appropriate color based on current turn
-			tile.highlight(turn_colors[current_turn])
-		else:
-			# Selected piece tile stays green
-			tile.highlight(Color.GREEN)
+	var piece_at_tile = game_manager.get_piece_at_position(new_tile_pos)
+	var selected_piece = game_manager.selected_piece
+	var current_team = game_manager.get_current_team()
+	
+	if selected_piece == null or (piece_at_tile != selected_piece):
+		# Use appropriate color based on current turn
+		var hover_color = ChessConstants.HOVER_COLORS[current_team]
+		board_renderer.highlight_tile(new_tile_pos, hover_color)
+	else:
+		# Selected piece tile stays green
+		board_renderer.highlight_tile(new_tile_pos, ChessConstants.SELECTION_COLOR)
 
 func handle_selection_input():
+	if not game_manager:
+		return
+		
 	# Handle accept/cancel inputs for this cursor
 	if Input.is_action_just_pressed(get_action("accept")):
-		if get_parent().has_method("handle_tile_click"):
-			get_parent().handle_tile_click(player_id)
+		handle_accept_input()
 	
 	if Input.is_action_just_pressed(get_action("cancel")):
-		if get_parent().has_method("handle_cancel_selection"):
-			get_parent().handle_cancel_selection(player_id)
+		handle_cancel_input()
+
+func handle_accept_input():
+	if not game_manager.can_player_act(player_id):
+		return
+	
+	var tile_pos = get_current_tile_pos()
+	var piece = game_manager.get_piece_at_position(tile_pos)
+	
+	# If no piece is selected and we're on a piece of our color
+	if game_manager.selected_piece == null and piece != null:
+		if game_manager.select_piece(piece):
+			board_renderer.highlight_tile(tile_pos, ChessConstants.SELECTION_COLOR)
+		return
+	
+	if game_manager.selected_piece != null:
+		# Movement logic will go here
+		game_manager.switch_turn()
+		game_manager.deselect_piece()
+
+func handle_cancel_input():
+	if not game_manager.can_player_act(player_id):
+		return
+	
+	if game_manager.selected_piece != null:
+		var selected_pos = game_manager.selected_piece.board_position
+		board_renderer.reset_tile_color(selected_pos)
+		game_manager.deselect_piece()
 
 func handle_input(delta):
 	var x_axis := Input.get_action_strength(get_action("right")) - Input.get_action_strength(get_action("left"))
@@ -98,9 +126,13 @@ func handle_input(delta):
 	
 	cursor_pos += input_vec.normalized() * move_speed * delta
 
-# Function to get action names with player_id suffix
 func get_action(base_action: String) -> String:
-	return base_action + "_" + str(player_id)
+	var player_suffix = "1" if player_id == ChessConstants.PlayerId.WHITE_PLAYER else "2"
+	return base_action + "_" + player_suffix
 
 func get_current_tile_pos() -> Vector2i:
 	return last_hovered_tile
+
+func update_hover_after_turn_switch():
+	if last_hovered_tile != Vector2i(-1, -1):
+		handle_hover_change(Vector2i(-1, -1), last_hovered_tile)
