@@ -74,11 +74,11 @@ func handle_hover_change(old_tile_pos: Vector2i, new_tile_pos: Vector2i):
 	# Set new tile highlight
 	var piece_at_tile = game_manager.get_piece_at_position(new_tile_pos)
 	var selected_piece = game_manager.selected_piece
-	var current_team = game_manager.get_current_team()
+	var current_turn = game_manager.get_current_turn()
 	
 	if selected_piece == null or (piece_at_tile != selected_piece):
 		# Use team color for hover (blue for white, dark blue for black)
-		var hover_color = ChessConstants.HOVER_COLORS[current_team]
+		var hover_color = ChessConstants.HOVER_COLORS[current_turn]
 		board_renderer.highlight_tile(new_tile_pos, hover_color)
 	else:
 		# Keep selected piece tile green
@@ -109,15 +109,14 @@ func handle_accept_input():
 			board_renderer.highlight_tile(tile_pos, ChessConstants.SELECTION_COLOR)
 		return
 	
-	# If piece is selected - this would be a move (currently just switches turn)
+	# DEMONSTRAION PIECE MOVEMENT
 	if game_manager.selected_piece != null:
-		var selected_pos = game_manager.selected_piece.board_position
-		print("Piece Moved to ", tile_pos)
-		game_manager.switch_turn()
-		game_manager.deselect_piece()
-		# Reset tile colors after move
-		board_renderer.reset_tile_color(selected_pos)
-		board_renderer.reset_tile_color(last_hovered_tile)
+		var selected_piece = game_manager.selected_piece
+		var selected_pos = selected_piece.board_position
+		if tile_pos == selected_pos:
+			return
+		
+		game_manager.piece_moved.emit(selected_piece,selected_pos,tile_pos)
 
 func handle_cancel_input():
 	# Only allow cancel if it's this player's turn
@@ -149,8 +148,3 @@ func get_action(base_action: String) -> String:
 func get_current_tile_pos() -> Vector2i:
 	# Get the tile position the cursor is currently hovering over
 	return last_hovered_tile
-
-func update_hover_after_turn_switch():
-	# Update hover colors when turn switches (colors change based on whose turn it is)
-	if last_hovered_tile != Vector2i(-1, -1):
-		handle_hover_change(Vector2i(-1, -1), last_hovered_tile)
