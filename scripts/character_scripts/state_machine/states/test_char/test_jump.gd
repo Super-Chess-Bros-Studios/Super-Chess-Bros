@@ -43,6 +43,13 @@ func _on_left_collide(body: Node2D) -> void:
 func _on_right_collide(body: Node2D) -> void:
 	rightCollide = true
 
+func _on_left_collide_body_exited(body: Node2D) -> void:
+	leftCollide = false
+
+func _on_right_collide_body_exited(body: Node2D) -> void:
+	rightCollide = false
+
+
 #wall_kick_dir is kind of like cur_dir but for walls
 func wall_kick(wall_kick_dir):
 	if wall_kick_dir == DIRECTION.left:

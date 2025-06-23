@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bdeycv51w4sxb"
-path="res://.godot/imported/player push idle 48x48.png-1f2b9b9ad8e43fdeb0a531496d7b0747.ctex"
+path="res://.godot/imported/player push idle 48x48.png-ddd0d96cdd32069e321da9554b8c4944.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/PushPull (idle state)/player push idle 48x48.png"
-dest_files=["res://.godot/imported/player push idle 48x48.png-1f2b9b9ad8e43fdeb0a531496d7b0747.ctex"]
+source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/PushPull (idle state)/player push idle 48x48.png"
+dest_files=["res://.godot/imported/player push idle 48x48.png-ddd0d96cdd32069e321da9554b8c4944.ctex"]
 
 [params]
 
