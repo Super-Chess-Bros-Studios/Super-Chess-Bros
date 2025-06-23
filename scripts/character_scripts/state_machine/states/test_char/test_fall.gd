@@ -53,6 +53,8 @@ func Physics_Update(delta):
 	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part
 		Transitioned.emit(self,"airdodge")
+	elif Input.is_action_pressed(get_action("up")) and Input.is_action_pressed(get_action("special")):
+		Transitioned.emit(self,"UpSpecial")
 	elif begin_wall_slide and (char_attributes.can_air_dodge or char_attributes.can_double_jump or char_attributes.can_wall_jump):
 		Transitioned.emit(self,"wallslide")
 		
