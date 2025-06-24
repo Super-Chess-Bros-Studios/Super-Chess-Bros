@@ -1,12 +1,5 @@
-extends CharacterState
+extends TestFall
 class_name TestFastFall
-@export var anim : AnimatedSprite2D
-@export var character : CharacterBody2D
-@export var slide_colliderL : Area2D
-@export var slide_colliderR : Area2D
-var begin_wall_slide = false
-
-@export var speed : float = 300
 
 func playanim():
 	anim.play("fastfall")
@@ -19,7 +12,7 @@ func Enter():
 	print("FastFall state")
 	begin_wall_slide = false
 	wall_detection_enabled(true)
-	character.velocity.y += char_attributes.MAX_FALL_SPEED
+	character.velocity.y = char_attributes.MAX_FALL_SPEED
 	playanim()
 
 #this makes it so that the areas only check if you are next to a wall while falling
@@ -39,10 +32,6 @@ func _on_right_collide(body: Node2D) -> void:
 	begin_wall_slide = true
 	print("wall collide on right")
 	char_attributes.cur_dir = DIRECTION.left
-
-func Exit():
-	begin_wall_slide = false
-	wall_detection_enabled(false)
 
 func Physics_Update(delta):
 	#handles vertical events
