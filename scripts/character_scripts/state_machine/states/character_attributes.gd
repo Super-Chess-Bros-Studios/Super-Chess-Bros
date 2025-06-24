@@ -23,6 +23,7 @@ var cur_dir = 1
 var can_double_jump = true
 var can_air_dodge = true
 var can_wall_jump = true
+var can_recover = true
 #needed for a cooldown
 var can_roll = true
 #hitboxes should ignore a character if they are invulnerable

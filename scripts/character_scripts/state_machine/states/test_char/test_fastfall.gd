@@ -19,7 +19,7 @@ func Enter():
 	print("FastFall state")
 	begin_wall_slide = false
 	wall_detection_enabled(true)
-	character.velocity.y += 200
+	character.velocity.y += char_attributes.MAX_FALL_SPEED
 	playanim()
 
 #this makes it so that the areas only check if you are next to a wall while falling
@@ -32,12 +32,12 @@ func wall_detection_enabled(ask : bool):
 
 func _on_left_collide(body: Node2D) -> void:
 	begin_wall_slide = true
-	print("wall slide begun")
+	print("wall collide on left")
 	char_attributes.cur_dir = DIRECTION.right
 
 func _on_right_collide(body: Node2D) -> void:
 	begin_wall_slide = true
-	print("wall slide begun")
+	print("wall collide on right")
 	char_attributes.cur_dir = DIRECTION.left
 
 func Exit():
@@ -51,6 +51,8 @@ func Physics_Update(delta):
 	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part
 		Transitioned.emit(self,"airdodge")
+	elif Input.is_action_pressed(get_action("up")) and Input.is_action_pressed(get_action("special")):
+		Transitioned.emit(self,"UpSpecial")
 	elif begin_wall_slide:
 		Transitioned.emit(self,"wallslide")
 
