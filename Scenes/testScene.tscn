@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtf4p6j0qehoa"]
+[gd_scene load_steps=5 format=3 uid="uid://dtf4p6j0qehoa"]
 
-[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://Scenes/characters/Test_Char.tscn" id="1_8xinf"]
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
+[ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4mqg7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3sglg"]
+size = Vector2(128, 128)
 
 [node name="TestScene" type="Node2D"]
 
@@ -12,6 +16,35 @@
 shape = SubResource("WorldBoundaryShape2D_4mqg7")
 
 [node name="Player1" parent="." instance=ExtResource("1_8xinf")]
-position = Vector2(-48, -29)
+position = Vector2(36, -26)
+
+[node name="Player2" parent="." instance=ExtResource("1_8xinf")]
+position = Vector2(66, -26)
+
+[node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="4"]
+player_id = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -294)
+zoom = Vector2(0.835, 0.835)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-46, -293)
+texture = ExtResource("2_i052m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_3sglg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(206, -65)
+texture = ExtResource("2_i052m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_3sglg")
+
+[editable path="Player1"]
+[editable path="Player2"]
