@@ -1,8 +1,8 @@
 extends CharacterState
 class_name TestWallSlide
 
-
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
+@export var anim : AnimationPlayer
 @export var character : CharacterBody2D
 
 #vertical variables

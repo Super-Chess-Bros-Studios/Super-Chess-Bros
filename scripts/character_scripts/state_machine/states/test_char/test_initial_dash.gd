@@ -1,7 +1,8 @@
 extends CharacterState
 class_name TestInitialDash
 
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
+@export var anim : AnimationPlayer
 @export var speed : int = 300
 @export var character : CharacterBody2D
 @export var timer : Timer

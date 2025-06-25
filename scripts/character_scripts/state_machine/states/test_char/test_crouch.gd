@@ -1,7 +1,8 @@
 extends CharacterState
 class_name TestCrouch
 
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
+@export var anim : AnimationPlayer
 @export var character : CharacterBody2D
 
 func playanim():

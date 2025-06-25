@@ -1,8 +1,8 @@
 extends CharacterState
 class_name TestPivot
 
-
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
+@export var anim : AnimationPlayer
 @export var character : CharacterBody2D
 @export var timer : Timer
 #I use this timed_out variable so I don't cause a race condition

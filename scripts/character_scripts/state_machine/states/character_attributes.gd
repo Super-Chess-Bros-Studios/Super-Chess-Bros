@@ -28,3 +28,4 @@ var can_recover = true
 var can_roll = true
 #hitboxes should ignore a character if they are invulnerable
 var invulnerable = false
+var just_took_damage = false

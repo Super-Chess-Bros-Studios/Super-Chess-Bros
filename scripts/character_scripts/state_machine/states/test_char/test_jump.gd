@@ -1,7 +1,8 @@
 extends CharacterState
 class_name TestFullHop
 
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
+@export var anim : AnimationPlayer
 @export var character : CharacterBody2D
 @export var slide_colliderL : Area2D
 @export var slide_colliderR : Area2D

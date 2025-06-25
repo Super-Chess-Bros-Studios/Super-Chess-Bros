@@ -1,7 +1,8 @@
 extends CharacterState
 class_name TestIdle
 
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
+@export var anim : AnimationPlayer
 @export var character : CharacterBody2D
 #just so it doesnt repeat the beginning of the idle animation over and over in physics process
 var idle_anim = true

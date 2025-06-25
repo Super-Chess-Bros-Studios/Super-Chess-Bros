@@ -1,7 +1,8 @@
 extends CharacterState
 class_name TestFall
 
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
+@export var anim : AnimationPlayer
 @export var character : CharacterBody2D
 
 @export var speed : float = 300
