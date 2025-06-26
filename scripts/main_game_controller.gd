@@ -44,7 +44,7 @@ func request_scene_change(scene_name: String):
 			change_game_state(MainConstants.GameState.MENU)
 		MainConstants.SCENE_NAMES.main_menu:
 			change_game_state(MainConstants.GameState.MENU)
-		MainConstants.SCENE_NAMES.chess, MainConstants.SCENE_NAMES.dual_arena:
+		MainConstants.SCENE_NAMES.chess, MainConstants.SCENE_NAMES.chess:
 			change_game_state(MainConstants.GameState.IN_GAME)
 	
 	# Emit signal to main for actual scene change

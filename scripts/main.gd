@@ -16,6 +16,8 @@ func initialize_systems():
 	game_controller = MainGameController.new()
 	input_manager = InputManager.new()
 	
+	canvas_layer.follow_viewport_enabled = true  # Try this
+	canvas_layer.layer = 0  # Reset layer
 	# Set up scene manager
 	SceneManager.set_canvas_layer(canvas_layer)
 	SceneManager.initialize_scene_dictionary()
@@ -29,8 +31,13 @@ func setup_connections():
 	SceneManager.scene_changed.connect(_on_scene_changed)
 	SceneManager.scene_loading_started.connect(_on_scene_loading_started)
 
+func set_color_inputs():
+	input_manager.set_white_player_device("controller", 0, "White")
+	input_manager.set_black_player_device("controller", 1, "Black")
+
 func start_game():
-	request_scene_change("title_screen")
+	set_color_inputs()
+	request_scene_change("chess")
 
 func request_scene_change(scene_name: String):
 	game_controller.request_scene_change(scene_name)

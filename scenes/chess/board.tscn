@@ -10,16 +10,15 @@
 script = ExtResource("1_m5kr7")
 piece_sprite_sheet = ExtResource("4_l1xyo")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
 [node name="WhiteCursor" parent="." instance=ExtResource("5_l1xyo")]
 
 [node name="BlackCursor" parent="." instance=ExtResource("5_l1xyo")]
 player_id = 2
 
 [node name="PiecesContainer" type="Node2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(290, 164)
-zoom = Vector2(3, 3)
 
 [node name="BoardRenderer" type="Node2D" parent="."]
 script = ExtResource("4_6y3m1")

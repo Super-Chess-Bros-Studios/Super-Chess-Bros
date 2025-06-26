@@ -16,8 +16,8 @@ func initialize_scene_dictionary():
 	# Register all scenes - only chess for now, plus title screen
 	scene_dictionary = {
 		"title_screen": preload("res://scenes/title_screen.tscn"),
-		"main_menu": preload("res://scenes/main_menu.tscn")
-		#"chess": preload("res://scenes/chess/board.tscn")
+		"main_menu": preload("res://scenes/main_menu.tscn"),
+		"chess": preload("res://scenes/chess/board.tscn")
 	}
 
 func set_canvas_layer(layer: CanvasLayer):

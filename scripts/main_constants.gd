@@ -6,12 +6,6 @@ enum GameType {
 	CHESS = 0
 }
 
-# Input Modes
-enum InputMode {
-	CONTROLLER_ONLY,
-	KEYBOARD_AND_CONTROLLER
-}
-
 # Game States
 enum GameState {
 	TITLE,

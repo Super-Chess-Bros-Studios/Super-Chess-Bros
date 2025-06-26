@@ -40,17 +40,12 @@ func set_black_player_device(device_type: String, device_id: int = -1, device_na
 	}
 	print("Black player device set: ", black_player_device)
 
-func get_action(action_base: String, color: String) -> String:
-	var device_info: Dictionary
-	if color == "white":
-		device_info = white_player_device
-	elif color == "black":
-		device_info = black_player_device
-	else:
-		return "%s_%d" % [action_base, 0]  # Fallback for unknown colors
-	
-	var device_id = device_info.get("device_id", 0)
-	return "%s_%d" % [action_base, device_id]
+func get_action(action_base: String, id: int) -> String:
+	if id == 1:
+		return "%s_%d" % [action_base, white_player_device.get("device_id", -1)+1]
+	elif id == 2:
+		return "%s_%d" % [action_base, black_player_device.get("device_id", -1)+1]
+	return "%s_%d" % [action_base, id]
 
 func get_device_type(event) -> String:
 	if event is InputEventKey:
@@ -60,10 +55,10 @@ func get_device_type(event) -> String:
 	return "unknown"
 
 	
-func is_correct_device_type(color: String, event) -> bool:
-	if color == "white" and white_player_device.get("device_type", "") == get_device_type(event):
+func is_correct_device_type(id: int, event) -> bool:
+	if id == 1 and white_player_device.get("device_type", "") == get_device_type(event):
 		return true
-	elif color == "black" and black_player_device.get("device_type", "") == get_device_type(event):
+	elif id == 2 and black_player_device.get("device_type", "") == get_device_type(event):
 		return true
 	return false
 
