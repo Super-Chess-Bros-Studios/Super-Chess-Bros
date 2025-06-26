@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtf4p6j0qehoa"]
 
-[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://Scenes/characters/Test_Char.tscn" id="1_8xinf"]
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
 [ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4mqg7"]
@@ -18,10 +18,16 @@ shape = SubResource("WorldBoundaryShape2D_4mqg7")
 [node name="Player1" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(36, -26)
 
+[node name="Sprite2D" parent="Player1/CharacterBody2D" index="0"]
+hframes = 10
+
 [node name="Player2" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(66, -26)
 
-[node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="4"]
+[node name="Sprite2D" parent="Player2/CharacterBody2D" index="0"]
+hframes = 10
+
+[node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="6"]
 player_id = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]

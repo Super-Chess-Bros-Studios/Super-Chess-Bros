@@ -1,8 +1,7 @@
-[gd_scene load_steps=122 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=112 format=3 uid="uid://5b3fmt2t3sc6"]
 
 [ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
 [ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
-[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
 [ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
 [ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
 [ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
@@ -43,30 +42,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_w1xps")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
 
 [sub_resource type="Animation" id="Animation_fjca5"]
 resource_name = "airdodge"
@@ -83,413 +58,11 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_w1xps")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-
-[sub_resource type="Animation" id="Animation_2yqwl"]
-resource_name = "idle"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("1_qb3vb")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-
-[sub_resource type="Animation" id="Animation_3ywid"]
-resource_name = "crouch"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_4jtsn")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [10]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-
-[sub_resource type="Animation" id="Animation_0owkq"]
-resource_name = "jump"
-length = 0.4
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_ndpjv")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_jg6e0"]
-resource_name = "fall"
-length = 0.4
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_ndpjv")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_4remw"]
-resource_name = "fastfall"
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_ndpjv")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [5]
-}
-
-[sub_resource type="Animation" id="Animation_m852p"]
-resource_name = "pivot"
-length = 0.9
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_ld6di")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [9]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-
-[sub_resource type="Animation" id="Animation_p57wh"]
-resource_name = "roll"
-length = 0.7
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("6_du7ul")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [7]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-
-[sub_resource type="Animation" id="Animation_1gi5x"]
-resource_name = "run"
-length = 0.8
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_3ywid")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_gh1gg"]
-resource_name = "skid"
-length = 0.4
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_ld6di")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [9]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [5, 6, 7, 8]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b8cx6"]
 _data = {
 &"RESET": SubResource("Animation_b8cx6"),
-&"airdodge": SubResource("Animation_fjca5"),
-&"crouch": SubResource("Animation_3ywid"),
-&"fall": SubResource("Animation_jg6e0"),
-&"fastfall": SubResource("Animation_4remw"),
-&"idle": SubResource("Animation_2yqwl"),
-&"jump": SubResource("Animation_0owkq"),
-&"pivot": SubResource("Animation_m852p"),
-&"roll": SubResource("Animation_p57wh"),
-&"run": SubResource("Animation_1gi5x"),
-&"skid": SubResource("Animation_gh1gg")
+&"airdodge": SubResource("Animation_fjca5")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uoks1"]
@@ -1117,11 +690,10 @@ hurtbox = NodePath("CharacterBody2D/Hurtbox")
 collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("2_3ywid")
-hframes = 8
+texture = ExtResource("1_w1xps")
+hframes = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
-reset_on_save = false
 libraries = {
 &"": SubResource("AnimationLibrary_b8cx6")
 }
@@ -1131,9 +703,8 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_uoks1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-visible = false
 sprite_frames = SubResource("SpriteFrames_luash")
-animation = &"special_fall"
+animation = &"fall"
 flip_h = true
 
 [node name="LeftCollide" type="Area2D" parent="CharacterBody2D"]
@@ -1156,122 +727,112 @@ metadata/_custom_type_script = "uid://db3y4jnn8ci5y"
 
 [node name="State Machine" type="Node" parent="CharacterBody2D"]
 
-[node name="Idle" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
+[node name="Idle" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "anim")]
 script = ExtResource("5_dgi44")
-anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
+anim = NodePath("../../AnimationPlayer")
 metadata/_custom_type_script = "uid://rg3jnrlnyt6m"
 
-[node name="Run" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="Run" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "timer", "anim")]
 script = ExtResource("6_kpwuy")
 speed = 300
+character = NodePath("../..")
 timer = NodePath("PreTransition")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 metadata/_custom_type_script = "uid://ctsqulv68cgxy"
 
 [node name="PreTransition" type="Timer" parent="CharacterBody2D/State Machine/Run"]
 wait_time = 0.05
 one_shot = true
 
-[node name="Crouch" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
+[node name="Crouch" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "anim")]
 script = ExtResource("7_2137q")
-anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
+anim = NodePath("../../AnimationPlayer")
 metadata/_custom_type_script = "uid://dbyyiifx7mbga"
 
-[node name="JumpSquat" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="JumpSquat" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character", "timer")]
 script = ExtResource("8_cqar7")
-timer = NodePath("SquatTime")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
+timer = NodePath("SquatTime")
 metadata/_custom_type_script = "uid://b5d57x8h3avr5"
 
 [node name="SquatTime" type="Timer" parent="CharacterBody2D/State Machine/JumpSquat"]
 wait_time = 0.05
 one_shot = true
 
-[node name="FullHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
+[node name="FullHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "slide_colliderL", "slide_colliderR", "anim")]
 script = ExtResource("9_qga04")
+character = NodePath("../..")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 metadata/_custom_type_script = "uid://xq4wnlhqxdlm"
 
-[node name="ShortHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
+[node name="ShortHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "slide_colliderL", "slide_colliderR", "anim")]
 script = ExtResource("11_0l6pb")
+character = NodePath("../..")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 metadata/_custom_type_script = "uid://dsq2k53fkg20h"
 
-[node name="Fall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
+[node name="Fall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "slide_colliderL", "slide_colliderR", "anim")]
 script = ExtResource("11_hmptn")
+character = NodePath("../..")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 metadata/_custom_type_script = "uid://dxn1tegm7uca6"
 
-[node name="InitialDash" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="InitialDash" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "timer", "anim")]
 script = ExtResource("13_va0ok")
+character = NodePath("../..")
 timer = NodePath("DashTime")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 metadata/_custom_type_script = "uid://d26weydsrf1ra"
 
 [node name="DashTime" type="Timer" parent="CharacterBody2D/State Machine/InitialDash"]
 wait_time = 0.2
 one_shot = true
 
-[node name="Fastfall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
+[node name="Fastfall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "slide_colliderL", "slide_colliderR", "anim")]
 script = ExtResource("14_w2ni4")
+character = NodePath("../..")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
 
-[node name="Pivot" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="Pivot" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "timer", "anim")]
 script = ExtResource("15_1ekob")
+character = NodePath("../..")
 timer = NodePath("PivotTime")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 
 [node name="PivotTime" type="Timer" parent="CharacterBody2D/State Machine/Pivot"]
 wait_time = 0.1
 one_shot = true
 
-[node name="AirDodge" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="AirDodge" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character", "timer")]
 script = ExtResource("17_eam3d")
-timer = NodePath("DodgeLength")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
+timer = NodePath("DodgeLength")
+speed = null
 
 [node name="DodgeLength" type="Timer" parent="CharacterBody2D/State Machine/AirDodge"]
 wait_time = 0.2
 one_shot = true
 
-[node name="Roll" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "roll_cooldown_timer", "anim", "sprite", "character")]
+[node name="Roll" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "timer", "roll_cooldown_timer", "anim")]
 script = ExtResource("20_he0e7")
+character = NodePath("../..")
 timer = NodePath("RollLength")
 roll_cooldown_timer = NodePath("RollCooldown")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 
 [node name="RollLength" type="Timer" parent="CharacterBody2D/State Machine/Roll"]
 wait_time = 0.3
@@ -1281,30 +842,32 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="WallSlide" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
+[node name="WallSlide" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "character")]
 script = ExtResource("22_u77ra")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
+wall_slide_speed = null
+fast_wall_slide_coefficient = null
+max_wall_slide_speed = null
+wall_jump_horizontal_strength = null
+wall_slide_boost = null
 
-[node name="UpSpecial" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="UpSpecial" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "timer", "anim")]
 script = ExtResource("25_42ld6")
+character = NodePath("../..")
 timer = NodePath("UpSpecialLength")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
 
 [node name="UpSpecialLength" type="Timer" parent="CharacterBody2D/State Machine/UpSpecial"]
 wait_time = 0.5
 one_shot = true
 
-[node name="SpecialFall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
+[node name="SpecialFall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("character", "slide_colliderL", "slide_colliderR", "anim")]
 script = ExtResource("26_31y7r")
+character = NodePath("../..")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
-anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
+anim = NodePath("../../AnimatedSprite2D")
 
 [node name="Hurtbox" type="Area2D" parent="CharacterBody2D"]
 script = ExtResource("27_fjca5")

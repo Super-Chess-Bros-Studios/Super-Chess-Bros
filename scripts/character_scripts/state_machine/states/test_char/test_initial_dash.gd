@@ -2,17 +2,8 @@ extends CharacterState
 class_name TestInitialDash
 
 # @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
 @export var speed : int = 300
-@export var character : CharacterBody2D
 @export var timer : Timer
-
-func playanim():
-	anim.play("run")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
 
 func Enter():
 	#this is the simplest way i can think of to avoid race conditions with state 
@@ -20,7 +11,7 @@ func Enter():
 	print("Initial Dash State")
 	timer.set_paused(false)
 	timer.start()
-	playanim()
+	playanim("run")
 
 func _on_dash_time_timeout() -> void:
 	Transitioned.emit(self, "run")

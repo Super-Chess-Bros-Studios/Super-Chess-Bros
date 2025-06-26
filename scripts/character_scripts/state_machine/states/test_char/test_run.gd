@@ -2,19 +2,10 @@ extends CharacterState
 class_name TestRun
 
 # @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
 @export var speed : int = 400
-@export var character : CharacterBody2D
 @export var timer : Timer
 #I use this timed_out variable so I don't cause a race condition
 var timed_out = false
-
-func playanim(animation):
-	anim.play(animation)
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
 
 func Enter():
 	print("Run state")

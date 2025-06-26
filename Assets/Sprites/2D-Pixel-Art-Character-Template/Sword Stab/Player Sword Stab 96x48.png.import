@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dw6hhljdcgqhb"
-path="res://.godot/imported/Player Sword Stab 96x48.png-e082c9a1f587061485e089bf0e5f074c.ctex"
+path="res://.godot/imported/Player Sword Stab 96x48.png-c30115aa4bca4ce93429729e00c26248.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png"
-dest_files=["res://.godot/imported/Player Sword Stab 96x48.png-e082c9a1f587061485e089bf0e5f074c.ctex"]
+source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png"
+dest_files=["res://.godot/imported/Player Sword Stab 96x48.png-c30115aa4bca4ce93429729e00c26248.ctex"]
 
 [params]
 

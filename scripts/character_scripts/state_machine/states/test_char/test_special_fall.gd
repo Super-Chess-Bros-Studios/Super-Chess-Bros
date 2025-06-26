@@ -7,19 +7,12 @@ class_name TestSpecialFall
 var leftCollide = false
 var rightCollide = false
 
-func playanim():
-	anim.play("special_fall")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
-
 func Enter():
 	print("Special Fall state")
 	var leftCollide = false
 	var rightCollide = false
 	wall_detection_enabled(true)
-	playanim()
+	playanim("special_fall")
 
 #this entire section of code is for the wall kick you can do while rising in the air
 

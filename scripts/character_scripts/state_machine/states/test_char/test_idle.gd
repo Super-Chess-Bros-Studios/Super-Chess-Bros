@@ -1,18 +1,7 @@
 extends CharacterState
 class_name TestIdle
-
-# @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
-@export var character : CharacterBody2D
 #just so it doesnt repeat the beginning of the idle animation over and over in physics process
 var idle_anim = true
-
-func playanim(animation):
-	anim.play(animation)
-	if char_attributes.cur_dir < 0:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
 
 func Enter():
 	print("Idle state")

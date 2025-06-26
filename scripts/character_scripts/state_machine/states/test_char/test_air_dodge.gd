@@ -1,21 +1,10 @@
 extends CharacterState
 class_name TestAirDodge
 
-# @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
-@export var character : CharacterBody2D
 @export var timer : Timer
 
 @export var speed : float = 300
 var directional_input : Vector2
-
-
-func playanim():
-	anim.play("airdodge")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
 
 func Enter():
 	print("Air dodge state")
@@ -23,7 +12,7 @@ func Enter():
 	char_attributes.invulnerable = true
 	char_attributes.can_air_dodge = false
 	timer.start()
-	playanim()
+	playanim("airdodge")
 
 func Exit():
 	char_attributes.invulnerable = false

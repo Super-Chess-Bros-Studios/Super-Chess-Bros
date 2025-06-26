@@ -12,7 +12,7 @@ func Enter():
 	#basically this variant applies to double jump
 	if !char_attributes.can_double_jump:
 		character.velocity.y *= double_jump_coefficient
-	playanim()
+	playanim("jump")
 
 func Exit():
 	wall_detection_enabled(false)

@@ -1,9 +1,6 @@
 extends CharacterState
 class_name TestRoll
 
-# @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
-@export var character : CharacterBody2D
 @export var timer : Timer
 
 #starts a cooldown for the roll
@@ -11,14 +8,6 @@ class_name TestRoll
 
 @export var speed : float = 300
 var directional_input : Vector2
-
-
-func playanim():
-	anim.play("roll")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
 
 func Enter():
 	print("Roll state")
@@ -28,7 +17,7 @@ func Enter():
 	directional_input = directional_input.normalized()
 	char_attributes.invulnerable = true
 	timer.start()
-	playanim()
+	playanim("roll")
 
 func Exit():
 	char_attributes.invulnerable = false

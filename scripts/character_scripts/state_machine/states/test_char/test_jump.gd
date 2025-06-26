@@ -1,9 +1,6 @@
 extends CharacterState
 class_name TestFullHop
 
-# @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
-@export var character : CharacterBody2D
 @export var slide_colliderL : Area2D
 @export var slide_colliderR : Area2D
 
@@ -14,13 +11,6 @@ class_name TestFullHop
 var leftCollide = false
 var rightCollide = false
 
-func playanim():
-	anim.play("jump")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
-
 func Enter():
 	print("Jump state")
 	character.velocity.y = char_attributes.JUMP_POWER
@@ -30,7 +20,7 @@ func Enter():
 	#basically this variant applies to double jump
 	if !char_attributes.can_double_jump:
 		character.velocity.y *= double_jump_coefficient
-	playanim()
+	playanim("jump")
 
 #this entire section of code is for the wall kick you can do while rising in the air
 

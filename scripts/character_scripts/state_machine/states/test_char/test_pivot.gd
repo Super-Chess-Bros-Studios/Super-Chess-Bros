@@ -1,26 +1,16 @@
 extends CharacterState
 class_name TestPivot
 
-# @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
-@export var character : CharacterBody2D
 @export var timer : Timer
 #I use this timed_out variable so I don't cause a race condition
 var timed_out = false
-
-func playanim():
-	anim.play("pivot")
-	if char_attributes.cur_dir < 0:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
 
 func Enter():
 	print("Pivot state")
 	char_attributes.cur_dir *= -1
 	timed_out = false
 	timer.start()
-	playanim()
+	playanim("pivot")
 
 func _on_pivot_time_timeout() -> void:
 	timed_out = true

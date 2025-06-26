@@ -1,27 +1,16 @@
 extends CharacterState
 class_name TestFall
 
-# @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
-@export var character : CharacterBody2D
-
 @export var speed : float = 300
 @export var slide_colliderL : Area2D
 @export var slide_colliderR : Area2D
 var begin_wall_slide = false
 
-func playanim():
-	anim.play("fall")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
-
 func Enter():
 	print("Fall state")
 	begin_wall_slide = false
 	wall_detection_enabled(true)
-	playanim()
+	playanim("fall")
 
 #this makes it so that the areas only check if you are next to a wall while falling
 #that way you don't trigger the signal while on the ground

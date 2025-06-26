@@ -1,10 +1,6 @@
 extends CharacterState
 class_name TestWallSlide
 
-# @export var anim : AnimatedSprite2D
-@export var anim : AnimationPlayer
-@export var character : CharacterBody2D
-
 #vertical variables
 
 #how fast you slide down a wall without holding down
@@ -24,17 +20,10 @@ class_name TestWallSlide
 
 var exit_wall_slide = false
 
-func playanim():
-	anim.play("wallslide")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
-
 func Enter():
 	print("Wall Slide state")
 	exit_wall_slide = false
-	playanim()
+	playanim("wallslide")
 
 func _on_wall_detect_body_exited(body: Node2D) -> void:
 	exit_wall_slide = true
