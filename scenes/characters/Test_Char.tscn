@@ -1408,8 +1408,10 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
-[node name="WallSlide" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
+[node name="WallSlide" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
 script = ExtResource("22_u77ra")
+slide_colliderL = NodePath("../../LeftCollide")
+slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
@@ -1434,6 +1436,8 @@ sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 
 [node name="Hurtbox" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("27_fjca5")
 metadata/_custom_type_script = "uid://c6s37218lbip0"
 

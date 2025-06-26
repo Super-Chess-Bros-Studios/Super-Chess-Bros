@@ -1,6 +1,9 @@
 extends CharacterState
 class_name TestWallSlide
 
+@export var slide_colliderL : Area2D
+@export var slide_colliderR : Area2D
+
 #vertical variables
 
 #how fast you slide down a wall without holding down
@@ -11,7 +14,6 @@ class_name TestWallSlide
 @export var max_wall_slide_speed = char_attributes.MAX_FALL_SPEED
 
 #horizontal variables
-
 #how fast horizontally you boost off a wall if you jump
 @export var wall_jump_horizontal_strength : float = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH
 #how quick you move off of a wall when inputting opposite of a wall
@@ -22,12 +24,24 @@ var exit_wall_slide = false
 
 func Enter():
 	print("Wall Slide state")
+	wall_detection_enabled(true)
 	exit_wall_slide = false
 	playanim("wallslide")
+
+#this makes it so that the areas only check if you are next to a wall while falling
+#that way you don't trigger the signal while on the ground
+#this doesn't really matter for the MVP because you can't be on the ground and touching
+#the wall on the current stage
+func wall_detection_enabled(ask : bool):
+	slide_colliderL.monitoring = ask
+	slide_colliderR.monitoring = ask
 
 func _on_wall_detect_body_exited(body: Node2D) -> void:
 	exit_wall_slide = true
 	print("wall slide exited")
+
+func Exit():
+	wall_detection_enabled(false)
 
 
 func Physics_Update(delta):
