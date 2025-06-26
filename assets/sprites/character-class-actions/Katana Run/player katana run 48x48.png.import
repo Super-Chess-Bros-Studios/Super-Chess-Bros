@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4n23iawe35lj"
-path="res://.godot/imported/player katana run 48x48.png-d8c755aaff1dca37f492cc5255f4c2a2.ctex"
+path="res://.godot/imported/player katana run 48x48.png-54399e78687ca517b517a9b4f1966b0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/character-class-actions/Katana Run/player katana run 48x48.png"
-dest_files=["res://.godot/imported/player katana run 48x48.png-d8c755aaff1dca37f492cc5255f4c2a2.ctex"]
+source_file="res://Assets/Sprites/character-class-actions/Katana Run/player katana run 48x48.png"
+dest_files=["res://.godot/imported/player katana run 48x48.png-54399e78687ca517b517a9b4f1966b0d.ctex"]
 
 [params]
 

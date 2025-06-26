@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://86ds12uvev0u"
-path="res://.godot/imported/Player Side-Climb 48x48.png-ff8b027175a3c06e97457c89d2636158.ctex"
+path="res://.godot/imported/Player Side-Climb 48x48.png-c60543bfabd1d0a9d3e28e8f280a930b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/character-class-actions/Climb (facing side of player)/old climb/Player Side-Climb 48x48.png"
-dest_files=["res://.godot/imported/Player Side-Climb 48x48.png-ff8b027175a3c06e97457c89d2636158.ctex"]
+source_file="res://Assets/Sprites/character-class-actions/Climb (facing side of player)/old climb/Player Side-Climb 48x48.png"
+dest_files=["res://.godot/imported/Player Side-Climb 48x48.png-c60543bfabd1d0a9d3e28e8f280a930b.ctex"]
 
 [params]
 
