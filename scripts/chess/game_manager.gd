@@ -102,7 +102,7 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	
 	piece.set_board_position(to_pos, ChessConstants.TILE_SIZE)
 	
-	on_initiate_duel()
+	#on_initiate_duel()
 	switch_turn()
 	deselect_piece()
 
