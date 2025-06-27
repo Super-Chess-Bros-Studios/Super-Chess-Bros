@@ -1,10 +1,9 @@
 extends Node
 
-# Main game controller - serves as the public API hub
+# Core systems
 var game_controller: MainGameController
 var input_manager: InputManager
 
-# Child nodes
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 func _ready():
@@ -13,62 +12,61 @@ func _ready():
 	start_game()
 
 func initialize_systems():
+	# Create controllers
 	game_controller = MainGameController.new()
 	input_manager = InputManager.new()
 	
-	canvas_layer.follow_viewport_enabled = true  # Try this
-	canvas_layer.layer = 0  # Reset layer
-	# Set up scene manager
+	canvas_layer.follow_viewport_enabled = true
+	canvas_layer.layer = 0
+	# Setup scene manager
 	SceneManager.set_canvas_layer(canvas_layer)
 	SceneManager.initialize_scene_dictionary()
 
 func setup_connections():
-	# Game controller signals
+	# Connect game controller signals
 	game_controller.scene_change_requested.connect(_on_scene_change_requested)
 	game_controller.game_state_changed.connect(_on_game_state_changed)
 	
-	# Scene manager signals (from autoload)
+	# Connect scene manager signals
 	SceneManager.scene_changed.connect(_on_scene_changed)
-	SceneManager.scene_loading_started.connect(_on_scene_loading_started)
-
-func set_color_inputs():
-	input_manager.set_white_player_device("controller", 0, "White")
-	input_manager.set_black_player_device("keyboard", 1, "Black")
 
 func start_game():
-	set_color_inputs()
+	# Set up input devices
+	input_manager.set_white_player_device("controller", 0, "White") #Params are device type, deivce id, color for printing
+	input_manager.set_black_player_device("controller", 1, "Black")
+	
+	# Start at title screen
 	request_scene_change("chess")
 
+# Public API for scene changes
 func request_scene_change(scene_name: String):
 	game_controller.request_scene_change(scene_name)
 
+func request_duel_transition():
+	game_controller.request_duel_transition()
+
+func request_duel_exit():
+	game_controller.request_duel_exit()
+
+# Getters
 func get_input_manager() -> InputManager:
 	return input_manager
 
 func get_game_controller() -> MainGameController:
 	return game_controller
 
-# Convenient helper for scenes to request scene changes
-func change_scene(scene_name: String):
-	game_controller.request_scene_change(scene_name)
-
-func connect_scene_signals():
-	var current_scene = SceneManager.get_current_scene()
-	if not current_scene:
-		return
-	
-	# Connect common scene signals if they exist
-	if current_scene.has_signal("request_scene_change"):
-		if not current_scene.request_scene_change.is_connected(_on_scene_change_requested):
-			current_scene.request_scene_change.connect(_on_scene_change_requested)
-
-# ==========================================
-# Signal Handlers
-# ==========================================
-
+# Signal handlers
 func _on_scene_change_requested(scene_name: String):
 	print("Scene change requested: ", scene_name)
-	SceneManager.change_scene(scene_name)
+	
+	# Handle special duel transitions
+	match scene_name:
+		"duel_transition":
+			SceneManager.transition_to_duel()
+		"duel_exit":
+			SceneManager.exit_duel()
+		_:
+			SceneManager.change_scene(scene_name)
 
 func _on_game_state_changed(new_state: MainConstants.GameState):
 	print("Game state changed to: ", MainConstants.GameState.keys()[new_state])
@@ -77,8 +75,15 @@ func _on_scene_changed(scene_name: String):
 	print("Scene changed to: ", scene_name)
 	connect_scene_signals()
 
-func _on_scene_loading_started(scene_name: String):
-	print("Loading scene: ", scene_name)
+func connect_scene_signals():
+	var current_scene = SceneManager.get_current_scene()
+	if not current_scene:
+		return
+	
+	# Connect scene signals to main
+	if current_scene.has_signal("request_scene_change"):
+		if not current_scene.request_scene_change.is_connected(_on_scene_change_requested):
+			current_scene.request_scene_change.connect(_on_scene_change_requested)
 
 # ==========================================
 # Save/Load System

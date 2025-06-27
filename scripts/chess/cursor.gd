@@ -61,11 +61,9 @@ func _input(event):
 	if not input_manager:
 		print("No input manager found")
 		return
-
-	handle_selection_input(event)
-		
-	# Update movement vector for smooth movement (continuous)
-	update_movement_vector(event)
+	if input_manager.is_correct_device_type(player_id, event):
+		handle_selection_input(event)
+		update_movement_vector(event)
 
 func update_hover():
 	# Convert pixel position to tile coordinates
@@ -105,11 +103,11 @@ func handle_selection_input(event):
 		return
 		
 	# Handle accept (select piece/move) and cancel (deselect) inputs
-	if event.is_action_pressed(get_action("accept", player_id, event)):
+	if event.is_action_pressed(get_action("accept", player_id)):
 		print("Accept for player ", player_id)
 		handle_accept_input()
 	
-	if event.is_action_pressed(get_action("cancel", player_id, event)):
+	if event.is_action_pressed(get_action("cancel", player_id)):
 		handle_cancel_input()
 
 func handle_accept_input():
@@ -153,8 +151,8 @@ func update_movement_vector(event):
 		movement_vector = Vector2.ZERO
 		return
 	
-	var x_axis := Input.get_action_strength(get_action("right", player_id, event)) - Input.get_action_strength(get_action("left", player_id, event))
-	var y_axis := Input.get_action_strength(get_action("down", player_id, event)) - Input.get_action_strength(get_action("up", player_id, event))
+	var x_axis := Input.get_action_strength(get_action("right", player_id)) - Input.get_action_strength(get_action("left", player_id))
+	var y_axis := Input.get_action_strength(get_action("down", player_id)) - Input.get_action_strength(get_action("up", player_id))
 	
 	movement_vector = Vector2(x_axis, y_axis)
 
@@ -162,5 +160,5 @@ func get_current_tile_pos() -> Vector2i:
 	# Get the tile position the cursor is currently hovering over
 	return last_hovered_tile
 
-func get_action(action_base: String, player_id: int, event) -> String:
-	return input_manager.get_action(action_base, player_id, event)
+func get_action(action_base: String, player_id: int) -> String:
+	return input_manager.get_action(action_base, player_id)

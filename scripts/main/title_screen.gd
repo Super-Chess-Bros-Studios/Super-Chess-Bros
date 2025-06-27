@@ -19,7 +19,7 @@ func _on_start_button_pressed():
 	# Don't emit signal immediately - wait for timer
 
 func _on_timer_timeout():
-	# Timer finished, now transition to main menu
+	# Timer finished, now transition to chess for testing
 	request_scene_change.emit("chess")
 
 # Optional: Handle direct input for quick start

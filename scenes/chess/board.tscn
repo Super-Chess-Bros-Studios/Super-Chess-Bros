@@ -14,12 +14,9 @@ piece_sprite_sheet = ExtResource("4_l1xyo")
 zoom = Vector2(2, 2)
 
 [node name="WhiteCursor" parent="." instance=ExtResource("5_l1xyo")]
-player_id = 1
-move_speed = 80.0
 
 [node name="BlackCursor" parent="." instance=ExtResource("5_l1xyo")]
 player_id = 2
-move_speed = 80.0
 
 [node name="PiecesContainer" type="Node2D" parent="."]
 
