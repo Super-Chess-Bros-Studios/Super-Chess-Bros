@@ -20,7 +20,7 @@ func _on_start_button_pressed():
 
 func _on_timer_timeout():
 	# Timer finished, now transition to main menu
-	request_scene_change.emit("main_menu")
+	request_scene_change.emit("chess")
 
 # Optional: Handle direct input for quick start
 func _input(event):

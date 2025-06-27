@@ -10,13 +10,15 @@ var scene_dictionary: Dictionary = {}
 var current_scene_instance: Node = null
 var current_scene_name: String = ""
 var canvas_layer: CanvasLayer
+var cached_chess_scene: Node = null
+var is_chess_cached: bool = false
 
 
 func initialize_scene_dictionary():
 	# Register all scenes - only chess for now, plus title screen
 	scene_dictionary = {
-		"title_screen": preload("res://scenes/title_screen.tscn"),
-		"main_menu": preload("res://scenes/main_menu.tscn"),
+		"title": preload("res://scenes/main/title_screen.tscn"),
+		"main_menu": preload("res://scenes/main/main_menu.tscn"),
 		"chess": preload("res://scenes/chess/board.tscn")
 	}
 
@@ -62,6 +64,36 @@ func change_scene(scene_name: String):
 	
 	# Complete scene change
 	complete_scene_change(scene_name)
+
+func cache_chess_scene():
+	if current_scene_instance and current_scene_name == "chess":
+		cached_chess_scene = current_scene_instance
+		cached_chess_scene.hide()
+		is_chess_cached = true
+		print("Cached chess scene")
+
+func clear_chess_cache():
+	if cached_chess_scene:
+		cached_chess_scene.queue_free()
+		cached_chess_scene = null
+		is_chess_cached = false
+		print("Cleared cached chess scene")
+
+	# Cache the scene name
+func handle_current_scene_exit(new_scene_name: String):
+	if not current_scene_instance:
+		return
+	
+	if current_scene_name == "chess" and new_scene_name != "chess":
+		cache_chess_scene()
+	elif current_scene_name == "chess" and new_scene_name == "chess":
+		# This shouldn't happen, but handle it
+		return
+	else:
+		# Destroy non-chess scenes
+		current_scene_instance.queue_free()
+	
+	current_scene_instance = null
 
 func prepare_scene_change(new_scene_name: String):
 	# Let main game manager handle any state saving

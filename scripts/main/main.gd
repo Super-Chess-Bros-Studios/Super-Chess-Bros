@@ -33,7 +33,7 @@ func setup_connections():
 
 func set_color_inputs():
 	input_manager.set_white_player_device("controller", 0, "White")
-	input_manager.set_black_player_device("controller", 1, "Black")
+	input_manager.set_black_player_device("keyboard", 1, "Black")
 
 func start_game():
 	set_color_inputs()

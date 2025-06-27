@@ -148,6 +148,7 @@ extends Node2D
 var game_manager: GameManager
 var piece_spawner: PieceSpawner
 var input_manager: InputManager
+var main_game_controller: MainGameController
 
 
 # Initialization of all systems
@@ -163,6 +164,7 @@ func initialize_systems():
 	# Initialize game manager (handles all game logic)
 	game_manager = GameManager.new()
 	input_manager = get_main_input_manager()
+	main_game_controller = get_main_game_controller()
 	# Initialize piece spawner (creates chess pieces)
 	piece_spawner = PieceSpawner.new()
 	add_child(piece_spawner)
@@ -195,7 +197,7 @@ func connect_signals():
 	game_manager.piece_deselected.connect(_on_piece_deselected)
 	game_manager.turn_switched.connect(_on_turn_switched)
 	game_manager.piece_moved.connect(_on_piece_moved)
-
+	game_manager.initiate_duel.connect(_on_initiate_duel)
 #These are all the signal handlers
 
 func _on_game_state_changed(new_state: ChessConstants.GameState):
@@ -221,6 +223,10 @@ func _on_turn_switched(new_team: ChessConstants.TeamColor):
 
 	print("Turn switched to: ", "White" if new_team == ChessConstants.TeamColor.WHITE else "Black")
 
+func _on_initiate_duel():
+	#Called when a duel is initiated.
+	
+	main_game_controller.request_scene_change("title")
 #DEMONSTRATION PIECE MOVEMENT
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
 		if(game_manager.move_piece(piece, to_pos)):
@@ -246,6 +252,14 @@ func get_piece_spawner() -> PieceSpawner:
 	#Returns the PieceSpawner instance for piece creation operations.
 
 	return piece_spawner
+
+func get_main_game_controller() -> MainGameController:
+	#Returns the MainGameController instance for accessing game state and logic.
+	var main_node = get_node_or_null("/root/Main")
+	if main_node and main_node.has_method("get_game_controller"):
+		return main_node.get_game_controller()
+	else:
+		return null
 
 func get_main_input_manager() -> InputManager:
 	# Get the InputManager from Main that has the device data

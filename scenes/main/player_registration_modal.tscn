@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnsn8v7ruexmq"]
 
-[ext_resource type="Script" uid="uid://bvad7pinyfeej" path="res://scripts/player_registration_modal.gd" id="1_8k5xv"]
+[ext_resource type="Script" uid="uid://bvad7pinyfeej" path="res://scripts/main/player_registration_modal.gd" id="1_8k5xv"]
 
 [node name="PlayerRegistrationModal" type="Control"]
 z_index = 15

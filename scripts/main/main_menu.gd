@@ -2,7 +2,7 @@ extends Control
 
 @onready var play: Button = $UILayer/ButtonsContainer/Play
 
-@onready var modal: PackedScene = preload("res://scenes/player_registration_modal.tscn")
+@onready var modal: PackedScene = preload("res://scenes/main/player_registration_modal.tscn")
 # Signals that main will connect to
 signal request_scene_change(scene_name)
 

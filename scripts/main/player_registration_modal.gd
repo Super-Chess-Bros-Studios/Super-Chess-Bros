@@ -44,11 +44,11 @@ func _input(event):
 			_register_player(event)
 	
 	var input_manager = get_node("/root/Main").get_input_manager()
-	if input_manager.is_correct_device_type("white", event):
-		if event.is_action_pressed(input_manager.get_action("right", "white")):
+	if input_manager.is_correct_device_type(1, event):
+		if event.is_action_pressed(input_manager.get_action("right", 1, event)):
 			print("White input")
-	if input_manager and input_manager.is_correct_device_type("black", event):
-		if event.is_action_pressed(input_manager.get_action("right", "black")):
+	if input_manager and input_manager.is_correct_device_type(2, event):
+		if event.is_action_pressed(input_manager.get_action("right", 2, event)):
 			print("Black input")
 
 func _register_player(event):

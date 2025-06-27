@@ -61,18 +61,11 @@ func _input(event):
 	if not input_manager:
 		print("No input manager found")
 		return
-	
-	var is_correct_device = input_manager.is_correct_device_type(player_id, event)
-	if is_correct_device:
-		# Handle button presses (discrete actions)
-		if event.is_action_pressed(input_manager.get_action("accept", player_id)):
-			handle_accept_input()
+
+	handle_selection_input(event)
 		
-		if event.is_action_pressed(input_manager.get_action("cancel", player_id)):
-			handle_cancel_input()
-		
-		# Update movement vector for smooth movement (continuous)
-		update_movement_vector()
+	# Update movement vector for smooth movement (continuous)
+	update_movement_vector(event)
 
 func update_hover():
 	# Convert pixel position to tile coordinates
@@ -112,11 +105,11 @@ func handle_selection_input(event):
 		return
 		
 	# Handle accept (select piece/move) and cancel (deselect) inputs
-	if event.is_action_pressed(input_manager.get_action("accept", player_id)):
+	if event.is_action_pressed(get_action("accept", player_id, event)):
 		print("Accept for player ", player_id)
 		handle_accept_input()
 	
-	if event.is_action_pressed(input_manager.get_action("cancel", player_id)):
+	if event.is_action_pressed(get_action("cancel", player_id, event)):
 		handle_cancel_input()
 
 func handle_accept_input():
@@ -154,17 +147,20 @@ func handle_cancel_input():
 		board_renderer.reset_tile_color(selected_pos)
 		game_manager.deselect_piece()
 
-func update_movement_vector():
+func update_movement_vector(event):
 	# Update movement vector based on current input state
 	if not input_manager:
 		movement_vector = Vector2.ZERO
 		return
 	
-	var x_axis := Input.get_action_strength(input_manager.get_action("right", player_id)) - Input.get_action_strength(input_manager.get_action("left", player_id))
-	var y_axis := Input.get_action_strength(input_manager.get_action("down", player_id)) - Input.get_action_strength(input_manager.get_action("up", player_id))
+	var x_axis := Input.get_action_strength(get_action("right", player_id, event)) - Input.get_action_strength(get_action("left", player_id, event))
+	var y_axis := Input.get_action_strength(get_action("down", player_id, event)) - Input.get_action_strength(get_action("up", player_id, event))
 	
 	movement_vector = Vector2(x_axis, y_axis)
 
 func get_current_tile_pos() -> Vector2i:
 	# Get the tile position the cursor is currently hovering over
 	return last_hovered_tile
+
+func get_action(action_base: String, player_id: int, event) -> String:
+	return input_manager.get_action(action_base, player_id, event)

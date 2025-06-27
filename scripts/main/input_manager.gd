@@ -40,10 +40,10 @@ func set_black_player_device(device_type: String, device_id: int = -1, device_na
 	}
 	print("Black player device set: ", black_player_device)
 
-func get_action(action_base: String, id: int) -> String:
-	if id == 1:
+func get_action(action_base: String, id: int, event) -> String:
+	if id == 1 && is_correct_device_type(id, event):
 		return "%s_%d" % [action_base, white_player_device.get("device_id", -1)+1]
-	elif id == 2:
+	elif id == 2 && is_correct_device_type(id, event):
 		return "%s_%d" % [action_base, black_player_device.get("device_id", -1)+1]
 	return "%s_%d" % [action_base, id]
 
