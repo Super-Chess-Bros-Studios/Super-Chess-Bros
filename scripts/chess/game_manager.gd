@@ -102,3 +102,6 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	deselect_piece()
 
 	return true
+
+#func set_valid_moves(piece: Piece):
+	#valid_moves = selected_piece.get_valid_moves()
