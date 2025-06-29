@@ -83,21 +83,52 @@ func get_current_turn() -> ChessConstants.TeamColor:
 	return ChessConstants.get_team_from_game_state(current_game_state)
 
 func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
-	# Move piece to new position on board
-	if not is_valid_position(to_pos):
-		return false
-	
-	if piece == null:
+	# Validate the move using the piece's get_valid_moves function
+	if not is_valid_move(piece, to_pos):
 		return false
 	
 	var from_pos = piece.board_position
 	
+	# Capture enemy piece if it's in the target position
+	var captured_piece = board_state[to_pos.y][to_pos.x]
+	if captured_piece != null:
+		# Regular chess capture for now.
+		captured_piece.queue_free()
+	
+	# Move piece to new position
 	board_state[from_pos.y][from_pos.x] = null  # Remove from old position
 	board_state[to_pos.y][to_pos.x] = piece     # Place in new position
 	
 	piece.set_board_position(to_pos, ChessConstants.TILE_SIZE)
-
+	
+	# Emit signal for piece movement
+	piece_moved.emit(piece, from_pos, to_pos)
+	
 	switch_turn()
 	deselect_piece()
 
 	return true
+
+func is_valid_move(piece: Piece, to_pos: Vector2i) -> bool:
+	# Check if the move is valid for the given piece
+	if not is_valid_position(to_pos) or piece == null:
+		return false
+	
+	# Get valid moves for the piece
+	var valid_moves = piece.get_valid_moves(self)
+	
+	# Check if the target position is in the valid moves list
+	return to_pos in valid_moves
+
+func is_empty(pos: Vector2i) -> bool:
+	# Check if position is empty (no piece)
+	if not is_valid_position(pos):
+		return false
+	return board_state[pos.y][pos.x] == null
+
+func is_enemy(pos: Vector2i, team: ChessConstants.TeamColor) -> bool:
+	# Check if position contains an enemy piece
+	if not is_valid_position(pos):
+		return false
+	var piece = board_state[pos.y][pos.x]
+	return piece != null and piece.team != team

@@ -109,14 +109,19 @@ func handle_accept_input():
 			board_renderer.highlight_tile(tile_pos, ChessConstants.SELECTION_COLOR)
 		return
 	
-	# DEMONSTRAION PIECE MOVEMENT
 	if game_manager.selected_piece != null:
 		var selected_piece = game_manager.selected_piece
 		var selected_pos = selected_piece.board_position
 		if tile_pos == selected_pos:
+			handle_cancel_input()
 			return
 		
-		game_manager.piece_moved.emit(selected_piece,selected_pos,tile_pos)
+		# Try to move the piece using the GameManager
+		if game_manager.move_piece(selected_piece, tile_pos):
+			# Move was successful, tile colors will be reseted by the move_piece function
+			pass
+		else:
+			print("Invalid move!")
 
 func handle_cancel_input():
 	# Only allow cancel if it's this player's turn

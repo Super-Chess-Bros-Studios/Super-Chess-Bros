@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwbpl1ts02gh"
-path="res://.godot/imported/chess_board.png-6d2a774c0156763e62cc52c40fbf19f5.ctex"
+path="res://.godot/imported/chess_board.png-e171b9c111bdfb00d92dce09eb9030b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/chess/chess_board.png"
-dest_files=["res://.godot/imported/chess_board.png-6d2a774c0156763e62cc52c40fbf19f5.ctex"]
+source_file="res://Assets/Sprites/chess/chess_board.png"
+dest_files=["res://.godot/imported/chess_board.png-e171b9c111bdfb00d92dce09eb9030b9.ctex"]
 
 [params]
 

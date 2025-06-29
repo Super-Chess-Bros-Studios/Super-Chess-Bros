@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fr26f1pqqivu"
-path="res://.godot/imported/player katana attack-sheathe 80x64.png-4aef1e438c70f81f350adaaf3ab7a079.ctex"
+path="res://.godot/imported/player katana attack-sheathe 80x64.png-bf4869ae90c1ef49ae34e396340d1689.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/character-class-actions/Katana Attack-Sheathe/player katana attack-sheathe 80x64.png"
-dest_files=["res://.godot/imported/player katana attack-sheathe 80x64.png-4aef1e438c70f81f350adaaf3ab7a079.ctex"]
+source_file="res://Assets/Sprites/character-class-actions/Katana Attack-Sheathe/player katana attack-sheathe 80x64.png"
+dest_files=["res://.godot/imported/player katana attack-sheathe 80x64.png-bf4869ae90c1ef49ae34e396340d1689.ctex"]
 
 [params]
 

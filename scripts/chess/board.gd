@@ -219,14 +219,10 @@ func _on_turn_switched(new_team: ChessConstants.TeamColor):
 
 	print("Turn switched to: ", "White" if new_team == ChessConstants.TeamColor.WHITE else "Black")
 
-#DEMONSTRATION PIECE MOVEMENT
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
-		if(game_manager.move_piece(piece, to_pos)):
-			print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
-			board_renderer.reset_tile_color(from_pos)
-			board_renderer.reset_tile_color(to_pos)
-		else:
-			print("Invalid move!")
+	print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
+	board_renderer.reset_tile_color(from_pos)
+	board_renderer.reset_tile_color(to_pos)
 
 	#This is how we get acsess to all the important variables and functions which is through this public API
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dydjiil8hoh7k"
-path="res://.godot/imported/player push 48x48.png-727bb92089d83f071f183d1f31beeec5.ctex"
+path="res://.godot/imported/player push 48x48.png-0a86aea31e8757ba39603e261a1d145d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/character-class-actions/Push/player push 48x48.png"
-dest_files=["res://.godot/imported/player push 48x48.png-727bb92089d83f071f183d1f31beeec5.ctex"]
+source_file="res://Assets/Sprites/character-class-actions/Push/player push 48x48.png"
+dest_files=["res://.godot/imported/player push 48x48.png-0a86aea31e8757ba39603e261a1d145d.ctex"]
 
 [params]
 

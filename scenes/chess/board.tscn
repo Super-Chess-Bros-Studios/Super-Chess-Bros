@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b5ep5if383vj3" path="res://scripts/chess/board.gd" id="1_m5kr7"]
 [ext_resource type="PackedScene" uid="uid://dldgguqclgyl8" path="res://scenes/chess/tile.tscn" id="2_w6gev"]
 [ext_resource type="Script" path="res://scripts/chess/board_renderer.gd" id="4_6y3m1"]
-[ext_resource type="Texture2D" uid="uid://clw4wtm4s1qki" path="res://assets/sprites/chess/chess-pieces.png" id="4_l1xyo"]
+[ext_resource type="Texture2D" uid="uid://clw4wtm4s1qki" path="res://Assets/Sprites/chess/chess-pieces.png" id="4_l1xyo"]
 [ext_resource type="PackedScene" uid="uid://b5qaf8x74fqir" path="res://scenes/chess/cursor.tscn" id="5_l1xyo"]
 
 [node name="Board" type="Node2D"]
