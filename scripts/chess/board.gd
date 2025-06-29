@@ -204,6 +204,11 @@ func _on_game_state_changed(new_state: ChessConstants.GameState):
 
 func _on_piece_selected(piece: Piece):
 	#Called when a player selects a chess piece.
+	for move in game_manager.valid_moves:
+		if(game_manager.get_piece_at_position(move) == null):
+			board_renderer.highlight_tile(move, Color.YELLOW)
+		else:
+			board_renderer.highlight_tile(move, Color.RED)
 	
 	print("Piece selected: ", piece.name)
 	# Add any piece selection handling here
@@ -223,8 +228,7 @@ func _on_turn_switched(new_team: ChessConstants.TeamColor):
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
 		if(game_manager.move_piece(piece, to_pos)):
 			print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
-			board_renderer.reset_tile_color(from_pos)
-			board_renderer.reset_tile_color(to_pos)
+			board_renderer.reset_all_tiles()
 		else:
 			print("Invalid move!")
 

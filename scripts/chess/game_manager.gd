@@ -12,6 +12,7 @@ signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
 var selected_piece: Piece = null  # Currently selected piece
+var valid_moves: Array[Vector2i] = [Vector2i(0,5), Vector2i(1,1)]  # Valid moves for the selected piece
 
 func _init():
 	initialize_board_state()

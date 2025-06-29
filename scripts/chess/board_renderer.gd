@@ -48,5 +48,10 @@ func reset_tile_color(pos: Vector2i):
 	if tile:
 		tile.reset_color()
 
+func reset_all_tiles():
+	for row in ChessConstants.BOARD_SIZE:
+		for col in ChessConstants.BOARD_SIZE:
+			reset_tile_color(Vector2i(col, row))
+
 func get_board_center() -> Vector2:
 	return Vector2(ChessConstants.BOARD_SIZE * ChessConstants.TILE_SIZE, ChessConstants.BOARD_SIZE * ChessConstants.TILE_SIZE) / 2 
