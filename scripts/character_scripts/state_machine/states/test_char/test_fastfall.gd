@@ -27,8 +27,10 @@ func _on_right_collide(body: Node2D) -> void:
 	char_attributes.cur_dir = DIRECTION.left
 
 func Physics_Update(delta):
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#handles vertical events
-	if character.is_on_floor():
+	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")
 	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part

@@ -13,8 +13,10 @@ func _ready():
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox == null:
 		return
-		
-	if owner.has_method("take_damage"):
-		owner.take_damage(hitbox.damage)
+	elif hitbox.owner == self:
+		return
+	#passes the hitbox to the state machine script
+	if owner.has_method("on_hit"):
+		owner.on_hit(hitbox.bkb, hitbox.kbg, hitbox.kb_dir, hitbox.damage, hitbox.hitbox_group)
 		
 	

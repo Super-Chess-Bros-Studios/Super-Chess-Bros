@@ -22,6 +22,9 @@ var damage : float = 0
 #when another hitbox hits the player with the value of 0, it will be ignored.
 #if a hitbox of value 1 hits while hitbox_group is 0, it will make contact.
 var hitbox_group : int = -1
+var knockback_force : float = 0
+
+var hit_on_ground = false
 
 func Enter():
 	print("Hitstun state")
@@ -29,24 +32,48 @@ func Enter():
 	#this ensures that it doesnt do any wall sliding stuff while we're in hitstun haha
 	wall_detection_enabled(false)
 	
+	#basically means they don't instantly enter grounded state if they are hit on the ground
+	if character.is_on_floor():
+		hit_on_ground = true
+	else:
+		hit_on_ground = false
+	
 	#i don't want to prefix everything with char_attributes lol
-	percentage = char_attributes.percentage
 	bkb = char_attributes.bkb
 	kbg = char_attributes.kbg
 	kb_dir = char_attributes.kb_dir
 	damage = char_attributes.damage
 	hitbox_group = char_attributes.hitbox_group
-	
+	percentage = char_attributes.percentage
+	print(char_attributes.percentage, "%")
+	char_attributes.percentage += char_attributes.damage
+	#so you don't stay in hitstun forever
 	char_attributes.just_took_damage = false
 	
-	character.velocity = kb_dir * (bkb + (percentage*kbg))
+	#applies knockback
+	print("knockback growth: ", kbg)
+	knockback_force = bkb + (percentage*kbg/20)
+	print("knockback force: ", knockback_force)
+	character.velocity = kb_dir.normalized() * knockback_force
+	
 	#hitstun length is going to take some math i'm not ready for atm
-	hitstun_length.start(bkb)
+	hitstun_length.start(knockback_force/500)
 	playanim("hitstun")
 
 func Physics_Update(delta):
-	if hitstun_length.is_stopped():
+	#if i took damage from a hitbox that isn't in the current hitbox group
+	if char_attributes.just_took_damage and char_attributes.hitbox_group != hitbox_group:
+		Transitioned.emit(self,"hitstun")
+	elif hitstun_length.is_stopped():
 		Transitioned.emit(self, "tumble")
+	elif character.is_on_floor() and !hit_on_ground:
+		Transitioned.emit(self,"grounded")
 	else:
 		#make it exist first, make it better later (tm)
+		character.velocity.y = character.velocity.y + char_attributes.GRAVITY
+		
+		#makes it so your character still has friction when they are hit on the ground and land before
+		#hitstun ends
+		if hit_on_ground and character.is_on_floor():
+			character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
 		character.move_and_slide()
