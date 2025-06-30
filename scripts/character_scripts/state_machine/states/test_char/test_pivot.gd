@@ -1,19 +1,17 @@
 extends CharacterState
 class_name TestPivot
 
-@export var timer : Timer
 #I use this timed_out variable so I don't cause a race condition
-var timed_out = false
+var pivot_end = false
 
 func Enter():
 	print("Pivot state")
 	char_attributes.cur_dir *= -1
-	timed_out = false
-	timer.start()
+	pivot_end = false
 	playanim("pivot")
 
-func _on_pivot_time_timeout() -> void:
-	timed_out = true
+func end_pivot():
+	pivot_end = true
 
 func Physics_Update(delta):
 	if !character.is_on_floor():
@@ -22,7 +20,7 @@ func Physics_Update(delta):
 	#Every statement needs to be elif so we don't emit multiple transitioned signals.
 	
 	#Only allow these movements once pivot ends.
-	elif timed_out:
+	elif pivot_end:
 		#If you're holding left at the end of pivot, run left.
 		if Input.is_action_pressed(get_action("left")):
 			char_attributes.cur_dir = DIRECTION.left

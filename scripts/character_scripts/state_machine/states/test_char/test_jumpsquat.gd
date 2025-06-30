@@ -1,16 +1,14 @@
 extends CharacterState
 class_name TestJumpSquat
 
-@export var timer : Timer
 var short_hop = false
 
 func Enter():
 	print("Jumpsquat state")
 	short_hop = false
-	timer.start()
-	playanim("crouch")
+	playanim("jumpsquat")
 
-func _on_squat_time_timeout() -> void:
+func end_jumpsquat():
 	if Input.is_action_pressed(get_action("shield")):
 		Transitioned.emit(self, "airdodge")
 	elif short_hop:

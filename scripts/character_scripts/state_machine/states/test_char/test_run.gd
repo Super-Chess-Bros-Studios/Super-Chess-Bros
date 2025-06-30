@@ -4,7 +4,10 @@ class_name TestRun
 # @export var anim : AnimatedSprite2D
 @export var speed : int = 400
 @export var timer : Timer
-#I use this timed_out variable so I don't cause a race condition
+
+#Basically, there is a period of time you want to have that allows the character to
+#transition to the pivot state. Basically when you flick your stick from right to left (or vice versa)
+#you want there to be a little bit of buffer, you can't exactly flick your stick in one frame (easily).
 var timed_out = false
 
 func Enter():
@@ -14,7 +17,7 @@ func Enter():
 	playanim("run")
 
 func _on_pre_transition_timeout() -> void:
-	print("timed out")
+	print("pivot buffer ended")
 	timed_out = true
 
 #applies friction and starts a physics update on the character.

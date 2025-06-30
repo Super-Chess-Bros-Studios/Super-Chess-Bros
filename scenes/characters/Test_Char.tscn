@@ -1,22 +1,22 @@
-[gd_scene load_steps=125 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=127 format=3 uid="uid://5b3fmt2t3sc6"]
 
-[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
-[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
-[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
-[ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
-[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
-[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
-[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
+[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
+[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
+[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
+[ext_resource type="Texture2D" uid="uid://dgj40goagn804" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Run/player run 48x48.png" id="2_422c8"]
+[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
+[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
+[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
 [ext_resource type="Script" uid="uid://rg3jnrlnyt6m" path="res://scripts/character_scripts/state_machine/states/test_char/test_idle.gd" id="5_dgi44"]
-[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
+[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
 [ext_resource type="Script" uid="uid://ctsqulv68cgxy" path="res://scripts/character_scripts/state_machine/states/test_char/test_run.gd" id="6_kpwuy"]
 [ext_resource type="Script" uid="uid://dbyyiifx7mbga" path="res://scripts/character_scripts/state_machine/states/test_char/test_crouch.gd" id="7_2137q"]
 [ext_resource type="Script" uid="uid://b5d57x8h3avr5" path="res://scripts/character_scripts/state_machine/states/test_char/test_jumpsquat.gd" id="8_cqar7"]
 [ext_resource type="Script" uid="uid://db3y4jnn8ci5y" path="res://scripts/character_scripts/state_machine/states/character_attributes.gd" id="8_h8dpt"]
-[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
+[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
 [ext_resource type="Script" uid="uid://xq4wnlhqxdlm" path="res://scripts/character_scripts/state_machine/states/test_char/test_jump.gd" id="9_qga04"]
-[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
+[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
 [ext_resource type="Script" uid="uid://dsq2k53fkg20h" path="res://scripts/character_scripts/state_machine/states/test_char/test_short_hop.gd" id="11_0l6pb"]
 [ext_resource type="Script" uid="uid://dxn1tegm7uca6" path="res://scripts/character_scripts/state_machine/states/test_char/test_fall.gd" id="11_hmptn"]
 [ext_resource type="Script" uid="uid://d26weydsrf1ra" path="res://scripts/character_scripts/state_machine/states/test_char/test_initial_dash.gd" id="13_va0ok"]
@@ -71,6 +71,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id="Animation_fjca5"]
 resource_name = "airdodge"
 length = 0.6
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -106,6 +107,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [6]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/AirDodge")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_air_dodge"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_3ywid"]
@@ -352,6 +367,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/Pivot")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_pivot"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_p57wh"]
 resource_name = "roll"
@@ -392,6 +421,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/Roll")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_roll"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_1gi5x"]
@@ -559,6 +602,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/UpSpecial")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_up_special"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_78rvd"]
 resource_name = "wallslide"
@@ -600,6 +657,117 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_c1e3k"]
+resource_name = "initial_dash"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_3ywid")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/InitialDash")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_initial_dash"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mlf1o"]
+resource_name = "jumpsquat"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_4jtsn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/JumpSquat")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_jumpsquat"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b8cx6"]
 _data = {
 &"RESET": SubResource("Animation_b8cx6"),
@@ -608,7 +776,9 @@ _data = {
 &"fall": SubResource("Animation_jg6e0"),
 &"fastfall": SubResource("Animation_4remw"),
 &"idle": SubResource("Animation_2yqwl"),
+&"initial_dash": SubResource("Animation_c1e3k"),
 &"jump": SubResource("Animation_0owkq"),
+&"jumpsquat": SubResource("Animation_mlf1o"),
 &"pivot": SubResource("Animation_m852p"),
 &"roll": SubResource("Animation_p57wh"),
 &"run": SubResource("Animation_1gi5x"),
@@ -1243,8 +1413,8 @@ hurtbox = NodePath("CharacterBody2D/Hurtbox")
 collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("1_w1xps")
-hframes = 6
+texture = ExtResource("3_4jtsn")
+hframes = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 reset_on_save = false
@@ -1310,17 +1480,12 @@ sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dbyyiifx7mbga"
 
-[node name="JumpSquat" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="JumpSquat" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("8_cqar7")
-timer = NodePath("SquatTime")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://b5d57x8h3avr5"
-
-[node name="SquatTime" type="Timer" parent="CharacterBody2D/State Machine/JumpSquat"]
-wait_time = 0.05
-one_shot = true
 
 [node name="FullHop" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
 script = ExtResource("9_qga04")
@@ -1349,17 +1514,12 @@ sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dxn1tegm7uca6"
 
-[node name="InitialDash" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="InitialDash" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("13_va0ok")
-timer = NodePath("DashTime")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://d26weydsrf1ra"
-
-[node name="DashTime" type="Timer" parent="CharacterBody2D/State Machine/InitialDash"]
-wait_time = 0.2
-one_shot = true
 
 [node name="Fastfall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
 script = ExtResource("14_w2ni4")
@@ -1370,39 +1530,24 @@ sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
 
-[node name="Pivot" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="Pivot" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("15_1ekob")
-timer = NodePath("PivotTime")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 
-[node name="PivotTime" type="Timer" parent="CharacterBody2D/State Machine/Pivot"]
-wait_time = 0.1
-one_shot = true
-
-[node name="AirDodge" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="AirDodge" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("17_eam3d")
-timer = NodePath("DodgeLength")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 
-[node name="DodgeLength" type="Timer" parent="CharacterBody2D/State Machine/AirDodge"]
-wait_time = 0.2
-one_shot = true
-
-[node name="Roll" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "roll_cooldown_timer", "anim", "sprite", "character")]
+[node name="Roll" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("roll_cooldown_timer", "anim", "sprite", "character")]
 script = ExtResource("20_he0e7")
-timer = NodePath("RollLength")
 roll_cooldown_timer = NodePath("RollCooldown")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
-
-[node name="RollLength" type="Timer" parent="CharacterBody2D/State Machine/Roll"]
-wait_time = 0.3
-one_shot = true
 
 [node name="RollCooldown" type="Timer" parent="CharacterBody2D/State Machine/Roll"]
 wait_time = 0.5
@@ -1416,16 +1561,11 @@ anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 
-[node name="UpSpecial" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
+[node name="UpSpecial" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("25_42ld6")
-timer = NodePath("UpSpecialLength")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
-
-[node name="UpSpecialLength" type="Timer" parent="CharacterBody2D/State Machine/UpSpecial"]
-wait_time = 0.5
-one_shot = true
 
 [node name="SpecialFall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
 script = ExtResource("26_31y7r")
@@ -1460,7 +1600,4 @@ debug_color = Color(2.06962e-06, 0.640148, 0.354265, 0.42)
 [connection signal="body_exited" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/WallSlide" method="_on_wall_detect_body_exited"]
 [connection signal="body_exited" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/SpecialFall" method="_on_right_collide_body_exited"]
 [connection signal="timeout" from="CharacterBody2D/State Machine/Run/PreTransition" to="CharacterBody2D/State Machine/Run" method="_on_pre_transition_timeout"]
-[connection signal="timeout" from="CharacterBody2D/State Machine/JumpSquat/SquatTime" to="CharacterBody2D/State Machine/JumpSquat" method="_on_squat_time_timeout"]
-[connection signal="timeout" from="CharacterBody2D/State Machine/InitialDash/DashTime" to="CharacterBody2D/State Machine/InitialDash" method="_on_dash_time_timeout"]
-[connection signal="timeout" from="CharacterBody2D/State Machine/Pivot/PivotTime" to="CharacterBody2D/State Machine/Pivot" method="_on_pivot_time_timeout"]
 [connection signal="timeout" from="CharacterBody2D/State Machine/Roll/RollCooldown" to="." method="_on_roll_cooldown_timeout"]
