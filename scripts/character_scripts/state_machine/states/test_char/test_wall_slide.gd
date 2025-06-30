@@ -45,8 +45,10 @@ func Exit():
 
 
 func Physics_Update(delta):
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#handles vertical events
-	if character.is_on_floor():
+	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")
 	elif exit_wall_slide:
 		Transitioned.emit(self,"fall")

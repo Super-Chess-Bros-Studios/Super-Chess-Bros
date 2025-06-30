@@ -43,8 +43,10 @@ func wall_kick(wall_kick_dir):
 
 func Physics_Update(delta):
 	print("can wall jump:", char_attributes.can_wall_jump)
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#handles vertical events
-	if character.is_on_floor():
+	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")
 	
 	elif Input.is_action_just_pressed(get_action("jump")) and char_attributes.can_wall_jump:

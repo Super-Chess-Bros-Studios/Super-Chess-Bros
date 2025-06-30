@@ -28,4 +28,22 @@ var can_recover = true
 var can_roll = true
 #hitboxes should ignore a character if they are invulnerable
 var invulnerable = false
+#basically the player's health
+var percentage : float = 0.0
+
+#values for when a character takes damage. should be reset back to these values when hitstun ends
 var just_took_damage = false
+#base knockback, knockback that will be applied regardless of player's percentage
+var bkb : float = 0
+#knockback growth (basically a multiplier based on character's percentage)
+var kbg : float = 0
+#knockback direction, normalize this
+var kb_dir : Vector2 = Vector2.ZERO
+#amount of percent the hitbox deals to the character
+var damage : float = 0
+#for damage purposes -1 will represent the character being able to be hit by any hitbox.
+#hitbox groups will start at 0.
+#if a character is being hit by a hitbox with a value of 0, it will have 0 as its hitbox group variable
+#when another hitbox hits the player with the value of 0, it will be ignored.
+#if a hitbox of value 1 hits while hitbox_group is 0, it will make contact.
+var hitbox_group : int = -1

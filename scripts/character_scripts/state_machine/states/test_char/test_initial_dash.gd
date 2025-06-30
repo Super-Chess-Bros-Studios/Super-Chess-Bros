@@ -19,8 +19,10 @@ func end_initial_dash():
 
 func Physics_Update(delta):
 	
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#ensures the player doesn't just run on air
-	if !character.is_on_floor():
+	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
 	elif initial_dash_ended:
 		Transitioned.emit(self, "run")

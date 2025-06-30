@@ -27,9 +27,11 @@ func apply_friction():
 	character.move_and_slide()
 
 func Physics_Update(delta):
-
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
+	
 	#ensures the player doesn't just run on air
-	if !character.is_on_floor():
+	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
 	#This handles transition to pivot
 	elif !timer.is_stopped() and Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.left:
@@ -68,8 +70,6 @@ func Physics_Update(delta):
 	#This handles transition to jumpsquat
 	elif Input.is_action_pressed(get_action("jump")):
 		Transitioned.emit(self, "JumpSquat")
-
-
 	
 	#Otherwise just stay in this state and run
 	else:

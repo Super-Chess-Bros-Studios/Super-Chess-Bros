@@ -62,6 +62,15 @@ func on_child_transitioned(state, new_state_name):
 	
 	current_state = new_state
 
+func on_hit(percentage : float, bkb : float, kbg : float, kb_dir : Vector2, damage : float, hitbox_group : int):
+	char_attributes.just_took_damage = true
+	#honestly, might want to turn these variables into their own class, or maybe just directly the pointer to the hitbox??
+	char_attributes.percentage = percentage
+	char_attributes.bkb = bkb
+	char_attributes.kbg = kbg
+	char_attributes.kb_dir = kb_dir
+	char_attributes.damage = damage
+	char_attributes.hitbox_group = hitbox_group
 
 func _on_roll_cooldown_timeout() -> void:
 	print("roll refreshed")

@@ -14,7 +14,10 @@ func end_pivot():
 	pivot_end = true
 
 func Physics_Update(delta):
-	if !character.is_on_floor():
+	
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
+	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
 	
 	#Every statement needs to be elif so we don't emit multiple transitioned signals.
