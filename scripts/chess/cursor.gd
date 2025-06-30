@@ -133,6 +133,7 @@ func handle_cancel_input():
 		var selected_pos = game_manager.selected_piece.board_position
 		board_renderer.reset_tile_color(selected_pos)
 		game_manager.deselect_piece()
+		board_renderer.reset_all_tiles()
 
 func handle_input(delta):
 	# Handle movement input (WASD or arrow keys)
