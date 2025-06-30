@@ -90,10 +90,9 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	var from_pos = piece.board_position
 	
 	# Capture enemy piece if it's in the target position
-	var captured_piece = board_state[to_pos.y][to_pos.x]
-	if captured_piece != null:
-		# Regular chess capture for now.
-		captured_piece.queue_free()
+	if !is_empty(to_pos):
+		if is_enemy(to_pos, piece.team):
+			capture_piece(piece, to_pos)
 	
 	# Move piece to new position
 	board_state[from_pos.y][from_pos.x] = null  # Remove from old position
@@ -132,3 +131,10 @@ func is_enemy(pos: Vector2i, team: ChessConstants.TeamColor) -> bool:
 		return false
 	var piece = board_state[pos.y][pos.x]
 	return piece != null and piece.team != team
+
+func capture_piece(attack_piece: Piece, capture_pos: Vector2i):
+	var defence_piece = board_state[capture_pos.y][capture_pos.x]
+	if defence_piece != null:
+		defence_piece.queue_free()
+	print("attacking piece: ", attack_piece.name)
+	print("defending piece: ", defence_piece.name)
