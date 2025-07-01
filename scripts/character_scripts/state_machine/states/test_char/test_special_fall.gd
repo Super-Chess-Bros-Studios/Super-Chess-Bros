@@ -7,19 +7,12 @@ class_name TestSpecialFall
 var leftCollide = false
 var rightCollide = false
 
-func playanim():
-	anim.play("special_fall")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
-
 func Enter():
 	print("Special Fall state")
 	var leftCollide = false
 	var rightCollide = false
 	wall_detection_enabled(true)
-	playanim()
+	playanim("special_fall")
 
 #this entire section of code is for the wall kick you can do while rising in the air
 
@@ -50,8 +43,10 @@ func wall_kick(wall_kick_dir):
 
 func Physics_Update(delta):
 	print("can wall jump:", char_attributes.can_wall_jump)
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#handles vertical events
-	if character.is_on_floor():
+	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")
 	
 	elif Input.is_action_just_pressed(get_action("jump")) and char_attributes.can_wall_jump:
@@ -72,16 +67,17 @@ func Physics_Update(delta):
 	else:
 		applyGravity()
 		
-		#input for fastfall.
-		if Input.is_action_pressed(get_action("down")) and character.velocity.y > 0:
-			character.velocity.y = char_attributes.MAX_FALL_SPEED
-			character.move_and_slide()
+		
 		#handles horizontal events
-		elif Input.is_action_pressed(get_action("left")):
+		if Input.is_action_pressed(get_action("left")):
 			character.velocity.x = lerp(character.velocity.x,-speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
 		elif Input.is_action_pressed(get_action("right")):
 			character.velocity.x = lerp(character.velocity.x,speed,char_attributes.AIRSPEEDLERP)
+			character.move_and_slide()
+		#input for fastfall.
+		elif Input.is_action_pressed(get_action("down")) and character.velocity.y > 0:
+			character.velocity.y = char_attributes.MAX_FALL_SPEED
 			character.move_and_slide()
 		else:
 			#you don't have to multiply by delta if you call move and slide for velocity

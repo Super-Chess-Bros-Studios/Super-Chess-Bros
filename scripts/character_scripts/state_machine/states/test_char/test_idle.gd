@@ -1,17 +1,7 @@
 extends CharacterState
 class_name TestIdle
-
-@export var anim : AnimatedSprite2D
-@export var character : CharacterBody2D
 #just so it doesnt repeat the beginning of the idle animation over and over in physics process
 var idle_anim = true
-
-func playanim(animation):
-	anim.play(animation)
-	if char_attributes.cur_dir < 0:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
 
 func Enter():
 	print("Idle state")
@@ -30,10 +20,12 @@ func Enter():
 
 func Physics_Update(delta):
 	
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#bunch of inputs
-	if !character.is_on_floor():
+	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
-	if Input.is_action_pressed(get_action("up")) and Input.is_action_pressed(get_action("special")):
+	if Input.is_action_pressed(get_action("up")) and Input.is_action_just_pressed(get_action("special")):
 		Transitioned.emit(self,"UpSpecial")
 	if Input.is_action_pressed(get_action("left")):
 		char_attributes.cur_dir = DIRECTION.left

@@ -1,38 +1,29 @@
 extends CharacterState
 class_name TestPivot
 
-
-@export var anim : AnimatedSprite2D
-@export var character : CharacterBody2D
-@export var timer : Timer
 #I use this timed_out variable so I don't cause a race condition
-var timed_out = false
-
-func playanim():
-	anim.play("pivot")
-	if char_attributes.cur_dir < 0:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
+var pivot_end = false
 
 func Enter():
 	print("Pivot state")
 	char_attributes.cur_dir *= -1
-	timed_out = false
-	timer.start()
-	playanim()
+	pivot_end = false
+	playanim("pivot")
 
-func _on_pivot_time_timeout() -> void:
-	timed_out = true
+func end_pivot():
+	pivot_end = true
 
 func Physics_Update(delta):
-	if !character.is_on_floor():
+	
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
+	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
 	
 	#Every statement needs to be elif so we don't emit multiple transitioned signals.
 	
 	#Only allow these movements once pivot ends.
-	elif timed_out:
+	elif pivot_end:
 		#If you're holding left at the end of pivot, run left.
 		if Input.is_action_pressed(get_action("left")):
 			char_attributes.cur_dir = DIRECTION.left

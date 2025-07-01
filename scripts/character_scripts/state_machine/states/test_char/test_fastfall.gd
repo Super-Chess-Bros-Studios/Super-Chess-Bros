@@ -1,19 +1,12 @@
 extends TestFall
 class_name TestFastFall
 
-func playanim():
-	anim.play("fastfall")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
-
 func Enter():
 	print("FastFall state")
 	begin_wall_slide = false
 	wall_detection_enabled(true)
 	character.velocity.y = char_attributes.MAX_FALL_SPEED
-	playanim()
+	playanim("fastfall")
 
 #this makes it so that the areas only check if you are next to a wall while falling
 #that way you don't trigger the signal while on the ground
@@ -34,8 +27,10 @@ func _on_right_collide(body: Node2D) -> void:
 	char_attributes.cur_dir = DIRECTION.left
 
 func Physics_Update(delta):
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#handles vertical events
-	if character.is_on_floor():
+	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")
 	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part

@@ -1,31 +1,25 @@
 extends CharacterState
 class_name TestUpSpecial
 
-@export var anim : AnimatedSprite2D
-@export var character : CharacterBody2D
-@export var timer : Timer
-
 @export var speed : float = 300
-
-
-func playanim():
-	anim.play("up_special")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
+var up_special_end = false
 
 func Enter():
 	print("Up Special state")
+	up_special_end = false
 	character.velocity.y = char_attributes.JUMP_POWER
-	
-	timer.start()
-	playanim()
+	playanim("up_special")
+
+#This is called by the animation player.
+func end_of_up_special():
+	up_special_end = true
 
 func Physics_Update(delta):
-	if character.is_on_floor():
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
+	elif character.is_on_floor():
 		Transitioned.emit(self,"idle")
-	elif timer.is_stopped():
+	elif up_special_end:
 		Transitioned.emit(self, "SpecialFall")
 	
 	#handles horizontal events

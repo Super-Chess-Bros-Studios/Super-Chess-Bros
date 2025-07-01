@@ -1,9 +1,8 @@
 extends CharacterState
 class_name TestWallSlide
 
-
-@export var anim : AnimatedSprite2D
-@export var character : CharacterBody2D
+@export var slide_colliderL : Area2D
+@export var slide_colliderR : Area2D
 
 #vertical variables
 
@@ -15,7 +14,6 @@ class_name TestWallSlide
 @export var max_wall_slide_speed = char_attributes.MAX_FALL_SPEED
 
 #horizontal variables
-
 #how fast horizontally you boost off a wall if you jump
 @export var wall_jump_horizontal_strength : float = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH
 #how quick you move off of a wall when inputting opposite of a wall
@@ -24,26 +22,33 @@ class_name TestWallSlide
 
 var exit_wall_slide = false
 
-func playanim():
-	anim.play("wallslide")
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
-
 func Enter():
 	print("Wall Slide state")
+	wall_detection_enabled(true)
 	exit_wall_slide = false
-	playanim()
+	playanim("wallslide")
+
+#this makes it so that the areas only check if you are next to a wall while falling
+#that way you don't trigger the signal while on the ground
+#this doesn't really matter for the MVP because you can't be on the ground and touching
+#the wall on the current stage
+func wall_detection_enabled(ask : bool):
+	slide_colliderL.monitoring = ask
+	slide_colliderR.monitoring = ask
 
 func _on_wall_detect_body_exited(body: Node2D) -> void:
 	exit_wall_slide = true
 	print("wall slide exited")
 
+func Exit():
+	wall_detection_enabled(false)
+
 
 func Physics_Update(delta):
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
 	#handles vertical events
-	if character.is_on_floor():
+	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")
 	elif exit_wall_slide:
 		Transitioned.emit(self,"fall")

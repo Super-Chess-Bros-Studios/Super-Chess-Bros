@@ -3,7 +3,6 @@ extends Node
 var current_state : CharacterState
 # Dictionary of State objects 
 var states : Dictionary = {}
-
 enum DIRECTION {left = -1, right = 1}
 
 
@@ -11,11 +10,13 @@ enum DIRECTION {left = -1, right = 1}
 @export var initial_state : CharacterState
 @export var char_attributes : CharacterAttributes
 @export var state_machine : Node
+@export var hurtbox : Hurtbox
 
 #_ready is called when the node is first created automatically by Godot.
 #Essentially, it fills up the dictionary with each Character_State node under the
 #State Machine in the scene tree.
 func _ready():
+	hurtbox.char_attributes = char_attributes
 	for child in state_machine.get_children():
 		if child is CharacterState:
 			#to_lower is a precaution, of course.
@@ -61,6 +62,14 @@ func on_child_transitioned(state, new_state_name):
 	
 	current_state = new_state
 
+func on_hit(bkb : float, kbg : float, kb_dir : Vector2, damage : float, hitbox_group : int):
+	if !char_attributes.invulnerable:
+		char_attributes.just_took_damage = true
+		char_attributes.bkb = bkb
+		char_attributes.kbg = kbg
+		char_attributes.kb_dir = kb_dir
+		char_attributes.damage = damage
+		char_attributes.hitbox_group = hitbox_group
 
 func _on_roll_cooldown_timeout() -> void:
 	print("roll refreshed")

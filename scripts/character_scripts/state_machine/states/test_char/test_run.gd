@@ -1,19 +1,14 @@
 extends CharacterState
 class_name TestRun
 
-@export var anim : AnimatedSprite2D
+# @export var anim : AnimatedSprite2D
 @export var speed : int = 400
-@export var character : CharacterBody2D
 @export var timer : Timer
-#I use this timed_out variable so I don't cause a race condition
-var timed_out = false
 
-func playanim(animation):
-	anim.play(animation)
-	if char_attributes.cur_dir == DIRECTION.left:
-		anim.set_flip_h(true)
-	else:
-		anim.set_flip_h(false)
+#Basically, there is a period of time you want to have that allows the character to
+#transition to the pivot state. Basically when you flick your stick from right to left (or vice versa)
+#you want there to be a little bit of buffer, you can't exactly flick your stick in one frame (easily).
+var timed_out = false
 
 func Enter():
 	print("Run state")
@@ -22,7 +17,7 @@ func Enter():
 	playanim("run")
 
 func _on_pre_transition_timeout() -> void:
-	print("timed out")
+	print("pivot buffer ended")
 	timed_out = true
 
 #applies friction and starts a physics update on the character.
@@ -32,9 +27,11 @@ func apply_friction():
 	character.move_and_slide()
 
 func Physics_Update(delta):
-
+	if char_attributes.just_took_damage:
+		Transitioned.emit(self, "hitstun")
+	
 	#ensures the player doesn't just run on air
-	if !character.is_on_floor():
+	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
 	#This handles transition to pivot
 	elif !timer.is_stopped() and Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.left:
@@ -73,8 +70,6 @@ func Physics_Update(delta):
 	#This handles transition to jumpsquat
 	elif Input.is_action_pressed(get_action("jump")):
 		Transitioned.emit(self, "JumpSquat")
-
-
 	
 	#Otherwise just stay in this state and run
 	else:
