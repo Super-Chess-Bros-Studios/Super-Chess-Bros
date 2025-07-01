@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddnfd5nmu3unk"
-path="res://.godot/imported/player katana air attack (upper body) 80x64.png-d67e1097bf011c72eefdd077ce8d42a6.ctex"
+path="res://.godot/imported/player katana air attack (upper body) 80x64.png-d4b602700761a81ff8f7f1cd6c7c561d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/character-class-actions/Katana Air Attack/player katana air attack (upper body) 80x64.png"
-dest_files=["res://.godot/imported/player katana air attack (upper body) 80x64.png-d67e1097bf011c72eefdd077ce8d42a6.ctex"]
+source_file="res://assets/sprites/character-class-actions/Katana Air Attack/player katana air attack (upper body) 80x64.png"
+dest_files=["res://.godot/imported/player katana air attack (upper body) 80x64.png-d4b602700761a81ff8f7f1cd6c7c561d.ctex"]
 
 [params]
 

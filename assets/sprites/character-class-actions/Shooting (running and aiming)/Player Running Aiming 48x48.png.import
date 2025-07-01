@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b876l1062xvc"
-path="res://.godot/imported/Player Running Aiming 48x48.png-52fd597563f1042806883a29dcc5b047.ctex"
+path="res://.godot/imported/Player Running Aiming 48x48.png-15f8945a60a95bb492c2668517021592.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/character-class-actions/Shooting (running and aiming)/Player Running Aiming 48x48.png"
-dest_files=["res://.godot/imported/Player Running Aiming 48x48.png-52fd597563f1042806883a29dcc5b047.ctex"]
+source_file="res://assets/sprites/character-class-actions/Shooting (running and aiming)/Player Running Aiming 48x48.png"
+dest_files=["res://.godot/imported/Player Running Aiming 48x48.png-15f8945a60a95bb492c2668517021592.ctex"]
 
 [params]
 

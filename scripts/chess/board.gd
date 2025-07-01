@@ -225,8 +225,6 @@ func _on_turn_switched(new_team: ChessConstants.TeamColor):
 
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
 	print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
-	board_renderer.reset_tile_color(from_pos)
-	board_renderer.reset_tile_color(to_pos)
 	board_renderer.reset_all_tiles()
 	#This is how we get acsess to all the important variables and functions which is through this public API
 

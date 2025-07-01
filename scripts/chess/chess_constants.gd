@@ -42,6 +42,7 @@ const HOVER_COLORS := {
 }
 
 const SELECTION_COLOR := Color.GREEN
+const VALID_MOVE_COLOR := Color.BLUE
 const LIGHT_TILE_COLOR := Color(0.85, 0.75, 0.6)
 const DARK_TILE_COLOR := Color(0.4, 0.25, 0.1)
 

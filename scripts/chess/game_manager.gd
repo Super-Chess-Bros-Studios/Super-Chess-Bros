@@ -103,8 +103,9 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	# Emit signal for piece movement
 	piece_moved.emit(piece, from_pos, to_pos)
 	
-	switch_turn()
 	deselect_piece()
+	switch_turn()
+
 
 	return true
 

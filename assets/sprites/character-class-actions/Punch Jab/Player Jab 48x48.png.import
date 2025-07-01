@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dacosfrvw3t1q"
-path="res://.godot/imported/Player Jab 48x48.png-4f13cfe13db34ac6cdc7982ffdfd7c18.ctex"
+path="res://.godot/imported/Player Jab 48x48.png-1fcf7cd3e36e340d0c564ee7952f9b14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/character-class-actions/Punch Jab/Player Jab 48x48.png"
-dest_files=["res://.godot/imported/Player Jab 48x48.png-4f13cfe13db34ac6cdc7982ffdfd7c18.ctex"]
+source_file="res://assets/sprites/character-class-actions/Punch Jab/Player Jab 48x48.png"
+dest_files=["res://.godot/imported/Player Jab 48x48.png-1fcf7cd3e36e340d0c564ee7952f9b14.ctex"]
 
 [params]
 

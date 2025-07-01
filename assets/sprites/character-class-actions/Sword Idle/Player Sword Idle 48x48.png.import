@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dt6305asr01xt"
-path="res://.godot/imported/Player Sword Idle 48x48.png-d472bec425025c7cf29591c928c3fa44.ctex"
+path="res://.godot/imported/Player Sword Idle 48x48.png-9e4affd075a513a61cca1a18302816fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/character-class-actions/Sword Idle/Player Sword Idle 48x48.png"
-dest_files=["res://.godot/imported/Player Sword Idle 48x48.png-d472bec425025c7cf29591c928c3fa44.ctex"]
+source_file="res://assets/sprites/character-class-actions/Sword Idle/Player Sword Idle 48x48.png"
+dest_files=["res://.godot/imported/Player Sword Idle 48x48.png-9e4affd075a513a61cca1a18302816fc.ctex"]
 
 [params]
 

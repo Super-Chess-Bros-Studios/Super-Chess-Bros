@@ -43,10 +43,7 @@ func setup(_game_manager: GameManager, _board_renderer: BoardRenderer):
 func _process(delta):
 	handle_input(delta)
 	handle_selection_input()
-	
-	# Keep cursor within board boundaries
-	cursor_pos.x = clamp(cursor_pos.x, 0, board_size_pixels.x - cursor_size.x)
-	cursor_pos.y = clamp(cursor_pos.y, 0, board_size_pixels.y - cursor_size.y)
+
 	
 	position = cursor_pos
 	update_hover()
@@ -63,7 +60,7 @@ func update_hover():
 		last_hovered_tile = tile_pos
 
 func handle_hover_change(old_tile_pos: Vector2i, new_tile_pos: Vector2i):
-	if not game_manager or not board_renderer:
+	if not game_manager or not board_renderer or game_manager.selected_piece != null:
 		return
 	
 	# Clear previous tile highlight (unless it's the selected piece)
@@ -85,11 +82,12 @@ func handle_hover_change(old_tile_pos: Vector2i, new_tile_pos: Vector2i):
 		board_renderer.highlight_tile(new_tile_pos, ChessConstants.SELECTION_COLOR)
 
 func handle_selection_input():
-	if not game_manager:
+	if not game_manager || not game_manager.can_player_act(player_id):
 		return
 		
 	# Handle accept (select piece/move) and cancel (deselect) inputs
 	if Input.is_action_just_pressed(get_action("accept")):
+		print(player_id)
 		handle_accept_input()
 	
 	if Input.is_action_just_pressed(get_action("cancel")):
