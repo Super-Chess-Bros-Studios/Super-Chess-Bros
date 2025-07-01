@@ -133,12 +133,7 @@ func handle_accept_input():
 			handle_cancel_input()
 			return
 		
-		# Try to move the piece using the GameManager
-		if game_manager.move_piece(selected_piece, tile_pos):
-			# Move was successful, tile colors will be reseted by the move_piece function
-			pass
-		else:
-			print("Invalid move!")
+		game_manager.move_piece(selected_piece, tile_pos)
 
 func handle_cancel_input():
 	# Only allow cancel if it's this player's turn

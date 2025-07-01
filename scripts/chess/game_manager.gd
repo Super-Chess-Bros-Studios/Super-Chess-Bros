@@ -154,6 +154,7 @@ func capture_piece(attack_piece: Piece, capture_pos: Vector2i):
 
 func handle_duel_result(winner: Piece):
 	if winner == duel_attacker:
+		print("Attacker wins!")
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null  # Remove from old position
 		board_state[duel_defender.board_position.y][duel_defender.board_position.x] = duel_attacker     # Place in new position
 		duel_attacker.set_board_position(duel_defender.board_position, ChessConstants.TILE_SIZE)
@@ -164,6 +165,7 @@ func handle_duel_result(winner: Piece):
 		switch_turn()
 		
 	else:
+		print("Defender wins!")
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
 		deselect_piece()
 		duel_attacker.queue_free()

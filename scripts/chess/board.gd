@@ -229,7 +229,7 @@ func _on_turn_switched(new_team: ChessConstants.TeamColor):
 	print("Turn switched to: ", "White" if new_team == ChessConstants.TeamColor.WHITE else "Black")
 
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
-	print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
+	#print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
 	board_renderer.reset_all_tiles()
 
 func _on_initiate_duel(attacker: Piece, defender: Piece):
