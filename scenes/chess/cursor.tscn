@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5qaf8x74fqir"]
+
+[ext_resource type="Texture2D" uid="uid://wuuhsfbf33vc" path="res://assets/sprites/chess/sprite_cursor.png" id="1_pr4aq"]
+[ext_resource type="Script" uid="uid://cfprmhbm7h1uu" path="res://scripts/chess/cursor.gd" id="1_x2x7w"]
+
+[node name="Cursor" type="Node2D"]
+z_index = 3
+script = ExtResource("1_x2x7w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_pr4aq")

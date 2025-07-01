@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtf4p6j0qehoa"]
+
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
+[ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
+[ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="3_3sglg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4mqg7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3sglg"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sj726"]
+size = Vector2(130, 130)
+
+[node name="TestScene" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_4mqg7")
+
+[node name="Player1" parent="." instance=ExtResource("1_8xinf")]
+position = Vector2(36, -26)
+
+[node name="Player2" parent="." instance=ExtResource("1_8xinf")]
+position = Vector2(206.96, -148.44)
+
+[node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="5"]
+player_id = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -294)
+zoom = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-46, -293)
+texture = ExtResource("2_i052m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_3sglg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(206, -65)
+texture = ExtResource("2_i052m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_3sglg")
+
+[node name="EvilHitbox" type="Sprite2D" parent="."]
+position = Vector2(-232, -27)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_i052m")
+
+[node name="Hitbox" type="Area2D" parent="EvilHitbox"]
+script = ExtResource("3_3sglg")
+bkb = 200.0
+kbg = 20.0
+kb_dir = Vector2(3, -3)
+damage = 5.0
+hitbox_group = 0
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EvilHitbox/Hitbox"]
+position = Vector2(0, 7.62939e-06)
+shape = SubResource("RectangleShape2D_sj726")
+
+[node name="EvilHitbox2" type="Sprite2D" parent="."]
+position = Vector2(-126, -26)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_i052m")
+
+[node name="Hitbox" type="Area2D" parent="EvilHitbox2"]
+script = ExtResource("3_3sglg")
+bkb = 200.0
+kbg = 20.0
+kb_dir = Vector2(-3, -3)
+damage = 5.0
+hitbox_group = 1
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EvilHitbox2/Hitbox"]
+position = Vector2(0, 7.62939e-06)
+shape = SubResource("RectangleShape2D_sj726")
+
+[editable path="Player1"]
+[editable path="Player2"]
