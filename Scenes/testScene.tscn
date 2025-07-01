@@ -23,7 +23,7 @@ shape = SubResource("WorldBoundaryShape2D_4mqg7")
 position = Vector2(36, -26)
 
 [node name="Player2" parent="." instance=ExtResource("1_8xinf")]
-position = Vector2(66, -26)
+position = Vector2(206.96, -148.44)
 
 [node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="5"]
 player_id = 2
