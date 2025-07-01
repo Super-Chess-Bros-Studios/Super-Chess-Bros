@@ -1,22 +1,24 @@
-[gd_scene load_steps=57 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=64 format=3 uid="uid://5b3fmt2t3sc6"]
 
-[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
-[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
-[ext_resource type="Texture2D" uid="uid://cng3raykcvqid" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png" id="2_0owkq"]
-[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
-[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
-[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
-[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
+[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
+[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
+[ext_resource type="Texture2D" uid="uid://cng3raykcvqid" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png" id="2_0owkq"]
+[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
+[ext_resource type="Texture2D" uid="uid://dw6hhljdcgqhb" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png" id="2_7t1rv"]
+[ext_resource type="Script" uid="uid://v7fg0nfblchc" path="res://Scenes/characters/flippable_sprite.gd" id="3_1o4lo"]
+[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
+[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
+[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
 [ext_resource type="Script" uid="uid://rg3jnrlnyt6m" path="res://scripts/character_scripts/state_machine/states/test_char/test_idle.gd" id="5_dgi44"]
-[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
+[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
 [ext_resource type="Script" uid="uid://ctsqulv68cgxy" path="res://scripts/character_scripts/state_machine/states/test_char/test_run.gd" id="6_kpwuy"]
 [ext_resource type="Script" uid="uid://dbyyiifx7mbga" path="res://scripts/character_scripts/state_machine/states/test_char/test_crouch.gd" id="7_2137q"]
 [ext_resource type="Script" uid="uid://b5d57x8h3avr5" path="res://scripts/character_scripts/state_machine/states/test_char/test_jumpsquat.gd" id="8_cqar7"]
 [ext_resource type="Script" uid="uid://db3y4jnn8ci5y" path="res://scripts/character_scripts/state_machine/states/character_attributes.gd" id="8_h8dpt"]
-[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
+[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
 [ext_resource type="Script" uid="uid://xq4wnlhqxdlm" path="res://scripts/character_scripts/state_machine/states/test_char/test_jump.gd" id="9_qga04"]
-[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
+[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
 [ext_resource type="Script" uid="uid://dsq2k53fkg20h" path="res://scripts/character_scripts/state_machine/states/test_char/test_short_hop.gd" id="11_0l6pb"]
 [ext_resource type="Script" uid="uid://dxn1tegm7uca6" path="res://scripts/character_scripts/state_machine/states/test_char/test_fall.gd" id="11_hmptn"]
 [ext_resource type="Script" uid="uid://d26weydsrf1ra" path="res://scripts/character_scripts/state_machine/states/test_char/test_initial_dash.gd" id="13_va0ok"]
@@ -28,17 +30,20 @@
 [ext_resource type="Script" uid="uid://15mwj3ofxm0e" path="res://scripts/character_scripts/state_machine/states/test_char/test_up_special.gd" id="25_42ld6"]
 [ext_resource type="Script" uid="uid://2nl1jqo5yy8p" path="res://scripts/character_scripts/state_machine/states/test_char/test_special_fall.gd" id="26_31y7r"]
 [ext_resource type="Script" uid="uid://c6s37218lbip0" path="res://scripts/character_scripts/hurtbox.gd" id="27_fjca5"]
-[ext_resource type="Script" uid="uid://remlbk4g6ld0" path="res://scripts/character_scripts/state_machine/states/test_char/test_hitstun.gd" id="28_0owkq"]
-[ext_resource type="Script" uid="uid://ctjjwn7oh8sgt" path="res://scripts/character_scripts/state_machine/states/test_char/test_grounded.gd" id="29_jg6e0"]
-[ext_resource type="Script" uid="uid://66dswa3a5bhq" path="res://scripts/character_scripts/state_machine/states/test_char/test_tumble.gd" id="30_4remw"]
-[ext_resource type="Script" uid="uid://tox15ywq17rl" path="res://scripts/character_scripts/test_percentage_label.gd" id="32_m852p"]
+[ext_resource type="Script" path="res://scripts/character_scripts/state_machine/states/test_char/test_hitstun.gd" id="28_0owkq"]
+[ext_resource type="Script" path="res://scripts/character_scripts/state_machine/states/test_char/test_grounded.gd" id="29_jg6e0"]
+[ext_resource type="Script" path="res://scripts/character_scripts/state_machine/states/test_char/test_tumble.gd" id="30_4remw"]
+[ext_resource type="Script" path="res://scripts/character_scripts/test_percentage_label.gd" id="32_m852p"]
+[ext_resource type="Script" uid="uid://dnfprtkp32yl1" path="res://scripts/character_scripts/state_machine/states/test_char/test_jab.gd" id="32_moi7e"]
+[ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="33_erow1"]
+[ext_resource type="Script" uid="uid://ctsshhu7cx8mw" path="res://Scenes/characters/flippable_shape.gd" id="36_74kkg"]
 
 [sub_resource type="Animation" id="Animation_b8cx6"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("FlippableSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -50,7 +55,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/path = NodePath("FlippableSprite:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -62,7 +67,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/path = NodePath("FlippableSprite:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -70,6 +75,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [10]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("JabHitbox/FlippableShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_fjca5"]
@@ -79,7 +96,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("FlippableSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -91,7 +108,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/path = NodePath("FlippableSprite:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -103,7 +120,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/path = NodePath("FlippableSprite:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -134,7 +151,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -146,7 +163,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -158,7 +175,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -175,7 +192,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -187,7 +204,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -199,7 +216,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -215,7 +232,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -227,7 +244,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -239,7 +256,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -256,7 +273,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -268,7 +285,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -280,7 +297,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -311,7 +328,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -323,7 +340,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -335,7 +352,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -352,7 +369,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -364,7 +381,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("FlippableSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -376,7 +393,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/path = NodePath("FlippableSprite:hframes")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -394,7 +411,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -406,7 +423,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -418,7 +435,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -442,6 +459,73 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_moi7e"]
+resource_name = "jab"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlippableSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_7t1rv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlippableSprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlippableSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("JabHitbox/FlippableShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.400532, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("State Machine/Jab")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_jab"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_0owkq"]
 resource_name = "jump"
 length = 0.4
@@ -449,7 +533,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -461,7 +545,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -473,7 +557,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -490,7 +574,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -502,7 +586,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -514,7 +598,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -545,7 +629,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -557,7 +641,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -569,7 +653,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -600,7 +684,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -612,7 +696,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -624,7 +708,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -656,7 +740,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -668,7 +752,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -680,7 +764,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -697,7 +781,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -709,7 +793,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -721,7 +805,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -739,7 +823,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -751,7 +835,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -763,7 +847,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -779,7 +863,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -791,7 +875,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -803,7 +887,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -820,7 +904,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -832,7 +916,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -844,7 +928,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -874,7 +958,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/path = NodePath("FlippableSprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -886,7 +970,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/path = NodePath("FlippableSprite:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -898,7 +982,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("FlippableSprite:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -919,6 +1003,7 @@ _data = {
 &"hitstun": SubResource("Animation_q47m3"),
 &"idle": SubResource("Animation_2yqwl"),
 &"initial_dash": SubResource("Animation_c1e3k"),
+&"jab": SubResource("Animation_moi7e"),
 &"jump": SubResource("Animation_0owkq"),
 &"jumpsquat": SubResource("Animation_mlf1o"),
 &"pivot": SubResource("Animation_m852p"),
@@ -942,6 +1027,9 @@ size = Vector2(1, 28)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8cx6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o4lo"]
+size = Vector2(45, 8.5)
+
 [node name="TestChar" type="Node2D" node_paths=PackedStringArray("initial_state", "char_attributes", "state_machine", "hurtbox")]
 script = ExtResource("5_422c8")
 initial_state = NodePath("CharacterBody2D/State Machine/Idle")
@@ -952,10 +1040,11 @@ hurtbox = NodePath("CharacterBody2D/Hurtbox")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="FlippableSprite" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-texture = ExtResource("1_qb3vb")
-hframes = 10
+texture = ExtResource("2_7t1rv")
+hframes = 7
+script = ExtResource("3_1o4lo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 reset_on_save = false
@@ -990,7 +1079,7 @@ metadata/_custom_type_script = "uid://db3y4jnn8ci5y"
 [node name="Idle" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("5_dgi44")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://rg3jnrlnyt6m"
 
@@ -999,7 +1088,7 @@ script = ExtResource("6_kpwuy")
 speed = 300
 timer = NodePath("PreTransition")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://ctsqulv68cgxy"
 
@@ -1010,14 +1099,14 @@ one_shot = true
 [node name="Crouch" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("7_2137q")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dbyyiifx7mbga"
 
 [node name="JumpSquat" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("8_cqar7")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://b5d57x8h3avr5"
 
@@ -1026,7 +1115,7 @@ script = ExtResource("9_qga04")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://xq4wnlhqxdlm"
 
@@ -1035,7 +1124,7 @@ script = ExtResource("11_0l6pb")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dsq2k53fkg20h"
 
@@ -1044,14 +1133,14 @@ script = ExtResource("11_hmptn")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dxn1tegm7uca6"
 
 [node name="InitialDash" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("13_va0ok")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://d26weydsrf1ra"
 
@@ -1060,27 +1149,27 @@ script = ExtResource("14_w2ni4")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
 
 [node name="Pivot" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("15_1ekob")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 
 [node name="AirDodge" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("17_eam3d")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 
 [node name="Roll" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("roll_cooldown_timer", "anim", "sprite", "character")]
 script = ExtResource("20_he0e7")
 roll_cooldown_timer = NodePath("RollCooldown")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 
 [node name="RollCooldown" type="Timer" parent="CharacterBody2D/State Machine/Roll"]
@@ -1092,13 +1181,13 @@ script = ExtResource("22_u77ra")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 
 [node name="UpSpecial" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("25_42ld6")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 
 [node name="SpecialFall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
@@ -1106,7 +1195,7 @@ script = ExtResource("26_31y7r")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
 
 [node name="Hitstun" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("hitstun_length", "slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
@@ -1115,9 +1204,8 @@ hitstun_length = NodePath("HitstunLength")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
-metadata/_custom_type_script = "uid://remlbk4g6ld0"
 
 [node name="HitstunLength" type="Timer" parent="CharacterBody2D/State Machine/Hitstun"]
 one_shot = true
@@ -1125,18 +1213,23 @@ one_shot = true
 [node name="Grounded" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("29_jg6e0")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
-metadata/_custom_type_script = "uid://ctjjwn7oh8sgt"
 
 [node name="Tumble" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
 script = ExtResource("30_4remw")
 slide_colliderL = NodePath("../../LeftCollide")
 slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("../../FlippableSprite")
 character = NodePath("../..")
-metadata/_custom_type_script = "uid://66dswa3a5bhq"
+
+[node name="Jab" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
+script = ExtResource("32_moi7e")
+anim = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../FlippableSprite")
+character = NodePath("../..")
+metadata/_custom_type_script = "uid://dnfprtkp32yl1"
 
 [node name="Hurtbox" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 2
@@ -1145,8 +1238,27 @@ script = ExtResource("27_fjca5")
 metadata/_custom_type_script = "uid://c6s37218lbip0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hurtbox"]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_b8cx6")
 debug_color = Color(2.06962e-06, 0.640148, 0.354265, 0.42)
+
+[node name="JabHitbox" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("hitbox_owner", "flippable_sprite")]
+script = ExtResource("33_erow1")
+bkb = 100.0
+kbg = 20.0
+kb_dir = Vector2(1, 1)
+damage = 10.0
+hitbox_group = 0
+hitbox_owner = NodePath("../Hurtbox")
+flippable_sprite = NodePath("../FlippableSprite")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="FlippableShape" type="CollisionShape2D" parent="CharacterBody2D/JabHitbox"]
+position = Vector2(21, 4)
+shape = SubResource("RectangleShape2D_1o4lo")
+disabled = true
+script = ExtResource("36_74kkg")
+default_position = Vector2(21, 4)
 
 [node name="Label" type="Label" parent="CharacterBody2D" node_paths=PackedStringArray("char_attributes")]
 offset_left = -20.0

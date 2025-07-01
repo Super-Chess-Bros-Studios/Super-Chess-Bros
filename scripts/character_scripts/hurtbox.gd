@@ -13,7 +13,7 @@ func _ready():
 func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox == null:
 		return
-	elif hitbox.owner == self:
+	elif hitbox.hitbox_owner == self:
 		return
 	#passes the hitbox to the state machine script
 	if owner.has_method("on_hit"):

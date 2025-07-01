@@ -9,6 +9,7 @@ extends Area2D
 @export var kb_dir : Vector2
 #amount of percent the hitbox deals to the character
 @export var damage : float = 0
+
 #for damage purposes -1 will represent the character being able to be hit by any hitbox.
 #hitbox groups will start at 0.
 #if a character is being hit by a hitbox with a value of 0, it will have 0 as its hitbox group variable
@@ -19,7 +20,14 @@ extends Area2D
 #makes sure that the hitbox doesn't target the owner of the hitbox
 @export var hitbox_owner : Hurtbox = null
 
+@export var flippable_sprite : FlippableSprite
+
 func _init() -> void:
 	collision_layer = 2
 	collision_mask = 0
- 
+
+
+func _ready():
+	if flippable_sprite != null:
+		for child in get_children():
+			flippable_sprite.sprite_flipped.connect(child._on_sprite_flipped)

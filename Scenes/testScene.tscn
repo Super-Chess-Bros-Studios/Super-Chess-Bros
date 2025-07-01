@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dtf4p6j0qehoa"]
 
-[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://Scenes/characters/Test_Char.tscn" id="1_8xinf"]
 [ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
 [ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="3_3sglg"]
 
@@ -22,11 +22,77 @@ shape = SubResource("WorldBoundaryShape2D_4mqg7")
 [node name="Player1" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(36, -26)
 
+[node name="FullHop" parent="Player1/CharacterBody2D/State Machine" index="4"]
+speed = 300.0
+double_jump_coefficient = 0.75
+wall_jump_horizontal_strength = 500.0
+
+[node name="ShortHop" parent="Player1/CharacterBody2D/State Machine" index="5"]
+jump_power_coefficient = 0.65
+speed = 300.0
+double_jump_coefficient = 0.75
+wall_jump_horizontal_strength = 500.0
+
+[node name="Fall" parent="Player1/CharacterBody2D/State Machine" index="6"]
+speed = 300.0
+
+[node name="InitialDash" parent="Player1/CharacterBody2D/State Machine" index="7"]
+speed = 300
+
+[node name="AirDodge" parent="Player1/CharacterBody2D/State Machine" index="10"]
+speed = 300.0
+
+[node name="Roll" parent="Player1/CharacterBody2D/State Machine" index="11"]
+speed = 300.0
+
+[node name="WallSlide" parent="Player1/CharacterBody2D/State Machine" index="12"]
+wall_slide_speed = 60.0
+fast_wall_slide_coefficient = 2.0
+max_wall_slide_speed = 600.0
+wall_jump_horizontal_strength = 500.0
+wall_slide_boost = 50
+
+[node name="UpSpecial" parent="Player1/CharacterBody2D/State Machine" index="13"]
+speed = 300.0
+
 [node name="Player2" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(206.96, -148.44)
 
 [node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="5"]
 player_id = 2
+
+[node name="FullHop" parent="Player2/CharacterBody2D/State Machine" index="4"]
+speed = 300.0
+double_jump_coefficient = 0.75
+wall_jump_horizontal_strength = 500.0
+
+[node name="ShortHop" parent="Player2/CharacterBody2D/State Machine" index="5"]
+jump_power_coefficient = 0.65
+speed = 300.0
+double_jump_coefficient = 0.75
+wall_jump_horizontal_strength = 500.0
+
+[node name="Fall" parent="Player2/CharacterBody2D/State Machine" index="6"]
+speed = 300.0
+
+[node name="InitialDash" parent="Player2/CharacterBody2D/State Machine" index="7"]
+speed = 300
+
+[node name="AirDodge" parent="Player2/CharacterBody2D/State Machine" index="10"]
+speed = 300.0
+
+[node name="Roll" parent="Player2/CharacterBody2D/State Machine" index="11"]
+speed = 300.0
+
+[node name="WallSlide" parent="Player2/CharacterBody2D/State Machine" index="12"]
+wall_slide_speed = 60.0
+fast_wall_slide_coefficient = 2.0
+max_wall_slide_speed = 600.0
+wall_jump_horizontal_strength = 500.0
+wall_slide_boost = 50
+
+[node name="UpSpecial" parent="Player2/CharacterBody2D/State Machine" index="13"]
+speed = 300.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -294)
