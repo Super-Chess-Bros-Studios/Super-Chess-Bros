@@ -17,7 +17,8 @@ func initialize_scene_dictionary():
 		"title": preload("res://scenes/main/title_screen.tscn"),
 		"main_menu": preload("res://scenes/main/main_menu.tscn"),
 		"chess": preload("res://scenes/chess/board.tscn"),
-		"dual_arena": preload("res://scenes/dual_arena.tscn")
+		"dual_arena": preload("res://scenes/dual_arena.tscn"),
+		"testScene": preload("res://scenes/testScene.tscn")
 	}
 
 func set_canvas_layer(layer: CanvasLayer):

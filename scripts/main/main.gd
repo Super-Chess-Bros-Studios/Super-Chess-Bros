@@ -36,7 +36,7 @@ func start_game():
 	input_manager.set_black_player_device("keyboard", 0, "Black")  # If using keyboard and controller both devices ids are 0. Seccond contrller is 1
 	
 	# Start at title screen
-	request_scene_change("chess")
+	request_scene_change("testScene")
 
 # Public API for scene changes
 func request_scene_change(scene_name: String):
