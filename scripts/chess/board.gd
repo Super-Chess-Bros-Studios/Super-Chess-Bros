@@ -147,6 +147,8 @@ extends Node2D
 # Core systems - Initialized at runtime
 var game_manager: GameManager
 var piece_spawner: PieceSpawner
+var input_manager: InputManager
+var main_game_controller: MainGameController
 
 
 # Initialization of all systems
@@ -161,7 +163,8 @@ func _ready():
 func initialize_systems():
 	# Initialize game manager (handles all game logic)
 	game_manager = GameManager.new()
-	
+	input_manager = get_main_input_manager()
+	main_game_controller = get_main_game_controller()
 	# Initialize piece spawner (creates chess pieces)
 	piece_spawner = PieceSpawner.new()
 	add_child(piece_spawner)
@@ -175,13 +178,14 @@ func setup_camera():
 func setup_cursors():
 	var board_center = board_renderer.get_board_center()
 	
+	
 	# Setup white cursor (Player 1)
 	white_cursor.cursor_pos = board_center
-	white_cursor.setup(game_manager, board_renderer)
+	white_cursor.setup(game_manager, board_renderer, input_manager)
 	
 	# Setup black cursor (Player 2)
 	black_cursor.cursor_pos = board_center
-	black_cursor.setup(game_manager, board_renderer)
+	black_cursor.setup(game_manager, board_renderer, input_manager)
 
 func spawn_initial_pieces():
 	piece_spawner.spawn_all_pieces()
@@ -193,7 +197,6 @@ func connect_signals():
 	game_manager.piece_deselected.connect(_on_piece_deselected)
 	game_manager.turn_switched.connect(_on_turn_switched)
 	game_manager.piece_moved.connect(_on_piece_moved)
-
 #These are all the signal handlers
 
 func _on_game_state_changed(new_state: ChessConstants.GameState):
@@ -242,3 +245,23 @@ func get_piece_spawner() -> PieceSpawner:
 	#Returns the PieceSpawner instance for piece creation operations.
 
 	return piece_spawner
+
+func get_main_game_controller() -> MainGameController:
+	#Returns the MainGameController instance for accessing game state and logic.
+	var main_node = get_node_or_null("/root/Main")
+	if main_node and main_node.has_method("get_game_controller"):
+		return main_node.get_game_controller()
+	else:
+		return null
+
+func get_main_input_manager() -> InputManager:
+	# Get the InputManager from Main that has the device data
+	var main_node = get_node_or_null("/root/Main")
+	if main_node and main_node.has_method("get_input_manager"):
+		return main_node.get_input_manager()
+	else:
+		# Fallback for testing individual scenes
+		var test_manager = InputManager.new()
+		test_manager.set_white_player_device("keyboard", -1, "Keyboard")
+		test_manager.set_black_player_device("controller", 0, "Test Controller")
+		return test_manager

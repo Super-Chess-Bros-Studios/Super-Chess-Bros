@@ -7,7 +7,7 @@ signal piece_selected(piece: Piece)
 signal piece_deselected()
 signal turn_switched(new_team: ChessConstants.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
-
+signal initiate_duel()
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
@@ -81,6 +81,11 @@ func switch_turn():
 func get_current_turn() -> ChessConstants.TeamColor:
 	# Get which team's turn it currently is
 	return ChessConstants.get_team_from_game_state(current_game_state)
+
+
+func on_initiate_duel() -> void:
+	initiate_duel.emit()
+	
 
 func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	# Validate the move using the piece's get_valid_moves function

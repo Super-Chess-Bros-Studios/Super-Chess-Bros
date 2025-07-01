@@ -13,11 +13,15 @@ var cursor_size := Vector2.ZERO
 # Last tile position the cursor was hovering over
 var last_hovered_tile := Vector2i(-1, -1)
 
+# Movement state for smooth movement
+var movement_vector := Vector2.ZERO
+
 @onready var sprite: Sprite2D = $Sprite2D
 
 # References to main systems
 var game_manager: GameManager
 var board_renderer: BoardRenderer
+var input_manager: InputManager
 
 func _ready():
 	# Calculate board dimensions and set initial cursor position
@@ -35,18 +39,32 @@ func _ready():
 	else:
 		sprite.modulate = Color(1.0, 1.0, 0.0)  # Bright yellow
 
-func setup(_game_manager: GameManager, _board_renderer: BoardRenderer):
+func setup(_game_manager: GameManager, _board_renderer: BoardRenderer, _input_manager: InputManager):
 	# Get references to main systems from the board
 	game_manager = _game_manager
 	board_renderer = _board_renderer
+	input_manager = _input_manager
 
 func _process(delta):
-	handle_input(delta)
-	handle_selection_input()
-
+	# Apply smooth movement using stored movement vector
+	if movement_vector.length() > 0.1:
+		cursor_pos += movement_vector.normalized() * move_speed * delta
+	
+	# Keep cursor within board boundaries
+	cursor_pos.x = clamp(cursor_pos.x, 0, board_size_pixels.x - cursor_size.x)
+	cursor_pos.y = clamp(cursor_pos.y, 0, board_size_pixels.y - cursor_size.y)
 	
 	position = cursor_pos
 	update_hover()
+
+func _input(event):
+	if not input_manager:
+		print("No input manager found")
+		return
+	
+	# Update movement vector for smooth movement (continuous)
+	update_movement_vector(event)
+	handle_selection_input(event)
 
 func update_hover():
 	# Convert pixel position to tile coordinates
@@ -86,16 +104,17 @@ func handle_selection_input():
 		return
 		
 	# Handle accept (select piece/move) and cancel (deselect) inputs
-	if Input.is_action_just_pressed(get_action("accept")):
-		print(player_id)
+	if event.is_action_pressed(get_action("accept", player_id, event)):
+		print("Accept for player ", player_id)
 		handle_accept_input()
 	
-	if Input.is_action_just_pressed(get_action("cancel")):
+	if event.is_action_pressed(get_action("cancel", player_id, event)):
 		handle_cancel_input()
 
 func handle_accept_input():
 	# Only allow input if it's this player's turn
 	if not game_manager.can_player_act(player_id):
+		print("Cannot accept for player ", player_id)
 		return
 	
 	var tile_pos = get_current_tile_pos()
@@ -133,22 +152,20 @@ func handle_cancel_input():
 		game_manager.deselect_piece()
 		board_renderer.reset_all_tiles()
 
-func handle_input(delta):
-	# Handle movement input (WASD or arrow keys)
-	var x_axis := Input.get_action_strength(get_action("right")) - Input.get_action_strength(get_action("left"))
-	var y_axis := Input.get_action_strength(get_action("down")) - Input.get_action_strength(get_action("up"))
-	var input_vec = Vector2(x_axis, y_axis)
+func update_movement_vector(event):
+	# Update movement vector based on current input state
+	if not input_manager:
+		movement_vector = Vector2.ZERO
+		return
 	
-	if input_vec.length() < 0.1:
-		return  # deadzone
+	var x_axis := Input.get_action_strength(get_action("right", player_id, event)) - Input.get_action_strength(get_action("left", player_id, event))
+	var y_axis := Input.get_action_strength(get_action("down", player_id, event)) - Input.get_action_strength(get_action("up", player_id, event))
 	
-	cursor_pos += input_vec.normalized() * move_speed * delta
-
-func get_action(base_action: String) -> String:
-	# Convert base action to player-specific action (e.g., "accept" -> "accept_1" for white player)
-	var player_suffix = "1" if player_id == ChessConstants.PlayerId.WHITE_PLAYER else "2"
-	return base_action + "_" + player_suffix
+	movement_vector = Vector2(x_axis, y_axis)
 
 func get_current_tile_pos() -> Vector2i:
 	# Get the tile position the cursor is currently hovering over
 	return last_hovered_tile
+
+func get_action(action_base: String, player_id: int, event) -> String:
+	return input_manager.get_action(action_base, player_id, event)
