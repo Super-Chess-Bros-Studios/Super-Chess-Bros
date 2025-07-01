@@ -1244,7 +1244,7 @@ debug_color = Color(2.06962e-06, 0.640148, 0.354265, 0.42)
 
 [node name="JabHitbox" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("hitbox_owner", "flippable_sprite")]
 script = ExtResource("33_erow1")
-bkb = 100.0
+bkb = 1000.0
 kbg = 20.0
 kb_dir = Vector2(1, 1)
 damage = 10.0

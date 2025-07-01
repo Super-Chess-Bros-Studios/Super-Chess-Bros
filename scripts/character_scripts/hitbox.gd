@@ -6,7 +6,9 @@ extends Area2D
 #knockback growth (basically a multiplier based on character's percentage)
 @export var kbg : float = 0
 #knockback direction, normalize this
-@export var kb_dir : Vector2
+@export var kb_dir : Vector2:
+	set(new_kbd):
+			kb_dir = new_kbd
 #amount of percent the hitbox deals to the character
 @export var damage : float = 0
 
@@ -21,7 +23,14 @@ extends Area2D
 @export var hitbox_owner : Hurtbox = null
 
 @export var flippable_sprite : FlippableSprite
+var current_flip_value : bool
 
+func _on_sprite_flipped(flip_value):
+	if current_flip_value != flip_value:
+		kb_dir.x *= -1
+		current_flip_value = flip_value
+		
+		
 func _init() -> void:
 	collision_layer = 2
 	collision_mask = 0
@@ -29,5 +38,6 @@ func _init() -> void:
 
 func _ready():
 	if flippable_sprite != null:
+		flippable_sprite.sprite_flipped.connect(_on_sprite_flipped)
 		for child in get_children():
 			flippable_sprite.sprite_flipped.connect(child._on_sprite_flipped)
