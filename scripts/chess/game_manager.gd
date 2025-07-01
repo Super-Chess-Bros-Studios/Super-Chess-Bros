@@ -7,12 +7,13 @@ signal piece_selected(piece: Piece)
 signal piece_deselected()
 signal turn_switched(new_team: ChessConstants.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
-signal initiate_duel()
+signal initiate_duel(attacker: Piece, defender: Piece)
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
 var selected_piece: Piece = null  # Currently selected piece
-
+var duel_attacker: Piece = null
+var duel_defender: Piece = null
 func _init():
 	initialize_board_state()
 
@@ -83,8 +84,13 @@ func get_current_turn() -> ChessConstants.TeamColor:
 	return ChessConstants.get_team_from_game_state(current_game_state)
 
 
-func on_initiate_duel() -> void:
-	initiate_duel.emit()
+func on_initiate_duel(attacker: Piece, defender: Piece) -> void:
+	duel_attacker = attacker
+	duel_defender = defender
+	if(attacker.point_value < defender.point_value):
+		var defecit = (defender.point_value - attacker.point_value)*5
+		print("Handicap of ", defecit, "% is applied to the defender")
+	initiate_duel.emit(attacker, defender)
 	
 
 func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
@@ -95,9 +101,10 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	var from_pos = piece.board_position
 	
 	# Capture enemy piece if it's in the target position
-	if !is_empty(to_pos):
-		if is_enemy(to_pos, piece.team):
-			capture_piece(piece, to_pos)
+	if is_enemy(to_pos, piece.team):
+		on_initiate_duel(piece, get_piece_at_position(to_pos))
+		piece_moved.emit(piece, from_pos, to_pos)
+		return false
 	
 	# Move piece to new position
 	board_state[from_pos.y][from_pos.x] = null  # Remove from old position
@@ -144,3 +151,23 @@ func capture_piece(attack_piece: Piece, capture_pos: Vector2i):
 		defence_piece.queue_free()
 	print("attacking piece: ", attack_piece.name)
 	print("defending piece: ", defence_piece.name)
+
+func handle_duel_result(winner: Piece):
+	if winner == duel_attacker:
+		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null  # Remove from old position
+		board_state[duel_defender.board_position.y][duel_defender.board_position.x] = duel_attacker     # Place in new position
+		duel_attacker.set_board_position(duel_defender.board_position, ChessConstants.TILE_SIZE)
+		deselect_piece()
+		duel_defender.queue_free()
+		duel_defender = null
+		duel_attacker = null
+		switch_turn()
+		
+	else:
+		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
+		deselect_piece()
+		duel_attacker.queue_free()
+		duel_attacker = null
+		duel_defender = null
+		switch_turn()
+		

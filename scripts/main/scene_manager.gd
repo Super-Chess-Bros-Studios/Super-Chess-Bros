@@ -2,7 +2,7 @@ extends Node
 
 # Simple scene management signals
 signal scene_changed(scene_name: String)
-
+signal duel_ended(winner: Piece)
 # Scene state
 var scene_dictionary: Dictionary = {}
 var current_scene_instance: Node = null
@@ -62,7 +62,7 @@ func transition_to_duel():
 	scene_changed.emit("dual_arena")
 
 # Exit duel and return to cached chess
-func exit_duel():
+func exit_duel(winner: Piece):
 	if current_scene_name != "dual_arena" or not cached_chess_scene:
 		push_error("Can only exit duel when in duel scene with cached chess")
 		return
@@ -73,12 +73,13 @@ func exit_duel():
 		current_scene_instance = null
 	
 	# Restore chess scene
+	
 	current_scene_instance = cached_chess_scene
 	cached_chess_scene = null
 	current_scene_instance.show()
-	
 	current_scene_name = "chess"
 	scene_changed.emit("chess")
+	duel_ended.emit(winner)
 
 func get_current_scene() -> Node:
 	return current_scene_instance

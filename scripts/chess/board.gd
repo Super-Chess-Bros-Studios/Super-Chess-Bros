@@ -149,7 +149,7 @@ var game_manager: GameManager
 var piece_spawner: PieceSpawner
 var input_manager: InputManager
 var main_game_controller: MainGameController
-
+var scene_manager: SceneManager
 
 # Initialization of all systems
 func _ready():
@@ -197,6 +197,8 @@ func connect_signals():
 	game_manager.piece_deselected.connect(_on_piece_deselected)
 	game_manager.turn_switched.connect(_on_turn_switched)
 	game_manager.piece_moved.connect(_on_piece_moved)
+	game_manager.initiate_duel.connect(_on_initiate_duel)
+	SceneManager.duel_ended.connect(_on_duel_ended)
 #These are all the signal handlers
 
 func _on_game_state_changed(new_state: ChessConstants.GameState):
@@ -229,7 +231,16 @@ func _on_turn_switched(new_team: ChessConstants.TeamColor):
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
 	print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
 	board_renderer.reset_all_tiles()
-	#This is how we get acsess to all the important variables and functions which is through this public API
+
+func _on_initiate_duel(attacker: Piece, defender: Piece):
+	print("Initiate duel: ", attacker.name, " vs ", defender.name)
+	#input if defender or attacker won in terminal
+	
+	SceneManager.transition_to_duel()
+	
+
+func _on_duel_ended(winner: Piece):
+	game_manager.handle_duel_result(winner)
 
 func get_game_manager() -> GameManager:
 	#Returns the GameManager instance for accessing game state and logic.

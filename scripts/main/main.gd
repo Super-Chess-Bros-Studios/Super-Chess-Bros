@@ -63,8 +63,6 @@ func _on_scene_change_requested(scene_name: String):
 	match scene_name:
 		"duel_transition":
 			SceneManager.transition_to_duel()
-		"duel_exit":
-			SceneManager.exit_duel()
 		_:
 			SceneManager.change_scene(scene_name)
 

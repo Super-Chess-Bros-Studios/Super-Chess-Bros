@@ -99,7 +99,7 @@ func handle_hover_change(old_tile_pos: Vector2i, new_tile_pos: Vector2i):
 		# Keep selected piece tile green
 		board_renderer.highlight_tile(new_tile_pos, ChessConstants.SELECTION_COLOR)
 
-func handle_selection_input():
+func handle_selection_input(event):
 	if not game_manager || not game_manager.can_player_act(player_id):
 		return
 		
