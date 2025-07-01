@@ -67,16 +67,17 @@ func Physics_Update(delta):
 	else:
 		applyGravity()
 		
-		#input for fastfall.
-		if Input.is_action_pressed(get_action("down")) and character.velocity.y > 0:
-			character.velocity.y = char_attributes.MAX_FALL_SPEED
-			character.move_and_slide()
+		
 		#handles horizontal events
-		elif Input.is_action_pressed(get_action("left")):
+		if Input.is_action_pressed(get_action("left")):
 			character.velocity.x = lerp(character.velocity.x,-speed,char_attributes.AIRSPEEDLERP)
 			character.move_and_slide()
 		elif Input.is_action_pressed(get_action("right")):
 			character.velocity.x = lerp(character.velocity.x,speed,char_attributes.AIRSPEEDLERP)
+			character.move_and_slide()
+		#input for fastfall.
+		elif Input.is_action_pressed(get_action("down")) and character.velocity.y > 0:
+			character.velocity.y = char_attributes.MAX_FALL_SPEED
 			character.move_and_slide()
 		else:
 			#you don't have to multiply by delta if you call move and slide for velocity
