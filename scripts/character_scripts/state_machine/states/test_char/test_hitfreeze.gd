@@ -60,6 +60,10 @@ func Physics_Update(delta):
 	if char_attributes.just_took_damage:
 		Transitioned.emit(self,"hitfreeze")
 	elif hitfreeze_length.is_stopped():
+		#sometimes hitfreeze is so short it literally runs on one frame
+		directional_input = Input.get_vector(get_action("left"),get_action("right"),get_action("up"),get_action("down")).normalized()
+		print(directional_input, ": directional input vector")
 		Transitioned.emit(self,"hitstun")
 	else:
 		directional_input = Input.get_vector(get_action("left"),get_action("right"),get_action("up"),get_action("down")).normalized()
+		print(directional_input, ": directional input vector")
