@@ -59,7 +59,7 @@ func Exit():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	#shield is prioritized here so it doesn't get overwritten by left and right inputs
 	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part

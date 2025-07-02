@@ -46,6 +46,7 @@ position = Vector2(206.96, -148.44)
 
 [node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="5"]
 player_id = 2
+WEIGHT = 50.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -240)

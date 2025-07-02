@@ -16,7 +16,7 @@ func end_of_jab():
 func Physics_Update(_delta: float):
 	if char_attributes.just_took_damage:
 		jab_hitbox.deactivate_hitbox()
-		Transitioned.emit(self,"hitstun")
+		Transitioned.emit(self,"hitfreeze")
 	elif !character.is_on_floor():
 		jab_hitbox.deactivate_hitbox()
 		Transitioned.emit(self,"fall")

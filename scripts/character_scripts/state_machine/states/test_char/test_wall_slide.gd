@@ -11,7 +11,7 @@ class_name TestWallSlide
 
 #how fast you fall while holding down during a wall slide
 @export var fast_wall_slide_coefficient : float = 2
-@export var max_wall_slide_speed = char_attributes.MAX_FALL_SPEED
+@export var max_wall_slide_speed : float = char_attributes.MAX_FALL_SPEED
 
 #horizontal variables
 #how fast horizontally you boost off a wall if you jump
@@ -46,7 +46,7 @@ func Exit():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	#handles vertical events
 	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")

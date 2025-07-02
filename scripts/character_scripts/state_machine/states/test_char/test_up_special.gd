@@ -16,7 +16,7 @@ func end_of_up_special():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	elif character.is_on_floor():
 		Transitioned.emit(self,"idle")
 	elif up_special_end:
