@@ -2,7 +2,7 @@ extends CharacterState
 class_name TestInitialDash
 
 # @export var anim : AnimatedSprite2D
-@export var speed : int = 300
+@export var speed : float = 300
 
 var initial_dash_ended = false
 

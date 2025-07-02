@@ -1,10 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtf4p6j0qehoa"]
+[gd_scene load_steps=9 format=3 uid="uid://dtf4p6j0qehoa"]
 
-[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://Scenes/characters/Test_Char.tscn" id="1_8xinf"]
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
 [ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
 [ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="3_3sglg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4mqg7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3sglg"]
+normal = Vector2(1, 0)
+distance = -360.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sj726"]
+normal = Vector2(-1, 0)
+distance = -360.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sglg"]
 size = Vector2(128, 128)
@@ -14,46 +22,24 @@ size = Vector2(130, 130)
 
 [node name="TestScene" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_4mqg7")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_3sglg")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(1, 0)
+shape = SubResource("WorldBoundaryShape2D_sj726")
 
 [node name="Player1" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(36, -26)
-
-[node name="FullHop" parent="Player1/CharacterBody2D/State Machine" index="4"]
-speed = 300.0
-double_jump_coefficient = 0.75
-wall_jump_horizontal_strength = 500.0
-
-[node name="ShortHop" parent="Player1/CharacterBody2D/State Machine" index="5"]
-jump_power_coefficient = 0.65
-speed = 300.0
-double_jump_coefficient = 0.75
-wall_jump_horizontal_strength = 500.0
-
-[node name="Fall" parent="Player1/CharacterBody2D/State Machine" index="6"]
-speed = 300.0
-
-[node name="InitialDash" parent="Player1/CharacterBody2D/State Machine" index="7"]
-speed = 300
-
-[node name="AirDodge" parent="Player1/CharacterBody2D/State Machine" index="10"]
-speed = 300.0
-
-[node name="Roll" parent="Player1/CharacterBody2D/State Machine" index="11"]
-speed = 300.0
-
-[node name="WallSlide" parent="Player1/CharacterBody2D/State Machine" index="12"]
-wall_slide_speed = 60.0
-fast_wall_slide_coefficient = 2.0
-max_wall_slide_speed = 600.0
-wall_jump_horizontal_strength = 500.0
-wall_slide_boost = 50
-
-[node name="UpSpecial" parent="Player1/CharacterBody2D/State Machine" index="13"]
-speed = 300.0
 
 [node name="Player2" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(206.96, -148.44)
@@ -61,42 +47,9 @@ position = Vector2(206.96, -148.44)
 [node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="5"]
 player_id = 2
 
-[node name="FullHop" parent="Player2/CharacterBody2D/State Machine" index="4"]
-speed = 300.0
-double_jump_coefficient = 0.75
-wall_jump_horizontal_strength = 500.0
-
-[node name="ShortHop" parent="Player2/CharacterBody2D/State Machine" index="5"]
-jump_power_coefficient = 0.65
-speed = 300.0
-double_jump_coefficient = 0.75
-wall_jump_horizontal_strength = 500.0
-
-[node name="Fall" parent="Player2/CharacterBody2D/State Machine" index="6"]
-speed = 300.0
-
-[node name="InitialDash" parent="Player2/CharacterBody2D/State Machine" index="7"]
-speed = 300
-
-[node name="AirDodge" parent="Player2/CharacterBody2D/State Machine" index="10"]
-speed = 300.0
-
-[node name="Roll" parent="Player2/CharacterBody2D/State Machine" index="11"]
-speed = 300.0
-
-[node name="WallSlide" parent="Player2/CharacterBody2D/State Machine" index="12"]
-wall_slide_speed = 60.0
-fast_wall_slide_coefficient = 2.0
-max_wall_slide_speed = 600.0
-wall_jump_horizontal_strength = 500.0
-wall_slide_boost = 50
-
-[node name="UpSpecial" parent="Player2/CharacterBody2D/State Machine" index="13"]
-speed = 300.0
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -294)
-zoom = Vector2(2, 2)
+position = Vector2(0, -240)
+zoom = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-46, -293)
@@ -117,7 +70,7 @@ texture = ExtResource("2_i052m")
 shape = SubResource("RectangleShape2D_3sglg")
 
 [node name="EvilHitbox" type="Sprite2D" parent="."]
-position = Vector2(-232, -27)
+position = Vector2(-236.4, -92.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_i052m")
 
@@ -135,7 +88,7 @@ position = Vector2(0, 7.62939e-06)
 shape = SubResource("RectangleShape2D_sj726")
 
 [node name="EvilHitbox2" type="Sprite2D" parent="."]
-position = Vector2(-126, -26)
+position = Vector2(-130.4, -91.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_i052m")
 

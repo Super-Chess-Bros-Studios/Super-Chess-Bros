@@ -70,8 +70,6 @@ func Physics_Update(delta):
 	
 	#handles jump input
 	else:
-		print("rightcollide", rightCollide)
-		print("leftcollide", leftCollide)
 		if Input.is_action_just_pressed(get_action("jump")) and (char_attributes.can_double_jump or char_attributes.can_wall_jump):
 			if char_attributes.can_wall_jump and (rightCollide or leftCollide):
 				if rightCollide:

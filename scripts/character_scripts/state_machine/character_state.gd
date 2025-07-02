@@ -8,7 +8,7 @@ var char_attributes : CharacterAttributes
 enum DIRECTION {left = -1, right = 1}
 
 @export var anim : AnimationPlayer
-@export var sprite : FlippableSprite
+@export var sprite : Sprite2D
 @export var character : CharacterBody2D
 
 #automatically plays an animation and flips the sprite based on the direction the 
@@ -17,10 +17,8 @@ func playanim(animation):
 	anim.play(animation)
 	if char_attributes.cur_dir < 0:
 		sprite.set_flip_h(true)
-		sprite.flipped = true
 	else:
 		sprite.set_flip_h(false)
-		sprite.flipped = false
 
 #Function for entering the state
 func Enter():

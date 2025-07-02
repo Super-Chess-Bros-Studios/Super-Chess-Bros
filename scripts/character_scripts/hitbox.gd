@@ -6,9 +6,7 @@ extends Area2D
 #knockback growth (basically a multiplier based on character's percentage)
 @export var kbg : float = 0
 #knockback direction, normalize this
-@export var kb_dir : Vector2:
-	set(new_kbd):
-			kb_dir = new_kbd
+@export var kb_dir : Vector2
 #amount of percent the hitbox deals to the character
 @export var damage : float = 0
 
@@ -22,22 +20,33 @@ extends Area2D
 #makes sure that the hitbox doesn't target the owner of the hitbox
 @export var hitbox_owner : Hurtbox = null
 
-@export var flippable_sprite : FlippableSprite
-var current_flip_value : bool
+@export var char_attributes : CharacterAttributes
+@export var collision_box : CollisionShape2D
 
-func _on_sprite_flipped(flip_value):
-	if current_flip_value != flip_value:
-		kb_dir.x *= -1
-		current_flip_value = flip_value
-		
-		
+var default_kb_dir
+var default_collision_offset
+
 func _init() -> void:
 	collision_layer = 2
 	collision_mask = 0
 
+func default_hitbox():
+	default_collision_offset = collision_box.position.x
+	default_kb_dir = kb_dir
+	print("default collision offset: ", default_collision_offset)
+	print("default kb dir: ", default_kb_dir)
+	collision_box.disabled = true
 
-func _ready():
-	if flippable_sprite != null:
-		flippable_sprite.sprite_flipped.connect(_on_sprite_flipped)
-		for child in get_children():
-			flippable_sprite.sprite_flipped.connect(child._on_sprite_flipped)
+func activate_hitbox():
+	default_collision_offset = collision_box.position.x
+	kb_dir.x *= char_attributes.cur_dir
+	print(kb_dir, ": kb dir")
+	collision_box.position.x *= char_attributes.cur_dir
+	print(collision_box.position.x, ": collision offset")
+	collision_box.disabled = false
+
+func deactivate_hitbox():
+	#needs to be flipped back around
+	kb_dir = default_kb_dir
+	collision_box.position.x = default_collision_offset
+	collision_box.disabled = true
