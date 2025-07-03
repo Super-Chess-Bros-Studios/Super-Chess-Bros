@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtf4p6j0qehoa"]
+[gd_scene load_steps=10 format=3 uid="uid://dtf4p6j0qehoa"]
 
 [ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
 [ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
@@ -19,6 +19,16 @@ size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj726"]
 size = Vector2(130, 130)
+
+[sub_resource type="GDScript" id="GDScript_3sglg"]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", reload_scene)
+
+func reload_scene():
+	get_tree().reload_current_scene()
+"
 
 [node name="TestScene" type="Node2D"]
 
@@ -104,6 +114,14 @@ metadata/_custom_type_script = "uid://j4sloqxb1mei"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EvilHitbox2/Hitbox"]
 position = Vector2(0, 7.62939e-06)
 shape = SubResource("RectangleShape2D_sj726")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 213.0
+offset_top = -443.0
+offset_right = 320.0
+offset_bottom = -412.0
+text = "reload scene"
+script = SubResource("GDScript_3sglg")
 
 [editable path="Player1"]
 [editable path="Player2"]
