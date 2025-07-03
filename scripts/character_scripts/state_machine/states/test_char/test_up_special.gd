@@ -22,6 +22,9 @@ func allow_land():
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
 		Transitioned.emit(self, "hitfreeze")
+	elif char_attributes.just_hit_enemy:
+		freeze_frame(0.2)
+		char_attributes.just_hit_enemy = false
 	elif character.is_on_floor() and can_land:
 		Transitioned.emit(self,"idle")
 	elif up_special_end:
