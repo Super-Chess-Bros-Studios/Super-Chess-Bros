@@ -57,6 +57,8 @@ func Exit():
 
 func Physics_Update(delta):
 	#if i took damage from a hitbox that isn't in the current hitbox group
+	if Engine.time_scale == 0:
+		return
 	if char_attributes.just_took_damage and char_attributes.hitbox_group != hitbox_group:
 		Transitioned.emit(self,"hitfreeze")
 	elif hitstun_length.is_stopped():

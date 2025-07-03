@@ -28,7 +28,23 @@ var default_collision_offset
 
 func _init() -> void:
 	collision_layer = 2
-	collision_mask = 0
+	collision_mask = 1
+
+func _ready():
+	area_entered.connect(on_area_entered)
+
+
+#this is primarily used to trigger hitfreeze on the person attacking
+#as of now, hitfreeze on the person attacking freezes the entire game engine
+#hitfreeze on the person being hit are additional frames on top of the game engine being frozen
+func on_area_entered(hurtbox : Hurtbox) -> void:
+	#prevents hitboxes from detecting their owner
+	if hurtbox == hitbox_owner:
+		return
+	#needs to check if the hitbox belongs to a character
+	if char_attributes:
+		char_attributes.just_hit_enemy = true
+		print("just hit enemy")
 
 func default_hitbox():
 	default_collision_offset = collision_box.position.x

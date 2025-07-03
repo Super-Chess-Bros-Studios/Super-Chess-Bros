@@ -70,7 +70,7 @@ texture = ExtResource("2_i052m")
 shape = SubResource("RectangleShape2D_3sglg")
 
 [node name="EvilHitbox" type="Sprite2D" parent="."]
-position = Vector2(-236.4, -92.4)
+position = Vector2(-282.4, -272.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_i052m")
 
@@ -88,7 +88,7 @@ position = Vector2(0, 7.62939e-06)
 shape = SubResource("RectangleShape2D_sj726")
 
 [node name="EvilHitbox2" type="Sprite2D" parent="."]
-position = Vector2(-130.4, -91.4)
+position = Vector2(-176.4, -271.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_i052m")
 

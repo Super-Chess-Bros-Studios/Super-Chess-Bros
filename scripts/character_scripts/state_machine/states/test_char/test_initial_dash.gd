@@ -24,6 +24,9 @@ func Physics_Update(delta):
 	#ensures the player doesn't just run on air
 	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
+	#dash attack input
+	elif Input.is_action_just_pressed(get_action("attack")):
+		Transitioned.emit(self,"DashAttack")
 	elif initial_dash_ended:
 		Transitioned.emit(self, "run")
 	elif Input.is_action_just_pressed(get_action("shield")) and char_attributes.can_roll:

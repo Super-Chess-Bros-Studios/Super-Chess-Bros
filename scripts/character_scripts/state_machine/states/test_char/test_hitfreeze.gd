@@ -48,6 +48,7 @@ func Enter():
 	#so you don't stay in hitstun forever
 	char_attributes.just_took_damage = false
 	
+	#used to calculate the length of hitfreeze
 	knockback_force = (bkb + (percentage*kbg/20)) / char_attributes.WEIGHT
 	hitfreeze_length.start(knockback_force/hitfreeze_divisor)
 	print("hitfreeze length: ", knockback_force/hitfreeze_divisor)
