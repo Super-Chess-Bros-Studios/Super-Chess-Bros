@@ -11,11 +11,8 @@ class_name TestWallSlide
 
 #how fast you fall while holding down during a wall slide
 @export var fast_wall_slide_coefficient : float = 2
-@export var max_wall_slide_speed : float = char_attributes.MAX_FALL_SPEED
+@export var max_wall_slide_speed : float = 600
 
-#horizontal variables
-#how fast horizontally you boost off a wall if you jump
-@export var wall_jump_horizontal_strength : float = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH
 #how quick you move off of a wall when inputting opposite of a wall
 #this might not be too important to have
 @export var wall_slide_boost = 50
@@ -62,7 +59,7 @@ func Physics_Update(delta):
 		#if you can wall jump do it if it's input
 		if Input.is_action_pressed(get_action("jump")) and char_attributes.can_wall_jump:
 			char_attributes.can_wall_jump = false
-			character.velocity.x = wall_jump_horizontal_strength * char_attributes.cur_dir
+			character.velocity.x = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH * char_attributes.cur_dir
 			Transitioned.emit(self, "fullhop")
 			
 		#input for fast slide.

@@ -2,7 +2,6 @@ extends TestFall
 class_name TestSpecialFall
 
 @export var double_jump_coefficient : float = 0.75
-@export var wall_jump_horizontal_strength : float = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH
 
 var leftCollide = false
 var rightCollide = false
@@ -38,7 +37,7 @@ func applyGravity():
 #wall_kick_dir is kind of like cur_dir but for walls
 func wall_kick(wall_kick_dir):
 	char_attributes.can_wall_jump = false
-	character.velocity.x = wall_jump_horizontal_strength * wall_kick_dir
+	character.velocity.x = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH * wall_kick_dir
 	Transitioned.emit(self, "fullhop")
 
 func Physics_Update(delta):

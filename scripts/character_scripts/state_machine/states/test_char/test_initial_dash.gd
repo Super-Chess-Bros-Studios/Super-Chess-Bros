@@ -25,6 +25,8 @@ func Physics_Update(delta):
 	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
 	#dash attack input
+	elif Input.is_action_pressed(get_action("up")) and Input.is_action_just_pressed(get_action("special")):
+		Transitioned.emit(self,"UpSpecial")
 	elif Input.is_action_just_pressed(get_action("attack")):
 		Transitioned.emit(self,"DashAttack")
 	elif initial_dash_ended:

@@ -13,13 +13,13 @@ class_name CharacterAttributes
 @export var AIRSPEEDLERP : float = 0.15
 @export var AIRFRICTIONLERP : float = 0.1
 @export var FRICTIONLERP : float = 0.1
-#needs to be constant since they error out on other functions
-const MAX_FALL_SPEED : float = 600
+@export var MAX_FALL_SPEED : float = 600
 
 #controls jump power
 @export var JUMP_POWER : float = -350
-#needs to be constant since they error out on other functions
-const WALL_JUMP_HORIZONTAL_STRENGTH : float = 500
+
+#how fast horizontally you boost off a wall if you jump
+@export var WALL_JUMP_HORIZONTAL_STRENGTH : float = 500
 
 #weight is used for knockback calculations. 
 @export var WEIGHT : float = 100
