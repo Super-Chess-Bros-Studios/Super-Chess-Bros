@@ -1,9 +1,11 @@
-[gd_scene load_steps=57 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=66 format=3 uid="uid://5b3fmt2t3sc6"]
 
 [ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
 [ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
 [ext_resource type="Texture2D" uid="uid://cng3raykcvqid" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png" id="2_0owkq"]
 [ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
+[ext_resource type="Texture2D" uid="uid://dw6hhljdcgqhb" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png" id="2_7t1rv"]
+[ext_resource type="Texture2D" uid="uid://dnbpd4aomrs78" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run Attack/player katana running attack (upper body).png" id="2_mlf1o"]
 [ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
 [ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
 [ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
@@ -32,6 +34,9 @@
 [ext_resource type="Script" uid="uid://ctjjwn7oh8sgt" path="res://scripts/character_scripts/state_machine/states/test_char/test_grounded.gd" id="29_jg6e0"]
 [ext_resource type="Script" uid="uid://66dswa3a5bhq" path="res://scripts/character_scripts/state_machine/states/test_char/test_tumble.gd" id="30_4remw"]
 [ext_resource type="Script" uid="uid://tox15ywq17rl" path="res://scripts/character_scripts/test_percentage_label.gd" id="32_m852p"]
+[ext_resource type="Script" uid="uid://dnfprtkp32yl1" path="res://scripts/character_scripts/state_machine/states/test_char/test_jab.gd" id="32_moi7e"]
+[ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="33_erow1"]
+[ext_resource type="Script" uid="uid://btlsvroptalej" path="res://scripts/character_scripts/state_machine/states/test_char/test_dash_attack.gd" id="34_q47m3"]
 
 [sub_resource type="Animation" id="Animation_b8cx6"]
 length = 0.001
@@ -439,6 +444,81 @@ tracks/3/keys = {
 "values": [{
 "args": [],
 "method": &"end_initial_dash"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_moi7e"]
+resource_name = "jab"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_7t1rv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State Machine/Jab")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_jab"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("JabHitbox")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"default_hitbox"
+}, {
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
 }]
 }
 
@@ -908,17 +988,114 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_chsy4"]
+resource_name = "dash_attack"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_mlf1o")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DashAttackHitbox1")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"default_hitbox"
+}, {
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("State Machine/DashAttack")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_of_dash_attack"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DashAttackHitbox2")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"default_hitbox"
+}, {
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b8cx6"]
 _data = {
 &"RESET": SubResource("Animation_b8cx6"),
 &"airdodge": SubResource("Animation_fjca5"),
 &"crouch": SubResource("Animation_3ywid"),
+&"dash_attack": SubResource("Animation_chsy4"),
 &"fall": SubResource("Animation_jg6e0"),
 &"fastfall": SubResource("Animation_4remw"),
 &"grounded": SubResource("Animation_y8vyv"),
 &"hitstun": SubResource("Animation_q47m3"),
 &"idle": SubResource("Animation_2yqwl"),
 &"initial_dash": SubResource("Animation_c1e3k"),
+&"jab": SubResource("Animation_moi7e"),
 &"jump": SubResource("Animation_0owkq"),
 &"jumpsquat": SubResource("Animation_mlf1o"),
 &"pivot": SubResource("Animation_m852p"),
@@ -942,6 +1119,12 @@ size = Vector2(1, 28)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b8cx6"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1o4lo"]
+size = Vector2(45, 8.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfuln"]
+size = Vector2(43, 33)
+
 [node name="TestChar" type="Node2D" node_paths=PackedStringArray("initial_state", "char_attributes", "state_machine", "hurtbox")]
 script = ExtResource("5_422c8")
 initial_state = NodePath("CharacterBody2D/State Machine/Idle")
@@ -954,8 +1137,9 @@ collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-texture = ExtResource("1_qb3vb")
-hframes = 10
+texture = ExtResource("2_mlf1o")
+hframes = 8
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 reset_on_save = false
@@ -996,7 +1180,6 @@ metadata/_custom_type_script = "uid://rg3jnrlnyt6m"
 
 [node name="Run" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("timer", "anim", "sprite", "character")]
 script = ExtResource("6_kpwuy")
-speed = 300
 timer = NodePath("PreTransition")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
@@ -1117,7 +1300,6 @@ slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
-metadata/_custom_type_script = "uid://remlbk4g6ld0"
 
 [node name="HitstunLength" type="Timer" parent="CharacterBody2D/State Machine/Hitstun"]
 one_shot = true
@@ -1127,7 +1309,6 @@ script = ExtResource("29_jg6e0")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
-metadata/_custom_type_script = "uid://ctjjwn7oh8sgt"
 
 [node name="Tumble" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
 script = ExtResource("30_4remw")
@@ -1136,7 +1317,22 @@ slide_colliderR = NodePath("../../RightCollide")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
-metadata/_custom_type_script = "uid://66dswa3a5bhq"
+
+[node name="Jab" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("jab_hitbox", "anim", "sprite", "character")]
+script = ExtResource("32_moi7e")
+jab_hitbox = NodePath("../../JabHitbox")
+anim = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+character = NodePath("../..")
+metadata/_custom_type_script = "uid://dnfprtkp32yl1"
+
+[node name="DashAttack" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("da_hitbox", "anim", "sprite", "character")]
+script = ExtResource("34_q47m3")
+da_hitbox = NodePath("../../DashAttackHitbox1")
+anim = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+character = NodePath("../..")
+metadata/_custom_type_script = "uid://btlsvroptalej"
 
 [node name="Hurtbox" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 2
@@ -1145,8 +1341,60 @@ script = ExtResource("27_fjca5")
 metadata/_custom_type_script = "uid://c6s37218lbip0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hurtbox"]
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_b8cx6")
 debug_color = Color(2.06962e-06, 0.640148, 0.354265, 0.42)
+
+[node name="JabHitbox" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+script = ExtResource("33_erow1")
+bkb = 300.0
+kbg = 20.0
+kb_dir = Vector2(1, -1)
+damage = 10.0
+hitbox_group = 0
+hitbox_owner = NodePath("../Hurtbox")
+char_attributes = NodePath("../CharacterAttributes")
+collision_box = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/JabHitbox"]
+position = Vector2(21, 4)
+shape = SubResource("RectangleShape2D_1o4lo")
+disabled = true
+
+[node name="DashAttackHitbox1" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+script = ExtResource("33_erow1")
+bkb = 500.0
+kbg = 5.0
+kb_dir = Vector2(1, -0.3)
+damage = 8.0
+hitbox_group = 0
+hitbox_owner = NodePath("../Hurtbox")
+char_attributes = NodePath("../CharacterAttributes")
+collision_box = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/DashAttackHitbox1"]
+position = Vector2(11.5, -0.5)
+shape = SubResource("RectangleShape2D_lfuln")
+disabled = true
+
+[node name="DashAttackHitbox2" type="Area2D" parent="CharacterBody2D" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+script = ExtResource("33_erow1")
+bkb = 100.0
+kbg = 50.0
+kb_dir = Vector2(1, -1)
+damage = 8.0
+hitbox_group = 1
+hitbox_owner = NodePath("../Hurtbox")
+char_attributes = NodePath("../CharacterAttributes")
+collision_box = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/DashAttackHitbox2"]
+position = Vector2(11.5, -0.5)
+shape = SubResource("RectangleShape2D_lfuln")
+disabled = true
 
 [node name="Label" type="Label" parent="CharacterBody2D" node_paths=PackedStringArray("char_attributes")]
 offset_left = -20.0

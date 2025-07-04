@@ -25,9 +25,11 @@ func Physics_Update(delta):
 	#bunch of inputs
 	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
-	if Input.is_action_pressed(get_action("up")) and Input.is_action_just_pressed(get_action("special")):
+	elif Input.is_action_just_pressed(get_action("attack")):
+		Transitioned.emit(self,"Jab")
+	elif Input.is_action_pressed(get_action("up")) and Input.is_action_just_pressed(get_action("special")):
 		Transitioned.emit(self,"UpSpecial")
-	if Input.is_action_pressed(get_action("left")):
+	elif Input.is_action_pressed(get_action("left")):
 		char_attributes.cur_dir = DIRECTION.left
 		Transitioned.emit(self,"initialdash")
 	elif Input.is_action_pressed(get_action("right")):

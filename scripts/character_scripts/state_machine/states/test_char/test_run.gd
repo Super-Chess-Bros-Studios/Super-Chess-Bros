@@ -2,7 +2,7 @@ extends CharacterState
 class_name TestRun
 
 # @export var anim : AnimatedSprite2D
-@export var speed : int = 400
+@export var speed : float = 400
 @export var timer : Timer
 
 #Basically, there is a period of time you want to have that allows the character to
@@ -33,6 +33,9 @@ func Physics_Update(delta):
 	#ensures the player doesn't just run on air
 	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
+	#dash attack input
+	elif Input.is_action_just_pressed(get_action("attack")):
+		Transitioned.emit(self,"DashAttack")
 	#This handles transition to pivot
 	elif !timer.is_stopped() and Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.left:
 		Transitioned.emit(self, "Pivot")
