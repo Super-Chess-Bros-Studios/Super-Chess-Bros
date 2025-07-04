@@ -19,4 +19,18 @@ func get_valid_moves(game_manager: GameManager) -> Array:
 		if game_manager.is_valid_position(target):
 			if game_manager.is_empty(target) or game_manager.is_enemy(target, team):
 				moves.append(target)
+	
+	# Castling moves
+	if move_count == 0: # check if the king has moved
+		var rook_king_side = game_manager.get_piece_at_position(Vector2i(7, board_position.y))
+		if rook_king_side != null and rook_king_side.move_count == 0: # check if the king side rook has moved
+			# King-side castling
+			if game_manager.is_empty(Vector2i(board_position.x + 2, board_position.y)) and game_manager.is_empty(Vector2i(board_position.x + 1, board_position.y)):
+				moves.append(Vector2i(board_position.x + 2, board_position.y))
+		var rook_queen_side = game_manager.get_piece_at_position(Vector2i(0, board_position.y))
+		if rook_queen_side != null and rook_queen_side.move_count == 0: # check if the queen side rook has moved
+			# Queen-side castling
+			if game_manager.is_empty(Vector2i(board_position.x - 3, board_position.y)) and game_manager.is_empty(Vector2i(board_position.x - 2, board_position.y)) and game_manager.is_empty(Vector2i(board_position.x - 1, board_position.y)):
+				moves.append(Vector2i(board_position.x - 2, board_position.y))
+
 	return moves

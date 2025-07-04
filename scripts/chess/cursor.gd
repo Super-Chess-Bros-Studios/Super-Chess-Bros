@@ -2,7 +2,7 @@ extends Node2D
 
 # Which player this cursor belongs to (WHITE_PLAYER = 1, BLACK_PLAYER = 2)
 @export var player_id: ChessConstants.PlayerId = ChessConstants.PlayerId.WHITE_PLAYER
-@export var move_speed := 80.0
+@export var move_speed := 150.0
 
 # Cursor position in pixels
 var cursor_pos := Vector2.ZERO

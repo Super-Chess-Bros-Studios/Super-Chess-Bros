@@ -94,6 +94,10 @@ func on_initiate_duel(attacker: Piece, defender: Piece) -> void:
 	
 
 func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
+	# Check if this is a castling move where the king moves 2 squares horizontally. Also check if the move is valid.
+	if piece is King and abs(to_pos.x - piece.board_position.x) == 2 and is_valid_move(piece, to_pos):
+		return perform_castling(piece, to_pos)
+	
 	# Validate the move using the piece's get_valid_moves function
 	if not is_valid_move(piece, to_pos):
 		return false
@@ -111,6 +115,7 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	board_state[to_pos.y][to_pos.x] = piece     # Place in new position
 	
 	piece.set_board_position(to_pos, ChessConstants.TILE_SIZE)
+	piece.mark_as_moved()  # Increment move count
 	
 	# Emit signal for piece movement
 	piece_moved.emit(piece, from_pos, to_pos)
@@ -119,6 +124,45 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	switch_turn()
 
 
+	return true
+
+func perform_castling(king: King, to_pos: Vector2i) -> bool:
+	var king_y = king.board_position.y
+	var from_pos = king.board_position
+	var rook_from: Vector2i
+	var rook_to: Vector2i
+	
+	# Determine which rook to move based on castling direction
+	if to_pos.x == 6:  # King-side castling
+		rook_from = Vector2i(7, king_y)
+		rook_to = Vector2i(5, king_y)
+	elif to_pos.x == 2:  # Queen-side castling
+		rook_from = Vector2i(0, king_y)
+		rook_to = Vector2i(3, king_y)
+	else:
+		return false
+	
+	# Move king
+	board_state[from_pos.y][from_pos.x] = null
+	board_state[to_pos.y][to_pos.x] = king
+	king.set_board_position(to_pos, ChessConstants.TILE_SIZE)
+	king.mark_as_moved()
+	
+	# Move rook
+	var rook = get_piece_at_position(rook_from)
+	board_state[rook_from.y][rook_from.x] = null
+	board_state[rook_to.y][rook_to.x] = rook
+	rook.set_board_position(rook_to, ChessConstants.TILE_SIZE)
+	rook.mark_as_moved()
+	
+	# Emit signals for both moves
+	piece_moved.emit(king, from_pos, to_pos)
+	piece_moved.emit(rook, rook_from, rook_to)
+	
+	switch_turn()
+	deselect_piece()
+	
+	print("Castling performed")
 	return true
 
 func is_valid_move(piece: Piece, to_pos: Vector2i) -> bool:

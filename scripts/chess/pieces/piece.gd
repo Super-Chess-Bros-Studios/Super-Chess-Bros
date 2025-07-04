@@ -6,6 +6,7 @@ var team # Enum from board.gd, white = 0, black = 1
 var board_position: Vector2i
 var point_value: int
 var sprite_sheet: Texture
+var move_count: int # Track how many times this piece moved (for castling and en passant)
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -18,10 +19,16 @@ func setup(_team, _pos: Vector2i, _sheet: Texture, _points: int, tile_size: int)
 	team = _team
 	point_value = _points
 	sprite_sheet = _sheet
+	move_count = 0  # Initialize as not moved
 	set_board_position(_pos, tile_size)
 	update_sprite_region()
 
-# Sets sprite baseed on sprite sheet
+# Mark piece as moved (for castling and en passant)
+func mark_as_moved():
+	move_count += 1 
+	print("move count ", move_count) # debug to see if the move count is working.
+
+# Sets sprite based on sprite sheet
 func update_sprite_region():
 	if sprite_sheet == null:
 		print("Sprite sheet is null for piece at ", board_position)
