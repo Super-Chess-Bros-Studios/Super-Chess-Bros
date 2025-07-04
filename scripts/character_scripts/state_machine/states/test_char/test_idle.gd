@@ -21,7 +21,7 @@ func Enter():
 func Physics_Update(delta):
 	
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	#bunch of inputs
 	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")

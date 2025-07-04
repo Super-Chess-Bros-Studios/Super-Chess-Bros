@@ -4,7 +4,7 @@ extends Area2D
 var char_attributes
 
 func _init() -> void:
-	collision_layer = 0
+	collision_layer = 1
 	collision_mask = 2
 	
 func _ready():

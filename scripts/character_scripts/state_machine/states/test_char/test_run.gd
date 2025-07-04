@@ -28,11 +28,13 @@ func apply_friction():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	
 	#ensures the player doesn't just run on air
 	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
+	elif Input.is_action_pressed(get_action("up")) and Input.is_action_just_pressed(get_action("special")):
+		Transitioned.emit(self,"UpSpecial")
 	#dash attack input
 	elif Input.is_action_just_pressed(get_action("attack")):
 		Transitioned.emit(self,"DashAttack")

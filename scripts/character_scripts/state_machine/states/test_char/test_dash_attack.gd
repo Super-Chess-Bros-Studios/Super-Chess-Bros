@@ -16,7 +16,10 @@ func end_of_dash_attack():
 func Physics_Update(_delta: float):
 	if char_attributes.just_took_damage:
 		da_hitbox.deactivate_hitbox()
-		Transitioned.emit(self,"hitstun")
+		Transitioned.emit(self,"hitfreeze")
+	elif char_attributes.just_hit_enemy:
+		freeze_frame(0.1)
+		char_attributes.just_hit_enemy = false
 	elif !character.is_on_floor():
 		da_hitbox.deactivate_hitbox()
 		Transitioned.emit(self,"fall")

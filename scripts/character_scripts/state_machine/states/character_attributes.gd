@@ -1,24 +1,32 @@
 extends Node
 class_name CharacterAttributes
 
-
+#Export vars allow any character to use these character attributes without having to
+#extend the class. You can now change any of these values in the inspector.
 @export var player_id: int = 1  # Set this in the editor or at spawn time
 
-const GRAVITY  : float = 10
-const FASTFALLMULTIPLIER : float = 2
+#Used for calculating how fast a character falls.
+@export var GRAVITY  : float = 10
+@export var FASTFALLMULTIPLIER : float = 2
 
 #These are used in the lerp functions whenever calculating physics for speed. Lerp makes it feel smoother.
-const AIRSPEEDLERP : float = 0.15
-const AIRFRICTIONLERP : float = 0.1
-const FRICTIONLERP : float = 0.1
-const MAX_FALL_SPEED : float = 600
+@export var AIRSPEEDLERP : float = 0.15
+@export var AIRFRICTIONLERP : float = 0.1
+@export var FRICTIONLERP : float = 0.1
+@export var MAX_FALL_SPEED : float = 600
 
 #controls jump power
-const JUMP_POWER : float = -350
-const WALL_JUMP_HORIZONTAL_STRENGTH : float = 500
+@export var JUMP_POWER : float = -350
+
+#how fast horizontally you boost off a wall if you jump
+@export var WALL_JUMP_HORIZONTAL_STRENGTH : float = 500
+
+#weight is used for knockback calculations. 
+@export var WEIGHT : float = 100
 
 #These are basically "global variables" for the character that can be read and written to by other states
 var cur_dir = 1
+
 #this character can only double jump and air dodge once before needing to hit the ground
 var can_double_jump = true
 var can_air_dodge = true
@@ -48,3 +56,8 @@ var damage : float = 0
 #when another hitbox hits the player with the value of 0, it will be ignored.
 #if a hitbox of value 1 hits while hitbox_group is 0, it will make contact.
 var hitbox_group : int = -1
+var hit_on_ground : bool = false
+
+var DI : Vector2 = Vector2.ZERO
+
+var just_hit_enemy = false

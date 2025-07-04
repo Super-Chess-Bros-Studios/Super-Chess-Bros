@@ -24,19 +24,12 @@ var damage : float = 0
 var hitbox_group : int = -1
 var knockback_force : float = 0
 
-var hit_on_ground = false
 
 func Enter():
 	print("Hitstun state")
 	begin_wall_slide = false
 	#this ensures that it doesnt do any wall sliding stuff while we're in hitstun haha
 	wall_detection_enabled(false)
-	
-	#basically means they don't instantly enter grounded state if they are hit on the ground
-	if character.is_on_floor():
-		hit_on_ground = true
-	else:
-		hit_on_ground = false
 	
 	#i don't want to prefix everything with char_attributes lol
 	bkb = char_attributes.bkb
@@ -45,28 +38,32 @@ func Enter():
 	damage = char_attributes.damage
 	hitbox_group = char_attributes.hitbox_group
 	percentage = char_attributes.percentage
-	print(char_attributes.percentage, "%")
-	char_attributes.percentage += char_attributes.damage
-	#so you don't stay in hitstun forever
-	char_attributes.just_took_damage = false
 	
 	#applies knockback
 	print("knockback growth: ", kbg)
-	knockback_force = bkb + (percentage*kbg/20)
+	knockback_force = (bkb + (percentage*kbg/20)) / (char_attributes.WEIGHT/100)
 	print("knockback force: ", knockback_force)
+	print("kb_dir before DI", kb_dir.normalized())
+	kb_dir = kb_dir + char_attributes.DI
+	print("kb_dir after DI", kb_dir.normalized())
 	character.velocity = kb_dir.normalized() * knockback_force
 	
 	#hitstun length is going to take some math i'm not ready for atm
 	hitstun_length.start(knockback_force/500)
 	playanim("hitstun")
 
+func Exit():
+	char_attributes.hit_on_ground = false
+
 func Physics_Update(delta):
 	#if i took damage from a hitbox that isn't in the current hitbox group
+	if Engine.time_scale == 0:
+		return
 	if char_attributes.just_took_damage and char_attributes.hitbox_group != hitbox_group:
-		Transitioned.emit(self,"hitstun")
+		Transitioned.emit(self,"hitfreeze")
 	elif hitstun_length.is_stopped():
 		Transitioned.emit(self, "tumble")
-	elif character.is_on_floor() and !hit_on_ground:
+	elif character.is_on_floor() and !char_attributes.hit_on_ground:
 		Transitioned.emit(self,"grounded")
 	else:
 		#make it exist first, make it better later (tm)
@@ -74,6 +71,6 @@ func Physics_Update(delta):
 		
 		#makes it so your character still has friction when they are hit on the ground and land before
 		#hitstun ends
-		if hit_on_ground and character.is_on_floor():
+		if char_attributes.hit_on_ground and character.is_on_floor():
 			character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.FRICTIONLERP)
 		character.move_and_slide()

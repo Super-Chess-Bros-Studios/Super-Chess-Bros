@@ -28,7 +28,7 @@ func _on_right_collide(body: Node2D) -> void:
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	#handles vertical events
 	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")

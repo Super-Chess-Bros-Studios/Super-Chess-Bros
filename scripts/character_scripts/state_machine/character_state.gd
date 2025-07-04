@@ -20,6 +20,11 @@ func playanim(animation):
 	else:
 		sprite.set_flip_h(false)
 
+func freeze_frame(duration):
+	Engine.time_scale = 0
+	await(get_tree().create_timer(duration, true, false, true).timeout)
+	Engine.time_scale = 1
+
 #Function for entering the state
 func Enter():
 	pass
