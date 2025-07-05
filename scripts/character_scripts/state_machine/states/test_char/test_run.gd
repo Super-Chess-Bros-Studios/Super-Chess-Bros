@@ -37,7 +37,10 @@ func Physics_Update(delta):
 		Transitioned.emit(self,"UpSpecial")
 	#dash attack input
 	elif Input.is_action_just_pressed(get_action("attack")):
-		Transitioned.emit(self,"DashAttack")
+		if anim.get_animation("skid"):
+			Transitioned.emit(self, "jab")
+		else:
+			Transitioned.emit(self,"DashAttack")
 	#This handles transition to pivot
 	elif !timer.is_stopped() and Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.left:
 		Transitioned.emit(self, "Pivot")
