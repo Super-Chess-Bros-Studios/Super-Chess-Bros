@@ -49,6 +49,10 @@ func Physics_Update(delta):
 	
 	#handles transition to roll
 	elif Input.is_action_just_pressed(get_action("shield")) and char_attributes.can_roll:
+		#when parry state gets implemented, uncomment the below line of code so we can have sliding parries!
+		#if anim.get_animation("skid"):
+		#	Transitioned.emit(self, "Parry")
+		#else:
 		Transitioned.emit(self,"roll")
 	
 	#if you let go of the key direction you're going, you transition to idle.
