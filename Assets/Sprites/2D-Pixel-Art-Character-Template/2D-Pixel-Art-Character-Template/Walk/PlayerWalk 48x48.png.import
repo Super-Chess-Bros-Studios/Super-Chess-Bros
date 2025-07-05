@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d8p156ynywg"
-path="res://.godot/imported/PlayerWalk 48x48.png-e7e1135e44eb1e58983130bee0d38622.ctex"
+path="res://.godot/imported/PlayerWalk 48x48.png-b55e5e194297b8fbd6301a9e7285fca9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Walk/PlayerWalk 48x48.png"
-dest_files=["res://.godot/imported/PlayerWalk 48x48.png-e7e1135e44eb1e58983130bee0d38622.ctex"]
+source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Walk/PlayerWalk 48x48.png"
+dest_files=["res://.godot/imported/PlayerWalk 48x48.png-b55e5e194297b8fbd6301a9e7285fca9.ctex"]
 
 [params]
 

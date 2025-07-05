@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnbpd4aomrs78"
-path="res://.godot/imported/player katana running attack (upper body).png-ecadfc9b391830593aa8f031213d98a0.ctex"
+path="res://.godot/imported/player katana running attack (upper body).png-d075ba862bf18fb8fd7454e5feebebc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Run Attack/player katana running attack (upper body).png"
-dest_files=["res://.godot/imported/player katana running attack (upper body).png-ecadfc9b391830593aa8f031213d98a0.ctex"]
+source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Run Attack/player katana running attack (upper body).png"
+dest_files=["res://.godot/imported/player katana running attack (upper body).png-d075ba862bf18fb8fd7454e5feebebc7.ctex"]
 
 [params]
 
