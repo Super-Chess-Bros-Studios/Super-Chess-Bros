@@ -35,7 +35,7 @@ func set_white_player_device(device_type: String, device_id: int = -1, device_na
 func set_black_player_device(device_type: String, device_id: int = -1, device_name: String = ""):
 	black_player_device = {
 		"device_type": device_type,
-		"device_id": device_id,
+		"device_id": 0,
 		"device_name": device_name
 	}
 	print("Black player device set: ", black_player_device)

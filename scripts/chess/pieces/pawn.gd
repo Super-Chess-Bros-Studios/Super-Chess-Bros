@@ -19,12 +19,14 @@ func get_valid_moves(game_manager: GameManager) -> Array:
 		if board_position.y == start_row and game_manager.is_empty(two_step):
 			moves.append(two_step)
 			
-	# When enemy piece is diagonal
+	# Diagonal captures (enemy pieces or en passant)
 	var diag_left := board_position + Vector2i(-1, direction) 
 	var diag_right := board_position + Vector2i(1, direction)
 	
-	if game_manager.is_valid_position(diag_left) and game_manager.is_enemy(diag_left, team):
+	if game_manager.is_valid_position(diag_left) and (game_manager.is_enemy(diag_left, team) or game_manager.is_en_passant_target(diag_left)):
 		moves.append(diag_left)
-	if game_manager.is_valid_position(diag_right) and game_manager.is_enemy(diag_right, team):
-		moves.append(diag_right)	
+	if game_manager.is_valid_position(diag_right) and (game_manager.is_enemy(diag_right, team) or game_manager.is_en_passant_target(diag_right)):
+		moves.append(diag_right)
+	
+	
 	return moves

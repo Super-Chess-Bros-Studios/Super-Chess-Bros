@@ -14,6 +14,10 @@ var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHIT
 var selected_piece: Piece = null  # Currently selected piece
 var duel_attacker: Piece = null
 var duel_defender: Piece = null
+# En passant tracking
+var en_passant_target: Vector2i = Vector2i(-1, -1) # Initialize en passant target to invalid position
+var en_passant_pawn: Piece = null  # Reference to the pawn that can be captured en passant
+
 func _init():
 	initialize_board_state()
 
@@ -83,6 +87,79 @@ func get_current_turn() -> ChessConstants.TeamColor:
 	# Get which team's turn it currently is
 	return ChessConstants.get_team_from_game_state(current_game_state)
 
+# En passant setter and getter and helper functions
+func set_en_passant_target(pos: Vector2i, pawn: Piece):
+	# Set the en passant target after a pawn moves two squares
+	en_passant_target = pos
+	en_passant_pawn = pawn
+
+func clear_en_passant_target():
+	# Clear en passant target (called after each move)
+	en_passant_target = Vector2i(-1, -1)
+	en_passant_pawn = null
+
+func is_en_passant_target(pos: Vector2i) -> bool:
+	# Check if a position is the en passant target
+	return pos == en_passant_target
+
+func get_en_passant_pawn() -> Piece:
+	# Get the pawn that can be captured en passant
+	return en_passant_pawn
+
+func is_en_passant_capture(piece: Piece, to_pos: Vector2i) -> bool:
+	# Check if this move is an en passant capture
+	if not piece is Pawn:
+		return false
+	
+	# En passant capture moves diagonally by 1 square
+	var direction = -1 if piece.team == ChessConstants.TeamColor.WHITE else 1
+	var x_diff = abs(to_pos.x - piece.board_position.x)
+	var y_diff = direction
+	
+	# Must move diagonally by 1 square
+	if x_diff != 1 or (to_pos.y - piece.board_position.y) != y_diff:
+		return false
+	
+	# Must be capturing the en passant target
+	return is_en_passant_target(to_pos)
+
+func perform_en_passant_capture(piece: Piece, to_pos: Vector2i) -> bool:
+	# Perform the en passant capture
+	var from_pos = piece.board_position
+	var captured_pawn = get_en_passant_pawn()
+	
+	if captured_pawn == null:
+		return false
+	
+	# Remove the captured pawn from the board
+	var captured_pos = captured_pawn.board_position
+	board_state[captured_pos.y][captured_pos.x] = null
+
+	#FIXME	
+	# Initiate duel
+	#on_initiate_duel(piece, captured_pawn)
+
+	# Destroy the captured pawn for now
+	captured_pawn.queue_free()
+	
+	
+	# Move the capturing pawn
+	board_state[from_pos.y][from_pos.x] = null
+	board_state[to_pos.y][to_pos.x] = piece
+	piece.set_board_position(to_pos, ChessConstants.TILE_SIZE)
+	
+	# Clear en passant target
+	clear_en_passant_target()
+	
+	# Emit signals
+	piece_moved.emit(piece, from_pos, to_pos)
+	
+	deselect_piece()
+	switch_turn()
+	
+	print("En passant capture performed")
+	return true
+
 
 func on_initiate_duel(attacker: Piece, defender: Piece) -> void:
 	duel_attacker = attacker
@@ -104,6 +181,10 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	
 	var from_pos = piece.board_position
 	
+	# Check if this is an en passant capture
+	if piece is Pawn and is_en_passant_capture(piece, to_pos):
+		return perform_en_passant_capture(piece, to_pos)
+	
 	# Capture enemy piece if it's in the target position
 	if is_enemy(to_pos, piece.team):
 		on_initiate_duel(piece, get_piece_at_position(to_pos))
@@ -117,12 +198,20 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	piece.set_board_position(to_pos, ChessConstants.TILE_SIZE)
 	piece.mark_as_moved()  # Increment move count
 	
+	# Handle en passant opportunity (if pawn moved two squares)
+	if piece is Pawn and abs(to_pos.y - from_pos.y) == 2:
+		# create en passant opportunity
+		var en_passant_pos = Vector2i(to_pos.x, (from_pos.y + to_pos.y) / 2) # Square that the pawn skips over
+		set_en_passant_target(en_passant_pos, piece)
+	else:
+		#clear en passant opportunity
+		clear_en_passant_target() 
+	
 	# Emit signal for piece movement
 	piece_moved.emit(piece, from_pos, to_pos)
 	
 	deselect_piece()
 	switch_turn()
-
 
 	return true
 
