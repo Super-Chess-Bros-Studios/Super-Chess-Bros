@@ -83,6 +83,8 @@ func switch_turn():
 		print("Check!")
 	if is_checkmate(oposing_team):
 		print("Checkmate!")
+	if is_stalemate(oposing_team):
+		print("Stalemate!")
 	
 	var new_team = ChessConstants.get_team_from_game_state(current_game_state)
 	game_state_changed.emit(current_game_state)
@@ -218,6 +220,14 @@ func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
 func is_checkmate(team: ChessConstants.TeamColor) -> bool:
 	if not is_king_in_check(team):
 		return false
+	return any_valid_moves(team)
+
+func is_stalemate(team: ChessConstants.TeamColor) -> bool:
+	if is_king_in_check(team):
+		return false
+	return any_valid_moves(team)
+
+func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
 	# Try every move for every piece on the team
 	for y in range(ChessConstants.BOARD_SIZE):
 		for x in range(ChessConstants.BOARD_SIZE):
@@ -238,7 +248,7 @@ func is_checkmate(team: ChessConstants.TeamColor) -> bool:
 					piece.board_position = from_pos
 					if not in_check:
 						return false # Found a move that escapes check
-	return true # No moves escape check
+	return true
 
 
 func handle_duel_result(winner: Piece):
