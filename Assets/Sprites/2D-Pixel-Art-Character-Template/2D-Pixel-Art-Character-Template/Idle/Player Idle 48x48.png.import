@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cian1bln36x04"
-path="res://.godot/imported/Player Idle 48x48.png-22007682a98239e0dc7d8bd892c80a13.ctex"
+path="res://.godot/imported/Player Idle 48x48.png-88dfebd85753363db464a725b577f4c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png"
-dest_files=["res://.godot/imported/Player Idle 48x48.png-22007682a98239e0dc7d8bd892c80a13.ctex"]
+source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png"
+dest_files=["res://.godot/imported/Player Idle 48x48.png-88dfebd85753363db464a725b577f4c0.ctex"]
 
 [params]
 
