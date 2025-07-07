@@ -39,4 +39,4 @@ func Physics_Update(_delta: float):
 	pass
 
 func get_action(action_base: String) -> String:
-	return "%s_%d" % [action_base, char_attributes.player_id]
+	return InputManager.get_action(action_base, char_attributes.player_id)
