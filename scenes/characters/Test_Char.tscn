@@ -1366,8 +1366,10 @@ anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 
-[node name="UpSpecial" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
+[node name="UpSpecial" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("up_special_hb1", "up_special_hb2", "anim", "sprite", "character")]
 script = ExtResource("25_42ld6")
+up_special_hb1 = NodePath("../../Hitboxes/UpSpecialHitbox1")
+up_special_hb2 = NodePath("../../Hitboxes/UpSpecialHitbox2")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
@@ -1425,9 +1427,10 @@ sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://dnfprtkp32yl1"
 
-[node name="DashAttack" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("da_hitbox", "anim", "sprite", "character")]
+[node name="DashAttack" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("da_hitbox1", "da_hitbox2", "anim", "sprite", "character")]
 script = ExtResource("34_q47m3")
-da_hitbox = NodePath("../../Hitboxes/DashAttackHitbox1")
+da_hitbox1 = NodePath("../../Hitboxes/DashAttackHitbox1")
+da_hitbox2 = NodePath("../../Hitboxes/DashAttackHitbox2")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")

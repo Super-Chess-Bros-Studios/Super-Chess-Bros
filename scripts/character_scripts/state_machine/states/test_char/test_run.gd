@@ -37,7 +37,10 @@ func Physics_Update(delta):
 		Transitioned.emit(self,"UpSpecial")
 	#dash attack input
 	elif Input.is_action_just_pressed(get_action("attack")):
-		Transitioned.emit(self,"DashAttack")
+		if anim.get_animation("skid"):
+			Transitioned.emit(self, "jab")
+		else:
+			Transitioned.emit(self,"DashAttack")
 	#This handles transition to pivot
 	elif !timer.is_stopped() and Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.left:
 		Transitioned.emit(self, "Pivot")
@@ -46,6 +49,10 @@ func Physics_Update(delta):
 	
 	#handles transition to roll
 	elif Input.is_action_just_pressed(get_action("shield")) and char_attributes.can_roll:
+		#when parry state gets implemented, uncomment the below line of code so we can have sliding parries!
+		#if anim.get_animation("skid"):
+		#	Transitioned.emit(self, "Parry")
+		#else:
 		Transitioned.emit(self,"roll")
 	
 	#if you let go of the key direction you're going, you transition to idle.
