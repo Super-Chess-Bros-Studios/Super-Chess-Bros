@@ -16,6 +16,7 @@ func Physics_Update(delta):
 		Transitioned.emit(self, "hitfreeze")
 	#handles vertical events
 	elif character.is_on_floor():
+		char_attributes.landing_lag_length = 0.4
 		Transitioned.emit(self, "grounded")
 	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part

@@ -1,24 +1,24 @@
 [gd_scene load_steps=69 format=3 uid="uid://5b3fmt2t3sc6"]
 
-[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
-[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
-[ext_resource type="Texture2D" uid="uid://cng3raykcvqid" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png" id="2_0owkq"]
-[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
-[ext_resource type="Texture2D" uid="uid://dw6hhljdcgqhb" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png" id="2_7t1rv"]
-[ext_resource type="Texture2D" uid="uid://dnbpd4aomrs78" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run Attack/player katana running attack (upper body).png" id="2_mlf1o"]
-[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
-[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
-[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
+[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
+[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
+[ext_resource type="Texture2D" uid="uid://cng3raykcvqid" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png" id="2_0owkq"]
+[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
+[ext_resource type="Texture2D" uid="uid://dw6hhljdcgqhb" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png" id="2_7t1rv"]
+[ext_resource type="Texture2D" uid="uid://dnbpd4aomrs78" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Run Attack/player katana running attack (upper body).png" id="2_mlf1o"]
+[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
+[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
+[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
 [ext_resource type="Script" uid="uid://rg3jnrlnyt6m" path="res://scripts/character_scripts/state_machine/states/test_char/test_idle.gd" id="5_dgi44"]
-[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
+[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
 [ext_resource type="Script" uid="uid://ctsqulv68cgxy" path="res://scripts/character_scripts/state_machine/states/test_char/test_run.gd" id="6_kpwuy"]
 [ext_resource type="Script" uid="uid://dbyyiifx7mbga" path="res://scripts/character_scripts/state_machine/states/test_char/test_crouch.gd" id="7_2137q"]
 [ext_resource type="Script" uid="uid://b5d57x8h3avr5" path="res://scripts/character_scripts/state_machine/states/test_char/test_jumpsquat.gd" id="8_cqar7"]
 [ext_resource type="Script" uid="uid://db3y4jnn8ci5y" path="res://scripts/character_scripts/state_machine/states/character_attributes.gd" id="8_h8dpt"]
-[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
+[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
 [ext_resource type="Script" uid="uid://xq4wnlhqxdlm" path="res://scripts/character_scripts/state_machine/states/test_char/test_jump.gd" id="9_qga04"]
-[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
+[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
 [ext_resource type="Script" uid="uid://dsq2k53fkg20h" path="res://scripts/character_scripts/state_machine/states/test_char/test_short_hop.gd" id="11_0l6pb"]
 [ext_resource type="Script" uid="uid://dxn1tegm7uca6" path="res://scripts/character_scripts/state_machine/states/test_char/test_fall.gd" id="11_hmptn"]
 [ext_resource type="Script" uid="uid://d26weydsrf1ra" path="res://scripts/character_scripts/state_machine/states/test_char/test_initial_dash.gd" id="13_va0ok"]
@@ -34,7 +34,7 @@
 [ext_resource type="Script" uid="uid://ctjjwn7oh8sgt" path="res://scripts/character_scripts/state_machine/states/test_char/test_grounded.gd" id="29_jg6e0"]
 [ext_resource type="Script" uid="uid://66dswa3a5bhq" path="res://scripts/character_scripts/state_machine/states/test_char/test_tumble.gd" id="30_4remw"]
 [ext_resource type="Script" uid="uid://d04posusl155u" path="res://scripts/character_scripts/state_machine/states/test_char/test_hitfreeze.gd" id="30_q47m3"]
-[ext_resource type="Script" uid="uid://tox15ywq17rl" path="res://scripts/character_scripts/test_percentage_label.gd" id="32_m852p"]
+[ext_resource type="Script" path="res://scripts/character_scripts/test_percentage_label.gd" id="32_m852p"]
 [ext_resource type="Script" uid="uid://dnfprtkp32yl1" path="res://scripts/character_scripts/state_machine/states/test_char/test_jab.gd" id="32_moi7e"]
 [ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="33_erow1"]
 [ext_resource type="Script" uid="uid://btlsvroptalej" path="res://scripts/character_scripts/state_machine/states/test_char/test_dash_attack.gd" id="34_q47m3"]
@@ -389,20 +389,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [5, 6, 7, 8]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("State Machine/Grounded")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"end_grounded"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_an8fg"]
@@ -1226,8 +1212,9 @@ collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-texture = ExtResource("3_4jtsn")
-hframes = 10
+texture = ExtResource("4_ld6di")
+hframes = 9
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 reset_on_save = false
@@ -1405,11 +1392,15 @@ character = NodePath("../..")
 [node name="HitstunLength" type="Timer" parent="CharacterBody2D/State Machine/Hitstun"]
 one_shot = true
 
-[node name="Grounded" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
+[node name="Grounded" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("landing_lag", "anim", "sprite", "character")]
 script = ExtResource("29_jg6e0")
+landing_lag = NodePath("LandingLag")
 anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
+
+[node name="LandingLag" type="Timer" parent="CharacterBody2D/State Machine/Grounded"]
+one_shot = true
 
 [node name="Tumble" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
 script = ExtResource("30_4remw")
@@ -1558,3 +1549,4 @@ disabled = true
 [connection signal="body_exited" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/SpecialFall" method="_on_right_collide_body_exited"]
 [connection signal="timeout" from="CharacterBody2D/State Machine/Run/PreTransition" to="CharacterBody2D/State Machine/Run" method="_on_pre_transition_timeout"]
 [connection signal="timeout" from="CharacterBody2D/State Machine/Roll/RollCooldown" to="." method="_on_roll_cooldown_timeout"]
+[connection signal="timeout" from="CharacterBody2D/State Machine/Grounded/LandingLag" to="CharacterBody2D/State Machine/Grounded" method="end_grounded"]

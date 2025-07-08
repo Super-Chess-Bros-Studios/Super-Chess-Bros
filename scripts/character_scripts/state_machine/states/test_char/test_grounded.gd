@@ -1,6 +1,8 @@
 extends TestIdle
 class_name TestGrounded
 
+@export var landing_lag : Timer
+
 var grounded_end = false
 
 func Enter():
@@ -10,9 +12,11 @@ func Enter():
 	char_attributes.can_air_dodge = true
 	char_attributes.can_wall_jump = true
 	grounded_end = false
+	landing_lag.start(char_attributes.landing_lag_length)
 	playanim("grounded")
 
 func end_grounded():
+	char_attributes.landing_lag_length = 0
 	grounded_end = true
 
 func Physics_Update(delta):

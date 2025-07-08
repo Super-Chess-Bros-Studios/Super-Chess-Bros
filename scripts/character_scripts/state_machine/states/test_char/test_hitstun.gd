@@ -64,6 +64,7 @@ func Physics_Update(delta):
 	elif hitstun_length.is_stopped():
 		Transitioned.emit(self, "tumble")
 	elif character.is_on_floor() and !char_attributes.hit_on_ground:
+		char_attributes.landing_lag_length = 0.4
 		Transitioned.emit(self,"grounded")
 	else:
 		#make it exist first, make it better later (tm)

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dilaauuoc1yi5"
-path="res://.godot/imported/player ledge climb 48x48.png-50b54b24debd8adbe88d568b931f074a.ctex"
+path="res://.godot/imported/player ledge climb 48x48.png-7a99eb2d41ae6169e23abe21521be287.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Ledge Grab-Climb/player ledge climb 48x48.png"
-dest_files=["res://.godot/imported/player ledge climb 48x48.png-50b54b24debd8adbe88d568b931f074a.ctex"]
+source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Ledge Grab-Climb/player ledge climb 48x48.png"
+dest_files=["res://.godot/imported/player ledge climb 48x48.png-7a99eb2d41ae6169e23abe21521be287.ctex"]
 
 [params]
 

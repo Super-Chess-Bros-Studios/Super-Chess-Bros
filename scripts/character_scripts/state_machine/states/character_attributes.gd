@@ -58,6 +58,8 @@ var damage : float = 0
 var hitbox_group : int = -1
 var hit_on_ground : bool = false
 
+var landing_lag_length : float = 0
+
 var DI : Vector2 = Vector2.ZERO
 
 var just_hit_enemy = false
