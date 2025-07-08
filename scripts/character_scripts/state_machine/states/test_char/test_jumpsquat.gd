@@ -14,7 +14,7 @@ func end_jumpsquat():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	elif Input.is_action_just_released(get_action("jump")):
 		short_hop = true
 	elif jumpsquat_ended:

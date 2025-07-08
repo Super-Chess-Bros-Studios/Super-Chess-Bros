@@ -6,7 +6,6 @@ class_name TestFullHop
 
 @export var speed : float = 300
 @export var double_jump_coefficient : float = 0.75
-@export var wall_jump_horizontal_strength : float = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH
 
 var leftCollide = false
 var rightCollide = false
@@ -44,7 +43,7 @@ func _on_right_collide_body_exited(body: Node2D) -> void:
 #wall_kick_dir is kind of like cur_dir but for walls
 func wall_kick(wall_kick_dir):
 	char_attributes.can_wall_jump = false
-	character.velocity.x = wall_jump_horizontal_strength * wall_kick_dir
+	character.velocity.x = char_attributes.WALL_JUMP_HORIZONTAL_STRENGTH * wall_kick_dir
 	Transitioned.emit(self, "fullhop")
 		
 
@@ -59,7 +58,7 @@ func Exit():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	#shield is prioritized here so it doesn't get overwritten by left and right inputs
 	elif Input.is_action_pressed(get_action("shield")) and char_attributes.can_air_dodge:
 		#don't calculate move and slide until airdodge is running it's part
@@ -67,11 +66,10 @@ func Physics_Update(delta):
 	
 	elif Input.is_action_pressed(get_action("up")) and Input.is_action_pressed(get_action("special")):
 		Transitioned.emit(self,"UpSpecial")
-	
+	elif Input.is_action_just_pressed(get_action("attack")):
+		Transitioned.emit(self, "NeutralAir")
 	#handles jump input
 	else:
-		print("rightcollide", rightCollide)
-		print("leftcollide", leftCollide)
 		if Input.is_action_just_pressed(get_action("jump")) and (char_attributes.can_double_jump or char_attributes.can_wall_jump):
 			if char_attributes.can_wall_jump and (rightCollide or leftCollide):
 				if rightCollide:
