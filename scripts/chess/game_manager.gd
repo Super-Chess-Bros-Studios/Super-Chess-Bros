@@ -46,6 +46,9 @@ func can_player_act(player_id: ChessConstants.PlayerId) -> bool:
 	# Check if given player can act (it's their turn and game isn't over)
 	var current_team = ChessConstants.get_team_from_game_state(current_game_state)
 	var player_team = ChessConstants.get_team_from_player_id(player_id)
+	#====================================================================
+	#return true   # REMOVE FOR 2 CONTROLLERS
+	#====================================================================
 	return current_team == player_team and current_game_state != ChessConstants.GameState.GAME_OVER
 
 func select_piece(piece: Piece) -> bool:
@@ -75,6 +78,14 @@ func switch_turn():
 		ChessConstants.GameState.BLACK_TURN:
 			current_game_state = ChessConstants.GameState.WHITE_TURN
 	
+	var oposing_team = get_current_turn()
+	if is_king_in_check(oposing_team):
+		print("Check!")
+	if is_checkmate(oposing_team):
+		print("Checkmate!")
+	if is_stalemate(oposing_team):
+		print("Stalemate!")
+	
 	var new_team = ChessConstants.get_team_from_game_state(current_game_state)
 	game_state_changed.emit(current_game_state)
 	turn_switched.emit(new_team)
@@ -97,7 +108,9 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	# Validate the move using the piece's get_valid_moves function
 	if not is_valid_move(piece, to_pos):
 		return false
-	
+	#var is_valid = to_pos in piece.get_valid_moves(self)
+	#if !is_valid:
+		#return false
 	var from_pos = piece.board_position
 	
 	# Capture enemy piece if it's in the target position
@@ -115,10 +128,12 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	# Emit signal for piece movement
 	piece_moved.emit(piece, from_pos, to_pos)
 	
+	# Did you check or checkmate oponents king 
+	
 	deselect_piece()
 	switch_turn()
 
-
+	
 	return true
 
 func is_valid_move(piece: Piece, to_pos: Vector2i) -> bool:
@@ -126,11 +141,36 @@ func is_valid_move(piece: Piece, to_pos: Vector2i) -> bool:
 	if not is_valid_position(to_pos) or piece == null:
 		return false
 	
+	# Are you moveing to a position that your piece occupies
+	if not is_empty(to_pos) and not is_enemy(to_pos, piece.team):
+		return false
+	
 	# Get valid moves for the piece
 	var valid_moves = piece.get_valid_moves(self)
 	
+	if not to_pos in valid_moves:
+		return false
+	
+	#  Simulate the move to check for self-check
+	var from_pos = piece.board_position
+	var original_piece = board_state[to_pos.y][to_pos.x]
+	board_state[from_pos.y][from_pos.x] = null
+	board_state[to_pos.y][to_pos.x] = piece
+	piece.board_position = to_pos
+	
+	var in_check = is_king_in_check(piece.team)
+	
+	# Undo the move
+	board_state[from_pos.y][from_pos.x] = piece
+	board_state[to_pos.y][to_pos.x] = original_piece
+	piece.board_position = from_pos
+	
+	# not valid if the move puts own king in check
+	return not in_check
+	
 	# Check if the target position is in the valid moves list
-	return to_pos in valid_moves
+
+	return true
 
 func is_empty(pos: Vector2i) -> bool:
 	# Check if position is empty (no piece)
@@ -151,6 +191,65 @@ func capture_piece(attack_piece: Piece, capture_pos: Vector2i):
 		defence_piece.queue_free()
 	print("attacking piece: ", attack_piece.name)
 	print("defending piece: ", defence_piece.name)
+
+func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
+	# Find the king for the given team
+	var king_pos: Vector2i = Vector2i(-1, -1)
+	for y in range(ChessConstants.BOARD_SIZE):
+		for x in range(ChessConstants.BOARD_SIZE):
+			var piece = board_state[y][x]
+			if piece != null and piece.team == team and piece.point_value == ChessConstants.PIECE_VALUES.king:
+				king_pos = Vector2i(x, y)
+				break
+	
+	# error check for king not found
+	if king_pos == Vector2i(-1, -1):
+		return false
+	
+	# can any oposing piece can move to position of king
+	var oposing_team = ChessConstants.TeamColor.WHITE if team == ChessConstants.TeamColor.BLACK else ChessConstants.TeamColor.BLACK
+	for y in range(ChessConstants.BOARD_SIZE):
+		for x in range(ChessConstants.BOARD_SIZE):
+			var piece = board_state[y][x]
+			if piece != null and piece.team == oposing_team:
+				var moves = piece.get_valid_moves(self)
+				if king_pos in moves:
+					return true
+	return false
+
+func is_checkmate(team: ChessConstants.TeamColor) -> bool:
+	if not is_king_in_check(team):
+		return false
+	return any_valid_moves(team)
+
+func is_stalemate(team: ChessConstants.TeamColor) -> bool:
+	if is_king_in_check(team):
+		return false
+	return any_valid_moves(team)
+
+func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
+	# Try every move for every piece on the team
+	for y in range(ChessConstants.BOARD_SIZE):
+		for x in range(ChessConstants.BOARD_SIZE):
+			var piece = board_state[y][x]
+			if piece != null and piece.team == team:
+				var moves = piece.get_valid_moves(self)
+				for move in moves:
+					# Simulate move
+					var original_piece = board_state[move.y][move.x]
+					var from_pos = piece.board_position
+					board_state[from_pos.y][from_pos.x] = null
+					board_state[move.y][move.x] = piece
+					piece.board_position = move
+					var in_check = is_king_in_check(team)
+					# Undo move
+					board_state[from_pos.y][from_pos.x] = piece
+					board_state[move.y][move.x] = original_piece
+					piece.board_position = from_pos
+					if not in_check:
+						return false # Found a move that escapes check
+	return true
+
 
 func handle_duel_result(winner: Piece):
 	if winner == duel_attacker:

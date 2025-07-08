@@ -6,9 +6,11 @@ class_name TestFall
 @export var slide_colliderR : Area2D
 var begin_wall_slide = false
 
+var fastfall = false
 func Enter():
 	print("Fall state")
 	begin_wall_slide = false
+	fastfall = false
 	wall_detection_enabled(true)
 	playanim("fall")
 
@@ -38,7 +40,7 @@ func Exit():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	#handles vertical events
 	elif character.is_on_floor():
 		Transitioned.emit(self, "idle")
@@ -49,9 +51,13 @@ func Physics_Update(delta):
 		Transitioned.emit(self,"UpSpecial")
 	elif begin_wall_slide and (char_attributes.can_air_dodge or char_attributes.can_double_jump or char_attributes.can_wall_jump):
 		Transitioned.emit(self,"wallslide")
-		
+	elif Input.is_action_just_pressed(get_action("attack")):
+		Transitioned.emit(self, "NeutralAir")
 	else:
 		character.velocity.y = clamp(character.velocity.y + char_attributes.GRAVITY, -char_attributes.MAX_FALL_SPEED, char_attributes.MAX_FALL_SPEED)
+		if fastfall:
+			character.velocity.y = char_attributes.MAX_FALL_SPEED
+		
 		#if you can double jump do it if it's input
 		if Input.is_action_pressed(get_action("jump")) and char_attributes.can_double_jump:
 			char_attributes.can_double_jump = false
@@ -59,8 +65,9 @@ func Physics_Update(delta):
 			
 		#input for fastfall.
 		elif Input.is_action_pressed(get_action("down")):
-			Transitioned.emit(self, "fastfall")
-			
+			fastfall = true
+			character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.AIRFRICTIONLERP)
+			character.move_and_slide()
 		#handles horizontal events
 		elif Input.is_action_pressed(get_action("left")):
 			character.velocity.x = lerp(character.velocity.x,-speed,char_attributes.AIRSPEEDLERP)

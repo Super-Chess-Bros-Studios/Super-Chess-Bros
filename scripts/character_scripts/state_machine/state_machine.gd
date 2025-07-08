@@ -25,10 +25,12 @@ func _ready():
 			child.Transitioned.connect(on_child_transitioned)
 	#Checks if there's an initial state set in the State Machine node.
 	if initial_state:
-		initial_state.char_attributes.cur_dir = DIRECTION.right
 		initial_state.Enter()
 		current_state = initial_state
-		char_attributes.cur_dir = DIRECTION.right
+		if char_attributes.player_id == 1:
+			char_attributes.cur_dir = DIRECTION.right
+		else:
+			char_attributes.cur_dir = DIRECTION.left
 	else:
 		push_error("There's no initial state set!")
 		return

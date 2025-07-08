@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtf4p6j0qehoa"]
+[gd_scene load_steps=10 format=3 uid="uid://dtf4p6j0qehoa"]
 
 [ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
 [ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
@@ -6,18 +6,47 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4mqg7"]
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3sglg"]
+normal = Vector2(1, 0)
+distance = -360.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sj726"]
+normal = Vector2(-1, 0)
+distance = -360.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3sglg"]
 size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj726"]
 size = Vector2(130, 130)
 
+[sub_resource type="GDScript" id="GDScript_3sglg"]
+script/source = "extends Button
+
+func _ready() -> void:
+	connect(\"pressed\", reload_scene)
+
+func reload_scene():
+	get_tree().reload_current_scene()
+"
+
 [node name="TestScene" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_4mqg7")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_3sglg")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(1, 0)
+shape = SubResource("WorldBoundaryShape2D_sj726")
 
 [node name="Player1" parent="." instance=ExtResource("1_8xinf")]
 position = Vector2(36, -26)
@@ -29,8 +58,8 @@ position = Vector2(206.96, -148.44)
 player_id = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -294)
-zoom = Vector2(2, 2)
+position = Vector2(0, -240)
+zoom = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-46, -293)
@@ -51,7 +80,7 @@ texture = ExtResource("2_i052m")
 shape = SubResource("RectangleShape2D_3sglg")
 
 [node name="EvilHitbox" type="Sprite2D" parent="."]
-position = Vector2(-232, -27)
+position = Vector2(-282.4, -272.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_i052m")
 
@@ -69,7 +98,7 @@ position = Vector2(0, 7.62939e-06)
 shape = SubResource("RectangleShape2D_sj726")
 
 [node name="EvilHitbox2" type="Sprite2D" parent="."]
-position = Vector2(-126, -26)
+position = Vector2(-176.4, -271.4)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_i052m")
 
@@ -85,6 +114,14 @@ metadata/_custom_type_script = "uid://j4sloqxb1mei"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EvilHitbox2/Hitbox"]
 position = Vector2(0, 7.62939e-06)
 shape = SubResource("RectangleShape2D_sj726")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 213.0
+offset_top = -443.0
+offset_right = 320.0
+offset_bottom = -412.0
+text = "reload scene"
+script = SubResource("GDScript_3sglg")
 
 [editable path="Player1"]
 [editable path="Player2"]

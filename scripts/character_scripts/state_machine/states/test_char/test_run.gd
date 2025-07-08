@@ -2,7 +2,7 @@ extends CharacterState
 class_name TestRun
 
 # @export var anim : AnimatedSprite2D
-@export var speed : int = 400
+@export var speed : float = 400
 @export var timer : Timer
 
 #Basically, there is a period of time you want to have that allows the character to
@@ -28,11 +28,20 @@ func apply_friction():
 
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		Transitioned.emit(self, "hitstun")
+		Transitioned.emit(self, "hitfreeze")
 	
 	#ensures the player doesn't just run on air
 	elif !character.is_on_floor():
 		Transitioned.emit(self,"fall")
+	elif Input.is_action_pressed(get_action("up")) and Input.is_action_just_pressed(get_action("special")):
+		Transitioned.emit(self,"UpSpecial")
+	#dash attack input
+	elif Input.is_action_just_pressed(get_action("attack")):
+		if anim.current_animation == "skid":
+			print("skid jab")
+			Transitioned.emit(self, "jab")
+		else:
+			Transitioned.emit(self,"DashAttack")
 	#This handles transition to pivot
 	elif !timer.is_stopped() and Input.is_action_pressed(get_action("right")) and char_attributes.cur_dir == DIRECTION.left:
 		Transitioned.emit(self, "Pivot")
@@ -41,6 +50,10 @@ func Physics_Update(delta):
 	
 	#handles transition to roll
 	elif Input.is_action_just_pressed(get_action("shield")) and char_attributes.can_roll:
+		#when parry state gets implemented, uncomment the below line of code so we can have sliding parries!
+		#if anim.get_animation("skid"):
+		#	Transitioned.emit(self, "Parry")
+		#else:
 		Transitioned.emit(self,"roll")
 	
 	#if you let go of the key direction you're going, you transition to idle.
