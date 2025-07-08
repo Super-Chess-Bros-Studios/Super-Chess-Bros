@@ -55,6 +55,7 @@ func Enter():
 	playanim("hitfreeze")
 
 func Exit():
+	char_attributes.hitbox_group = -1
 	char_attributes.DI = directional_input
 
 func Physics_Update(delta):
