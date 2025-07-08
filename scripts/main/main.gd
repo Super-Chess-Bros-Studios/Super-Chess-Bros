@@ -2,7 +2,6 @@ extends Node
 
 # Core systems
 var game_controller: MainGameController
-var input_manager: InputManager
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
@@ -14,7 +13,6 @@ func _ready():
 func initialize_systems():
 	# Create controllers
 	game_controller = MainGameController.new()
-	input_manager = InputManager.new()
 	
 	canvas_layer.follow_viewport_enabled = true
 	canvas_layer.layer = 0
@@ -32,11 +30,12 @@ func setup_connections():
 
 func start_game():
 	# Set up input devices
-	input_manager.set_white_player_device("controller", 0, "White") #Params are device type, deivce id, color for printing
-	input_manager.set_black_player_device("controller", 1, "Black")  # If using keyboard and controller both devices ids are 0. Seccond contrller is 1
+	InputManager.initialize_player_devices()
+	InputManager.set_white_player_device("controller", 0, "White") #Params are device type, deivce id, color for printing
+	InputManager.set_black_player_device("controller", 1, "Black")  # If using keyboard and controller both devices ids are 0. Seccond contrller is 1
 	
 	# Start at title screen
-	request_scene_change("testScene")
+	request_scene_change("chess")
 
 # Public API for scene changes
 func request_scene_change(scene_name: String):
@@ -47,10 +46,6 @@ func request_duel_transition():
 
 func request_duel_exit():
 	game_controller.request_duel_exit()
-
-# Getters
-func get_input_manager() -> InputManager:
-	return input_manager
 
 func get_game_controller() -> MainGameController:
 	return game_controller
@@ -82,7 +77,3 @@ func connect_scene_signals():
 	if current_scene.has_signal("request_scene_change"):
 		if not current_scene.request_scene_change.is_connected(_on_scene_change_requested):
 			current_scene.request_scene_change.connect(_on_scene_change_requested)
-
-# ==========================================
-# Save/Load System
-# ==========================================
