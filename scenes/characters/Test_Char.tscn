@@ -1226,8 +1226,8 @@ collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-texture = ExtResource("2_3ywid")
-hframes = 8
+texture = ExtResource("3_4jtsn")
+hframes = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 reset_on_save = false

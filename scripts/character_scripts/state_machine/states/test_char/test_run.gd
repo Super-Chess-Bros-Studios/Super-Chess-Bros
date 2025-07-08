@@ -37,7 +37,8 @@ func Physics_Update(delta):
 		Transitioned.emit(self,"UpSpecial")
 	#dash attack input
 	elif Input.is_action_just_pressed(get_action("attack")):
-		if anim.get_animation("skid"):
+		if anim.current_animation == "skid":
+			print("skid jab")
 			Transitioned.emit(self, "jab")
 		else:
 			Transitioned.emit(self,"DashAttack")
