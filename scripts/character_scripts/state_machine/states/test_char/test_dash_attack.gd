@@ -17,23 +17,21 @@ func Enter():
 func end_of_dash_attack():
 	dash_attack_ended = true
 
+func Exit():
+	da_hitbox1.deactivate_hitbox()
+	da_hitbox2.deactivate_hitbox()
+
 func Physics_Update(_delta: float):
 	if char_attributes.just_took_damage:
 		#Any time an attack has hitboxes, the hitboxes need to be deactivated before the state transitions.
 		#Don't worry, you still have functionality like rapid jabs available by just looping the animation!
-		da_hitbox1.deactivate_hitbox()
-		da_hitbox2.deactivate_hitbox()
 		Transitioned.emit(self,"hitfreeze")
 	elif char_attributes.just_hit_enemy:
 		freeze_frame(0.1)
 		char_attributes.just_hit_enemy = false
 	elif !character.is_on_floor():
-		da_hitbox1.deactivate_hitbox()
-		da_hitbox2.deactivate_hitbox()
 		Transitioned.emit(self,"fall")
 	elif dash_attack_ended:
-		da_hitbox1.deactivate_hitbox()
-		da_hitbox2.deactivate_hitbox()
 		Transitioned.emit(self, "idle")
 	else:
 		character.velocity.x = speed * char_attributes.cur_dir

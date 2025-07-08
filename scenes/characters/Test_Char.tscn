@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=72 format=3 uid="uid://5b3fmt2t3sc6"]
 
 [ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
 [ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
@@ -18,11 +18,11 @@
 [ext_resource type="Script" uid="uid://db3y4jnn8ci5y" path="res://scripts/character_scripts/state_machine/states/character_attributes.gd" id="8_h8dpt"]
 [ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
 [ext_resource type="Script" uid="uid://xq4wnlhqxdlm" path="res://scripts/character_scripts/state_machine/states/test_char/test_jump.gd" id="9_qga04"]
-[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
+[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
 [ext_resource type="Script" uid="uid://dsq2k53fkg20h" path="res://scripts/character_scripts/state_machine/states/test_char/test_short_hop.gd" id="11_0l6pb"]
 [ext_resource type="Script" uid="uid://dxn1tegm7uca6" path="res://scripts/character_scripts/state_machine/states/test_char/test_fall.gd" id="11_hmptn"]
+[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="13_tyg5d"]
 [ext_resource type="Script" uid="uid://d26weydsrf1ra" path="res://scripts/character_scripts/state_machine/states/test_char/test_initial_dash.gd" id="13_va0ok"]
-[ext_resource type="Script" uid="uid://cfpxokfyo3ldp" path="res://scripts/character_scripts/state_machine/states/test_char/test_fastfall.gd" id="14_w2ni4"]
 [ext_resource type="Script" uid="uid://cqcicn3e5fkak" path="res://scripts/character_scripts/state_machine/states/test_char/test_pivot.gd" id="15_1ekob"]
 [ext_resource type="Script" uid="uid://dbhq6jkm6podc" path="res://scripts/character_scripts/state_machine/states/test_char/test_air_dodge.gd" id="17_eam3d"]
 [ext_resource type="Script" uid="uid://d0tk7qxtqo4sl" path="res://scripts/character_scripts/state_machine/states/test_char/test_roll.gd" id="20_he0e7"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" uid="uid://dnfprtkp32yl1" path="res://scripts/character_scripts/state_machine/states/test_char/test_jab.gd" id="32_moi7e"]
 [ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="33_erow1"]
 [ext_resource type="Script" uid="uid://btlsvroptalej" path="res://scripts/character_scripts/state_machine/states/test_char/test_dash_attack.gd" id="34_q47m3"]
+[ext_resource type="Script" uid="uid://52k7o3fdxuek" path="res://scripts/character_scripts/state_machine/states/test_char/test_neutral_air.gd" id="37_nprwx"]
 
 [sub_resource type="Animation" id="Animation_b8cx6"]
 length = 0.001
@@ -1030,7 +1031,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("9_tqteo")]
+"values": [ExtResource("13_tyg5d")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1154,6 +1155,101 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_nprwx"]
+resource_name = "neutral_air"
+length = 0.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_tqteo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitboxes/NairHitbox1")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"default_hitbox"
+}, {
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitboxes/NairHitbox2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"default_hitbox"
+}, {
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("State Machine/NeutralAir")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_nair"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b8cx6"]
 _data = {
 &"RESET": SubResource("Animation_b8cx6"),
@@ -1170,6 +1266,7 @@ _data = {
 &"jab": SubResource("Animation_moi7e"),
 &"jump": SubResource("Animation_0owkq"),
 &"jumpsquat": SubResource("Animation_mlf1o"),
+&"neutral_air": SubResource("Animation_nprwx"),
 &"pivot": SubResource("Animation_m852p"),
 &"roll": SubResource("Animation_p57wh"),
 &"run": SubResource("Animation_1gi5x"),
@@ -1200,6 +1297,9 @@ size = Vector2(45, 8.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xadbk"]
 size = Vector2(58, 41)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfv6w"]
+size = Vector2(55, 30)
+
 [node name="TestChar" type="Node2D" node_paths=PackedStringArray("initial_state", "char_attributes", "state_machine", "hurtbox")]
 script = ExtResource("5_422c8")
 initial_state = NodePath("CharacterBody2D/State Machine/Idle")
@@ -1212,9 +1312,8 @@ collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 texture_filter = 1
-texture = ExtResource("4_ld6di")
+texture = ExtResource("9_tqteo")
 hframes = 9
-frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 reset_on_save = false
@@ -1312,15 +1411,6 @@ anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://d26weydsrf1ra"
-
-[node name="Fastfall" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("slide_colliderL", "slide_colliderR", "anim", "sprite", "character")]
-script = ExtResource("14_w2ni4")
-slide_colliderL = NodePath("../../LeftCollide")
-slide_colliderR = NodePath("../../RightCollide")
-anim = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-character = NodePath("../..")
-metadata/_custom_type_script = "uid://cfpxokfyo3ldp"
 
 [node name="Pivot" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("anim", "sprite", "character")]
 script = ExtResource("15_1ekob")
@@ -1426,6 +1516,15 @@ anim = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://btlsvroptalej"
+
+[node name="NeutralAir" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("hitbox1", "hitbox2", "anim", "sprite", "character")]
+script = ExtResource("37_nprwx")
+hitbox1 = NodePath("../../Hitboxes/NairHitbox1")
+hitbox2 = NodePath("../../Hitboxes/NairHitbox2")
+anim = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+character = NodePath("../..")
+metadata/_custom_type_script = "uid://52k7o3fdxuek"
 
 [node name="Hurtbox" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 2
@@ -1533,16 +1632,48 @@ position = Vector2(19, -10.5)
 shape = SubResource("RectangleShape2D_xadbk")
 disabled = true
 
+[node name="NairHitbox1" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+script = ExtResource("33_erow1")
+bkb = 100.0
+kbg = 10.0
+kb_dir = Vector2(1, -1)
+damage = 4.0
+hitbox_group = 1
+hitbox_owner = NodePath("../../Hurtbox")
+char_attributes = NodePath("../../CharacterAttributes")
+collision_box = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hitboxes/NairHitbox1"]
+position = Vector2(10.5, 1)
+shape = SubResource("RectangleShape2D_cfv6w")
+disabled = true
+
+[node name="NairHitbox2" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+script = ExtResource("33_erow1")
+bkb = 200.0
+kbg = 30.0
+kb_dir = Vector2(1, -0.5)
+damage = 5.0
+hitbox_group = 2
+hitbox_owner = NodePath("../../Hurtbox")
+char_attributes = NodePath("../../CharacterAttributes")
+collision_box = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hitboxes/NairHitbox2"]
+position = Vector2(10.5, 1)
+shape = SubResource("RectangleShape2D_cfv6w")
+disabled = true
+
 [connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/FullHop" method="_on_left_collide"]
 [connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/Fall" method="_on_left_collide"]
-[connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/Fastfall" method="_on_left_collide"]
 [connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/SpecialFall" method="_on_left_collide"]
 [connection signal="body_exited" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/FullHop" method="_on_left_collide_body_exited"]
 [connection signal="body_exited" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/WallSlide" method="_on_wall_detect_body_exited"]
 [connection signal="body_exited" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/SpecialFall" method="_on_left_collide_body_exited"]
 [connection signal="body_entered" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/FullHop" method="_on_right_collide"]
 [connection signal="body_entered" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/Fall" method="_on_right_collide"]
-[connection signal="body_entered" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/Fastfall" method="_on_right_collide"]
 [connection signal="body_entered" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/SpecialFall" method="_on_right_collide"]
 [connection signal="body_exited" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/FullHop" method="_on_right_collide_body_exited"]
 [connection signal="body_exited" from="CharacterBody2D/RightCollide" to="CharacterBody2D/State Machine/WallSlide" method="_on_wall_detect_body_exited"]
