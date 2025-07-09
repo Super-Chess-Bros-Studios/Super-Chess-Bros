@@ -22,7 +22,8 @@ func Exit():
 
 func Physics_Update(delta):
 	if character.is_on_floor():
-		Transitioned.emit(self,"idle")
+		char_attributes.landing_lag_length = 0.1
+		Transitioned.emit(self,"grounded")
 	elif air_dodge_end:
 		#might add a transition to ground if grounded but i wanna see this first
 		Transitioned.emit(self, "fall")
