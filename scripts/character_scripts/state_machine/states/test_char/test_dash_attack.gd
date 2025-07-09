@@ -12,6 +12,8 @@ var dash_attack_ended = false
 func Enter():
 	print("Dash Attack State")
 	dash_attack_ended = false
+	da_hitbox1.default_hitbox()
+	da_hitbox2.default_hitbox()
 	playanim("dash_attack")
 
 func end_of_dash_attack():

@@ -13,6 +13,8 @@ func Enter():
 	up_special_end = false
 	can_land = false
 	character.velocity.y = char_attributes.JUMP_POWER
+	up_special_hb1.default_hitbox()
+	up_special_hb2.default_hitbox()
 	playanim("up_special")
 
 #This is called by the animation player.
@@ -22,21 +24,19 @@ func end_of_up_special():
 func allow_land():
 	can_land = true
 
+func Exit():
+	up_special_hb1.deactivate_hitbox()
+	up_special_hb2.deactivate_hitbox()
+
 func Physics_Update(delta):
 	if char_attributes.just_took_damage:
-		up_special_hb1.deactivate_hitbox()
-		up_special_hb2.deactivate_hitbox()
 		Transitioned.emit(self, "hitfreeze")
 	elif char_attributes.just_hit_enemy:
 		freeze_frame(0.2)
 		char_attributes.just_hit_enemy = false
 	elif character.is_on_floor() and can_land:
-		up_special_hb1.deactivate_hitbox()
-		up_special_hb2.deactivate_hitbox()
 		Transitioned.emit(self,"idle")
 	elif up_special_end:
-		up_special_hb1.deactivate_hitbox()
-		up_special_hb2.deactivate_hitbox()
 		Transitioned.emit(self, "SpecialFall")
 	
 	#handles horizontal events
