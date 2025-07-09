@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxk24mfhtxeop"
-path="res://.godot/imported/player climb-back 48x48.png-7b6d229adb2ffdf8d0b82f557149dc8e.ctex"
+path="res://.godot/imported/player climb-back 48x48.png-47ba1176772415ff97ceb4fd9ae23632.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Climb (facing back of player)/player climb-back 48x48.png"
-dest_files=["res://.godot/imported/player climb-back 48x48.png-7b6d229adb2ffdf8d0b82f557149dc8e.ctex"]
+source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Climb (facing back of player)/player climb-back 48x48.png"
+dest_files=["res://.godot/imported/player climb-back 48x48.png-47ba1176772415ff97ceb4fd9ae23632.ctex"]
 
 [params]
 

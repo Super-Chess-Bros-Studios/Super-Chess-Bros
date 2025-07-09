@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4n23iawe35lj"
-path="res://.godot/imported/player katana run 48x48.png-920e8e7311ae9e9f30178dc42f1987ab.ctex"
+path="res://.godot/imported/player katana run 48x48.png-62a9c0483d9be60fbaacee94b3bc3842.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png"
-dest_files=["res://.godot/imported/player katana run 48x48.png-920e8e7311ae9e9f30178dc42f1987ab.ctex"]
+source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png"
+dest_files=["res://.godot/imported/player katana run 48x48.png-62a9c0483d9be60fbaacee94b3bc3842.ctex"]
 
 [params]
 

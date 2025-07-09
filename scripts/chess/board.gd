@@ -147,7 +147,6 @@ extends Node2D
 # Core systems - Initialized at runtime
 var game_manager: GameManager
 var piece_spawner: PieceSpawner
-var input_manager: InputManager
 var main_game_controller: MainGameController
 var scene_manager: SceneManager
 
@@ -163,7 +162,6 @@ func _ready():
 func initialize_systems():
 	# Initialize game manager (handles all game logic)
 	game_manager = GameManager.new()
-	input_manager = get_main_input_manager()
 	main_game_controller = get_main_game_controller()
 	# Initialize piece spawner (creates chess pieces)
 	piece_spawner = PieceSpawner.new()
@@ -181,11 +179,11 @@ func setup_cursors():
 	
 	# Setup white cursor (Player 1)
 	white_cursor.cursor_pos = board_center
-	white_cursor.setup(game_manager, board_renderer, input_manager)
+	white_cursor.setup(game_manager, board_renderer)
 	
 	# Setup black cursor (Player 2)
 	black_cursor.cursor_pos = board_center
-	black_cursor.setup(game_manager, board_renderer, input_manager)
+	black_cursor.setup(game_manager, board_renderer)
 
 func spawn_initial_pieces():
 	piece_spawner.spawn_all_pieces()
@@ -266,15 +264,3 @@ func get_main_game_controller() -> MainGameController:
 		return main_node.get_game_controller()
 	else:
 		return null
-
-func get_main_input_manager() -> InputManager:
-	# Get the InputManager from Main that has the device data
-	var main_node = get_node_or_null("/root/Main")
-	if main_node and main_node.has_method("get_input_manager"):
-		return main_node.get_input_manager()
-	else:
-		# Fallback for testing individual scenes
-		var test_manager = InputManager.new()
-		test_manager.set_white_player_device("keyboard", -1, "Keyboard")
-		test_manager.set_black_player_device("controller", 0, "Test Controller")
-		return test_manager
