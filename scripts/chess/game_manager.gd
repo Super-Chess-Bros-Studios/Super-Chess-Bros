@@ -17,6 +17,8 @@ var duel_defender: Piece = null
 # En passant tracking
 var en_passant_target: Vector2i = Vector2i(-1, -1) # Initialize en passant target to invalid position
 var en_passant_pawn: Piece = null  # Reference to the pawn that can be captured en passant
+var en_passant_duel_active: bool = false
+var en_passant_landing_square: Vector2i = Vector2i(-1, -1)
 
 func _init():
 	initialize_board_state()
@@ -138,37 +140,14 @@ func perform_en_passant_capture(piece: Piece, to_pos: Vector2i) -> bool:
 	# Perform the en passant capture
 	var from_pos = piece.board_position
 	var captured_pawn = get_en_passant_pawn()
-	
 	if captured_pawn == null:
 		return false
-	
-	# Remove the captured pawn from the board
-	var captured_pos = captured_pawn.board_position
-	board_state[captured_pos.y][captured_pos.x] = null
 
-	#FIXME	
-	# Initiate duel
-	#on_initiate_duel(piece, captured_pawn)
+	# Store en passant duel state
+	en_passant_duel_active = true
+	en_passant_landing_square = to_pos # The en passant target square (where the pawn should land)
 
-	# Destroy the captured pawn for now
-	captured_pawn.queue_free()
-	
-	
-	# Move the capturing pawn
-	board_state[from_pos.y][from_pos.x] = null
-	board_state[to_pos.y][to_pos.x] = piece
-	piece.set_board_position(to_pos, ChessConstants.TILE_SIZE)
-	
-	# Clear en passant target
-	clear_en_passant_target()
-	
-	# Emit signals
-	piece_moved.emit(piece, from_pos, to_pos)
-	
-	deselect_piece()
-	switch_turn()
-	
-	print("En passant capture performed")
+	on_initiate_duel(piece, captured_pawn)
 	return true
 
 
@@ -350,6 +329,35 @@ func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
 					return true
 	return false
 
+func is_king_in_check_after_move(team: ChessConstants.TeamColor, to_pos: Vector2i) -> bool:
+	# Simulate the move to check if the king is in check (for castling)
+	# Find the king for the given team
+	var king_pos: Vector2i = Vector2i(-1, -1)
+	for y in range(ChessConstants.BOARD_SIZE):
+		for x in range(ChessConstants.BOARD_SIZE):
+			var piece = board_state[y][x]
+			if piece != null and piece.team == team and piece.point_value == ChessConstants.PIECE_VALUES.king:
+				king_pos = Vector2i(x, y)
+				break
+	
+	# king not found
+	if king_pos == Vector2i(-1, -1):
+		return false
+	
+	# Temporarily move the king to the new position
+	var king_piece = board_state[king_pos.y][king_pos.x]
+	board_state[king_pos.y][king_pos.x] = null
+	board_state[to_pos.y][to_pos.x] = king_piece
+	
+	# Check if the king is in check at the new position
+	var in_check = is_king_in_check(team)
+	
+	# Restore the original board state
+	board_state[king_pos.y][king_pos.x] = king_piece
+	board_state[to_pos.y][to_pos.x] = null  # Always null for castling
+	
+	return in_check
+
 func is_checkmate(team: ChessConstants.TeamColor) -> bool:
 	if not is_king_in_check(team):
 		return false
@@ -385,6 +393,46 @@ func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
 
 
 func handle_duel_result(winner: Piece):
+	if en_passant_duel_active:
+		# Handle En Passant duel result
+		if winner == duel_attacker:
+			print("Attacker wins en passant duel")
+			# Remove attacker from old position
+			board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
+			# Move attacker to skipped square
+			board_state[en_passant_landing_square.y][en_passant_landing_square.x] = duel_attacker
+			duel_attacker.set_board_position(en_passant_landing_square, ChessConstants.TILE_SIZE)
+			deselect_piece()
+
+			# Clear en passant state
+			clear_en_passant_target()
+			# Remove captured pawn from board
+			board_state[duel_defender.board_position.y][duel_defender.board_position.x] = null
+			duel_defender.queue_free()
+
+
+			# Reset duel state
+			duel_attacker = null
+			duel_defender = null
+			en_passant_duel_active = false
+			en_passant_landing_square = Vector2i(-1, -1) # Reset to invalid position
+			switch_turn()
+		else:
+			print("Defender wins en passant duel")
+			# Remove attacker from board
+			board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
+			deselect_piece()
+			duel_attacker.queue_free()
+			
+			# Clear en passant state
+			clear_en_passant_target()
+			# Reset duel state
+			duel_attacker = null
+			duel_defender = null
+			en_passant_duel_active = false
+			en_passant_landing_square = Vector2i(-1, -1)
+			switch_turn()
+		return # No need to check for other cases if you handle en passant duel result
 	if winner == duel_attacker:
 		print("Attacker wins!")
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null  # Remove from old position
