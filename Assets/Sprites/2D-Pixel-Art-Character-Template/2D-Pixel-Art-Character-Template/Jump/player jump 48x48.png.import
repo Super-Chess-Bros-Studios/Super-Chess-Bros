@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kbot10vfnbdl"
-path="res://.godot/imported/player jump 48x48.png-c11b64a2f6852b441f194a1b5997029b.ctex"
+path="res://.godot/imported/player jump 48x48.png-b4f94efac132891fc946535269cc0084.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Jump/player jump 48x48.png"
-dest_files=["res://.godot/imported/player jump 48x48.png-c11b64a2f6852b441f194a1b5997029b.ctex"]
+source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Jump/player jump 48x48.png"
+dest_files=["res://.godot/imported/player jump 48x48.png-b4f94efac132891fc946535269cc0084.ctex"]
 
 [params]
 
