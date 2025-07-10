@@ -240,6 +240,8 @@ func _on_initiate_duel(attacker: Piece, defender: Piece):
 func _on_duel_ended(winner: Piece):
 	game_manager.handle_duel_result(winner)
 
+	board_renderer.reset_all_tiles()
+
 func get_game_manager() -> GameManager:
 	#Returns the GameManager instance for accessing game state and logic.
 
