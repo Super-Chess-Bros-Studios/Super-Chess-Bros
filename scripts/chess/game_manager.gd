@@ -8,6 +8,7 @@ signal piece_deselected()
 signal turn_switched(new_team: ChessConstants.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
 signal initiate_duel(attacker: Piece, defender: Piece)
+signal piece_captured(captured: Piece, capturer: Piece)
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
@@ -392,7 +393,8 @@ func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
 	return true
 
 
-func handle_duel_result(winner: Piece):
+func handle_duel_result(winner: Piece, looser: Piece):
+
 	if en_passant_duel_active:
 		# Handle En Passant duel result
 		if winner == duel_attacker:
@@ -408,8 +410,7 @@ func handle_duel_result(winner: Piece):
 			clear_en_passant_target()
 			# Remove captured pawn from board
 			board_state[duel_defender.board_position.y][duel_defender.board_position.x] = null
-			duel_defender.queue_free()
-
+			piece_captured.emit(duel_defender, duel_attacker)
 
 			# Reset duel state
 			duel_attacker = null
@@ -422,7 +423,7 @@ func handle_duel_result(winner: Piece):
 			# Remove attacker from board
 			board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
 			deselect_piece()
-			duel_attacker.queue_free()
+			piece_captured.emit(duel_attacker, duel_defender)
 			
 			# Clear en passant state
 			clear_en_passant_target()
@@ -439,7 +440,7 @@ func handle_duel_result(winner: Piece):
 		board_state[duel_defender.board_position.y][duel_defender.board_position.x] = duel_attacker     # Place in new position
 		duel_attacker.set_board_position(duel_defender.board_position, ChessConstants.TILE_SIZE)
 		deselect_piece()
-		duel_defender.queue_free()
+		piece_captured.emit(duel_defender, duel_attacker)
 		duel_defender = null
 		duel_attacker = null
 		switch_turn()
@@ -448,7 +449,7 @@ func handle_duel_result(winner: Piece):
 		print("Defender wins!")
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
 		deselect_piece()
-		duel_attacker.queue_free()
+		piece_captured.emit(duel_attacker, duel_defender)
 		duel_attacker = null
 		duel_defender = null
 		switch_turn()

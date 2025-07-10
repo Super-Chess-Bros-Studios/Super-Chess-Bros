@@ -63,7 +63,7 @@ func transition_to_duel():
 	scene_changed.emit("dual_arena")
 
 # Exit duel and return to cached chess
-func exit_duel(winner: Piece):
+func exit_duel(winner: Piece, looser: Piece):
 	if current_scene_name != "dual_arena" or not cached_chess_scene:
 		push_error("Can only exit duel when in duel scene with cached chess")
 		return
@@ -80,7 +80,7 @@ func exit_duel(winner: Piece):
 	current_scene_instance.show()
 	current_scene_name = "chess"
 	scene_changed.emit("chess")
-	duel_ended.emit(winner)
+	duel_ended.emit(winner, looser)
 
 func get_current_scene() -> Node:
 	return current_scene_instance
