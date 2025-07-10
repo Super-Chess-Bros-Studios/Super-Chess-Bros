@@ -324,7 +324,7 @@ func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
 		for x in range(ChessConstants.BOARD_SIZE):
 			var piece = board_state[y][x]
 			if piece != null and piece.team == oposing_team:
-				var moves = piece.get_valid_moves(self)
+				var moves = piece.get_opponent_valid_moves(self)
 				if king_pos in moves:
 					return true
 	return false
