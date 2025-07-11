@@ -394,7 +394,7 @@ func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
 
 
 func handle_duel_result(winner: Piece, looser: Piece):
-
+	piece_captured.emit(looser, winner)
 	if en_passant_duel_active:
 		# Handle En Passant duel result
 		if winner == duel_attacker:
@@ -410,7 +410,7 @@ func handle_duel_result(winner: Piece, looser: Piece):
 			clear_en_passant_target()
 			# Remove captured pawn from board
 			board_state[duel_defender.board_position.y][duel_defender.board_position.x] = null
-			piece_captured.emit(duel_defender, duel_attacker)
+			
 
 			# Reset duel state
 			duel_attacker = null
@@ -422,9 +422,7 @@ func handle_duel_result(winner: Piece, looser: Piece):
 			print("Defender wins en passant duel")
 			# Remove attacker from board
 			board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
-			deselect_piece()
-			piece_captured.emit(duel_attacker, duel_defender)
-			
+			deselect_piece()			
 			# Clear en passant state
 			clear_en_passant_target()
 			# Reset duel state
@@ -439,8 +437,7 @@ func handle_duel_result(winner: Piece, looser: Piece):
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null  # Remove from old position
 		board_state[duel_defender.board_position.y][duel_defender.board_position.x] = duel_attacker     # Place in new position
 		duel_attacker.set_board_position(duel_defender.board_position, ChessConstants.TILE_SIZE)
-		deselect_piece()
-		piece_captured.emit(duel_defender, duel_attacker)
+		deselect_piece()		
 		duel_defender = null
 		duel_attacker = null
 		switch_turn()
@@ -449,7 +446,6 @@ func handle_duel_result(winner: Piece, looser: Piece):
 		print("Defender wins!")
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
 		deselect_piece()
-		piece_captured.emit(duel_attacker, duel_defender)
 		duel_attacker = null
 		duel_defender = null
 		switch_turn()
