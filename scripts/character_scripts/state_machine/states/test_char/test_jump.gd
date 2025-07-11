@@ -66,7 +66,14 @@ func Physics_Update(delta):
 	
 	elif Input.is_action_pressed(get_action("up")) and Input.is_action_pressed(get_action("special")):
 		Transitioned.emit(self,"UpSpecial")
-	elif Input.is_action_pressed(get_action("attack")):
+		
+	elif (char_attributes.cur_dir == 1 and Input.is_action_pressed(get_action("left"))) and Input.is_action_just_pressed(get_action("attack")):
+			Transitioned.emit(self,"BackAir")	
+			
+	elif (char_attributes.cur_dir == -1 and Input.is_action_pressed(get_action("right"))) and Input.is_action_just_pressed(get_action("attack")):
+			Transitioned.emit(self,"BackAir")	
+	
+	elif Input.is_action_just_pressed(get_action("attack")):
 		Transitioned.emit(self, "NeutralAir")
 	#handles jump input
 	else:
