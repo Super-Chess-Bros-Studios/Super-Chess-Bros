@@ -10,6 +10,7 @@ func Enter():
 	char_attributes.cur_dir *= -1
 	fastfall = false
 	end_of_bair = false
+	hitbox.default_hitbox()
 	playanim("back_air")
 
 func Exit():
@@ -25,11 +26,13 @@ func Update(delta):
 	elif end_of_bair:
 		Transitioned.emit(self,"fall")
 	elif character.is_on_floor():
-		char_attributes.landing_lag_length = 0.4
+		char_attributes.landing_lag_length = 0.3
 		Transitioned.emit(self, "grounded")
-		
+	elif char_attributes.just_hit_enemy:
+		freeze_frame(0.1)
+		char_attributes.just_hit_enemy = false
 	#input for fastfall.
-	elif Input.is_action_pressed(get_action("down")) and character.velocity.y > 0:
+	elif Input.is_action_pressed(get_action("down")) and (character.velocity.y > 0 or Engine.time_scale == 0):
 		fastfall = true
 		character.velocity.x = lerp(character.velocity.x, 0.0, char_attributes.AIRFRICTIONLERP)
 		character.velocity.y = char_attributes.MAX_FALL_SPEED
