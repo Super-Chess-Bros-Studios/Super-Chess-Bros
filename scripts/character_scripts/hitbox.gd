@@ -37,7 +37,9 @@ func _ready():
 #this is primarily used to trigger hitfreeze on the person attacking
 #as of now, hitfreeze on the person attacking freezes the entire game engine
 #hitfreeze on the person being hit are additional frames on top of the game engine being frozen
-func on_area_entered(hurtbox : Hurtbox) -> void:
+func on_area_entered(hurtbox) -> void:
+	if hurtbox is not Hurtbox:
+		return
 	#prevents hitboxes from detecting their owner
 	if hurtbox == hitbox_owner:
 		return
