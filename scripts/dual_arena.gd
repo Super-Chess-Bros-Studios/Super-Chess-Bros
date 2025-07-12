@@ -15,6 +15,6 @@ func _ready():
 func _input(event):
 	# Exit on cancel
 	if event.is_action_pressed("ui_cancel"):
-		SceneManager.exit_duel(defender) 
+		SceneManager.exit_duel(defender, attacker) 
 	if event.is_action_pressed("ui_accept"):
-		SceneManager.exit_duel(attacker) 
+		SceneManager.exit_duel(attacker, defender) 
