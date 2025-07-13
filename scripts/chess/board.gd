@@ -189,14 +189,13 @@ func spawn_initial_pieces():
 	piece_spawner.spawn_all_pieces()
 
 func connect_signals():
-	# Connect game manager signals
+	# Connect game manager signals to local handlers
 	game_manager.game_state_changed.connect(_on_game_state_changed)
 	game_manager.piece_selected.connect(_on_piece_selected)
 	game_manager.piece_deselected.connect(_on_piece_deselected)
 	game_manager.turn_switched.connect(_on_turn_switched)
 	game_manager.piece_moved.connect(_on_piece_moved)
 	game_manager.initiate_duel.connect(_on_initiate_duel)
-	game_manager.piece_captured.connect(_on_piece_captured)
 	SceneManager.duel_ended.connect(_on_duel_ended)
 #These are all the signal handlers
 
@@ -238,15 +237,10 @@ func _on_initiate_duel(attacker: Piece, defender: Piece):
 	SceneManager.transition_to_duel()
 	
 
-func _on_duel_ended(winner: Piece, looser: Piece):
-	game_manager.handle_duel_result(winner, looser)
+func _on_duel_ended(winner: Piece):
+	game_manager.handle_duel_result(winner)
 
 	board_renderer.reset_all_tiles()
-	
-func _on_piece_captured(captured: Piece, capturer: Piece):
-	captured.queue_free()
-	print("Piece Captured")
-	pass
 
 func get_game_manager() -> GameManager:
 	#Returns the GameManager instance for accessing game state and logic.
