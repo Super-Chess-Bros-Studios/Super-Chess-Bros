@@ -196,7 +196,6 @@ func connect_signals():
 	game_manager.turn_switched.connect(_on_turn_switched)
 	game_manager.piece_moved.connect(_on_piece_moved)
 	game_manager.initiate_duel.connect(_on_initiate_duel)
-	game_manager.piece_captured.connect(_on_piece_captured)
 	SceneManager.duel_ended.connect(_on_duel_ended)
 #These are all the signal handlers
 
@@ -240,14 +239,9 @@ func _on_initiate_duel(attacker: Piece, defender: Piece):
 
 func _on_duel_ended(winner: Piece, looser: Piece):
 	game_manager.handle_duel_result(winner, looser)
-
+	looser.queue_free()
 	board_renderer.reset_all_tiles()
 	
-func _on_piece_captured(captured: Piece, capturer: Piece):
-	captured.queue_free()
-	print("Piece Captured")
-	pass
-
 func get_game_manager() -> GameManager:
 	#Returns the GameManager instance for accessing game state and logic.
 

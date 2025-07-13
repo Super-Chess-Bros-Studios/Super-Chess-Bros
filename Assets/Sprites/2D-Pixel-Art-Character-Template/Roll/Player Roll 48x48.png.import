@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cse02smgimka2"
-path="res://.godot/imported/Player Roll 48x48.png-f6bb93bfaca19ea81d9b01d1c8504917.ctex"
+path="res://.godot/imported/Player Roll 48x48.png-7c4ca4285ede6d5f18cbd0d8860c36f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png"
-dest_files=["res://.godot/imported/Player Roll 48x48.png-f6bb93bfaca19ea81d9b01d1c8504917.ctex"]
+source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png"
+dest_files=["res://.godot/imported/Player Roll 48x48.png-7c4ca4285ede6d5f18cbd0d8860c36f3.ctex"]
 
 [params]
 

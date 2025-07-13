@@ -8,7 +8,6 @@ signal piece_deselected()
 signal turn_switched(new_team: ChessConstants.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
 signal initiate_duel(attacker: Piece, defender: Piece)
-signal piece_captured(captured: Piece, capturer: Piece)
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
@@ -298,13 +297,6 @@ func is_enemy(pos: Vector2i, team: ChessConstants.TeamColor) -> bool:
 	var piece = board_state[pos.y][pos.x]
 	return piece != null and piece.team != team
 
-func capture_piece(attack_piece: Piece, capture_pos: Vector2i):
-	var defence_piece = board_state[capture_pos.y][capture_pos.x]
-	if defence_piece != null:
-		defence_piece.queue_free()
-	print("attacking piece: ", attack_piece.name)
-	print("defending piece: ", defence_piece.name)
-
 func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
 	# Find the king for the given team
 	var king_pos: Vector2i = Vector2i(-1, -1)
@@ -394,59 +386,57 @@ func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
 
 
 func handle_duel_result(winner: Piece, looser: Piece):
-	piece_captured.emit(looser, winner)
+	var attacker_wins = (winner == duel_attacker)
+	
 	if en_passant_duel_active:
-		# Handle En Passant duel result
-		if winner == duel_attacker:
-			print("Attacker wins en passant duel")
-			# Remove attacker from old position
-			board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
-			# Move attacker to skipped square
-			board_state[en_passant_landing_square.y][en_passant_landing_square.x] = duel_attacker
-			duel_attacker.set_board_position(en_passant_landing_square, ChessConstants.TILE_SIZE)
-			deselect_piece()
+		_handle_en_passant_duel_result(attacker_wins)
+	else:
+		_handle_regular_duel_result(attacker_wins)
+	
 
-			# Clear en passant state
-			clear_en_passant_target()
-			# Remove captured pawn from board
-			board_state[duel_defender.board_position.y][duel_defender.board_position.x] = null
-			
+func _handle_en_passant_duel_result(attacker_wins: bool):
+	if attacker_wins:
+		print("Attacker wins en passant duel")
+		# Move attacker to en passant landing square
+		_move_piece_to_position(duel_attacker, en_passant_landing_square)
+		# Remove captured pawn
+		board_state[duel_defender.board_position.y][duel_defender.board_position.x] = null
+	else:
+		print("Defender wins en passant duel")
+		# Remove attacker from board
+		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
+	
+	_cleanup_duel_state()
 
-			# Reset duel state
-			duel_attacker = null
-			duel_defender = null
-			en_passant_duel_active = false
-			en_passant_landing_square = Vector2i(-1, -1) # Reset to invalid position
-			switch_turn()
-		else:
-			print("Defender wins en passant duel")
-			# Remove attacker from board
-			board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
-			deselect_piece()			
-			# Clear en passant state
-			clear_en_passant_target()
-			# Reset duel state
-			duel_attacker = null
-			duel_defender = null
-			en_passant_duel_active = false
-			en_passant_landing_square = Vector2i(-1, -1)
-			switch_turn()
-		return # No need to check for other cases if you handle en passant duel result
-	if winner == duel_attacker:
+func _handle_regular_duel_result(attacker_wins: bool):
+	if attacker_wins:
 		print("Attacker wins!")
-		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null  # Remove from old position
-		board_state[duel_defender.board_position.y][duel_defender.board_position.x] = duel_attacker     # Place in new position
-		duel_attacker.set_board_position(duel_defender.board_position, ChessConstants.TILE_SIZE)
-		deselect_piece()		
-		duel_defender = null
-		duel_attacker = null
-		switch_turn()
-		
+		# Move attacker to defender's position
+		_move_piece_to_position(duel_attacker, duel_defender.board_position)
+
 	else:
 		print("Defender wins!")
+		# Remove attacker from board
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
-		deselect_piece()
-		duel_attacker = null
-		duel_defender = null
-		switch_turn()
+	
+	_cleanup_duel_state()
+
+func _move_piece_to_position(piece: Piece, new_position: Vector2i):
+	# Remove piece from old position
+	board_state[piece.board_position.y][piece.board_position.x] = null
+	# Place piece in new position
+	board_state[new_position.y][new_position.x] = piece
+	piece.set_board_position(new_position, ChessConstants.TILE_SIZE)
+
+func _cleanup_duel_state():
+	deselect_piece()
+	clear_en_passant_target()
+	
+	# Reset duel state
+	duel_attacker = null
+	duel_defender = null
+	en_passant_duel_active = false
+	en_passant_landing_square = Vector2i(-1, -1)
+	
+	switch_turn()
 		
