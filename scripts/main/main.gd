@@ -31,8 +31,8 @@ func setup_connections():
 func start_game():
 	# Set up input devices
 	InputManager.initialize_player_devices()
-	InputManager.set_white_player_device("keyboard", 0, "White") #Params are device type, deivce id, color for printing
-	InputManager.set_black_player_device("keyboard", 1, "Black")  # If using keyboard and controller both devices ids are 0. Seccond contrller is 1
+	InputManager.set_white_player_device("controller", 0, "White") #Params are device type, deivce id, color for printing
+	InputManager.set_black_player_device("controller", 1, "Black")  # If using keyboard and controller both devices ids are 0. Seccond contrller is 1
 	
 	# Start at title screen
 	request_scene_change("chess")

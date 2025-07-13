@@ -8,7 +8,6 @@ signal piece_deselected()
 signal turn_switched(new_team: ChessConstants.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
 signal initiate_duel(attacker: Piece, defender: Piece)
-signal piece_captured(captured: Piece, capturer: Piece)
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
@@ -422,6 +421,7 @@ func _handle_regular_duel_result(attacker_wins: bool):
 		print("Attacker wins!")
 		# Move attacker to defender's position
 		_move_piece_to_position(duel_attacker, duel_defender.board_position)
+
 	else:
 		print("Defender wins!")
 		# Remove attacker from board
@@ -447,3 +447,10 @@ func _cleanup_duel_state():
 	en_passant_landing_square = Vector2i(-1, -1)
 	
 	switch_turn()
+
+		deselect_piece()
+		duel_attacker.queue_free()
+		duel_attacker = null
+		duel_defender = null
+		switch_turn()
+		

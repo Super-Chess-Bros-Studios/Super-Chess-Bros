@@ -94,11 +94,11 @@ func handle_selection_input():
 		return
 		
 	# Handle accept (select piece/move) and cancel (deselect) inputs
-	if Input.is_action_just_pressed(get_action("accept")):
+	if Input.is_action_pressed(get_action("accept")):
 		print("Accept for player ", player_id)
 		handle_accept_input()
 	
-	if Input.is_action_just_pressed(get_action("cancel")):
+	if Input.is_action_pressed(get_action("cancel")):
 		handle_cancel_input()
 
 func handle_accept_input():

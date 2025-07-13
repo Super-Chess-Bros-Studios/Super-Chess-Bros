@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clw4wtm4s1qki"
-path="res://.godot/imported/chess-pieces.png-972c985179c0105176fd26d667ac3036.ctex"
+path="res://.godot/imported/chess-pieces.png-38f8485e4f8508776975737f87c9773c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/chess/chess-pieces.png"
-dest_files=["res://.godot/imported/chess-pieces.png-972c985179c0105176fd26d667ac3036.ctex"]
+source_file="res://assets/sprites/chess/chess-pieces.png"
+dest_files=["res://.godot/imported/chess-pieces.png-38f8485e4f8508776975737f87c9773c.ctex"]
 
 [params]
 
