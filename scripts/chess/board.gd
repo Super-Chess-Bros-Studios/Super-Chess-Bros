@@ -243,8 +243,8 @@ func _on_duel_ended(winner: Piece, looser: Piece):
 
 	board_renderer.reset_all_tiles()
 	
-func _on_piece_captured(captured: Piece, capturer: Piece):
-	captured.queue_free()
+func _on_piece_captured(winner: Piece, looser: Piece):
+	looser.queue_free()
 	print("Piece Captured")
 	pass
 
