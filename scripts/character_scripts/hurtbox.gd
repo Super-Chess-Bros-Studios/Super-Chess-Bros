@@ -1,7 +1,7 @@
 class_name Hurtbox
 extends Area2D
 
-var char_attributes : CharacterAttributes
+var char_attributes
 
 func _init() -> void:
 	collision_layer = 1
@@ -14,9 +14,7 @@ func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox == null:
 		return
 	#the hitbox_owner is the hurtbox
-	#makes does not call the onhit if your character is invulnerable
-	#nor if you just got hit by a hitbox of the same group
-	elif hitbox.hitbox_owner == self or char_attributes.invulnerable or char_attributes.hitbox_group == hitbox.hitbox_group:
+	elif hitbox.hitbox_owner == self:
 		return
 	#passes the hitbox to the state machine script
 	if owner.has_method("on_hit"):

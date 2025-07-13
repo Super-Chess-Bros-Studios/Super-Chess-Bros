@@ -31,7 +31,7 @@ func Update(delta):
 		char_attributes.landing_lag_length = 0.1
 		Transitioned.emit(self, "grounded")
 	elif char_attributes.just_hit_enemy:
-		freeze_frame(0.1)
+		freeze_frame(0.2)
 		char_attributes.just_hit_enemy = false
 	#input for fastfall.
 	elif Input.is_action_pressed(get_action("down")) and (character.velocity.y > 0 or Engine.time_scale == 0):
