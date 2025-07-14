@@ -52,9 +52,7 @@ func can_player_act(player_id: ChessConstants.PlayerId) -> bool:
 	# Check if given player can act (it's their turn and game isn't over)
 	var current_team = ChessConstants.get_team_from_game_state(current_game_state)
 	var player_team = ChessConstants.get_team_from_player_id(player_id)
-	#====================================================================
-	#return true   # REMOVE FOR 2 CONTROLLERS
-	#====================================================================
+	
 	return current_team == player_team and current_game_state != ChessConstants.GameState.GAME_OVER
 
 func select_piece(piece: Piece) -> bool:
