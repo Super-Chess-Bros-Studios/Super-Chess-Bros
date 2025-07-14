@@ -444,3 +444,18 @@ func _cleanup_duel_state():
 	
 	switch_turn()
 		
+func track_points(winner: Piece, looser: Piece):
+	if winner.team == ChessConstants.TeamColor.WHITE:
+		white_points += looser.point_value
+	else:
+		black_points += looser.point_value
+	print("White points: ", white_points)
+	print("Black points: ", black_points)
+
+func track_captured_pieces(_winner: Piece, looser: Piece):
+	if looser.team == ChessConstants.TeamColor.WHITE:
+		captured_white_pieces.append(looser.name)
+	else:
+		captured_black_pieces.append(looser.name)
+	print("Captured white pieces: ", captured_white_pieces)
+	print("Captured black pieces: ", captured_black_pieces)

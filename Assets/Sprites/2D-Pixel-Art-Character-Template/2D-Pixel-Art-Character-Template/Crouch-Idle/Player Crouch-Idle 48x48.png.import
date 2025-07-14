@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvubgs48kisil"
-path="res://.godot/imported/Player Crouch-Idle 48x48.png-acddba786d44498122227af02a33fb02.ctex"
+path="res://.godot/imported/Player Crouch-Idle 48x48.png-f6863b72b112557803bc863fb43d9928.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png"
-dest_files=["res://.godot/imported/Player Crouch-Idle 48x48.png-acddba786d44498122227af02a33fb02.ctex"]
+source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png"
+dest_files=["res://.godot/imported/Player Crouch-Idle 48x48.png-f6863b72b112557803bc863fb43d9928.ctex"]
 
 [params]
 
