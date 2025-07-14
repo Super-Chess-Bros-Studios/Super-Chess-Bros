@@ -29,7 +29,7 @@ func setup_connections():
 	SceneManager.scene_changed.connect(_on_scene_changed)
 
 func start_game():
-	print("Starting game")
+	print("Starting game from main.gd")
 	# Set up input devices
 	InputManager.initialize_player_devices()
 	InputManager.set_white_player_device("keyboard", 0, "White") #Params are device type, deivce id, color for printing
