@@ -147,7 +147,6 @@ extends Node2D
 # Core systems - Initialized at runtime
 var game_manager: GameManager
 var piece_spawner: PieceSpawner
-var main_game_controller: MainGameController
 var scene_manager: SceneManager
 
 # Initialization of all systems
@@ -162,7 +161,6 @@ func _ready():
 func initialize_systems():
 	# Initialize game manager (handles all game logic)
 	game_manager = GameManager.new()
-	main_game_controller = get_main_game_controller()
 	# Initialize piece spawner (creates chess pieces)
 	piece_spawner = PieceSpawner.new()
 	add_child(piece_spawner)
@@ -230,17 +228,19 @@ func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
 	#print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
 	board_renderer.reset_all_tiles()
 
-func _on_initiate_duel(attacker: Piece, defender: Piece):
-	print("Initiate duel: ", attacker.name, " vs ", defender.name)
+func _on_initiate_duel(attacker: Piece, defender: Piece, defecit: int):
+	print("Initiate duel: ", attacker.name, " vs ", defender.name, " with defecit of ", defecit)
+	board_renderer.reset_all_tiles()
 	#input if defender or attacker won in terminal
 	
-	SceneManager.transition_to_duel()
+	SceneManager.transition_to_duel(attacker, defender, defecit)
 	
 
 func _on_duel_ended(winner: Piece, looser: Piece):
 	game_manager.handle_duel_result(winner, looser)
 	looser.queue_free()
 	board_renderer.reset_all_tiles()
+	game_manager.switch_turn()
 	
 func get_game_manager() -> GameManager:
 	#Returns the GameManager instance for accessing game state and logic.
@@ -256,11 +256,3 @@ func get_piece_spawner() -> PieceSpawner:
 	#Returns the PieceSpawner instance for piece creation operations.
 
 	return piece_spawner
-
-func get_main_game_controller() -> MainGameController:
-	#Returns the MainGameController instance for accessing game state and logic.
-	var main_node = get_node_or_null("/root/Main")
-	if main_node and main_node.has_method("get_game_controller"):
-		return main_node.get_game_controller()
-	else:
-		return null

@@ -44,11 +44,7 @@ func change_scene(scene_name: String):
 	scene_changed.emit(scene_name)
 
 # Special transition to duel (caches chess)
-func transition_to_duel():
-	if current_scene_name != "chess":
-		push_error("Can only transition to duel from chess scene")
-		return
-	
+func transition_to_duel(attacker: Piece, defender: Piece, defecit: int):
 	# Cache chess scene
 	cached_chess_scene = current_scene_instance
 	cached_chess_scene.hide()
@@ -56,8 +52,12 @@ func transition_to_duel():
 	
 	# Load duel scene
 	var scene_resource = scene_dictionary["dual_arena"]
-	current_scene_instance = scene_resource.instantiate()
-	canvas_layer.add_child(current_scene_instance)
+	var duel_scene = scene_resource.instantiate()
+	current_scene_instance = duel_scene
+	duel_scene.attacker = attacker
+	duel_scene.defender = defender
+	duel_scene.defecit = defecit
+	canvas_layer.add_child(duel_scene)
 	
 	current_scene_name = "dual_arena"
 	scene_changed.emit("dual_arena")
