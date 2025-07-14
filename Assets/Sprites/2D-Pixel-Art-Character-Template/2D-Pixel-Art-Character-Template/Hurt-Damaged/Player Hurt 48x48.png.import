@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cng3raykcvqid"
-path="res://.godot/imported/Player Hurt 48x48.png-2923b9738fd99df5e08f71d6c4df6b38.ctex"
+uid="uid://b1ijeoyuhhlnp"
+path="res://.godot/imported/Player Hurt 48x48.png-58aed872e4c137a88c7bebb7f48e6cc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png"
-dest_files=["res://.godot/imported/Player Hurt 48x48.png-2923b9738fd99df5e08f71d6c4df6b38.ctex"]
+source_file="res://assets/sprites/2D-Pixel-Art-Character-Template/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png"
+dest_files=["res://.godot/imported/Player Hurt 48x48.png-58aed872e4c137a88c7bebb7f48e6cc2.ctex"]
 
 [params]
 
