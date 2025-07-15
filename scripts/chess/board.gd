@@ -238,7 +238,9 @@ func _on_initiate_duel(attacker: Piece, defender: Piece, defecit: int):
 
 func _on_duel_ended(winner: Piece, looser: Piece):
 	game_manager.handle_duel_result(winner, looser)
-	looser.queue_free()
+	looser.get_parent().remove_child(looser)
+	game_manager.add_captured_piece(looser)
+	game_manager.update_points()
 	board_renderer.reset_all_tiles()
 	game_manager.switch_turn()
 	

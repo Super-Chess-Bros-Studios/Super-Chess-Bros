@@ -21,6 +21,14 @@ var en_passant_landing_square: Vector2i = Vector2i(-1, -1)
 var duel_attacker: Piece = null
 var duel_defender: Piece = null
 
+var white_points: int = 0
+var black_points: int = 0
+
+var captured_white_pieces: Array[Piece] = []
+var captured_black_pieces: Array[Piece] = []
+
+
+
 
 func _init():
 	initialize_board_state()
@@ -147,6 +155,8 @@ func perform_en_passant_capture(piece: Piece, to_pos: Vector2i) -> bool:
 	en_passant_duel_active = true
 	en_passant_landing_square = to_pos # The en passant target square (where the pawn should land)
 
+	print("attacker: ", piece)
+	print("defender: ", captured_pawn)
 	on_initiate_duel(piece, captured_pawn)
 	return true
 
@@ -172,17 +182,25 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 		#return false
 	var from_pos = piece.board_position
 	
-	# Check if this is an en passant capture
-	if piece is Pawn and is_en_passant_capture(piece, to_pos):
-		return perform_en_passant_capture(piece, to_pos)
+	# Handle captures (both regular and en passant)
+	var target_piece = null
+	var is_en_passant = piece is Pawn and is_en_passant_capture(piece, to_pos)
 	
-	# Capture enemy piece if it's in the target position
-	if is_enemy(to_pos, piece.team):
+	if is_en_passant:
+		target_piece = get_en_passant_pawn()
+		print("En passant capture")
+	elif is_enemy(to_pos, piece.team):
+		target_piece = get_piece_at_position(to_pos)
+	
+	# If there's a capture, initiate duel
+	if target_piece:
 		duel_attacker = piece
-		duel_defender = get_piece_at_position(to_pos)
-		on_initiate_duel(duel_attacker, duel_defender)
-		return false
-	
+		duel_defender = target_piece
+		if is_en_passant:
+			return perform_en_passant_capture(piece, to_pos)
+		else:
+			on_initiate_duel(duel_attacker, duel_defender)
+			return false
 	# Move piece to new position
 	board_state[from_pos.y][from_pos.x] = null  # Remove from old position
 	board_state[to_pos.y][to_pos.x] = piece     # Place in new position
@@ -386,6 +404,8 @@ func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
 
 
 func handle_duel_result(winner: Piece, looser: Piece):
+	print(winner)
+	print(duel_attacker)
 	var attacker_wins = (winner == duel_attacker)
 	
 	if en_passant_duel_active:
@@ -437,4 +457,20 @@ func _cleanup_duel_state():
 	# Reset duel state
 	en_passant_duel_active = false
 	en_passant_landing_square = Vector2i(-1, -1)
+
+func add_captured_piece(piece: Piece):
+	if piece.team == ChessConstants.TeamColor.WHITE:
+		captured_white_pieces.append(piece)
+	else:
+		captured_black_pieces.append(piece)
+	print("Captured white pieces: ", captured_white_pieces)
+	print("Captured black pieces: ", captured_black_pieces)
+
+func update_points():
+	for piece in captured_white_pieces:
+		white_points += piece.point_value
+	for piece in captured_black_pieces:
+		black_points += piece.point_value
 		
+	print("White points: ", white_points)
+	print("Black points: ", black_points)
