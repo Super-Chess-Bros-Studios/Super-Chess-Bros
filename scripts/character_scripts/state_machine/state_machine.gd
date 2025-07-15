@@ -1,4 +1,5 @@
 extends Node
+class_name StateMachine
 
 var current_state : CharacterState
 # Dictionary of State objects 
