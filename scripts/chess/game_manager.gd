@@ -7,18 +7,20 @@ signal piece_selected(piece: Piece)
 signal piece_deselected()
 signal turn_switched(new_team: ChessConstants.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
-signal initiate_duel(attacker: Piece, defender: Piece)
+signal initiate_duel(attacker: Piece, defender: Piece, defecit: int)
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
 var selected_piece: Piece = null  # Currently selected piece
-var duel_attacker: Piece = null
-var duel_defender: Piece = null
 # En passant tracking
 var en_passant_target: Vector2i = Vector2i(-1, -1) # Initialize en passant target to invalid position
 var en_passant_pawn: Piece = null  # Reference to the pawn that can be captured en passant
 var en_passant_duel_active: bool = false
 var en_passant_landing_square: Vector2i = Vector2i(-1, -1)
+# Duel tracking
+var duel_attacker: Piece = null
+var duel_defender: Piece = null
+
 
 func _init():
 	initialize_board_state()
@@ -150,12 +152,11 @@ func perform_en_passant_capture(piece: Piece, to_pos: Vector2i) -> bool:
 
 
 func on_initiate_duel(attacker: Piece, defender: Piece) -> void:
-	duel_attacker = attacker
-	duel_defender = defender
+	var defecit = 0
 	if(attacker.point_value < defender.point_value):
-		var defecit = (defender.point_value - attacker.point_value)*5
+		defecit = (defender.point_value - attacker.point_value)*5
 		print("Handicap of ", defecit, "% is applied to the defender")
-	initiate_duel.emit(attacker, defender)
+	initiate_duel.emit(attacker, defender, defecit)
 	
 
 func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
@@ -177,8 +178,9 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 	
 	# Capture enemy piece if it's in the target position
 	if is_enemy(to_pos, piece.team):
-		on_initiate_duel(piece, get_piece_at_position(to_pos))
-		piece_moved.emit(piece, from_pos, to_pos)
+		duel_attacker = piece
+		duel_defender = get_piece_at_position(to_pos)
+		on_initiate_duel(duel_attacker, duel_defender)
 		return false
 	
 	# Move piece to new position
@@ -427,14 +429,12 @@ func _move_piece_to_position(piece: Piece, new_position: Vector2i):
 	piece.set_board_position(new_position, ChessConstants.TILE_SIZE)
 
 func _cleanup_duel_state():
+	duel_attacker = null
+	duel_defender = null
 	deselect_piece()
 	clear_en_passant_target()
 	
 	# Reset duel state
-	duel_attacker = null
-	duel_defender = null
 	en_passant_duel_active = false
 	en_passant_landing_square = Vector2i(-1, -1)
-	
-	switch_turn()
 		
