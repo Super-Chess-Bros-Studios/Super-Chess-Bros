@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv27jfna3itot"]
+
+[ext_resource type="Texture2D" uid="uid://d8p156ynywg" path="res://Assets/Sprites/chess/piece_move.png" id="1_f6c8b"]
+
+[node name="ValidMove" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_f6c8b")

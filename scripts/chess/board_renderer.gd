@@ -5,6 +5,9 @@ signal tile_hovered(tile_pos: Vector2i, player_id: ChessConstants.PlayerId)
 
 @onready var tiles_container := $TilesContainer
 @export var tile_scene: PackedScene
+@export var valid_move_icon: PackedScene
+
+var move_icons := {}
 
 var tile_references: Array[Array] = []
 
@@ -53,5 +56,21 @@ func reset_all_tiles():
 		for col in ChessConstants.BOARD_SIZE:
 			reset_tile_color(Vector2i(col, row))
 			
+
+func show_move_icon(tile_pos: Vector2i):
+	var icon = valid_move_icon.instantiate()
+	icon.position = get_tile_center(tile_pos)
+	tiles_container.add_child(icon)
+	move_icons[tile_pos] = icon
+
+func clear_move_icons():
+	for icon in move_icons.values():
+		icon.queue_free()
+	move_icons.clear()
+
+func get_tile_center(tile_pos: Vector2i) -> Vector2:
+	return Vector2(tile_pos.x * ChessConstants.TILE_SIZE + ChessConstants.TILE_SIZE / 2,
+				   tile_pos.y * ChessConstants.TILE_SIZE + ChessConstants.TILE_SIZE / 2)
+
 func get_board_center() -> Vector2:
 	return Vector2(ChessConstants.BOARD_SIZE * ChessConstants.TILE_SIZE, ChessConstants.BOARD_SIZE * ChessConstants.TILE_SIZE) / 2 

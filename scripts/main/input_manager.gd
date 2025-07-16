@@ -4,6 +4,9 @@ extends Node
 var white_player_device: Dictionary = {}
 var black_player_device: Dictionary = {}
 
+func _ready() -> void:
+	initialize_player_devices()
+	controller_keyboard_setup()
 
 func initialize_player_devices():
 	white_player_device = {
@@ -15,6 +18,29 @@ func initialize_player_devices():
 		"device_type": "",
 		"device_id": -1,
 		"device_name": ""
+	}
+
+func controller_keyboard_setup():
+	white_player_device = {
+		"device_type": "keyboard",
+		"device_id": 0,
+		"device_name": "White"
+	}
+	black_player_device = {
+		"device_type": "controller",
+		"device_id": 0,
+		"device_name": "Black"
+	}
+func controller_only_setup():
+	white_player_device = {
+		"device_type": "controller",
+		"device_id": 0,
+		"device_name": "White"
+	}
+	black_player_device = {
+		"device_type": "controller",
+		"device_id": 1,
+		"device_name": "Black"
 	}
 
 # Player device management
