@@ -1,6 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://c33twyv8t8bc0"]
+[gd_scene load_steps=5 format=3 uid="uid://c33twyv8t8bc0"]
 
-[ext_resource type="Script" path="res://scripts/dual_arena.gd" id="1_dual"]
+[ext_resource type="Script" uid="uid://b2p6pnqxpjlby" path="res://scripts/dual_arena.gd" id="1_dual"]
+[ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_o3asr"]
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="3_5xpv0"]
 
-[node name="DualArena" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oof1r"]
+size = Vector2(128.25, 128.5)
+
+[node name="DualArena" type="Node2D" node_paths=PackedStringArray("TestChar1", "TestChar2")]
 script = ExtResource("1_dual")
+TestChar1 = NodePath("TestChar")
+TestChar2 = NodePath("TestChar2")
+
+[node name="Stage" type="Sprite2D" parent="."]
+position = Vector2(0, 130)
+scale = Vector2(4, 2)
+texture = ExtResource("2_o3asr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stage"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/StaticBody2D"]
+position = Vector2(0.125, -0.25)
+shape = SubResource("RectangleShape2D_oof1r")
+
+[node name="TestChar" parent="." instance=ExtResource("3_5xpv0")]
+position = Vector2(-150, -30)
+
+[node name="TestChar2" parent="." instance=ExtResource("3_5xpv0")]
+position = Vector2(150, -30)
