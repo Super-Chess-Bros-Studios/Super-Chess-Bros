@@ -27,9 +27,9 @@ func _ready():
 	print("Press cancel to choose defender as winner")
 	print("Press enter to choose attacker as winner")
 
-func _input(event):
+func _input(_event):
 	# Exit on cancel
-	if event.is_action_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		SceneManager.exit_duel(defender, attacker) 
-	if event.is_action_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept"):
 		SceneManager.exit_duel(attacker, defender) 

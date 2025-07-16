@@ -209,8 +209,8 @@ func _on_piece_selected(piece: Piece):
 		if game_manager.is_valid_move(piece, move):
 			if(game_manager.get_piece_at_position(move) == null):
 				board_renderer.show_move_icon(move)
-		else:
-			board_renderer.highlight_tile(move, Color.RED)
+			else:
+				board_renderer.highlight_tile(move, Color.RED)
 	print("Piece selected: ", piece.name)
 	# Add any piece selection handling here
 
