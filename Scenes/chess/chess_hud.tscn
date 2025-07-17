@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dn6jx85c5rfv3"]
+
+[node name="ChessHud" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="WhitePlayerCaptures" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ScoreTitle" type="Label" parent="HBoxContainer/WhitePlayerCaptures"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "White "
+
+[node name="WhitePlayerScore" type="Label" parent="HBoxContainer/WhitePlayerCaptures"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "1"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="BlackPlayerCaptures" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ScoreTitle" type="Label" parent="HBoxContainer/BlackPlayerCaptures"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Black"
+
+[node name="BlackPlayerScore" type="Label" parent="HBoxContainer/BlackPlayerCaptures"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "1"
+horizontal_alignment = 1

@@ -8,6 +8,8 @@ var scene_dictionary: Dictionary = {}
 var current_scene_instance: Node = null
 var current_scene_name: String = ""
 var main: Node = null
+var hud: Control = null
+var level: Node2D = null
 
 # Chess caching
 var cached_chess_scene: Node = null
@@ -17,12 +19,16 @@ func initialize_scene_dictionary():
 		"title": preload("res://scenes/main/title_screen.tscn"),
 		"main_menu": preload("res://scenes/main/main_menu.tscn"),
 		"chess": preload("res://scenes/chess/board.tscn"),
-		"dual_arena": preload("res://scenes/dual_arena.tscn"),
-		"testScene": preload("res://scenes/testScene.tscn")
+		"dual_arena": preload("res://scenes/PF/dual_arena.tscn"),
+		"testScene": preload("res://scenes/PF/testScene.tscn")
 	}
 
 func set_main(main_node: Node):
 	main = main_node
+	if main.has_node("Hud"):
+		hud = main.get_node("Hud")
+	if main.has_node("Level"):
+		level = main.get_node("Level")
 
 # Standard scene change
 func change_scene(scene_name: String):
@@ -38,7 +44,7 @@ func change_scene(scene_name: String):
 	# Load new scene
 	var scene_resource = scene_dictionary[scene_name]
 	current_scene_instance = scene_resource.instantiate()
-	main.add_child(current_scene_instance)
+	level.add_child(current_scene_instance)
 	current_scene_name = scene_name
 	scene_changed.emit(scene_name)
 
@@ -47,14 +53,14 @@ func transition_to_duel(attacker: Piece, defender: Piece, defecit: int):
 
 	# Cache chess scene
 	cached_chess_scene = current_scene_instance
-	main.remove_child(cached_chess_scene)
+	level.remove_child(cached_chess_scene)
 	current_scene_instance = null
 	
 	# Load duel scene
 	var scene_resource = scene_dictionary["dual_arena"]
 	var duel_scene = scene_resource.instantiate()
 	current_scene_instance = duel_scene
-	main.add_child(current_scene_instance)
+	level.add_child(current_scene_instance)
 	duel_scene.attacker = attacker
 	duel_scene.defender = defender
 	duel_scene.defecit = defecit
@@ -77,7 +83,7 @@ func exit_duel(winner: Piece, looser: Piece):
 	
 	current_scene_instance = cached_chess_scene
 	cached_chess_scene = null
-	main.add_child(current_scene_instance)
+	level.add_child(current_scene_instance)
 	current_scene_name = "chess"
 	scene_changed.emit("chess")
 	duel_ended.emit(winner, looser)

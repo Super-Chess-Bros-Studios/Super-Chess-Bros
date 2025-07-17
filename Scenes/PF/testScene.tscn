@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dtf4p6j0qehoa"]
 
-[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/characters/Test_Char.tscn" id="1_8xinf"]
-[ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_i052m"]
-[ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="3_3sglg"]
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/PF/characters/Test_Char.tscn" id="1_ed3jc"]
+[ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_raev1"]
+[ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/PF/character_scripts/hitbox.gd" id="3_p78q7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4mqg7"]
 
@@ -48,10 +48,10 @@ shape = SubResource("WorldBoundaryShape2D_3sglg")
 position = Vector2(1, 0)
 shape = SubResource("WorldBoundaryShape2D_sj726")
 
-[node name="Player1" parent="." instance=ExtResource("1_8xinf")]
+[node name="Player1" parent="." instance=ExtResource("1_ed3jc")]
 position = Vector2(36, -26)
 
-[node name="Player2" parent="." instance=ExtResource("1_8xinf")]
+[node name="Player2" parent="." instance=ExtResource("1_ed3jc")]
 position = Vector2(206.96, -148.44)
 
 [node name="CharacterAttributes" parent="Player2/CharacterBody2D" index="5"]
@@ -63,7 +63,7 @@ zoom = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-46, -293)
-texture = ExtResource("2_i052m")
+texture = ExtResource("2_raev1")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
 
@@ -72,7 +72,7 @@ shape = SubResource("RectangleShape2D_3sglg")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(206, -65)
-texture = ExtResource("2_i052m")
+texture = ExtResource("2_raev1")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D2"]
 
@@ -82,10 +82,10 @@ shape = SubResource("RectangleShape2D_3sglg")
 [node name="EvilHitbox" type="Sprite2D" parent="."]
 position = Vector2(-282.4, -272.4)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_i052m")
+texture = ExtResource("2_raev1")
 
 [node name="Hitbox" type="Area2D" parent="EvilHitbox"]
-script = ExtResource("3_3sglg")
+script = ExtResource("3_p78q7")
 bkb = 200.0
 kbg = 20.0
 kb_dir = Vector2(3, -3)
@@ -100,10 +100,10 @@ shape = SubResource("RectangleShape2D_sj726")
 [node name="EvilHitbox2" type="Sprite2D" parent="."]
 position = Vector2(-176.4, -271.4)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_i052m")
+texture = ExtResource("2_raev1")
 
 [node name="Hitbox" type="Area2D" parent="EvilHitbox2"]
-script = ExtResource("3_3sglg")
+script = ExtResource("3_p78q7")
 bkb = 200.0
 kbg = 20.0
 kb_dir = Vector2(-3, -3)
