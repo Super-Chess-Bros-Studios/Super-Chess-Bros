@@ -28,7 +28,7 @@ func _ready():
 	if initial_state:
 		initial_state.Enter()
 		current_state = initial_state
-		if char_attributes.player_id == 1:
+		if char_attributes.team == InputManager.TeamColor.WHITE:
 			char_attributes.cur_dir = DIRECTION.right
 		else:
 			char_attributes.cur_dir = DIRECTION.left

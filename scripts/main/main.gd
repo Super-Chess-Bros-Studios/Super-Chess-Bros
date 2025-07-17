@@ -1,6 +1,5 @@
-extends Node
+extends Node2D
 
-@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 func _ready():
 	initialize_systems()
@@ -8,11 +7,9 @@ func _ready():
 	start_game()
 
 func initialize_systems():
-	canvas_layer.follow_viewport_enabled = true
-	canvas_layer.layer = 0
 	# Setup scene manager
-	SceneManager.set_canvas_layer(canvas_layer)
 	SceneManager.initialize_scene_dictionary()
+	SceneManager.set_main(self)
 
 func setup_connections():
 	# Connect scene manager signals

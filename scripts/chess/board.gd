@@ -51,13 +51,10 @@ extends Node2D
 #   - BLACK_TURN: Black player's turn  
 
 #
-# Team Colors (ChessConstants.TeamColor):
+# Team Colors (InputManager.TeamColor):
 #   - WHITE = 0
 #   - BLACK = 1
 #
-# Player IDs (ChessConstants.PlayerId):
-#   - WHITE_PLAYER = 1
-#   - BLACK_PLAYER = 2
 #
 # Board Constants:
 #   - BOARD_SIZE = 8 (8x8 chess board)
@@ -220,10 +217,10 @@ func _on_piece_deselected():
 	print("Piece deselected")
 	# Add any piece deselection handling here
 
-func _on_turn_switched(new_team: ChessConstants.TeamColor):
+func _on_turn_switched(new_team: InputManager.TeamColor):
 	#Called when the turn switches between players.
 
-	print("Turn switched to: ", "White" if new_team == ChessConstants.TeamColor.WHITE else "Black")
+	print("Turn switched to: ", "White" if new_team == InputManager.TeamColor.WHITE else "Black")
 
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
 	#print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)

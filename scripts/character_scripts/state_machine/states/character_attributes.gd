@@ -3,7 +3,9 @@ class_name CharacterAttributes
 
 #Export vars allow any character to use these character attributes without having to
 #extend the class. You can now change any of these values in the inspector.
-@export var player_id: int = 1  # Set this in the editor or at spawn time
+
+
+@export var team: InputManager.TeamColor = InputManager.TeamColor.WHITE  # Set this in the editor or at spawn time
 
 #Used for calculating how fast a character falls.
 @export var GRAVITY  : float = 10

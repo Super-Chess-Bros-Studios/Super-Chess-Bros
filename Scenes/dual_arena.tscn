@@ -7,10 +7,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oof1r"]
 size = Vector2(128.25, 128.5)
 
-[node name="DualArena" type="Node2D" node_paths=PackedStringArray("TestChar1", "TestChar2")]
+[node name="DualArena" type="Node2D" node_paths=PackedStringArray("WhiteTestChar", "BlackTestChar")]
 script = ExtResource("1_dual")
-TestChar1 = NodePath("TestChar")
-TestChar2 = NodePath("TestChar2")
+WhiteTestChar = NodePath("WhiteChar")
+BlackTestChar = NodePath("BlackChar")
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Stage" type="Sprite2D" parent="."]
 position = Vector2(0, 130)
@@ -23,8 +25,14 @@ texture = ExtResource("2_o3asr")
 position = Vector2(0.125, -0.25)
 shape = SubResource("RectangleShape2D_oof1r")
 
-[node name="TestChar" parent="." instance=ExtResource("3_5xpv0")]
+[node name="WhiteChar" parent="." instance=ExtResource("3_5xpv0")]
 position = Vector2(-150, -30)
 
-[node name="TestChar2" parent="." instance=ExtResource("3_5xpv0")]
+[node name="BlackChar" parent="." instance=ExtResource("3_5xpv0")]
 position = Vector2(150, -30)
+
+[node name="CharacterAttributes" parent="BlackChar/CharacterBody2D" index="5"]
+team = 1
+
+[editable path="WhiteChar"]
+[editable path="BlackChar"]

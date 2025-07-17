@@ -1,7 +1,7 @@
 class_name BoardRenderer
 extends Node2D
 
-signal tile_hovered(tile_pos: Vector2i, player_id: ChessConstants.PlayerId)
+signal tile_hovered(tile_pos: Vector2i, team: InputManager.TeamColor)
 
 @onready var tiles_container := $TilesContainer
 @export var tile_scene: PackedScene
