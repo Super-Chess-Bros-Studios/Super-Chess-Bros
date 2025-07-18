@@ -80,5 +80,5 @@ func test_one_move_checkmate():
 func test_one_move_stalemate():
 	# Stalemate setup - black king trapped but not in check
 	spawn_piece("king", InputManager.TeamColor.BLACK, Vector2i(0, 0))  # Black king in corner
-	spawn_piece("queen", InputManager.TeamColor.WHITE, Vector2i(2, 1))  # White queen ready to create stalemate
+	spawn_piece("queen", InputManager.TeamColor.WHITE, Vector2i(3, 1))  # White queen ready to create stalemate
 	spawn_piece("king", InputManager.TeamColor.WHITE, Vector2i(2, 2))  # White king for support

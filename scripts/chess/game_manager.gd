@@ -466,6 +466,7 @@ func check_game_status():
 	elif is_stalemate(opposing_turn):
 		print("Stalemate!")
 		#game_state_changed.emit(ChessConstants.GameState.STALEMATE)
+		end_game()
 	elif is_king_in_check(opposing_turn):
 		print("Check!")
 
@@ -488,10 +489,6 @@ func check_game_over():
 		print("Game over!")
 		var team_winner = get_opposing_turn()
 		print("Winner by Checkmate")
-		#game_state_changed.emit(ChessConstants.GameState.GAME_OVER)
-		end_game()
-	elif is_stalemate(current_turn):
-		print("Game over! Stalemate")
 		#game_state_changed.emit(ChessConstants.GameState.GAME_OVER)
 		end_game()
 

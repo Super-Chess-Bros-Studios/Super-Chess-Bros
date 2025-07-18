@@ -117,6 +117,7 @@ func is_in_menu_scene() -> bool:
 	return current_scene_name == "title_screen" 
 
 func end_game():
+	print("Ending game")
 	current_scene_instance.queue_free()
 	current_scene_instance = null
 	chess_hud.queue_free()

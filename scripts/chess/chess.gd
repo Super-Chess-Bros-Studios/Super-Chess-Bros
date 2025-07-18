@@ -181,7 +181,7 @@ func setup_cursors():
 	black_cursor.setup(game_manager, board_renderer)
 
 func spawn_initial_pieces():
-	piece_spawner.test_one_move_checkmate()
+	piece_spawner.spawn_all_pieces()
 
 func connect_signals():
 	# Connect game manager signals
@@ -226,11 +226,21 @@ func _on_turn_switched(new_team: InputManager.TeamColor):
 func _handle_turn_end():
 	#print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
 	game_manager.deselect_piece()
-	game_manager.check_game_status()
-	game_manager.switch_turn()
 	board_renderer.reset_all_tiles()
 	board_renderer.clear_move_icons()
+	game_manager.switch_turn()
+	_handle_turn_start()
 	
+func _handle_turn_start():
+	if(game_manager.is_stalemate(game_manager.get_current_turn())):
+		print("Stalemate!")
+		game_manager.end_game()
+	elif(game_manager.is_checkmate(game_manager.get_current_turn())):
+		print("Checkmate!")
+		game_manager.on_initiate_duel(game_manager.last_moved_piece, game_manager.get_team_king(game_manager.get_current_turn()))
+	elif(game_manager.is_king_in_check(game_manager.get_current_turn())):
+		print("Check!")
+
 
 func _on_initiate_duel(attacker: Piece, defender: Piece, defecit: int):
 	print("Initiate duel: ", attacker.name, " vs ", defender.name, " with defecit of ", defecit)
@@ -246,7 +256,14 @@ func _on_duel_ended(winner: Piece, looser: Piece):
 	game_manager.add_captured_piece(looser)
 	game_manager.update_points(looser)
 	game_manager.ui_update_points.emit(game_manager.black_points, game_manager.white_points)
-	game_manager.check_game_over()
+	if(game_manager.is_king_captured(game_manager.get_current_turn())):
+		print("King captured!")
+		game_manager.end_game()
+	elif(game_manager.is_stalemate(game_manager.get_current_turn())):
+		print("Stalemate!")
+		game_manager.end_game()
+	else:
+		_handle_turn_end()
 	
 func get_game_manager() -> GameManager:
 	#Returns the GameManager instance for accessing game state and logic.
