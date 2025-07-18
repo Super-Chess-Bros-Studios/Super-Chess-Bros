@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://xv82r6mhk4x5"]
+
+[ext_resource type="Script" uid="uid://b5ep5if383vj3" path="res://scripts/chess/chess.gd" id="1_ngd8j"]
+[ext_resource type="Texture2D" uid="uid://clw4wtm4s1qki" path="res://assets/sprites/chess/chess-pieces.png" id="2_gfuq8"]
+[ext_resource type="PackedScene" uid="uid://b5qaf8x74fqir" path="res://scenes/chess/cursor.tscn" id="3_krvrd"]
+[ext_resource type="Script" path="res://scripts/chess/board_renderer.gd" id="4_t3kt2"]
+[ext_resource type="PackedScene" uid="uid://dldgguqclgyl8" path="res://scenes/chess/tile.tscn" id="5_ivyig"]
+[ext_resource type="PackedScene" uid="uid://bv27jfna3itot" path="res://scenes/chess/valid_move.tscn" id="6_luc5s"]
+
+[node name="Chess" type="Node2D"]
+script = ExtResource("1_ngd8j")
+piece_sprite_sheet = ExtResource("2_gfuq8")
+
+[node name="WhiteCursor" parent="." instance=ExtResource("3_krvrd")]
+
+[node name="BlackCursor" parent="." instance=ExtResource("3_krvrd")]
+team = 1
+
+[node name="PiecesContainer" type="Node2D" parent="."]
+
+[node name="BoardRenderer" type="Node2D" parent="."]
+script = ExtResource("4_t3kt2")
+tile_scene = ExtResource("5_ivyig")
+valid_move_icon = ExtResource("6_luc5s")
+
+[node name="TilesContainer" type="Node2D" parent="BoardRenderer"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(6, 1)
+zoom = Vector2(2, 2)

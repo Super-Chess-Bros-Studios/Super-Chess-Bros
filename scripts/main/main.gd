@@ -19,7 +19,7 @@ func start_game():
 	print("Starting game from main.gd")
 	
 	# Start at title screen
-	request_scene_change("chess")
+	SceneManager.transition_to_chess()
 
 # Public API for scene changes
 func request_scene_change(scene_name: String):
