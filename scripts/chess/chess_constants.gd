@@ -10,7 +10,10 @@ enum GameState {
 	WHITE_TURN,
 	BLACK_TURN,
 	GAME_OVER,
-	PAUSED
+	PAUSED,
+	CHECK,
+	CHECKMATE,
+	STALEMATE
 }
 
 # Piece values
@@ -21,6 +24,15 @@ const PIECE_VALUES := {
 	"rook": 5,
 	"queen": 9,
 	"king": 0
+}
+
+const PIECE_TYPES := {
+	"pawn": "Pawn",
+	"knight": "Knight",
+	"bishop": "Bishop",
+	"rook": "Rook",
+	"queen": "Queen",
+	"king": "King"
 }
 
 # UI Colors

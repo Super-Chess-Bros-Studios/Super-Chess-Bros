@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn6jx85c5rfv3"]
+[gd_scene load_steps=3 format=3 uid="uid://dn6jx85c5rfv3"]
 
 [ext_resource type="Script" uid="uid://cf3mrf0kyerax" path="res://scripts/chess/chess_hud.gd" id="1_jhoc8"]
+[ext_resource type="LabelSettings" uid="uid://ch2qehhe1ekg5" path="res://assets/themes.tres" id="2_bt3f7"]
 
 [node name="ChessHud" type="Control"]
 layout_mode = 3
@@ -18,7 +19,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 500
+scale = Vector2(0.996435, 1)
+theme_override_constants/separation = 600
 alignment = 1
 
 [node name="WhitePlayerCaptures" type="VBoxContainer" parent="HBoxContainer"]
@@ -28,13 +30,15 @@ alignment = 1
 
 [node name="ScoreTitle" type="Label" parent="HBoxContainer/WhitePlayerCaptures"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 30
 text = "White "
+label_settings = ExtResource("2_bt3f7")
 
 [node name="WhitePlayerScore" type="Label" parent="HBoxContainer/WhitePlayerCaptures"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 30
 text = "1"
+label_settings = ExtResource("2_bt3f7")
 horizontal_alignment = 1
 
 [node name="BlackPlayerCaptures" type="VBoxContainer" parent="HBoxContainer"]
@@ -46,9 +50,11 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "Black"
+label_settings = ExtResource("2_bt3f7")
 
 [node name="BlackPlayerScore" type="Label" parent="HBoxContainer/BlackPlayerCaptures"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "1"
+label_settings = ExtResource("2_bt3f7")
 horizontal_alignment = 1

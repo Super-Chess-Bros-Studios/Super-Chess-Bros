@@ -29,7 +29,7 @@ func spawn_piece(piece_type: String, team: InputManager.TeamColor, position: Vec
 	piece_parent.add_child(piece)
 	
 	var point_value = ChessConstants.PIECE_VALUES[piece_type]
-	piece.setup(team, position, piece_sprite_sheet, point_value, ChessConstants.TILE_SIZE)
+	piece.setup(team, position, piece_sprite_sheet, point_value, ChessConstants.PIECE_TYPES[piece_type], ChessConstants.TILE_SIZE)
 	game_manager.set_piece_at_position(position, piece)
 	
 	# Set piece name for debugging
@@ -69,3 +69,16 @@ func spawn_all_pieces():
 	# Kings
 	spawn_piece("king", InputManager.TeamColor.WHITE, Vector2i(4, 7))
 	spawn_piece("king", InputManager.TeamColor.BLACK, Vector2i(4, 0)) 
+
+func test_one_move_checkmate():
+	# Two rook checkmate setup - black king trapped on back rank
+	spawn_piece("king", InputManager.TeamColor.BLACK, Vector2i(7, 0))  # Black king in corner
+	spawn_piece("rook", InputManager.TeamColor.WHITE, Vector2i(0, 1))  # White rook on 2nd rank
+	spawn_piece("rook", InputManager.TeamColor.WHITE, Vector2i(1, 6))  # White rook ready to deliver checkmate
+	spawn_piece("king", InputManager.TeamColor.WHITE, Vector2i(4, 4))  # White king for support
+
+func test_one_move_stalemate():
+	# Stalemate setup - black king trapped but not in check
+	spawn_piece("king", InputManager.TeamColor.BLACK, Vector2i(0, 0))  # Black king in corner
+	spawn_piece("queen", InputManager.TeamColor.WHITE, Vector2i(2, 1))  # White queen ready to create stalemate
+	spawn_piece("king", InputManager.TeamColor.WHITE, Vector2i(2, 2))  # White king for support

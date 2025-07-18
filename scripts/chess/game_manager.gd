@@ -6,7 +6,7 @@ signal game_state_changed(new_state: ChessConstants.GameState)
 signal piece_selected(piece: Piece)
 signal piece_deselected()
 signal turn_switched(new_team: InputManager.TeamColor)
-signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
+signal turn_ended()
 signal initiate_duel(attacker: Piece, defender: Piece, defecit: int)
 signal ui_update_points(black_points: int, white_points: int)
 # Core game state variables
@@ -18,6 +18,8 @@ var en_passant_target: Vector2i = Vector2i(-1, -1) # Initialize en passant targe
 var en_passant_pawn: Piece = null  # Reference to the pawn that can be captured en passant
 var en_passant_duel_active: bool = false
 var en_passant_landing_square: Vector2i = Vector2i(-1, -1)
+
+var last_moved_piece: Piece = null
 # Duel tracking
 var duel_attacker: Piece = null
 var duel_defender: Piece = null
@@ -92,14 +94,6 @@ func switch_turn():
 		ChessConstants.GameState.BLACK_TURN:
 			current_game_state = ChessConstants.GameState.WHITE_TURN
 	
-	var oposing_team = get_current_turn()
-	if is_king_in_check(oposing_team):
-		print("Check!")
-	if is_checkmate(oposing_team):
-		print("Checkmate!")
-	if is_stalemate(oposing_team):
-		print("Stalemate!")
-	
 	var new_team = ChessConstants.get_team_from_game_state(current_game_state)
 	game_state_changed.emit(current_game_state)
 	turn_switched.emit(new_team)
@@ -162,6 +156,8 @@ func perform_en_passant_capture(piece: Piece, to_pos: Vector2i) -> bool:
 
 
 func on_initiate_duel(attacker: Piece, defender: Piece) -> void:
+	duel_attacker = attacker
+	duel_defender = defender
 	var defecit = 0
 	if(attacker.point_value < defender.point_value):
 		defecit = (defender.point_value - attacker.point_value)*5
@@ -193,13 +189,12 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 		target_piece = get_piece_at_position(to_pos)
 	
 	# If there's a capture, initiate duel
+	last_moved_piece = piece
 	if target_piece:
-		duel_attacker = piece
-		duel_defender = target_piece
 		if is_en_passant:
 			return perform_en_passant_capture(piece, to_pos)
 		else:
-			on_initiate_duel(duel_attacker, duel_defender)
+			on_initiate_duel(piece, target_piece)
 			return false
 	# Move piece to new position
 	board_state[from_pos.y][from_pos.x] = null  # Remove from old position
@@ -218,12 +213,10 @@ func move_piece(piece: Piece, to_pos: Vector2i) -> bool:
 		clear_en_passant_target() 
 	
 	# Emit signal for piece movement
-	piece_moved.emit(piece, from_pos, to_pos)
+
+	turn_ended.emit()
 	
 	# Did you check or checkmate oponents king 
-	
-	deselect_piece()
-	switch_turn()
 
 	return true
 
@@ -256,12 +249,7 @@ func perform_castling(king: King, to_pos: Vector2i) -> bool:
 	rook.set_board_position(rook_to, ChessConstants.TILE_SIZE)
 	rook.mark_as_moved()
 	
-	# Emit signals for both moves
-	piece_moved.emit(king, from_pos, to_pos)
-	piece_moved.emit(rook, rook_from, rook_to)
-	
-	switch_turn()
-	deselect_piece()
+	turn_ended.emit()
 	
 	print("Castling performed")
 	return true
@@ -321,7 +309,7 @@ func is_king_in_check(team: InputManager.TeamColor) -> bool:
 	for y in range(ChessConstants.BOARD_SIZE):
 		for x in range(ChessConstants.BOARD_SIZE):
 			var piece = board_state[y][x]
-			if piece != null and piece.team == team and piece.point_value == ChessConstants.PIECE_VALUES.king:
+			if piece != null and piece.team == team and piece.piece_type == ChessConstants.PIECE_TYPES.king:
 				king_pos = Vector2i(x, y)
 				break
 	
@@ -347,7 +335,7 @@ func is_king_in_check_after_move(team: InputManager.TeamColor, to_pos: Vector2i)
 	for y in range(ChessConstants.BOARD_SIZE):
 		for x in range(ChessConstants.BOARD_SIZE):
 			var piece = board_state[y][x]
-			if piece != null and piece.team == team and piece.point_value == ChessConstants.PIECE_VALUES.king:
+			if piece != null and piece.team == team and piece.piece_type == ChessConstants.PIECE_TYPES.king:
 				king_pos = Vector2i(x, y)
 				break
 	
@@ -412,7 +400,7 @@ func handle_duel_result(winner: Piece, looser: Piece):
 		_handle_en_passant_duel_result(attacker_wins)
 	else:
 		_handle_regular_duel_result(attacker_wins)
-	
+	_cleanup_duel_state()
 
 func _handle_en_passant_duel_result(attacker_wins: bool):
 	if attacker_wins:
@@ -425,8 +413,6 @@ func _handle_en_passant_duel_result(attacker_wins: bool):
 		print("Defender wins en passant duel")
 		# Remove attacker from board
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
-	
-	_cleanup_duel_state()
 
 func _handle_regular_duel_result(attacker_wins: bool):
 	if attacker_wins:
@@ -438,8 +424,6 @@ func _handle_regular_duel_result(attacker_wins: bool):
 		print("Defender wins!")
 		# Remove attacker from board
 		board_state[duel_attacker.board_position.y][duel_attacker.board_position.x] = null
-	
-	_cleanup_duel_state()
 
 func _move_piece_to_position(piece: Piece, new_position: Vector2i):
 	# Remove piece from old position
@@ -451,7 +435,6 @@ func _move_piece_to_position(piece: Piece, new_position: Vector2i):
 func _cleanup_duel_state():
 	duel_attacker = null
 	duel_defender = null
-	deselect_piece()
 	clear_en_passant_target()
 	
 	# Reset duel state
@@ -466,8 +449,6 @@ func add_captured_piece(piece: Piece):
 	print("Captured white pieces: ", captured_white_pieces)
 	print("Captured black pieces: ", captured_black_pieces)
 
-
-
 func update_points(piece: Piece):
 	if piece.team == InputManager.TeamColor.WHITE:
 		black_points += piece.point_value
@@ -475,3 +456,50 @@ func update_points(piece: Piece):
 		white_points += piece.point_value
 	print("White points: ", white_points)
 	print("Black points: ", black_points)
+
+func check_game_status():
+	var opposing_turn = get_opposing_turn()
+	if is_checkmate(opposing_turn):
+		print("Checkmate!")
+		#game_state_changed.emit(ChessConstants.GameState.CHECKMATE)
+		on_initiate_duel(last_moved_piece, get_team_king(opposing_turn))
+	elif is_stalemate(opposing_turn):
+		print("Stalemate!")
+		#game_state_changed.emit(ChessConstants.GameState.STALEMATE)
+	elif is_king_in_check(opposing_turn):
+		print("Check!")
+
+func get_team_king(team: InputManager.TeamColor) -> Piece:
+	for y in range(ChessConstants.BOARD_SIZE):
+		for x in range(ChessConstants.BOARD_SIZE):
+			var piece = board_state[y][x]
+			if piece != null and piece.team == team and piece.piece_type == ChessConstants.PIECE_TYPES.king:
+				return piece
+	return null
+
+func get_opposing_turn() -> InputManager.TeamColor:
+	var current_turn = get_current_turn()
+	return InputManager.TeamColor.WHITE if current_turn == InputManager.TeamColor.BLACK else InputManager.TeamColor.BLACK
+
+func check_game_over():
+	print("Checking game over")
+	var current_turn = get_current_turn()
+	if is_king_captured(current_turn):
+		print("Game over!")
+		var team_winner = get_opposing_turn()
+		print("Winner by Checkmate")
+		#game_state_changed.emit(ChessConstants.GameState.GAME_OVER)
+		end_game()
+	elif is_stalemate(current_turn):
+		print("Game over! Stalemate")
+		#game_state_changed.emit(ChessConstants.GameState.GAME_OVER)
+		end_game()
+
+func is_king_captured(team: InputManager.TeamColor) -> bool:
+	var king = get_team_king(team)
+	if king == null:
+		return true
+	return false
+
+func end_game():
+	SceneManager.end_game()
