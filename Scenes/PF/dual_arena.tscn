@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://c33twyv8t8bc0"]
+
+[ext_resource type="Script" uid="uid://b2p6pnqxpjlby" path="res://scripts/PF/dual_arena.gd" id="1_e61sj"]
+[ext_resource type="Texture2D" uid="uid://c73tf2yc5b3bn" path="res://icon.svg" id="2_1c3gp"]
+[ext_resource type="PackedScene" uid="uid://5b3fmt2t3sc6" path="res://scenes/PF/characters/Test_Char.tscn" id="3_hoa7d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oof1r"]
+size = Vector2(128.25, 128.5)
+
+[node name="DualArena" type="Node2D" node_paths=PackedStringArray("WhiteTestChar", "BlackTestChar")]
+script = ExtResource("1_e61sj")
+WhiteTestChar = NodePath("WhiteChar")
+BlackTestChar = NodePath("BlackChar")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Stage" type="Sprite2D" parent="."]
+position = Vector2(0, 130)
+scale = Vector2(4, 2)
+texture = ExtResource("2_1c3gp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stage"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/StaticBody2D"]
+position = Vector2(0.125, -0.25)
+shape = SubResource("RectangleShape2D_oof1r")
+
+[node name="WhiteChar" parent="." instance=ExtResource("3_hoa7d")]
+position = Vector2(-150, -30)
+
+[node name="BlackChar" parent="." instance=ExtResource("3_hoa7d")]
+position = Vector2(150, -30)
+
+[node name="CharacterAttributes" parent="BlackChar/CharacterBody2D" index="5"]
+team = 1
+
+[editable path="WhiteChar"]
+[editable path="BlackChar"]

@@ -51,13 +51,10 @@ extends Node2D
 #   - BLACK_TURN: Black player's turn  
 
 #
-# Team Colors (ChessConstants.TeamColor):
+# Team Colors (InputManager.TeamColor):
 #   - WHITE = 0
 #   - BLACK = 1
 #
-# Player IDs (ChessConstants.PlayerId):
-#   - WHITE_PLAYER = 1
-#   - BLACK_PLAYER = 2
 #
 # Board Constants:
 #   - BOARD_SIZE = 8 (8x8 chess board)
@@ -195,6 +192,7 @@ func connect_signals():
 	game_manager.piece_moved.connect(_on_piece_moved)
 	game_manager.initiate_duel.connect(_on_initiate_duel)
 	SceneManager.duel_ended.connect(_on_duel_ended)
+	game_manager.ui_update_points.connect(SceneManager.chess_hud._ui_update_points)
 #These are all the signal handlers
 
 func _on_game_state_changed(new_state: ChessConstants.GameState):
@@ -220,10 +218,10 @@ func _on_piece_deselected():
 	print("Piece deselected")
 	# Add any piece deselection handling here
 
-func _on_turn_switched(new_team: ChessConstants.TeamColor):
+func _on_turn_switched(new_team: InputManager.TeamColor):
 	#Called when the turn switches between players.
 
-	print("Turn switched to: ", "White" if new_team == ChessConstants.TeamColor.WHITE else "Black")
+	print("Turn switched to: ", "White" if new_team == InputManager.TeamColor.WHITE else "Black")
 
 func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
 	#print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
@@ -242,7 +240,8 @@ func _on_duel_ended(winner: Piece, looser: Piece):
 	game_manager.handle_duel_result(winner, looser)
 	looser.get_parent().remove_child(looser)
 	game_manager.add_captured_piece(looser)
-	game_manager.update_points()
+	game_manager.update_points(looser)
+	game_manager.ui_update_points.emit(game_manager.black_points, game_manager.white_points)
 	board_renderer.reset_all_tiles()
 	game_manager.switch_turn()
 	

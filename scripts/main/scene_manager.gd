@@ -7,7 +7,11 @@ signal duel_ended(winner: Piece)
 var scene_dictionary: Dictionary = {}
 var current_scene_instance: Node = null
 var current_scene_name: String = ""
-var canvas_layer: CanvasLayer
+var main: Node = null
+var hud: Node = null
+var level: Node2D = null
+var chess_hud: Control = null
+
 
 # Chess caching
 var cached_chess_scene: Node = null
@@ -16,13 +20,20 @@ func initialize_scene_dictionary():
 	scene_dictionary = {
 		"title": preload("res://scenes/main/title_screen.tscn"),
 		"main_menu": preload("res://scenes/main/main_menu.tscn"),
-		"chess": preload("res://scenes/chess/board.tscn"),
-		"dual_arena": preload("res://scenes/dual_arena.tscn"),
-		"testScene": preload("res://scenes/testScene.tscn")
+		"chess": preload("res://scenes/chess/chess.tscn"),
+		"dual_arena": preload("res://scenes/PF/dual_arena.tscn"),
+		"testScene": preload("res://scenes/PF/testScene.tscn"),
+		"chess_hud": preload("res://scenes/chess/chess_hud.tscn")
 	}
 
-func set_canvas_layer(layer: CanvasLayer):
-	canvas_layer = layer
+func set_main(main_node: Node):
+	main = main_node
+	if main.has_node("Hud"):
+		print("Hud found")
+		hud = main.get_node("Hud")
+	if main.has_node("Level"):
+		print("Level found")
+		level = main.get_node("Level")
 
 # Standard scene change
 func change_scene(scene_name: String):
@@ -38,27 +49,33 @@ func change_scene(scene_name: String):
 	# Load new scene
 	var scene_resource = scene_dictionary[scene_name]
 	current_scene_instance = scene_resource.instantiate()
-	canvas_layer.add_child(current_scene_instance)
-	
+	level.add_child(current_scene_instance)
 	current_scene_name = scene_name
 	scene_changed.emit(scene_name)
 
+func transition_to_chess():
+	chess_hud = scene_dictionary["chess_hud"].instantiate()
+	hud.add_child(chess_hud)
+	change_scene("chess")
+
 # Special transition to duel (caches chess)
 func transition_to_duel(attacker: Piece, defender: Piece, defecit: int):
+
 	# Cache chess scene
 	cached_chess_scene = current_scene_instance
-	cached_chess_scene.hide()
+	level.remove_child(cached_chess_scene)
 	current_scene_instance = null
+	chess_hud.visible = false
 	
 	# Load duel scene
 	var scene_resource = scene_dictionary["dual_arena"]
 	var duel_scene = scene_resource.instantiate()
 	current_scene_instance = duel_scene
+	level.add_child(current_scene_instance)
 	duel_scene.attacker = attacker
 	duel_scene.defender = defender
 	duel_scene.defecit = defecit
-	canvas_layer.add_child(duel_scene)
-	
+
 	current_scene_name = "dual_arena"
 	scene_changed.emit("dual_arena")
 
@@ -77,8 +94,9 @@ func exit_duel(winner: Piece, looser: Piece):
 	
 	current_scene_instance = cached_chess_scene
 	cached_chess_scene = null
-	current_scene_instance.show()
+	level.add_child(current_scene_instance)
 	current_scene_name = "chess"
+	chess_hud.visible = true
 	scene_changed.emit("chess")
 	duel_ended.emit(winner, looser)
 

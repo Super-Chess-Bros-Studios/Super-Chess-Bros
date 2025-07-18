@@ -6,8 +6,8 @@ func get_sprite_column() -> int:
 
 func get_valid_moves(game_manager: GameManager) -> Array:
 	var moves: Array = []
-	var direction := -1 if team == ChessConstants.TeamColor.WHITE else 1 # White go up, black go down
-	var start_row := 6 if team == ChessConstants.TeamColor.WHITE else 1 # Set starting row
+	var direction := -1 if team == InputManager.TeamColor.WHITE else 1 # White go up, black go down
+	var start_row := 6 if team == InputManager.TeamColor.WHITE else 1 # Set starting row
 	
 	# Move one step forward
 	var one_step := board_position + Vector2i(0, direction)
@@ -34,8 +34,8 @@ func get_valid_moves(game_manager: GameManager) -> Array:
 # This is used to check if the king is in check after a move
 func get_opponent_valid_moves(game_manager: GameManager) -> Array:
 	var moves: Array = []
-	var direction := -1 if team == ChessConstants.TeamColor.WHITE else 1 # White go up, black go down
-	var start_row := 6 if team == ChessConstants.TeamColor.WHITE else 1 # Set starting row
+	var direction := -1 if team == InputManager.TeamColor.WHITE else 1 # White go up, black go down
+	var start_row := 6 if team == InputManager.TeamColor.WHITE else 1 # Set starting row
 	
 	# Move one step forward
 	var one_step := board_position + Vector2i(0, direction)

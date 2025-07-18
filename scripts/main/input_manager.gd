@@ -4,8 +4,12 @@ extends Node
 var white_player_device: Dictionary = {}
 var black_player_device: Dictionary = {}
 
+enum TeamColor {
+	WHITE = 0,
+	BLACK = 1
+}	
+
 func _ready() -> void:
-	initialize_player_devices()
 	controller_keyboard_setup()
 
 func initialize_player_devices():
@@ -60,20 +64,20 @@ func set_black_player_device(device_type: String, device_id: int = -1, device_na
 	}
 	print("Black player device set: ", black_player_device)
 
-func get_action(action_base: String, id: int) -> String:
+func get_action(action_base: String, team: TeamColor) -> String:
 	#1 is white and 2 is black
-	if id == 1:
+	if team == TeamColor.WHITE:
 		var device_type = white_player_device.get("device_type", "")
 		if device_type == "controller":
 			var device_id = white_player_device.get("device_id", -1)
-			return "%s_%d" % [action_base, device_id + 1]
+			return "%s_%d" % [action_base, device_id]
 		else:
 			return "%s_kb" % action_base
-	elif id == 2:
+	elif team == TeamColor.BLACK:
 		var device_type = black_player_device.get("device_type", "")
 		if device_type == "controller":
 			var device_id = black_player_device.get("device_id", -1)
-			return "%s_%d" % [action_base, device_id + 1]
+			return "%s_%d" % [action_base, device_id]
 		else:
 			return "%s_kb" % action_base
 	return "pass"

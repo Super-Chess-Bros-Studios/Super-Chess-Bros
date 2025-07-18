@@ -1,7 +1,7 @@
 extends Node2D
 
-# Which player this cursor belongs to (WHITE_PLAYER = 1, BLACK_PLAYER = 2)
-@export var player_id: ChessConstants.PlayerId = ChessConstants.PlayerId.WHITE_PLAYER
+# Which player this cursor belongs to (WHITE = 0, BLACK = 1)
+@export var team: InputManager.TeamColor = InputManager.TeamColor.WHITE
 @export var move_speed := 80.0
 
 # Cursor position in pixels
@@ -33,7 +33,7 @@ func _ready():
 		sprite.visible = true
 	
 	# Set cursor colors - red for white player, yellow for black player
-	if player_id == ChessConstants.PlayerId.WHITE_PLAYER:
+	if team == InputManager.TeamColor.WHITE:
 		sprite.modulate = Color(1.0, 0.0, 0.0)  # Bright red
 	else:
 		sprite.modulate = Color(1.0, 1.0, 0.0)  # Bright yellow
@@ -63,7 +63,7 @@ func update_hover():
 	var tile_pos = Vector2i(tile_x, tile_y)
 	
 	# Only update hover if tile changed and it's this player's turn
-	if tile_pos != last_hovered_tile and game_manager.can_player_act(player_id):
+	if tile_pos != last_hovered_tile and game_manager.can_player_act(team):
 		handle_hover_change(last_hovered_tile, tile_pos)
 		last_hovered_tile = tile_pos
 
@@ -90,12 +90,12 @@ func handle_hover_change(old_tile_pos: Vector2i, new_tile_pos: Vector2i):
 		board_renderer.highlight_tile(new_tile_pos, ChessConstants.SELECTION_COLOR)
 
 func handle_selection_input():
-	if not game_manager || not game_manager.can_player_act(player_id):
+	if not game_manager || not game_manager.can_player_act(team):
 		return
 		
 	# Handle accept (select piece/move) and cancel (deselect) inputs
 	if Input.is_action_just_pressed(get_action("accept")):
-		print("Accept for player ", player_id)
+		print("Accept for player ", team)
 		handle_accept_input()
 	
 	if Input.is_action_just_pressed(get_action("cancel")):
@@ -103,8 +103,8 @@ func handle_selection_input():
 
 func handle_accept_input():
 	# Only allow input if it's this player's turn
-	if not game_manager.can_player_act(player_id):
-		print("Cannot accept for player ", player_id)
+	if not game_manager.can_player_act(team):
+		print("Cannot accept for player ", team)
 		return
 	
 	var tile_pos = get_current_tile_pos()
@@ -127,7 +127,7 @@ func handle_accept_input():
 
 func handle_cancel_input():
 	# Only allow cancel if it's this player's turn
-	if not game_manager.can_player_act(player_id):
+	if not game_manager.can_player_act(team):
 		return
 	
 	# Deselect piece and reset tile color
@@ -149,4 +149,4 @@ func get_current_tile_pos() -> Vector2i:
 	return last_hovered_tile
 
 func get_action(action_base: String) -> String:
-	return InputManager.get_action(action_base, player_id)
+	return InputManager.get_action(action_base, team)

@@ -5,9 +5,10 @@ extends RefCounted
 signal game_state_changed(new_state: ChessConstants.GameState)
 signal piece_selected(piece: Piece)
 signal piece_deselected()
-signal turn_switched(new_team: ChessConstants.TeamColor)
+signal turn_switched(new_team: InputManager.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
 signal initiate_duel(attacker: Piece, defender: Piece, defecit: int)
+signal ui_update_points(black_points: int, white_points: int)
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
@@ -58,12 +59,11 @@ func is_valid_position(pos: Vector2i) -> bool:
 	# Check if position is within board boundaries (0-7 for both x and y)
 	return pos.x >= 0 and pos.x < ChessConstants.BOARD_SIZE and pos.y >= 0 and pos.y < ChessConstants.BOARD_SIZE
 
-func can_player_act(player_id: ChessConstants.PlayerId) -> bool:
+func can_player_act(team: InputManager.TeamColor) -> bool:
 	# Check if given player can act (it's their turn and game isn't over)
 	var current_team = ChessConstants.get_team_from_game_state(current_game_state)
-	var player_team = ChessConstants.get_team_from_player_id(player_id)
 	
-	return current_team == player_team and current_game_state != ChessConstants.GameState.GAME_OVER
+	return current_team == team and current_game_state != ChessConstants.GameState.GAME_OVER
 
 func select_piece(piece: Piece) -> bool:
 	# Select a piece if it belongs to current player's team
@@ -104,7 +104,7 @@ func switch_turn():
 	game_state_changed.emit(current_game_state)
 	turn_switched.emit(new_team)
 
-func get_current_turn() -> ChessConstants.TeamColor:
+func get_current_turn() -> InputManager.TeamColor:
 	# Get which team's turn it currently is
 	return ChessConstants.get_team_from_game_state(current_game_state)
 
@@ -133,7 +133,7 @@ func is_en_passant_capture(piece: Piece, to_pos: Vector2i) -> bool:
 		return false
 	
 	# En passant capture moves diagonally by 1 square
-	var direction = -1 if piece.team == ChessConstants.TeamColor.WHITE else 1
+	var direction = -1 if piece.team == InputManager.TeamColor.WHITE else 1
 	var x_diff = abs(to_pos.x - piece.board_position.x)
 	var y_diff = direction
 	
@@ -308,14 +308,14 @@ func is_empty(pos: Vector2i) -> bool:
 		return false
 	return board_state[pos.y][pos.x] == null
 
-func is_enemy(pos: Vector2i, team: ChessConstants.TeamColor) -> bool:
+func is_enemy(pos: Vector2i, team: InputManager.TeamColor) -> bool:
 	# Check if position contains an enemy piece
 	if not is_valid_position(pos):
 		return false
 	var piece = board_state[pos.y][pos.x]
 	return piece != null and piece.team != team
 
-func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
+func is_king_in_check(team: InputManager.TeamColor) -> bool:
 	# Find the king for the given team
 	var king_pos: Vector2i = Vector2i(-1, -1)
 	for y in range(ChessConstants.BOARD_SIZE):
@@ -330,7 +330,7 @@ func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
 		return false
 	
 	# can any oposing piece can move to position of king
-	var oposing_team = ChessConstants.TeamColor.WHITE if team == ChessConstants.TeamColor.BLACK else ChessConstants.TeamColor.BLACK
+	var oposing_team = InputManager.TeamColor.WHITE if team == InputManager.TeamColor.BLACK else InputManager.TeamColor.BLACK
 	for y in range(ChessConstants.BOARD_SIZE):
 		for x in range(ChessConstants.BOARD_SIZE):
 			var piece = board_state[y][x]
@@ -340,7 +340,7 @@ func is_king_in_check(team: ChessConstants.TeamColor) -> bool:
 					return true
 	return false
 
-func is_king_in_check_after_move(team: ChessConstants.TeamColor, to_pos: Vector2i) -> bool:
+func is_king_in_check_after_move(team: InputManager.TeamColor, to_pos: Vector2i) -> bool:
 	# Simulate the move to check if the king is in check (for castling)
 	# Find the king for the given team
 	var king_pos: Vector2i = Vector2i(-1, -1)
@@ -369,17 +369,17 @@ func is_king_in_check_after_move(team: ChessConstants.TeamColor, to_pos: Vector2
 	
 	return in_check
 
-func is_checkmate(team: ChessConstants.TeamColor) -> bool:
+func is_checkmate(team: InputManager.TeamColor) -> bool:
 	if not is_king_in_check(team):
 		return false
 	return any_valid_moves(team)
 
-func is_stalemate(team: ChessConstants.TeamColor) -> bool:
+func is_stalemate(team: InputManager.TeamColor) -> bool:
 	if is_king_in_check(team):
 		return false
 	return any_valid_moves(team)
 
-func any_valid_moves(team: ChessConstants.TeamColor) -> bool:
+func any_valid_moves(team: InputManager.TeamColor) -> bool:
 	# Try every move for every piece on the team
 	for y in range(ChessConstants.BOARD_SIZE):
 		for x in range(ChessConstants.BOARD_SIZE):
@@ -459,18 +459,19 @@ func _cleanup_duel_state():
 	en_passant_landing_square = Vector2i(-1, -1)
 
 func add_captured_piece(piece: Piece):
-	if piece.team == ChessConstants.TeamColor.WHITE:
+	if piece.team == InputManager.TeamColor.WHITE:
 		captured_white_pieces.append(piece)
 	else:
 		captured_black_pieces.append(piece)
 	print("Captured white pieces: ", captured_white_pieces)
 	print("Captured black pieces: ", captured_black_pieces)
 
-func update_points():
-	for piece in captured_white_pieces:
-		white_points += piece.point_value
-	for piece in captured_black_pieces:
+
+
+func update_points(piece: Piece):
+	if piece.team == InputManager.TeamColor.WHITE:
 		black_points += piece.point_value
-		
+	else:
+		white_points += piece.point_value
 	print("White points: ", white_points)
 	print("Black points: ", black_points)
