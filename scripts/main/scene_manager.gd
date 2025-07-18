@@ -54,9 +54,9 @@ func change_scene(scene_name: String):
 	scene_changed.emit(scene_name)
 
 func transition_to_chess():
-	change_scene("chess")
 	chess_hud = scene_dictionary["chess_hud"].instantiate()
 	hud.add_child(chess_hud)
+	change_scene("chess")
 
 # Special transition to duel (caches chess)
 func transition_to_duel(attacker: Piece, defender: Piece, defecit: int):

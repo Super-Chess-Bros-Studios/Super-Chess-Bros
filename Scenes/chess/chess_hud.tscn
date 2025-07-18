@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dn6jx85c5rfv3"]
 
-[ext_resource type="Script" uid="uid://cf3mrf0kyerax" path="res://scenes/chess/chess_hud.gd" id="1_jhoc8"]
+[ext_resource type="Script" uid="uid://cf3mrf0kyerax" path="res://scripts/chess/chess_hud.gd" id="1_jhoc8"]
 
 [node name="ChessHud" type="Control"]
 layout_mode = 3

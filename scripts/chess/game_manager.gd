@@ -8,6 +8,7 @@ signal piece_deselected()
 signal turn_switched(new_team: InputManager.TeamColor)
 signal piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i)
 signal initiate_duel(attacker: Piece, defender: Piece, defecit: int)
+signal ui_update_points(black_points: int, white_points: int)
 # Core game state variables
 var board_state: Array[Array] = []  # 2D array representing the chess board
 var current_game_state: ChessConstants.GameState = ChessConstants.GameState.WHITE_TURN  # Current game state
@@ -465,11 +466,12 @@ func add_captured_piece(piece: Piece):
 	print("Captured white pieces: ", captured_white_pieces)
 	print("Captured black pieces: ", captured_black_pieces)
 
-func update_points():
-	for piece in captured_white_pieces:
-		white_points += piece.point_value
-	for piece in captured_black_pieces:
+
+
+func update_points(piece: Piece):
+	if piece.team == InputManager.TeamColor.WHITE:
 		black_points += piece.point_value
-		
+	else:
+		white_points += piece.point_value
 	print("White points: ", white_points)
 	print("Black points: ", black_points)

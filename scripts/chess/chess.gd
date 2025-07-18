@@ -192,6 +192,7 @@ func connect_signals():
 	game_manager.piece_moved.connect(_on_piece_moved)
 	game_manager.initiate_duel.connect(_on_initiate_duel)
 	SceneManager.duel_ended.connect(_on_duel_ended)
+	game_manager.ui_update_points.connect(SceneManager.chess_hud._ui_update_points)
 #These are all the signal handlers
 
 func _on_game_state_changed(new_state: ChessConstants.GameState):
@@ -239,7 +240,8 @@ func _on_duel_ended(winner: Piece, looser: Piece):
 	game_manager.handle_duel_result(winner, looser)
 	looser.get_parent().remove_child(looser)
 	game_manager.add_captured_piece(looser)
-	game_manager.update_points()
+	game_manager.update_points(looser)
+	game_manager.ui_update_points.emit(game_manager.black_points, game_manager.white_points)
 	board_renderer.reset_all_tiles()
 	game_manager.switch_turn()
 	
