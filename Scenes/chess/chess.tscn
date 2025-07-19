@@ -27,4 +27,4 @@ valid_move_icon = ExtResource("6_luc5s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(6, 1)
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)

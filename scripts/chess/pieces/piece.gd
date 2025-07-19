@@ -7,6 +7,7 @@ var board_position: Vector2i
 var point_value: int
 var sprite_sheet: Texture
 var move_count: int # Track how many times this piece moved (for castling and en passant)
+var piece_type: String
 
 @onready var sprite: Sprite2D = $Sprite2D
 
@@ -15,10 +16,11 @@ func set_board_position(pos: Vector2i, tile_size: int = 24):
 	board_position = pos
 	position = Vector2(pos.x * tile_size + tile_size/2, pos.y * tile_size + tile_size/2)
 
-func setup(_team, _pos: Vector2i, _sheet: Texture, _points: int, tile_size: int):
+func setup(_team, _pos: Vector2i, _sheet: Texture, _points: int, _piece_type: String, tile_size: int):
 	team = _team
 	point_value = _points
 	sprite_sheet = _sheet
+	piece_type = _piece_type
 	move_count = 0  # Initialize as not moved
 	set_board_position(_pos, tile_size)
 	update_sprite_region()

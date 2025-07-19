@@ -189,7 +189,7 @@ func connect_signals():
 	game_manager.piece_selected.connect(_on_piece_selected)
 	game_manager.piece_deselected.connect(_on_piece_deselected)
 	game_manager.turn_switched.connect(_on_turn_switched)
-	game_manager.piece_moved.connect(_on_piece_moved)
+	game_manager.turn_ended.connect(_handle_turn_end)
 	game_manager.initiate_duel.connect(_on_initiate_duel)
 	SceneManager.duel_ended.connect(_on_duel_ended)
 	game_manager.ui_update_points.connect(SceneManager.chess_hud._ui_update_points)
@@ -223,10 +223,24 @@ func _on_turn_switched(new_team: InputManager.TeamColor):
 
 	print("Turn switched to: ", "White" if new_team == InputManager.TeamColor.WHITE else "Black")
 
-func _on_piece_moved(piece: Piece, from_pos: Vector2i, to_pos: Vector2i):
+func _handle_turn_end():
 	#print("Piece moved: ", piece.name, " from ", from_pos, " to ", to_pos)
+	game_manager.deselect_piece()
 	board_renderer.reset_all_tiles()
 	board_renderer.clear_move_icons()
+	game_manager.switch_turn()
+	_handle_turn_start()
+	
+func _handle_turn_start():
+	if(game_manager.is_stalemate(game_manager.get_current_turn())):
+		print("Stalemate!")
+		game_manager.end_game()
+	elif(game_manager.is_checkmate(game_manager.get_current_turn())):
+		print("Checkmate!")
+		game_manager.on_initiate_duel(game_manager.last_moved_piece, game_manager.get_team_king(game_manager.get_current_turn()))
+	elif(game_manager.is_king_in_check(game_manager.get_current_turn())):
+		print("Check!")
+
 
 func _on_initiate_duel(attacker: Piece, defender: Piece, defecit: int):
 	print("Initiate duel: ", attacker.name, " vs ", defender.name, " with defecit of ", defecit)
@@ -242,8 +256,14 @@ func _on_duel_ended(winner: Piece, looser: Piece):
 	game_manager.add_captured_piece(looser)
 	game_manager.update_points(looser)
 	game_manager.ui_update_points.emit(game_manager.black_points, game_manager.white_points)
-	board_renderer.reset_all_tiles()
-	game_manager.switch_turn()
+	if(game_manager.is_king_captured(game_manager.get_current_turn())):
+		print("King captured!")
+		game_manager.end_game()
+	elif(game_manager.is_stalemate(game_manager.get_current_turn())):
+		print("Stalemate!")
+		game_manager.end_game()
+	else:
+		_handle_turn_end()
 	
 func get_game_manager() -> GameManager:
 	#Returns the GameManager instance for accessing game state and logic.
