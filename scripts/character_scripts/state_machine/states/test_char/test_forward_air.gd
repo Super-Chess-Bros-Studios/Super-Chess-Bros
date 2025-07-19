@@ -1,29 +1,28 @@
 extends CharacterState
-class_name TestBackAir
+class_name TestForwardAir
 
 @export var hitbox : Hitbox
 @export var speed : float = 300
 var fastfall = false
-var end_of_bair = false
+var end_of_fair = false
 
 func Enter():
-	char_attributes.cur_dir *= -1
 	fastfall = false
-	end_of_bair = false
+	end_of_fair = false
 	hitbox.default_hitbox()
-	playanim("back_air")
+	playanim("forward_air")
 
 func Exit():
 	hitbox.deactivate_hitbox() 
 
-func end_bair():
-	end_of_bair = true
+func end_fair():
+	end_of_fair = true
 
 func Update(delta):
 	if char_attributes.just_took_damage:
 		Transitioned.emit(self, "hitfreeze")
 	#handles vertical events
-	elif end_of_bair:
+	elif end_of_fair:
 		Transitioned.emit(self,"fall")
 	elif character.is_on_floor():
 		char_attributes.landing_lag_length = 0.3

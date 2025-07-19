@@ -1,24 +1,24 @@
-[gd_scene load_steps=71 format=3 uid="uid://5b3fmt2t3sc6"]
+[gd_scene load_steps=77 format=3 uid="uid://5b3fmt2t3sc6"]
 
-[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
-[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
-[ext_resource type="Texture2D" uid="uid://cng3raykcvqid" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png" id="2_0owkq"]
-[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
-[ext_resource type="Texture2D" uid="uid://dw6hhljdcgqhb" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png" id="2_7t1rv"]
-[ext_resource type="Texture2D" uid="uid://dnbpd4aomrs78" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Run Attack/player katana running attack (upper body).png" id="2_mlf1o"]
-[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
-[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
-[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
+[ext_resource type="Texture2D" uid="uid://cian1bln36x04" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Idle/Player Idle 48x48.png" id="1_qb3vb"]
+[ext_resource type="Texture2D" uid="uid://bqyk2a78fddjq" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Air Spin/player air spin 48x48.png" id="1_w1xps"]
+[ext_resource type="Texture2D" uid="uid://cng3raykcvqid" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Hurt-Damaged/Player Hurt 48x48.png" id="2_0owkq"]
+[ext_resource type="Texture2D" uid="uid://b4n23iawe35lj" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Run/player katana run 48x48.png" id="2_3ywid"]
+[ext_resource type="Texture2D" uid="uid://dw6hhljdcgqhb" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Sword Stab/Player Sword Stab 96x48.png" id="2_7t1rv"]
+[ext_resource type="Texture2D" uid="uid://dnbpd4aomrs78" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Run Attack/player katana running attack (upper body).png" id="2_mlf1o"]
+[ext_resource type="Texture2D" uid="uid://wki3ktckg317" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Crouch-Idle/Player Crouch-Idle 48x48.png" id="3_4jtsn"]
+[ext_resource type="Texture2D" uid="uid://dod3yafs6veon" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Jump/player new jump 48x48.png" id="3_ndpjv"]
+[ext_resource type="Texture2D" uid="uid://cyg5e613cod0w" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Dash/dash.png" id="4_ld6di"]
 [ext_resource type="Script" uid="uid://dd7u0yqwtonu1" path="res://scripts/character_scripts/state_machine/state_machine.gd" id="5_422c8"]
 [ext_resource type="Script" uid="uid://rg3jnrlnyt6m" path="res://scripts/character_scripts/state_machine/states/test_char/test_idle.gd" id="5_dgi44"]
-[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
+[ext_resource type="Texture2D" uid="uid://cse02smgimka2" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Roll/Player Roll 48x48.png" id="6_du7ul"]
 [ext_resource type="Script" uid="uid://ctsqulv68cgxy" path="res://scripts/character_scripts/state_machine/states/test_char/test_run.gd" id="6_kpwuy"]
 [ext_resource type="Script" uid="uid://dbyyiifx7mbga" path="res://scripts/character_scripts/state_machine/states/test_char/test_crouch.gd" id="7_2137q"]
 [ext_resource type="Script" uid="uid://b5d57x8h3avr5" path="res://scripts/character_scripts/state_machine/states/test_char/test_jumpsquat.gd" id="8_cqar7"]
 [ext_resource type="Script" uid="uid://db3y4jnn8ci5y" path="res://scripts/character_scripts/state_machine/states/character_attributes.gd" id="8_h8dpt"]
-[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
+[ext_resource type="Texture2D" uid="uid://ir5skolpkk33" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Wall Slide/player wall slide (left) 48x48.png" id="9_a88om"]
 [ext_resource type="Script" uid="uid://xq4wnlhqxdlm" path="res://scripts/character_scripts/state_machine/states/test_char/test_jump.gd" id="9_qga04"]
-[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://assets/sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
+[ext_resource type="Texture2D" uid="uid://ddnfd5nmu3unk" path="res://Assets/Sprites/2D-Pixel-Art-Character-Template/Katana Air Attack/player katana air attack (upper body) 80x64.png" id="9_tqteo"]
 [ext_resource type="Script" uid="uid://dsq2k53fkg20h" path="res://scripts/character_scripts/state_machine/states/test_char/test_short_hop.gd" id="11_0l6pb"]
 [ext_resource type="Script" uid="uid://dxn1tegm7uca6" path="res://scripts/character_scripts/state_machine/states/test_char/test_fall.gd" id="11_hmptn"]
 [ext_resource type="Script" uid="uid://d26weydsrf1ra" path="res://scripts/character_scripts/state_machine/states/test_char/test_initial_dash.gd" id="13_va0ok"]
@@ -33,10 +33,12 @@
 [ext_resource type="Script" uid="uid://ctjjwn7oh8sgt" path="res://scripts/character_scripts/state_machine/states/test_char/test_grounded.gd" id="29_jg6e0"]
 [ext_resource type="Script" uid="uid://66dswa3a5bhq" path="res://scripts/character_scripts/state_machine/states/test_char/test_tumble.gd" id="30_4remw"]
 [ext_resource type="Script" uid="uid://d04posusl155u" path="res://scripts/character_scripts/state_machine/states/test_char/test_hitfreeze.gd" id="30_q47m3"]
-[ext_resource type="Script" uid="uid://tox15ywq17rl" path="res://scripts/character_scripts/test_percentage_label.gd" id="32_m852p"]
+[ext_resource type="Script" path="res://scripts/character_scripts/test_percentage_label.gd" id="32_m852p"]
 [ext_resource type="Script" uid="uid://dnfprtkp32yl1" path="res://scripts/character_scripts/state_machine/states/test_char/test_jab.gd" id="32_moi7e"]
 [ext_resource type="Script" uid="uid://j4sloqxb1mei" path="res://scripts/character_scripts/hitbox.gd" id="33_erow1"]
 [ext_resource type="Script" uid="uid://btlsvroptalej" path="res://scripts/character_scripts/state_machine/states/test_char/test_dash_attack.gd" id="34_q47m3"]
+[ext_resource type="Script" uid="uid://bi5ninnhrl7k6" path="res://scripts/character_scripts/state_machine/states/test_char/test_back_air.gd" id="36_tyg5d"]
+[ext_resource type="Script" uid="uid://ly15i1fkpado" path="res://scripts/character_scripts/state_machine/states/test_char/test_forward_air.gd" id="37_cfv6w"]
 [ext_resource type="Script" uid="uid://52k7o3fdxuek" path="res://scripts/character_scripts/state_machine/states/test_char/test_neutral_air.gd" id="37_nprwx"]
 
 [sub_resource type="Animation" id="Animation_b8cx6"]
@@ -130,6 +132,77 @@ tracks/3/keys = {
 "values": [{
 "args": [],
 "method": &"end_air_dodge"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xadbk"]
+resource_name = "back_air"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_tqteo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7, 8]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitboxes/BairHitbox")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("State Machine/BackAir")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_bair"
 }]
 }
 
@@ -1228,14 +1301,88 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_jmepm"]
+resource_name = "forward_air"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_tqteo")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 0, 1, 2, 3, 6, 7, 8]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Hitboxes/FairHitbox")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("State Machine/ForwardAir")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_fair"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b8cx6"]
 _data = {
 &"RESET": SubResource("Animation_b8cx6"),
 &"airdodge": SubResource("Animation_fjca5"),
+&"back_air": SubResource("Animation_xadbk"),
 &"crouch": SubResource("Animation_3ywid"),
 &"dash_attack": SubResource("Animation_chsy4"),
 &"fall": SubResource("Animation_jg6e0"),
 &"fastfall": SubResource("Animation_4remw"),
+&"forward_air": SubResource("Animation_jmepm"),
 &"grounded": SubResource("Animation_y8vyv"),
 &"hitfreeze": SubResource("Animation_an8fg"),
 &"hitstun": SubResource("Animation_q47m3"),
@@ -1278,6 +1425,12 @@ size = Vector2(58, 41)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cfv6w"]
 size = Vector2(55, 30)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tyg5d"]
+size = Vector2(58, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swryj"]
+size = Vector2(56, 29)
+
 [node name="TestChar" type="Node2D" node_paths=PackedStringArray("initial_state", "char_attributes", "state_machine", "hurtbox")]
 script = ExtResource("5_422c8")
 initial_state = NodePath("CharacterBody2D/State Machine/Idle")
@@ -1292,6 +1445,7 @@ collision_layer = 2
 texture_filter = 1
 texture = ExtResource("9_tqteo")
 hframes = 9
+frame = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 reset_on_save = false
@@ -1504,6 +1658,20 @@ sprite = NodePath("../../Sprite2D")
 character = NodePath("../..")
 metadata/_custom_type_script = "uid://52k7o3fdxuek"
 
+[node name="BackAir" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("hitbox", "anim", "sprite", "character")]
+script = ExtResource("36_tyg5d")
+hitbox = NodePath("../../Hitboxes/BairHitbox")
+anim = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+character = NodePath("../..")
+
+[node name="ForwardAir" type="Node" parent="CharacterBody2D/State Machine" node_paths=PackedStringArray("hitbox", "anim", "sprite", "character")]
+script = ExtResource("37_cfv6w")
+hitbox = NodePath("../../Hitboxes/FairHitbox")
+anim = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+character = NodePath("../..")
+
 [node name="Hurtbox" type="Area2D" parent="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -1526,6 +1694,7 @@ char_attributes = NodePath("../CharacterAttributes")
 [node name="Hitboxes" type="Node2D" parent="CharacterBody2D"]
 
 [node name="DashAttackHitbox2" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
 script = ExtResource("33_erow1")
 bkb = 100.0
 kbg = 50.0
@@ -1543,6 +1712,7 @@ shape = SubResource("RectangleShape2D_lfuln")
 disabled = true
 
 [node name="DashAttackHitbox1" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
 script = ExtResource("33_erow1")
 bkb = 500.0
 kbg = 5.0
@@ -1560,6 +1730,7 @@ shape = SubResource("RectangleShape2D_lfuln")
 disabled = true
 
 [node name="JabHitbox" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
 script = ExtResource("33_erow1")
 bkb = 300.0
 kbg = 20.0
@@ -1577,6 +1748,7 @@ shape = SubResource("RectangleShape2D_1o4lo")
 disabled = true
 
 [node name="UpSpecialHitbox1" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
 script = ExtResource("33_erow1")
 bkb = 500.0
 kbg = 17.0
@@ -1594,6 +1766,7 @@ shape = SubResource("RectangleShape2D_xadbk")
 disabled = true
 
 [node name="UpSpecialHitbox2" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
 script = ExtResource("33_erow1")
 bkb = 300.0
 kbg = 30.0
@@ -1611,6 +1784,7 @@ shape = SubResource("RectangleShape2D_xadbk")
 disabled = true
 
 [node name="NairHitbox1" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
 script = ExtResource("33_erow1")
 bkb = 100.0
 kbg = 10.0
@@ -1628,6 +1802,7 @@ shape = SubResource("RectangleShape2D_cfv6w")
 disabled = true
 
 [node name="NairHitbox2" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
 script = ExtResource("33_erow1")
 bkb = 200.0
 kbg = 30.0
@@ -1642,6 +1817,39 @@ metadata/_custom_type_script = "uid://j4sloqxb1mei"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hitboxes/NairHitbox2"]
 position = Vector2(10.5, 1)
 shape = SubResource("RectangleShape2D_cfv6w")
+disabled = true
+
+[node name="BairHitbox" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+visible = false
+script = ExtResource("33_erow1")
+bkb = 250.0
+kbg = 35.0
+kb_dir = Vector2(2, -1)
+damage = 12.0
+hitbox_owner = NodePath("../../Hurtbox")
+char_attributes = NodePath("../../CharacterAttributes")
+collision_box = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hitboxes/BairHitbox"]
+position = Vector2(9, 0)
+shape = SubResource("RectangleShape2D_tyg5d")
+disabled = true
+
+[node name="FairHitbox" type="Area2D" parent="CharacterBody2D/Hitboxes" node_paths=PackedStringArray("hitbox_owner", "char_attributes", "collision_box")]
+script = ExtResource("33_erow1")
+bkb = 150.0
+kbg = 20.0
+kb_dir = Vector2(1, -2)
+damage = 8.0
+hitbox_owner = NodePath("../../Hurtbox")
+char_attributes = NodePath("../../CharacterAttributes")
+collision_box = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://j4sloqxb1mei"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Hitboxes/FairHitbox"]
+position = Vector2(10, -5.5)
+shape = SubResource("RectangleShape2D_swryj")
 disabled = true
 
 [connection signal="body_entered" from="CharacterBody2D/LeftCollide" to="CharacterBody2D/State Machine/FullHop" method="_on_left_collide"]
